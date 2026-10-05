@@ -230,15 +230,13 @@ footer{padding:30px 0 50px;color:var(--muted);font-size:13px}
   <section id="alerts"><div class="sec-title"><span class="num">⑪</span><h2>확인 필요</h2><span class="sub">아직 확정되지 않은 정보 — 예약 전 반드시 재확인</span></div><div class="alert" id="checkList"></div></section>
   <section id="flights"><div class="sec-title"><span class="num">②</span><h2>항공편</h2><span class="sub">전자항공권(Trip.com) 기준 — 일정의 절대 시간 제약</span></div><div class="grid g2" id="flightCards"></div></section>
   <section id="timeline"><div class="sec-title"><span class="num">③</span><h2>전체 일정 Timeline</h2><span class="sub">추천안(C안) 기준 · 탭을 눌러 날짜 선택</span></div><div class="daytabs" id="dayTabs"></div><div id="dayBody"></div></section>
-  <section id="compare"><div class="sec-title"><span class="num">③-1</span><h2>일정안 비교 (A / B / C)</h2></div><div class="grid g3" id="planCards"></div>
-    <div class="sec-title" style="margin-top:22px"><h2 style="font-size:18px">마지막 날 밤(12/26) 숙박 비교</h2><span class="sub">귀국편 07:15 → 공항 도착 목표 04:15</span></div><div class="grid g3" id="lastNightCards"></div></section>
+  <section id="compare"><div class="sec-title"><span class="num">③-1</span><h2>일정안 비교 (A / B / C)</h2><span class="sub">C안 채택 · 항공권·숙소 4박 예약 완료</span></div><div class="grid g3" id="planCards"></div>
+    <details class="card" style="margin-top:16px"><summary>예약 전 비교 기록 — 마지막 날 밤(12/26) 숙박 비교 (Regal Airport Hotel 예약 완료로 결정 종료)</summary><div class="small muted" style="margin:6px 0 10px">귀국편 07:15 → 공항 도착 목표 04:15 기준으로 비교했던 기록입니다.</div><div class="grid g3" id="lastNightCards"></div></details></section>
   <section id="map"><div class="sec-title"><span class="num">④</span><h2>지역별 장소 &amp; 동선</h2><span class="sub">Google Maps 검색 링크</span></div><div class="grid g3" id="regionCards"></div></section>
   <section id="shows"><div class="sec-title"><span class="num">⑤</span><h2>공연 &amp; 무료 쇼</h2><span class="sub">이번 여행의 핵심 이벤트</span></div><div class="grid g2" id="showCards"></div></section>
-  <section id="hotels"><div class="sec-title"><span class="num">⑥</span><h2>호텔</h2><span class="sub">마카오 3박 예약 완료 · 12/26 홍콩 마지막 1박 미예약</span></div>
+  <section id="hotels"><div class="sec-title"><span class="num">⑥</span><h2>호텔</h2><span class="sub">숙박 4박 전부 예약 완료 — 마카오 3박 + 홍콩 1박</span></div>
     <div id="hotelConfirmed"></div>
-    <div class="sec-title" style="margin-top:20px"><h2 style="font-size:18px">12/26 → 12/27 홍콩 마지막 1박</h2><span class="rsv req">미예약 · 예약 필요</span><span class="sub">Broadway 예약에 포함되지 않음 · 귀국편 07:15 → 공항 도착 목표 04:15</span></div>
-    <div class="grid g3" id="hotelHk"></div>
-    <details class="card" style="margin-top:16px"><summary>예약 전 비교 기록 — 마카오 호텔 후보 (결정 완료 · 참고용)</summary><div class="small muted" style="margin:6px 0 10px">마카오 숙소는 Broadway Hotel로 예약 완료. 아래는 결정 전 비교 당시 자료이며 현재 예약 후보가 아닙니다.</div><div class="filters" id="hotelFilters"></div><div class="grid g3" id="hotelCards"></div></details>
+    <details class="card" style="margin-top:16px"><summary>예약 전 비교 기록 — 마카오·홍콩 공항 호텔 후보 (결정 완료 · 참고용)</summary><div class="small muted" style="margin:6px 0 10px">숙소는 Broadway Hotel(3박)·Regal Airport Hotel(1박)로 모두 예약 완료. 아래는 결정 전 비교 당시 자료이며 현재 예약 후보가 아닙니다.</div><div class="filters" id="hotelFilters"></div><div class="grid g3" id="hotelCards"></div></details>
   </section>
   <section id="agoda-hotels"><div class="sec-title"><span class="num">⑥-1</span><h2>예약 전 비교 기록 — Agoda 마카오 5성급 호텔</h2><span class="sub">결정 완료 · 참고용 (2026-10-05 조사, 12/23–12/26 · 성인 2명 · 3박 · 1박 30만원 이하)</span></div>
     <div class="card top" id="agodaStrategy" style="margin-bottom:14px"></div>
@@ -281,15 +279,15 @@ const tripData = {
     // 개인정보 — publish/index.html 빌드 시 자동 마스킹 (publish/tools/build_publish.py)
     travelerNames: "비공개",
     lastUpdated: "2026-10-05",
-    concept: "마카오 메인(약 70%) + 홍콩 핵심만(약 30%). 코타이 리조트 3박 — Broadway Hotel 3박(예약 완료) · House of Dancing Water 관람 · 코타이/갤럭시 중심 크리스마스 여행. 12/26 홍콩 마지막 1박은 새벽 귀국편 대비 공항 근처로 예약 예정.",
-    tags: ["마카오 중심 70%", "공연: House of Dancing Water", "항공권·Broadway Hotel 3박 예약 완료", "홍콩 마지막 1박 예약 필요", "크리스마스 시즌"],
+    concept: "마카오 메인(약 70%) + 홍콩 핵심만(약 30%). 코타이 리조트 3박 — Broadway Hotel 3박(예약 완료) · House of Dancing Water 관람 · 코타이/갤럭시 중심 크리스마스 여행. 12/26 홍콩 1박은 12/27 07:15 조기 출국을 위해 Regal Airport Hotel(예약 완료).",
+    tags: ["마카오 중심 70%", "공연: House of Dancing Water", "항공권 왕복 예약 완료", "숙소 4박 예약 완료 (Broadway 3박 + Regal Airport 1박)", "크리스마스 시즌"],
     stay: { macau: "3박 · 약 70시간", hongkong: "1박 · 약 15시간 (+공항)" },
     recommendedPlan: "C",
     // 호텔 구분 — 예약 전에는 confirmed 를 null 로 두고, 예약 후 호텔명·예약번호 입력
     // 마카오 숙소 (예약 완료 · NOL 바우처 기준). booking 의 번호들은 publish 빌드에서 자동 마스킹됨
     hotelPlan: {
       selected: "Broadway Hotel", status: "CONFIRMED", bookingStatus: "예약 완료",
-      checkIn: "2026-12-23", checkInTime: "15:00", checkOut: "2026-12-26", checkOutTime: "11:00", nights: 3,
+      checkIn: "2026-12-23", checkInDow: "수", checkInTime: "15:00", checkOut: "2026-12-26", checkOutDow: "토", checkOutTime: "11:00", nights: 3,
       roomType: "Broadway King", rooms: 1, guests: "성인 2명", meal: "조식 불포함 (No breakfast included)",
       paidKRW: 726939, nightlyAvgKRW: 242313, channel: "NOL",
       address: "Sul da Marina Taipa-Sul, junto a Rotunda do Dique Oeste, Taipa, Macau",
@@ -299,8 +297,21 @@ const tripData = {
       benefits: [{ text:"Grand Resort Deck 무료 이용 (체크인일~체크아웃일, MOP 888 상당)", note:"날씨·계절 휴장·운영 사정에 따라 변경/휴장 가능 — 12월 운영 여부 확인" }],
       booking: { bookingNo: "비공개", voucherNo: "비공개" }
     },
-    // 12/26 → 12/27 홍콩 마지막 1박 — Broadway 예약에 포함되지 않음. 예약 시 status·hotel·bookingNo 갱신
-    lastNightHotel: { status: "CHECK", bookingStatus: "미예약", candidate: "Regal Airport Hotel", estimateHKD: "1,300–1,900", bookingNo: null }
+    // 홍콩 숙소 (12/26 → 12/27, 예약 완료 · NOL 바우처 기준). booking 번호는 publish 빌드에서 자동 마스킹됨
+    hkHotelPlan: {
+      selected: "Regal Airport Hotel", status: "CONFIRMED", bookingStatus: "예약 완료",
+      checkIn: "2026-12-26", checkInDow: "토", checkInTime: "15:00", checkOut: "2026-12-27", checkOutDow: "일", checkOutTime: "12:00", nights: 1,
+      actualDeparture: "실제 퇴실은 12/27 새벽 04:00경 (UO618 07:15 출발) — 호텔 공식 체크아웃 12:00과 별개",
+      roomType: "Superior Room", rooms: 1, guests: "성인 2명", meal: "조식 불포함 (No breakfast included)",
+      paidKRW: 188829, nightlyAvgKRW: 188829, channel: "NOL",
+      address: "No. 9 Cheong Tat Road, Chek Lap Kok, Hong Kong",
+      purpose: "12/27 07:15 조기 출국을 위해 공항 접근성이 좋은 Regal Airport Hotel에서 마지막 1박",
+      arrivalPlan: "실제 도착 12/26 약 21:30 (홍콩 관광 후) · 12:15경 짐만 먼저 맡김 · 공식 체크인 15:00",
+      requests: ["Non-smoking room", "Higher floor", "Quiet room", "Early morning flight the next day"],
+      requestNote: "Special Request — 호텔 재량, 보장되지 않음 (subject to availability)",
+      taxNote: "바우처 안내: 홍콩 호텔숙박세(HAT) 3%가 총 숙박비에 영향을 줄 수 있음 — 사이트는 실제 결제금액 ₩188,829만 반영 (추가 청구 여부는 현장 확인)",
+      booking: { bookingNo: "비공개", voucherNo: "비공개" }
+    }
   },
 
   // 환율: 2026-09 기준 약 1 HKD ≈ 173 KRW. 계산 편의상 아래 값 사용. 2026년 12월 실제 환율은 달라질 수 있음.
@@ -328,15 +339,15 @@ const tripData = {
     { id:"A", name:"A안 — 마카오 집중 + 홍콩 시내 마지막 밤", status:"CANDIDATE",
       flow:"12/23 공항→바로 마카오(3박) → 12/26 홍콩 시내 이동·관광·1박 → 12/27 새벽 공항",
       rows:{ "이동시간":"HK공항→마카오 약 2.5h / 마카오→HK시내 약 2h / 새벽 시내→공항 40–60분", "마카오 체류":"약 70시간", "홍콩 체류":"약 15시간", "피로도":"중상 (새벽 택시·심야버스)", "비용":"중 (시내 호텔 + 새벽 택시 HKD 300–450)", "귀국 안정성":"보통 — 공항철도 첫차 05:50라 04:15 도착 불가, 택시/심야버스 의존" },
-      pros:["홍콩 시내 야경 늦게까지 가능","시내 호텔 선택지 많음"], cons:["새벽 3시대 택시/N버스 의존","크리스마스 연휴 시내 호텔 비쌈"], verdict:"새벽 이동 리스크 때문에 차선" },
+      pros:["홍콩 시내 야경 늦게까지 가능","시내 호텔 선택지 많음"], cons:["새벽 3시대 택시/N버스 의존","크리스마스 연휴 시내 호텔 비쌈"], verdict:"새벽 이동 리스크 때문에 차선 — C안 채택으로 비교 종료" },
     { id:"B", name:"B안 — 홍콩 1일 관광 후 마카오", status:"CANDIDATE",
       flow:"12/23 홍콩 관광·홍콩 1박 → 12/24 마카오(2박) → 12/26 홍콩 복귀·1박 → 12/27 귀국",
       rows:{ "이동시간":"짐 들고 3회 숙소 이동", "마카오 체류":"약 48시간", "홍콩 체류":"약 40시간", "피로도":"상 (새벽 출국 당일 종일 관광 + 숙소 3곳)", "비용":"상 (홍콩 2박 — 홍콩 호텔이 더 비쌈)", "귀국 안정성":"공항호텔이면 높음" },
-      pros:["홍콩을 여유 있게 볼 수 있음"], cons:["마카오 비중 50% 이하 → 요구사항 미충족","12/23은 03시대 기상 후 종일 관광 → 과로","숙소 3곳, 짐 이동 2회 추가"], verdict:"마카오 메인 목표와 맞지 않아 비추천" },
-    { id:"C", name:"C안 — 마카오 3박 + 공항호텔 1박 (추천)", status:"PLANNED", recommended:true,
-      flow:"12/23 공항→HZMB 버스로 바로 마카오(Broadway Hotel 3박 · 예약 완료) → 12/26 오전 홍콩 복귀, 공항호텔에 짐 → 오후·저녁 홍콩 핵심(피크·스타페리·침사추이) → 공항호텔 1박 → 12/27 04:00 도보로 체크인",
-      rows:{ "이동시간":"HK공항→코타이 약 2.5h / 마카오→HK공항 약 2h / 호텔→체크인 도보 10–15분", "마카오 체류":"약 70시간 (≈70%)", "홍콩 체류":"약 15시간 (≈30%)", "피로도":"하–중", "비용":"중 (공항호텔 HKD 1,300–1,900)", "귀국 안정성":"매우 높음 — 교통수단 의존 없음" },
-      pros:["HZMB 금색버스는 공항 옆 홍콩 口岸에서 출발 → 시내 경유 불필요","마카오 숙소 1곳에 3연박 (짐 이동 최소)","홍콩 오후 일정 동안 짐은 공항호텔에 맡김","새벽 귀국 리스크 최소"], cons:["홍콩 야시장·몽콕은 시간상 제외","홍콩 마지막 밤은 21시 전후 복귀 필요"], verdict:"✅ 최종 추천 — 마카오 비중·귀국 안정성 모두 충족" }
+      pros:["홍콩을 여유 있게 볼 수 있음"], cons:["마카오 비중 50% 이하 → 요구사항 미충족","12/23은 03시대 기상 후 종일 관광 → 과로","숙소 3곳, 짐 이동 2회 추가"], verdict:"마카오 메인 목표와 맞지 않아 비추천 — C안 채택으로 비교 종료" },
+    { id:"C", name:"C안 — 마카오 3박 + 공항호텔 1박 (채택)", status:"PLANNED", recommended:true,
+      flow:"12/23 공항→HZMB 버스로 바로 마카오(Broadway Hotel 3박 · 예약 완료) → 12/26 오전 홍콩 복귀, Regal Airport Hotel에 짐 → 오후·저녁 홍콩 핵심(피크·스타페리·침사추이) → Regal Airport Hotel 1박 (예약 완료) → 12/27 04:00 도보로 공항 체크인",
+      rows:{ "이동시간":"HK공항→코타이 약 2.5h / 마카오→HK공항 약 2h / 호텔→체크인 도보 10–15분", "마카오 체류":"약 70시간 (≈70%)", "홍콩 체류":"약 15시간 (≈30%)", "피로도":"하–중", "비용":"숙박 확정 ₩915,768 (Broadway ₩726,939 + Regal ₩188,829)", "귀국 안정성":"매우 높음 — 교통수단 의존 없음" },
+      pros:["HZMB 금색버스는 공항 옆 홍콩 口岸에서 출발 → 시내 경유 불필요","마카오 숙소 1곳에 3연박 (짐 이동 최소)","홍콩 오후 일정 동안 짐은 Regal Airport Hotel에 맡김","새벽 귀국 리스크 최소"], cons:["홍콩 야시장·몽콕은 시간상 제외","홍콩 마지막 밤은 21시 전후 복귀 필요"], verdict:"✅ 채택 — 항공권·숙소 4박 모두 예약 완료" }
   ],
 
   lastNight: [
@@ -346,9 +357,9 @@ const tripData = {
     { id:"B", name:"B. 홍콩 시내 숙박", status:"CANDIDATE",
       rows:{ "공항 도착":"04:00–04:30 (택시)", "첫차/막차":"공항철도 첫차 05:50 → 04:15 도착 불가 / 심야버스(N계열) 운행 — 노선·시간 확인 필요", "이동시간":"택시 35–50분", "비용":"호텔 + 새벽 택시 약 HKD 300–450", "피로도":"중 (03:00 기상)", "리스크":"새벽 택시 호출 실패 가능성", "항공편 놓칠 위험":"낮음–중" },
       verdict:"△ 가능하지만 C보다 이점 적음" },
-    { id:"C", name:"C. 홍콩 공항 근처 숙박 (추천 · 미예약)", status:"CHECK", recommended:true,
-      rows:{ "공항 도착":"04:10 (도보)", "첫차/막차":"무관 — 리갈 에어포트 호텔은 실내 연결통로로 T1 연결", "이동시간":"도보 10–15분 (T1 경유 T2 Aisle U, 실제 동선 확인 필요)", "비용":"HKD 1,300–1,900 (추정)", "피로도":"낮음 (03:30 기상)", "리스크":"거의 없음", "항공편 놓칠 위험":"매우 낮음" },
-      verdict:"✅ 추천 — Regal Airport Hotel (대안: Novotel Citygate 퉁청, 택시 10–15분) · 아직 미예약 → 예약 필요" }
+    { id:"C", name:"C. 홍콩 공항 근처 숙박 (채택 · 예약 완료)", status:"CONFIRMED", recommended:true,
+      rows:{ "공항 도착":"04:10 (도보)", "첫차/막차":"무관 — 리갈 에어포트 호텔은 실내 연결통로로 T1 연결", "이동시간":"도보 10–15분 (T1 경유 T2 Aisle U, 실제 동선 확인 필요)", "비용":"Regal Airport Hotel ₩188,829 (예약 완료)", "피로도":"낮음 (03:30 기상)", "리스크":"거의 없음", "항공편 놓칠 위험":"매우 낮음" },
+      verdict:"✅ 채택 — Regal Airport Hotel 예약 완료 (12/26 → 12/27)" }
   ],
 
   // 일정 (추천안 C) — 시간순
@@ -398,12 +409,12 @@ const tripData = {
         { time:"19:30–20:45", place:"크리스마스 저녁 — Broadway Food Street", region:"코타이", map:"Broadway Food Street Macau", desc:["예약 부담 없는 로컬 노점형 식당가 (호텔 바로 앞)","점심 António로 이미 제대로 된 식사 → 저녁은 가볍게"], move:"도보", moveTime:"1–3분", cost:"MOP 500 (2인)", booking:"none", status:"PLANNED" },
         { time:"20:45–22:00", place:"갤럭시 크리스마스 밤 — 다이아몬드 쇼 · 카지노 구경 → 숙소", region:"코타이", map:"Galaxy Macau", desc:["공휴일 다이아몬드 쇼 24시까지 · 크리스마스 조명 야경","카지노는 만 21세 이상, 여권 지참 · 내부 촬영 금지","끝나면 실내로 Broadway 복귀 (택시 불필요)"], move:"도보 (갤럭시 연결)", moveTime:"5–10분", cost:"—", booking:"none", status:"PLANNED" },
       ]},
-    { day:4, date:"12/26 (토)", title:"마카오 체크아웃 → 홍콩 핵심 반나절 (피크·스타페리·침사추이) → 공항호텔", goals:["짐은 공항호텔에","빅토리아 피크","하버 야경 & 스타페리"],
+    { day:4, date:"12/26 (토)", title:"마카오 체크아웃 → 홍콩 핵심 반나절 (피크·스타페리·침사추이) → Regal Airport Hotel", goals:["짐은 Regal Airport Hotel에","빅토리아 피크","하버 야경 & 스타페리"],
       items:[
         { time:"08:30–09:30", place:"아침 · 짐 정리", region:"코타이", desc:["위탁 20kg 확인, 남은 MOP 사용"], move:"—", moveTime:"—", cost:"MOP 200 (2인)", booking:"none", status:"PLANNED" },
         { time:"09:30–10:40", place:"Broadway Hotel 체크아웃 (기한 11:00) → HZMB 마카오 口岸", region:"이동", map:"HZMB Macau Port", desc:["체크아웃 기한 11:00 (예약 기준) — 09:30 체크아웃","기본안(택시): Broadway/갤럭시 승강장 → HZMB 口岸 약 20–25분 · MOP 120–160 — 09:40 출발","대안(무료): 갤럭시 Diamond Lobby HZMB 셔틀 (공식 10:00–23:00, 10–25분 간격, 약 25분) — 첫차 10:00라 09:50까지 로비 도착","12/26 토요일·연휴 직후 → 택시 대기·출경 혼잡 고려해 시간 여유"], move:"택시 (대안: 갤럭시 무료셔틀)", moveTime:"20–40분 (+대기)", cost:"MOP 120–160 (셔틀 무료)", booking:"none", status:"PLANNED" },
         { time:"10:40–12:15", place:"HZMB 금색버스 → 홍콩 口岸", region:"이동", desc:["토요일 + 연휴 → 출입경 대기 여유 있게"], move:"HZMB 셔틀버스", moveTime:"약 1.5h", cost:"HKD 65/인", booking:"none", status:"PLANNED" },
-        { time:"12:15–12:45", place:"B4 → 공항 · 12/26 숙소(리갈 에어포트 호텔 예정) 짐 보관", region:"홍콩", map:"Regal Airport Hotel Hong Kong", desc:["12/26 홍콩 숙소는 아직 미예약 — 예약 후 확정 (후보: Regal Airport Hotel)","체크인 전 짐 보관 (프런트)"], move:"B4 + 도보", moveTime:"20분", cost:"HKD 9.8/인", booking:"required", status:"CHECK" },
+        { time:"12:15–12:45", place:"B4 → 공항 · Regal Airport Hotel 짐 보관", region:"홍콩", map:"Regal Airport Hotel Hong Kong", desc:["Regal Airport Hotel 예약 완료 (12/26 → 12/27 · Superior Room)","공식 체크인 15:00 전이므로 프런트에 짐만 맡기고 홍콩 관광 (짐 보관 가능 여부 현장 확인)"], move:"B4 + 도보", moveTime:"20분", cost:"HKD 9.8/인", booking:"done", status:"PLANNED" },
         { time:"12:45–13:15", place:"공항철도 → 홍콩역 (센트럴)", region:"홍콩", desc:["Airport Express 24분, 10분 간격"], move:"공항철도", moveTime:"24분", cost:"약 HKD 115/인 (확인)", booking:"none", status:"CHECK" },
         { time:"13:15–14:15", place:"점심 — 팀호완 (홍콩역/IFC)", region:"홍콩", map:"Tim Ho Wan Hong Kong Station", desc:["미쉐린 딤섬 — 차슈번(BBQ pork bun)"], move:"도보 (역 내)", moveTime:"—", cost:"HKD 300 (2인)", booking:"none", status:"PLANNED" },
         { time:"14:30–17:30", place:"피크트램 → 빅토리아 피크", region:"홍콩", map:"Peak Tram Garden Road Lower Terminus", desc:["가든로드 하부역까지 도보 15분/택시","공휴일(박싱데이) 대기 길 수 있음 → 온라인 티켓","스카이테라스 428 전망, 해 질 녘 조망 (일몰 약 17:45)"], move:"도보 + 피크트램", moveTime:"15분 + 7분", cost:"HKD 216~ (왕복 2인, 주말/공휴일)", booking:"recommended", status:"PLANNED", key:true },
@@ -412,12 +423,12 @@ const tripData = {
         { time:"18:30–19:15", place:"침사추이 해변 산책로 · Avenue of Stars", region:"홍콩", map:"Avenue of Stars Hong Kong", desc:["빅토리아 하버 야경, 크리스마스 건물 조명"], move:"도보", moveTime:"—", cost:"무료", booking:"none", status:"PLANNED" },
         { time:"19:15–20:30", place:"저녁 — 침사추이 (하버시티/K11 MUSEA)", region:"홍콩", desc:["완탕면·로스트구스·딤섬 중 택1 (현장)"], move:"도보", moveTime:"10분", cost:"HKD 700 (2인)", booking:"none", status:"PLANNED" },
         { time:"20:00", place:"Symphony of Lights", region:"홍콩", map:"Tsim Sha Tsui Promenade", desc:["2026년 하반기 종료 예정 — 12월 운영 여부 확인 필요"], move:"도보", moveTime:"—", cost:"무료", booking:"none", status:"CHECK" },
-        { time:"20:45–21:30", place:"공항철도 구룡역 → 공항 → 12/26 숙소 체크인", region:"홍콩", desc:["구룡역까지 택시 약 10분","12/26 숙소 미예약 — 예약 후 확정","22:00 전 취침 목표"], move:"택시 + 공항철도", moveTime:"약 40분", cost:"약 HKD 250 (2인)", booking:"required", status:"CHECK" },
+        { time:"20:45–21:30", place:"공항철도 구룡역 → 공항 → Regal Airport Hotel 체크인", region:"홍콩", map:"Regal Airport Hotel Hong Kong", desc:["구룡역까지 택시 약 10분","실제 도착 약 21:30 — 공식 체크인 15:00 이후라 바로 체크인 (Superior Room · 조식 불포함)","요청사항(금연·고층·조용한 객실)은 보장되지 않음","22:00 전 취침 목표"], move:"택시 + 공항철도", moveTime:"약 40분", cost:"약 HKD 250 (2인) · 숙박 예약 완료 ₩188,829", booking:"done", status:"CONFIRMED" },
       ]},
-    { day:5, date:"12/27 (일)", title:"새벽 체크인 → 귀국", goals:["04:15 체크인","07:15 출발"],
+    { day:5, date:"12/27 (일)", title:"Regal Airport Hotel 새벽 퇴실 → 공항 체크인 → 귀국", goals:["04:00 퇴실 (공식 체크아웃 12:00)","04:15 체크인","07:15 출발"],
       items:[
-        { time:"03:30", place:"기상", region:"홍콩", desc:["전날 짐 정리 완료해둘 것"], move:"—", moveTime:"—", cost:"—", booking:"none", status:"PLANNED" },
-        { time:"04:00–04:15", place:"호텔 → T2 Aisle U (HK Express)", region:"홍콩", map:"Hong Kong International Airport Terminal 2", desc:["리갈 호텔 → T1 연결통로 → T2 (실제 동선 전날 미리 확인)"], move:"도보", moveTime:"10–15분", cost:"—", booking:"none", status:"CHECK" },
+        { time:"03:30", place:"기상 (Regal Airport Hotel)", region:"홍콩", desc:["전날 짐 정리 완료해둘 것"], move:"—", moveTime:"—", cost:"—", booking:"none", status:"PLANNED" },
+        { time:"04:00–04:15", place:"Regal Airport Hotel 퇴실 → T2 Aisle U (HK Express)", region:"홍콩", map:"Hong Kong International Airport Terminal 2", desc:["실제 퇴실 04:00 — 호텔 공식 체크아웃 12:00과 별개 (객실 키 반납)","리갈 호텔 → T1 연결통로 → T2 (실제 동선 전날 미리 확인)"], move:"도보", moveTime:"10–15분", cost:"—", booking:"none", status:"CHECK" },
         { time:"04:15–05:00", place:"체크인 · 백드랍", region:"홍콩", desc:["키오스크 06:00 / 카운터 06:15 마감","05:29 이전엔 T1으로 돌아가 보안·출국심사"], move:"도보", moveTime:"—", cost:"—", booking:"none", status:"CONFIRMED", key:true },
         { time:"05:00–06:30", place:"출국심사 → 탑승구", region:"홍콩", desc:["남은 HKD로 아침·간식"], move:"도보/APM", moveTime:"—", cost:"HKD 150", booking:"none", status:"PLANNED" },
         { time:"07:15–11:40", place:"UO618 홍콩 → 인천 T1", region:"항공", desc:["HK Express"], move:"항공", moveTime:"3h25m", cost:"예약 완료", booking:"none", status:"CONFIRMED", key:true }
@@ -501,11 +512,11 @@ const tripData = {
       pros:["세나도·성바울 도보권","반도 야경·로컬 식당 접근"], cons:["공연·리조트 동선과 멀어 매일 택시","이번 여행 목적(공연·리조트)과 불일치"],
       showAccess:"HoDW 택시 20–25분", sightAccess:"세나도 도보 15분", shuttle:"HZMB 셔틀(Ponte 16)", rating:2,
       links:[], map:"Sofitel Macau at Ponte 16" },
-    { name:"Regal Airport Hotel", area:"홍콩공항 (T1 연결)", tier:"airport", recommended:true, status:"CHECK", bookingStatus:"12/26 1박 미예약", stars:4, price:"HKD 1,300–1,900 (추정)",
-      pros:["실내 연결통로로 터미널 도보","새벽 체크인에 최적"], cons:["시내 관광 후 복귀 시간 필요(공항철도)"],
-      showAccess:"—", sightAccess:"공항철도로 센트럴 24분", shuttle:"도보", rating:5,
+    { name:"Regal Airport Hotel", area:"홍콩국제공항 · Chek Lap Kok (T1 연결)", tier:"airport", role:"confirmed", status:"CONFIRMED", stars:4, price:"예약 완료 ₩188,829 / 1박 (NOL)",
+      pros:["실내 연결통로로 터미널 도보 (기존 조사)","12/27 07:15 조기 출국에 최적 — 새벽 교통수단 불필요"], cons:["시내 관광 후 복귀 시간 필요(공항철도)"],
+      showAccess:"—", sightAccess:"공항철도로 센트럴 24분", shuttle:"공항까지 도보 (T1 연결통로 → T2 Aisle U)", rating:5,
       links:[{label:"공식", url:"https://www.regalhotel.com/regal-airport-hotel"}], map:"Regal Airport Hotel Hong Kong" },
-    { name:"Novotel Citygate Hong Kong", area:"퉁청 (공항 인근)", tier:"airport", status:"CANDIDATE", bookingStatus:"12/26 1박 미예약", stars:4, price:"HKD 1,100–1,700 (추정)",
+    { name:"Novotel Citygate Hong Kong", area:"퉁청 (공항 인근)", tier:"airport", status:"CANDIDATE", stars:4, price:"HKD 1,100–1,700 (추정)",
       pros:["MTR 퉁청역 앞, 아웃렛 연결","리갈보다 저렴할 때 많음"], cons:["새벽 택시 10–15분 필요"],
       showAccess:"—", sightAccess:"MTR 퉁청선", shuttle:"확인 필요", rating:3,
       links:[], map:"Novotel Citygate Hong Kong" }
@@ -571,7 +582,7 @@ const tripData = {
     { name:"홍콩", note:"12/23 경유 · 12/26 오후~12/27 새벽", places:[
       { name:"홍콩국제공항 T1 / T2", map:"Hong Kong International Airport", day:"D1·D5" },
       { name:"HZMB 홍콩 口岸", map:"HZMB Hong Kong Port Passenger Clearance Building", day:"D1·D4" },
-      { name:"Regal Airport Hotel", map:"Regal Airport Hotel Hong Kong", day:"D4" },
+      { name:"Regal Airport Hotel (숙소 · 예약 완료)", map:"Regal Airport Hotel Hong Kong", day:"D4–D5" },
       { name:"팀호완 (홍콩역)", map:"Tim Ho Wan Hong Kong Station", day:"D4" },
       { name:"피크트램 하부역 (Garden Rd)", map:"Peak Tram Garden Road Lower Terminus", day:"D4" },
       { name:"빅토리아 피크 · Sky Terrace 428", map:"Sky Terrace 428 The Peak", day:"D4" },
@@ -646,7 +657,7 @@ const tripData = {
   // 항공권은 결제금액 근거(전자항공권)에 금액이 없어 제외
   budget: [
     { category:"숙박", item:"마카오 3박 — Broadway Hotel (NOL 예약 완료 · Broadway King · 조식 불포함)", amount:726939, currency:"KRW", status:"confirmed" },
-    { category:"숙박", item:"홍콩 마지막 1박 (12/26) — 미예약 · 공항호텔 추정", amount:1600, currency:"HKD", status:"unbooked" },
+    { category:"숙박", item:"홍콩 1박 — Regal Airport Hotel (NOL 예약 완료 · Superior Room · 조식 불포함)", amount:188829, currency:"KRW", status:"confirmed" },
     { category:"공연", item:"House of Dancing Water Grand 2석 — 미예매 추정", amount:2196, currency:"MOP", status:"unbooked" },
     { category:"교통", item:"HZMB 금색버스 왕복 + B4 버스 (2인)", amount:300, currency:"HKD" },
     { category:"교통", item:"마카오 택시·셔틀", amount:500, currency:"MOP" },
@@ -662,7 +673,7 @@ const tripData = {
   // 숙박 요약 카드
   budgetLodging: [
     { label:"마카오 3박 · 확정 비용", hotel:"Broadway Hotel", nights:3, nightlyKRW:242313, totalKRW:726939, status:"CONFIRMED", base:true, note:"NOL 예약 완료 · 1박 평균 ₩242,313 · 조식 불포함" },
-    { label:"홍콩 마지막 1박 · 미예약 (예상)", hotel:"공항 근처 호텔 (후보 Regal Airport Hotel)", nights:1, nightlyKRW:280000, totalKRW:280000, status:"CHECK", note:"HKD 1,600 추정 (HKD 1,300–1,900) · 예약 필요" }
+    { label:"홍콩 1박 · 확정 비용", hotel:"Regal Airport Hotel", nights:1, nightlyKRW:188829, totalKRW:188829, status:"CONFIRMED", base:true, note:"NOL 예약 완료 · Superior Room · 조식 불포함 · HAT 3% 안내는 추가 반영 안 함" }
   ],
   budgetOptional: [
     { item:"(옵션) Macau 2049 B석 2석", amount:976, currency:"MOP" },
@@ -676,7 +687,7 @@ const tripData = {
     { id:"icn-transport", label:"12/23 03:45 인천공항 T1 도착 수단 (자차·택시·전날 숙박)", ref:"", status:"CHECK" },
     { id:"show-hodw", label:"공연: House of Dancing Water 12/24 19:30 (Grand)", ref:"예약번호: ", status:"CHECK" },
     { id:"hotel-macau-confirmed", label:"마카오 호텔: Broadway Hotel 12/23–12/26 (3박) — 예약 완료", ref:"예약번호: 비공개 · NOL · Broadway King · 조식 불포함 · ₩726,939", status:"CONFIRMED", done:true },
-    { id:"hotel-hkg", label:"12/26 홍콩 마지막 1박 숙소 (12/26–12/27) — 미예약 · 예약 필요", ref:"후보: Regal Airport Hotel (공항 연결) · 예약 후 meta.lastNightHotel 갱신", status:"CHECK" },
+    { id:"hotel-hkg-confirmed", label:"홍콩 호텔: Regal Airport Hotel 12/26–12/27 (1박) — 예약 완료", ref:"예약번호: 비공개 · NOL · Superior Room · 조식 불포함 · ₩188,829", status:"CONFIRMED", done:true },
     { id:"rest-antonio", label:"식당: António 12/25 12:30 (2인)", ref:"", status:"PLANNED" },
     { id:"rest-xmas", label:"식당: 12/25 저녁 / 12/24 공연 전 저녁", ref:"", status:"CHECK" },
     { id:"insurance", label:"여행자 보험", ref:"", status:"PLANNED" },
@@ -689,27 +700,29 @@ const tripData = {
   ],
 
   priority: [
-    { when:"지금 예약 (10월)", items:["House of Dancing Water — 12월 일정 공개 즉시 예매 (14일 전 조기예매 20% 할인)","✔ 마카오 Broadway Hotel 3박 — 예약 완료","홍콩 12/26 마지막 1박(공항 근처) — 무료취소 요금으로 선점 (미예약)","인천공항 새벽 도착 수단 결정"] },
-    { when:"1~2개월 전 (10월 말~11월)", items:["António 12/25 점심 예약","12/24·12/25 저녁 식당 확정·예약","여행자 보험 · eSIM 구매","Macau 2049 관람 여부 결정","크리스마스 행사(리조트·Light Up Macau) 발표 확인"] },
-    { when:"1~2주 전 (12월 초)", items:["공연 시간·휴연일 최종 확인","갤럭시 무료셔틀 시간표(HZMB 口岸·StarWorld ↔ Galaxy) 12월 운행 확인","Symphony of Lights 운영 여부 확인","피크트램 온라인 티켓","날씨·HZMB 운행 공지 확인"] },
+    { when:"✔ 예약 완료", items:["항공권 왕복 UO617 / UO618","마카오 Broadway Hotel 3박 (12/23–12/26)","홍콩 Regal Airport Hotel 1박 (12/26–12/27)"] },
+    { when:"지금 예약 (10월)", items:["① House of Dancing Water — 12월 일정 공개 즉시 예매 (14일 전 조기예매 20% 할인)","② António 12/25 점심 등 크리스마스 식당 예약","인천공항 새벽 도착 수단 결정"] },
+    { when:"1~2개월 전 (10월 말~11월)", items:["12/24·12/25 저녁 식당 확정 (현재 Broadway Food Street 계획 — 예약 불필요)","여행자 보험 · eSIM 구매","Macau 2049 관람 여부 결정","크리스마스 행사(리조트·Light Up Macau) 발표 확인"] },
+    { when:"1~2주 전 (12월 초)", items:["공연 시간·휴연일 최종 확인","갤럭시 무료셔틀 시간표(HZMB 口岸·StarWorld ↔ Galaxy) 12월 운행 확인","Symphony of Lights 운영 여부 확인","③ 피크트램 온라인 티켓 (12/26)","날씨·HZMB 운행 공지 확인"] },
     { when:"여행 직전", items:["HK Express 온라인 체크인 · 항공 시간 변경 확인","위탁 20kg / 개인물품 7kg 무게 확인","환전·옥토퍼스 충전","여권 유효기간(6개월 이상) 확인","예약 확인서 오프라인 저장"] }
   ],
 
   checkNeeded: [
-    { title:"12/26 홍콩 마지막 1박 숙소 미예약", detail:"Broadway Hotel 예약은 12/23→12/26 3박만 포함. 12/27 07:15 귀국편(HKG T2) 대비 공항 근처 숙소(후보 Regal Airport Hotel, HKD 1,300–1,900 추정) 예약 필요 — 공항 도착 목표 04:15." },
+    { title:"아직 예약하지 않은 항목", detail:"House of Dancing Water 예매 · António 12/25 점심 예약 · 피크트램 온라인 티켓 (항공권·숙소 4박은 모두 예약 완료)." },
     { title:"House of Dancing Water 12월 공연 일정 미공개", detail:"2026 하절기 기준 16:30/19:30 (수–일). 12/23–26은 수–토라 가능성 높지만 미확정. 공식 예매처에서 날짜 열리는지 주기적 확인." },
     { title:"Macau 2049 12월 회차", detail:"8/1부터 15:00 공연. 12월 휴연일 확인 필요." },
     { title:"크리스마스 이벤트 2026 미공개", detail:"리조트별 크리스마스 장식·Light Up Macau 2026 일정 발표 대기 (11월 예상)." },
     { title:"Symphony of Lights 종료 예정", detail:"홍콩 정부가 2026년 하반기 종료 방침 발표. 12/26 운영 여부 불확실 → 하버 야경 자체는 그대로 감상 가능." },
-    { title:"홍콩 마지막 1박 가격", detail:"공항호텔 가격은 추정치(HKD 1,300–1,900). 크리스마스 연휴 직후 토요일이라 오를 수 있음." },
+    { title:"Regal Airport Hotel 숙박세 안내", detail:"바우처에 홍콩 호텔숙박세(HAT) 3%가 총 숙박비에 영향을 줄 수 있다는 안내 — 결제금액 ₩188,829에 포함 여부를 체크인 시 확인 (예산엔 추가 반영 안 함)." },
     { title:"Broadway 투숙 혜택 · 요청사항", detail:"Grand Resort Deck 무료 이용은 날씨·계절 휴장에 따라 12월 운영 여부 확인 필요. 조기 체크인·고층·전망 등 요청사항은 보장되지 않음 (공식 체크인 15:00)." },
     { title:"갤럭시 무료셔틀 12월 운행", detail:"공식: HZMB ↔ Galaxy 10:00–23:00(Diamond Lobby), StarWorld ↔ Galaxy 09:30–22:00(Crystal Lobby). 연휴 기간 변경 여부와 Galaxy ↔ Broadway 실내 도보 경로 재확인." },
-    { title:"새벽 공항 동선 (공항호텔 → T2 Aisle U)", detail:"HK Express 체크인은 T2. 00:31–05:29엔 체크인 후 T1으로 돌아가 출국심사. 12/26 숙소 예약 후 밤에 미리 걸어보기." },
+    { title:"새벽 공항 동선 (Regal Airport Hotel → T2 Aisle U)", detail:"HK Express 체크인은 T2. 00:31–05:29엔 체크인 후 T1으로 돌아가 출국심사. 12/26 밤 체크인 후 미리 걸어보기." },
     { title:"인천공항 03:45 도착 수단", detail:"새벽 공항철도·버스 운행 전 — 자차(장기주차)·택시·전날 공항 근처 숙박 중 결정." },
     { title:"요금 재확인", detail:"공항철도 요금, TurboJET 요금표, 피크트램 공휴일 요금, 마카오 박물관 입장료." }
   ],
 
   history: [
+    { date:"2026-10-05", changes:["Regal Airport Hotel 예약 확정","12/26~12/27 Regal Airport Hotel 예약 완료 (NOL · 체크인 12/26 토 15:00 / 공식 체크아웃 12/27 일 12:00, 실제 퇴실은 새벽)","Superior Room / 성인 2명 / 조식 불포함","1박 ₩188,829 반영 (HAT 3% 안내는 추가 반영 안 함)","마지막 홍콩 숙박 미확정 상태 제거 · 마지막 밤 숙박 비교·공항 호텔 후보는 '예약 전 비교 기록'으로 이동","숙박 4박 전체 예약 완료 (숙박 확정 합계 ₩915,768)","DAY 4 / DAY 5 동선 업데이트","예산 및 체크리스트·예약 우선순위·확인 필요 업데이트"] },
     { date:"2026-10-05", changes:["항공권 및 Broadway Hotel 예약 확정 반영","UO617 / UO618 항공권 확정 정보 반영 (전자항공권 재대조 · 체크리스트 왕복 2건 완료)","Broadway Hotel 12/23~12/26 예약 확정 (NOL · 체크인 15:00 / 체크아웃 11:00)","Broadway King / 조식 불포함 / 3박 726,939원 (1박 평균 242,313원) 반영","일정 및 예산 업데이트 (확정·예상·미예약 비용 구분, 도착 13~14시는 요청사항일 뿐 공식 체크인 15:00)","호텔 비교 상태 정리 (마카오 후보·Agoda 비교 → '예약 전 비교 기록'으로 접기)","예약 체크리스트 업데이트","12/26 홍콩 숙박은 미확정 상태 유지"] },
     { date:"2026-10-05", changes:["공개용 publish/index.html 빌드 구조 추가 (python tools/build_publish.py) — 탑승객 이름·PNR·예약번호 자동 마스킹 및 잔존 검사","탑승객 이름을 meta.travelerNames 한 곳으로 모음 (요약 카드 하드코딩 제거)"] },
     { date:"2026-10-05", changes:["마카오 숙소 Broadway Macau로 최종 선택","The Londoner 숙박안 폐기 (프리미엄 대안·비교 참고로만 유지)","Broadway 기준 D1~D4 이동 동선 재설계 (갤럭시 HZMB 셔틀·StarWorld 셔틀·택시)","Galaxy/Broadway 접근성을 일정에 반영 (Broadway Food Street, 포춘 다이아몬드, 타이파 빌리지 도보)","기본 숙박 예산 Broadway 3박 ₩750,864로 확정","실제 예약 완료 전까지 상태는 SELECTED 유지"] },
@@ -720,7 +733,8 @@ const tripData = {
 
   sources: [
     { label:"전자항공권 (로컬 비공개 자료) — 항공편·수하물 Source of Truth", url:"" },
-    { label:"Broadway Hotel 예약 바우처 (NOL, 로컬 비공개 자료) — 숙박 Source of Truth", url:"" },
+    { label:"Broadway Hotel 예약 바우처 (NOL, 로컬 비공개 자료) — 마카오 숙박 Source of Truth", url:"" },
+    { label:"Regal Airport Hotel 예약 바우처 (NOL, 로컬 비공개 자료) — 홍콩 숙박 Source of Truth", url:"" },
     { label:"City of Dreams — House of Dancing Water", url:"https://www.cityofdreamsmacau.com/en/house-of-dancing-water" },
     { label:"MGM — Macau 2049", url:"https://macau2049.mgm.mo/en" },
     { label:"HK Express — HKIA T2 이전 안내", url:"https://www.hkexpress.com/Plan/Travel/HKIA-T2" },
@@ -785,8 +799,7 @@ const tripData = {
     const st = load(); const total = D.checklist.length;
     const done = D.checklist.filter(c => st[c.id] ?? !!c.done).length;
     const pct = Math.round(done/total*100);
-    const hp = D.meta.hotelPlan, ln = D.meta.lastNightHotel;
-    const hk = D.hotels.find(h => h.recommended && h.tier==="airport");
+    const hp = D.meta.hotelPlan, hh = D.meta.hkHotelPlan;
     const show = D.shows.find(s => s.topPick);
     const bt = budgetTotals();
     const o = D.flights[0], r = D.flights[1];
@@ -796,12 +809,13 @@ const tripData = {
       ["마카오 체류", D.meta.stay.macau, "코타이 3박 — 여행의 중심"],
       ["홍콩 체류", D.meta.stay.hongkong, "D1 경유 · D4 오후~D5 새벽"],
       ["항공권", `${o.flightNo} ${o.from.time} → ${r.flightNo} ${r.from.time}`, `HK Express · 왕복 <span class="rsv done">예약 완료</span> ${badge(o.status)}`],
-      ["마카오 숙소", hp.selected, `${hp.nights}박 · 12/23 ${hp.checkInTime} 체크인 → 12/26 ${hp.checkOutTime} 체크아웃<br>${esc(hp.roomType)} · ${esc(hp.meal.split(" (")[0])} · ₩${fmt(hp.paidKRW)}<br><span class="rsv done">${esc(hp.bookingStatus)}</span> ${badge(hp.status)}`],
-      ["홍콩 마지막 1박", "예약 필요", `12/26 → 12/27 · Broadway 예약에 미포함<br>후보 ${esc(ln.candidate)} (HKD ${esc(ln.estimateHKD)} 추정)<br><span class="rsv req">${esc(ln.bookingStatus)}</span> ${badge(ln.status)}`],
+      ["숙소 ① 마카오 3박", hp.selected, `${hp.nights}박 · 12/23 ${hp.checkInTime} 체크인 → 12/26 ${hp.checkOutTime} 체크아웃<br>${esc(hp.roomType)} · ${esc(hp.meal.split(" (")[0])} · ₩${fmt(hp.paidKRW)}<br><span class="rsv done">${esc(hp.bookingStatus)}</span> ${badge(hp.status)}`],
+      ["숙소 ② 홍콩 1박", hh.selected, `${hh.nights}박 · 12/26 ${hh.checkInTime} 체크인 → 12/27 새벽 퇴실 (공식 체크아웃 ${hh.checkOutTime})<br>${esc(hh.roomType)} · ${esc(hh.meal.split(" (")[0])} · ₩${fmt(hh.paidKRW)}<br><span class="rsv done">${esc(hh.bookingStatus)}</span> ${badge(hh.status)}`],
+      ["예약 현황", "항공권·숙소 4박 예약 완료", `항공권 왕복 <span class="rsv done">완료</span><br>Broadway 3박 + Regal Airport 1박 <span class="rsv done">완료</span><br>숙박 확정 합계 ₩${fmt(hp.paidKRW + hh.paidKRW)}`],
       ["추천 공연", show.name, `TOP PICK · ${badge(show.status)}`],
     ];
     $("summaryCards").innerHTML = cards.map(([l,v,n]) => `<div class="card stat"><div class="label">${l}</div><div class="value">${esc(v)}</div><div class="note">${n}</div></div>`).join("")
-      + `<div class="card stat big"><div class="label">예상 총비용 (2인, 항공 제외)</div><div class="value">₩${fmt(bt.krw)}</div><div class="note">≈ HKD ${fmt(bt.hkd)} · 확정 ₩${fmt(bt.byStatus.confirmed||0)} · 예상 ₩${fmt((bt.byStatus.estimate||0)+(bt.byStatus.unbooked||0))}</div></div>`
+      + `<div class="card stat big"><div class="label">예상 총비용 (2인, 항공 제외)</div><div class="value">₩${fmt(bt.krw)}</div><div class="note">≈ HKD ${fmt(bt.hkd)} <br>확정 ₩${fmt(bt.byStatus.confirmed||0)} · 예상 ₩${fmt(bt.byStatus.estimate||0)} · 미예약 ₩${fmt(bt.byStatus.unbooked||0)}</div></div>`
       + `<div class="card stat"><div class="label">예약 진행률</div><div class="value">${done} / ${total} (${pct}%)</div><div class="progress"><i style="width:${pct}%"></i></div><div class="note"><a href="#checklist">체크리스트로 →</a></div></div>`;
   }
 
@@ -861,29 +875,30 @@ const tripData = {
     ${linkBtns(s.links, s.map)}</div>`).join("");
 
   // ⑥ Hotels
-  // 호텔 역할: confirmed(예약 완료 숙소) / premiumAlt(비교 기록) / 공항호텔 recommended = 12/26 추천 후보(미예약)
+  // 호텔 역할: confirmed(예약 완료 숙소 — 확정 카드로 표시) / premiumAlt(비교 기록) / 나머지는 예약 전 비교 기록
   const hotelRoleLabel = h => h.role === "confirmed" ? "예약 완료" : h.role === "premiumAlt" ? "비교 기록" : h.recommended ? "추천 후보" : "";
   let tier = "all";
   function renderHotels(){
-    const hp = D.meta.hotelPlan, conf = D.hotels.find(h => h.role === "confirmed");
-    $("hotelConfirmed").innerHTML = `<div class="card top"><span class="ribbon">예약 완료</span>
-      <div class="tl-head"><div><div class="small muted">마카오 숙소 확정</div><h3 style="font-size:20px">${esc(hp.selected)}</h3><div class="meta">${esc(conf.area)} · ${"★".repeat(conf.stars)} <span title="${esc(conf.starsNote||"")}">(Agoda 분류)</span> · 예약처 ${esc(hp.channel)}</div></div>${badge(hp.status)}</div>
-      <div class="price-row"><div><span class="lbl">3박 결제 금액</span><span class="price-big">₩${fmt(hp.paidKRW)}</span></div><div><span class="lbl">1박 평균</span><b>₩${fmt(hp.nightlyAvgKRW)}</b></div><div><span class="lbl">예약 상태</span><span class="rsv done">${esc(hp.bookingStatus)}</span></div></div>
-      <dl class="kv"><dt>체크인</dt><dd>${esc(hp.checkIn)} (수) ${esc(hp.checkInTime)}</dd><dt>체크아웃</dt><dd>${esc(hp.checkOut)} (토) ${esc(hp.checkOutTime)}</dd><dt>숙박</dt><dd>${hp.nights}박 · ${esc(hp.roomType)} · 객실 ${hp.rooms}개 · ${esc(hp.guests)}</dd><dt>식사</dt><dd>${esc(hp.meal)}</dd><dt>도착 계획</dt><dd>${esc(hp.arrivalPlan)}</dd><dt>예약번호</dt><dd>${esc(hp.booking.bookingNo)} <span class="small muted">(체크인 시 제시)</span></dd><dt>주소</dt><dd>${esc(hp.address)}</dd></dl>
-      <div class="nature"><b>요청사항</b> <span class="small muted">— ${esc(hp.requestNote)}</span><div class="chips">${hp.requests.map(x => `<span class="chip">${esc(x)}</span>`).join("")}</div></div>
-      <div class="small" style="margin-top:8px">${hp.benefits.map(x => `🎁 ${esc(x.text)} <span class="muted">· ${esc(x.note)}</span>`).join("<br>")}</div>
-      <details><summary>위치·접근성</summary><dl class="kv"><dt>공연 접근</dt><dd>${esc(conf.showAccess)}</dd><dt>관광 접근</dt><dd>${esc(conf.sightAccess)}</dd><dt>무료셔틀</dt><dd>${esc(conf.shuttle)}</dd></dl><ul class="tight small">${conf.pros.map(x=>`<li>${esc(x)}</li>`).join("")}</ul></details>
-      ${linkBtns(conf.links, conf.map)}</div>`;
+    const hp = D.meta.hotelPlan;
+    const confirmedCard = (plan, title) => { const conf = D.hotels.find(h => h.name === plan.selected); return `<div class="card top" style="margin-bottom:14px"><span class="ribbon">예약 완료</span>
+      <div class="tl-head"><div><div class="small muted">${esc(title)}</div><h3 style="font-size:20px">${esc(plan.selected)}</h3><div class="meta">${esc(conf.area)} · ${"★".repeat(conf.stars)}${conf.starsNote?` <span title="${esc(conf.starsNote)}">(Agoda 분류)</span>`:""} · 예약처 ${esc(plan.channel)}</div>${plan.purpose?`<div class="small" style="margin-top:4px">✈ ${esc(plan.purpose)}</div>`:""}</div>${badge(plan.status)}</div>
+      <div class="price-row"><div><span class="lbl">${plan.nights}박 결제 금액</span><span class="price-big">₩${fmt(plan.paidKRW)}</span></div>${plan.nights>1?`<div><span class="lbl">1박 평균</span><b>₩${fmt(plan.nightlyAvgKRW)}</b></div>`:""}<div><span class="lbl">예약 상태</span><span class="rsv done">${esc(plan.bookingStatus)}</span></div></div>
+      <dl class="kv"><dt>체크인</dt><dd>${esc(plan.checkIn)} (${esc(plan.checkInDow)}) ${esc(plan.checkInTime)}</dd><dt>체크아웃</dt><dd>${esc(plan.checkOut)} (${esc(plan.checkOutDow)}) ${esc(plan.checkOutTime)} <span class="small muted">(호텔 공식)</span></dd>${plan.actualDeparture?`<dt>실제 퇴실</dt><dd>${esc(plan.actualDeparture)}</dd>`:""}<dt>숙박</dt><dd>${plan.nights}박 · ${esc(plan.roomType)} · 객실 ${plan.rooms}개 · ${esc(plan.guests)}</dd><dt>식사</dt><dd>${esc(plan.meal)}</dd><dt>도착 계획</dt><dd>${esc(plan.arrivalPlan)}</dd><dt>예약번호</dt><dd>${esc(plan.booking.bookingNo)} <span class="small muted">(체크인 시 제시)</span></dd><dt>주소</dt><dd>${esc(plan.address)}</dd></dl>
+      <div class="nature"><b>요청사항</b> <span class="small muted">— ${esc(plan.requestNote)}</span><div class="chips">${plan.requests.map(x => `<span class="chip">${esc(x)}</span>`).join("")}</div></div>
+      ${plan.benefits?`<div class="small" style="margin-top:8px">${plan.benefits.map(x => `🎁 ${esc(x.text)} <span class="muted">· ${esc(x.note)}</span>`).join("<br>")}</div>`:""}
+      ${plan.taxNote?`<div class="small muted" style="margin-top:8px">ⓘ ${esc(plan.taxNote)}</div>`:""}
+      <details><summary>위치·접근성</summary><dl class="kv"><dt>공연 접근</dt><dd>${esc(conf.showAccess)}</dd><dt>관광 접근</dt><dd>${esc(conf.sightAccess)}</dd><dt>이동</dt><dd>${esc(conf.shuttle)}</dd></dl><ul class="tight small">${conf.pros.map(x=>`<li>${esc(x)}</li>`).join("")}</ul></details>
+      ${linkBtns(conf.links, conf.map)}</div>`; };
+    $("hotelConfirmed").innerHTML = confirmedCard(hp, "숙소 ① 마카오 · 12/23 → 12/26") + confirmedCard(D.meta.hkHotelPlan, "숙소 ② 홍콩 공항 · 12/26 → 12/27");
     const hotelCard = h => { const rb = hotelRoleLabel(h); return `<div class="card ${rb&&h.role!=="premiumAlt"?"top":""}">${rb?`<span class="ribbon">${rb}</span>`:""}
       <div class="tl-head"><div><h3>${esc(h.name)}</h3><div class="meta">${esc(h.area)} · ${"★".repeat(h.stars)}${h.starsNote?` <span title="${esc(h.starsNote)}">(Agoda 분류)</span>`:""} · ${esc(D.hotelTiers[h.tier])}</div></div>${badge(h.status)}</div>
       <dl class="kv">${h.bookingStatus?`<dt>예약 상태</dt><dd><span class="rsv req">${esc(h.bookingStatus)} · 예약 필요</span></dd>`:""}<dt>1박 가격</dt><dd><b>${esc(h.price)}</b></dd><dt>공연 접근</dt><dd>${esc(h.showAccess)}</dd><dt>관광 접근</dt><dd>${esc(h.sightAccess)}</dd><dt>무료셔틀</dt><dd>${esc(h.shuttle)}</dd><dt>추천도</dt><dd>${stars(h.rating)}</dd></dl>
       <details><summary>장점 / 단점</summary><div class="small"><b>장점</b><ul class="tight">${h.pros.map(x=>`<li>${esc(x)}</li>`).join("")}</ul><b>단점</b><ul class="tight">${h.cons.map(x=>`<li>${esc(x)}</li>`).join("")}</ul></div></details>
       ${linkBtns(h.links, h.map)}</div>`; };
-    $("hotelHk").innerHTML = D.hotels.filter(h => h.tier === "airport").map(hotelCard).join("");
-    const tiers = [["all","전체"], ...Object.entries(D.hotelTiers).filter(([k]) => k !== "airport")];
+    const tiers = [["all","전체"], ...Object.entries(D.hotelTiers)];
     $("hotelFilters").innerHTML = tiers.map(([k,l]) => `<button class="btn ${tier===k?"on":""}" data-tier="${k}">${l}</button>`).join("");
     document.querySelectorAll("#hotelFilters .btn").forEach(b => b.onclick = () => { tier = b.dataset.tier; renderHotels(); });
-    $("hotelCards").innerHTML = D.hotels.filter(h => h.tier !== "airport" && h.role !== "confirmed" && (tier==="all" || h.tier===tier)).map(hotelCard).join("");
+    $("hotelCards").innerHTML = D.hotels.filter(h => h.role !== "confirmed" && (tier==="all" || h.tier===tier)).map(hotelCard).join("");
   }
 
   // ⑥-1 Agoda 호텔 비교 — tripData.agodaHotels 만 수정하면 자동 반영
@@ -1028,7 +1043,7 @@ const tripData = {
     const bt = budgetTotals(); const max = Math.max(...Object.values(bt.cats).map(c => c.krw));
     const optKRW = D.budgetOptional.reduce((s,o) => s + toKRW(o.amount,o.currency), 0);
     $("budgetBody").innerHTML = `<div class="total-box"><div><div class="small muted">2인 총 예상 (항공권 제외 · 확정+예상+미예약 추정)</div><div class="krw">₩${fmt(bt.krw)}</div></div><div class="muted">≈ HKD ${fmt(bt.hkd)} · ≈ MOP ${fmt(bt.hkd*D.fx.HKD/D.fx.MOP)}<br>1인 약 ₩${fmt(bt.krw/2)}</div></div>
-      <div class="chips" style="margin-top:10px"><span class="chip ok">확정 비용 ₩${fmt(bt.byStatus.confirmed||0)}</span><span class="chip">예상 비용 ₩${fmt(bt.byStatus.estimate||0)}</span><span class="chip no">미예약 (추정) ₩${fmt(bt.byStatus.unbooked||0)}</span></div>
+      <div class="chips" style="margin-top:10px"><span class="chip ok">확정 비용 ₩${fmt(bt.byStatus.confirmed||0)}</span><span class="chip ok">숙박 확정 합계 ₩${fmt(D.budget.filter(b=>b.category==="숙박"&&b.status==="confirmed").reduce((a,b)=>a+toKRW(b.amount,b.currency),0))}</span><span class="chip">예상 비용 ₩${fmt(bt.byStatus.estimate||0)}</span><span class="chip no">미예약 (추정) ₩${fmt(bt.byStatus.unbooked||0)}</span></div>
       <div class="grid g2" style="margin-top:14px">${D.budgetLodging.map(l => `<div class="card ${l.base?"top":""}" style="box-shadow:none">${l.base?'<span class="ribbon">예약 완료</span>':""}<div class="tl-head"><div><div class="small muted">${esc(l.label)}</div><b>${esc(l.hotel)} ${l.nights}박</b></div>${badge(l.status)}</div><div class="price-row"><div><span class="lbl">${l.nights}박 총액</span><span class="price-big">₩${fmt(l.totalKRW)}</span></div><div><span class="lbl">1박${l.base?" 평균":""}</span><b>₩${fmt(l.nightlyKRW)}</b></div></div><div class="small muted">${esc(l.note)}</div></div>`).join("")}</div>
       <div style="margin-top:14px">${Object.entries(bt.cats).map(([k,c]) => `<div class="bar-row"><span>${esc(k)}</span><div class="bar"><i style="width:${(c.krw/max*100).toFixed(1)}%"></i></div><span class="amt">₩${fmt(c.krw)}<small>HKD ${fmt(c.hkd)}</small></span></div>`).join("")}</div>
       <details><summary>항목별 상세 (원 통화 기준)</summary><div class="scroll-x"><table class="simple"><tr><th>구분</th><th>항목</th><th>상태</th><th>금액</th><th>KRW</th></tr>

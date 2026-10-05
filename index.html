@@ -1,0 +1,1027 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta name="robots" content="noindex,nofollow">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Hong Kong &amp; Macau Trip 2026</title>
+<style>
+/* =========================================================
+   DESIGN (스타일) — 여행 데이터는 아래 <script> tripData 에 있음
+   ========================================================= */
+:root{
+  --navy:#0f1d3d; --navy-2:#1b2c55; --gold:#c9a24a; --gold-soft:#f6edd6;
+  --bg:#f3f5f9; --card:#ffffff; --text:#1c2333; --muted:#5f6b80; --line:#e3e7ef;
+  --c-confirmed:#1e8e5a; --c-planned:#2f6fd6; --c-candidate:#7b5cc4; --c-check:#d9822b;
+  --radius:14px; --shadow:0 1px 3px rgba(15,29,61,.08),0 4px 14px rgba(15,29,61,.05);
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:64px}
+body{margin:0;overflow-wrap:anywhere;background:var(--bg);color:var(--text);font:15px/1.6 -apple-system,BlinkMacSystemFont,"Segoe UI","Malgun Gothic","Apple SD Gothic Neo",sans-serif;-webkit-text-size-adjust:100%}
+a{color:var(--planned,#2f6fd6)}
+h1,h2,h3,h4{line-height:1.3;margin:0}
+.wrap{max-width:1180px;margin:0 auto;padding:0 16px}
+
+/* Header */
+header.hero{background:linear-gradient(135deg,var(--navy) 0%,var(--navy-2) 60%,#2a2350 100%);color:#fff;padding:36px 0 30px}
+.hero h1{font-size:clamp(26px,5vw,40px);letter-spacing:.5px}
+.hero h2{font-size:clamp(16px,3vw,20px);color:var(--gold);font-weight:600;margin-top:6px;letter-spacing:1px}
+.hero p{color:#c9d2e6;margin:12px 0 0;max-width:760px}
+.hero .tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
+.hero .tags span{border:1px solid rgba(201,162,74,.6);color:#f3e3b9;padding:3px 10px;border-radius:99px;font-size:13px}
+
+/* Sticky nav */
+nav.top{position:sticky;top:0;z-index:50;background:rgba(15,29,61,.97);border-bottom:2px solid var(--gold)}
+nav.top .wrap{display:flex;gap:4px;overflow-x:auto;scrollbar-width:none;padding-top:8px;padding-bottom:8px}
+nav.top .wrap::-webkit-scrollbar{display:none}
+nav.top a{color:#dfe5f2;text-decoration:none;font-size:13.5px;white-space:nowrap;padding:6px 10px;border-radius:8px}
+nav.top a:hover{background:rgba(255,255,255,.1);color:#fff}
+
+section{padding:30px 0 6px}
+.sec-title{display:flex;align-items:baseline;gap:10px;margin-bottom:14px;flex-wrap:wrap}
+.sec-title h2{font-size:22px;color:var(--navy)}
+.sec-title .num{color:var(--gold);font-weight:700;font-size:22px}
+.sec-title .sub{color:var(--muted);font-size:13.5px}
+
+.grid{display:grid;gap:14px}
+.g2{grid-template-columns:repeat(auto-fill,minmax(min(320px,100%),1fr))}
+.g3{grid-template-columns:repeat(auto-fill,minmax(min(270px,100%),1fr))}
+.g4{grid-template-columns:repeat(auto-fill,minmax(min(160px,100%),1fr))}
+.card{background:var(--card);border-radius:var(--radius);box-shadow:var(--shadow);padding:16px 18px;border:1px solid var(--line);position:relative;min-width:0}
+.card h3{font-size:17px;color:var(--navy)}
+.card .meta{color:var(--muted);font-size:13px}
+.muted{color:var(--muted)}
+.small{font-size:13px}
+.kv{display:grid;grid-template-columns:92px 1fr;gap:4px 10px;font-size:13.5px;margin-top:10px}
+.kv dt{color:var(--muted)}
+.kv dd{margin:0}
+ul.tight{margin:6px 0 0;padding-left:18px}
+ul.tight li{margin:2px 0}
+
+/* Badges */
+.badge{display:inline-block;font-size:11px;font-weight:700;letter-spacing:.4px;padding:2px 8px;border-radius:6px;color:#fff;vertical-align:middle;white-space:nowrap}
+.b-CONFIRMED{background:var(--c-confirmed)}
+.b-PLANNED{background:var(--c-planned)}
+.b-CANDIDATE{background:var(--c-candidate)}
+.b-CHECK{background:var(--c-check)}
+.b-SELECTED{background:#b8860b}
+.ribbon{position:absolute;top:-10px;right:14px;background:var(--gold);color:var(--navy);font-weight:800;font-size:11.5px;padding:3px 10px;border-radius:6px;letter-spacing:.6px;box-shadow:0 2px 6px rgba(0,0,0,.15)}
+.card.top{border:2px solid var(--gold);background:linear-gradient(180deg,#fffdf6,#fff)}
+.stars{color:var(--gold);letter-spacing:1px;white-space:nowrap}
+.rsv{display:inline-block;font-size:11.5px;padding:1px 7px;border-radius:6px;border:1px solid var(--line);color:var(--muted);white-space:nowrap}
+.rsv.req{border-color:#e6b3b3;color:#b23b3b;background:#fdf1f1}
+.rsv.rec{border-color:#ecd39a;color:#946b12;background:#fff8e6}
+
+/* Buttons / links */
+.links{display:flex;flex-wrap:wrap;gap:6px;margin-top:12px}
+.btn{display:inline-flex;align-items:center;gap:4px;font-size:12.5px;text-decoration:none;padding:5px 10px;border-radius:8px;border:1px solid var(--line);color:var(--navy);background:#fff;cursor:pointer;font-family:inherit}
+.btn:hover{border-color:var(--gold);background:var(--gold-soft)}
+.btn.map{color:#1a6b3c}
+.btn.on{background:var(--navy);color:#fff;border-color:var(--navy)}
+
+/* Summary */
+.stat .label{font-size:12.5px;color:var(--muted)}
+.stat .value{font-size:18px;font-weight:700;color:var(--navy);margin-top:2px}
+.stat .note{font-size:12.5px;color:var(--muted);margin-top:2px}
+.progress{height:8px;background:#e8ebf2;border-radius:99px;overflow:hidden;margin-top:8px}
+.progress>i{display:block;height:100%;background:linear-gradient(90deg,var(--gold),#e2c47a);border-radius:99px;transition:width .3s}
+.stat.big{background:var(--navy);color:#fff;border:none}
+.stat.big .label,.stat.big .note{color:#c4cde2}
+.stat.big .value{color:var(--gold);font-size:22px}
+
+/* Flights */
+.flight{display:flex;align-items:center;justify-content:space-between;gap:10px;margin:14px 0 6px}
+.flight .ap{text-align:center;min-width:80px}
+.flight .ap b{display:block;font-size:28px;color:var(--navy);letter-spacing:1px}
+.flight .ap .t{font-size:22px;font-weight:700}
+.flight .ap .s{font-size:12px;color:var(--muted)}
+.flight .mid{flex:1;text-align:center;color:var(--muted);font-size:12px}
+.flight .mid .line{height:2px;background:repeating-linear-gradient(90deg,var(--gold) 0 6px,transparent 6px 10px);margin:6px 0}
+
+/* Timeline */
+.daytabs{display:flex;gap:8px;overflow-x:auto;padding-bottom:6px;scrollbar-width:thin}
+.daytab{flex:0 0 auto;border:1px solid var(--line);background:#fff;border-radius:12px;padding:8px 14px;cursor:pointer;text-align:left;font-family:inherit;color:var(--text)}
+.daytab b{display:block;color:var(--navy);font-size:15px}
+.daytab span{font-size:12px;color:var(--muted)}
+.daytab.on{background:var(--navy);border-color:var(--navy)}
+.daytab.on b{color:var(--gold)}
+.daytab.on span{color:#c4cde2}
+.dayhead{margin:14px 0 8px}
+.dayhead h3{font-size:19px;color:var(--navy)}
+.dayhead .goals{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}
+.dayhead .goals span{background:var(--gold-soft);color:#7a5a12;font-size:12.5px;padding:3px 10px;border-radius:99px}
+.tl{position:relative;margin-left:8px;padding-left:22px;border-left:2px solid #d5dbe7}
+.tl-item{position:relative;margin:0 0 12px}
+.tl-item::before{content:"";position:absolute;left:-30px;top:18px;width:12px;height:12px;border-radius:50%;background:#fff;border:3px solid var(--navy)}
+.tl-item.key::before{border-color:var(--gold);background:var(--gold)}
+.tl-item .card{padding:12px 14px}
+.tl-item.key .card{border-color:var(--gold)}
+.tl-time{font-weight:800;color:var(--navy);font-size:14px}
+.tl-place{font-weight:700;font-size:16px;margin-top:2px}
+.tl-row{display:flex;flex-wrap:wrap;gap:6px 14px;margin-top:8px;font-size:12.8px;color:var(--muted)}
+.tl-row b{color:var(--text);font-weight:600}
+.tl-head{display:flex;justify-content:space-between;gap:8px;align-items:flex-start}
+.region{font-size:11px;padding:1px 7px;border-radius:6px;background:#eef1f7;color:var(--muted);white-space:nowrap}
+
+/* Compare */
+.cmp .row{display:flex;justify-content:space-between;gap:10px;border-top:1px dashed var(--line);padding:6px 0;font-size:13.5px}
+.cmp .row span:first-child{color:var(--muted);flex:0 0 96px}
+.cmp .row span:last-child{text-align:right}
+.verdict{margin-top:10px;font-size:13.5px;padding:8px 10px;border-radius:8px;background:#f4f6fb}
+.card.reject{opacity:.85}
+.card.reject .verdict{background:#fdf1f1;color:#a23a3a}
+
+/* Filters */
+.filters{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:12px}
+
+/* Budget */
+.bar-row{display:grid;grid-template-columns:110px 1fr 150px;gap:10px;align-items:center;margin:8px 0;font-size:13.5px}
+.bar{height:14px;background:#e8ebf2;border-radius:99px;overflow:hidden}
+.bar>i{display:block;height:100%;background:var(--navy-2);border-radius:99px}
+.bar-row .amt{text-align:right;font-variant-numeric:tabular-nums}
+.bar-row .amt small{display:block;color:var(--muted);font-size:11.5px}
+.total-box{display:flex;flex-wrap:wrap;gap:18px;align-items:baseline}
+.total-box .krw{font-size:32px;font-weight:800;color:var(--navy)}
+
+/* Checklist */
+.check-item{display:flex;gap:10px;align-items:flex-start;padding:9px 4px;border-top:1px solid var(--line)}
+.check-item:first-child{border-top:none}
+.check-item input{width:19px;height:19px;margin-top:2px;accent-color:var(--navy);flex:0 0 auto}
+.check-item label{flex:1;cursor:pointer}
+.check-item.done label .t{text-decoration:line-through;color:var(--muted)}
+.check-item .ref{font-size:12px;color:var(--muted)}
+.prio h4{font-size:15px;color:var(--navy);margin-bottom:6px}
+
+/* Alert / check-needed */
+.alert{background:#fff7ec;border:2px solid var(--c-check);border-radius:var(--radius);padding:16px 18px}
+.alert h3{color:#a35a10}
+.alert li{margin:6px 0}
+
+/* Details */
+details{margin-top:10px}
+details summary{cursor:pointer;color:var(--navy);font-weight:600;font-size:13.5px}
+details[open] summary{margin-bottom:6px}
+
+table.simple{width:100%;border-collapse:collapse;font-size:13.5px}
+table.simple th,table.simple td{border-bottom:1px solid var(--line);padding:7px 6px;text-align:left;vertical-align:top}
+table.simple th{color:var(--muted);font-weight:600;font-size:12.5px}
+.scroll-x{overflow-x:auto}
+
+footer{padding:30px 0 50px;color:var(--muted);font-size:13px}
+.history .ver{border-left:3px solid var(--gold);padding:4px 0 4px 12px;margin:10px 0}
+.history .ver b{color:var(--navy)}
+
+/* Agoda 비교 */
+.agoda-ctl{display:flex;gap:10px;align-items:flex-start;margin-bottom:4px}
+.agoda-ctl .ctl-label{flex:0 0 64px;font-size:12.5px;color:var(--muted);padding-top:6px}
+.agoda-ctl .filters{margin-bottom:6px}
+.price-big{font-size:22px;font-weight:800;color:var(--navy)}
+.price-row{display:flex;gap:18px;flex-wrap:wrap;margin-top:10px;align-items:baseline}
+.price-row .lbl{font-size:12px;color:var(--muted);display:block}
+.chips{display:flex;flex-wrap:wrap;gap:5px;margin-top:10px}
+.chip{font-size:11.5px;padding:2px 8px;border-radius:99px;background:#eef1f7;color:var(--muted)}
+.chip.ok{background:#e7f5ee;color:#1e7a4d}
+.chip.no{background:#fbeeee;color:#a23a3a}
+.rank{position:absolute;top:-10px;left:14px;background:var(--navy);color:var(--gold);font-weight:800;font-size:11.5px;padding:3px 10px;border-radius:6px;letter-spacing:.6px}
+.score{display:flex;align-items:center;gap:8px;margin-top:10px;font-size:12.5px;color:var(--muted)}
+.score b{font-size:17px;color:var(--navy)}
+.score .progress{flex:1;margin-top:0}
+.fit{font-size:12.8px;margin-top:8px}
+.fit div{display:flex;justify-content:space-between;gap:8px;border-top:1px dashed var(--line);padding:4px 0}
+.fit div span:first-child{color:var(--muted)}
+.big-count{font-size:30px;font-weight:800;color:var(--gold)}
+.selected-bar{margin:4px 0 8px;padding:6px 10px;border-radius:8px;background:var(--navy);color:var(--gold);font-weight:700;font-size:13px}
+.fit-badge{display:inline-block;font-size:11.5px;font-weight:700;padding:2px 9px;border-radius:6px;background:var(--gold-soft);color:#7a5a12;border:1px solid #e6cf95}
+.nature{margin-top:10px;padding:8px 10px;border-radius:8px;background:#f7f8fb;border:1px solid var(--line);font-size:12.8px}
+.nature .ok{color:#1e7a4d}.nature .no{color:#a23a3a}
+.steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(220px,100%),1fr));gap:10px;margin-top:12px}
+.step{border:1px solid var(--line);border-left:4px solid var(--gold);border-radius:10px;padding:10px 12px;background:#fff}
+.dep{margin-top:8px;font-size:12.5px;color:#a35a10;background:#fff7ec;border:1px dashed #e7b36a;border-radius:8px;padding:5px 8px}
+
+@media (max-width:640px){
+  .agoda-ctl{flex-direction:column;gap:0}
+  .agoda-ctl .ctl-label{padding-top:0;flex:none;margin-bottom:4px}
+  .kv{grid-template-columns:80px 1fr}
+  .bar-row{grid-template-columns:72px 1fr 104px;font-size:12.5px}
+  .flight .ap b{font-size:22px}.flight .ap .t{font-size:18px}
+  .card{padding:14px}
+  .total-box .krw{font-size:26px}
+  .g2,.g3{grid-template-columns:1fr}
+}
+@media print{nav.top{display:none}.daytabs{display:none}}
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="wrap">
+    <h1>Hong Kong &amp; Macau Trip</h1>
+    <h2>2026.12.23 — 2026.12.27</h2>
+    <p id="heroText"></p>
+    <div class="tags" id="heroTags"></div>
+  </div>
+</header>
+
+<nav class="top"><div class="wrap" id="nav"></div></nav>
+
+<main class="wrap">
+  <section id="summary"><div class="sec-title"><span class="num">①</span><h2>여행 요약</h2><span class="sub" id="asOf"></span></div><div class="grid g4" id="summaryCards"></div></section>
+  <section id="alerts"><div class="sec-title"><span class="num">⑪</span><h2>확인 필요</h2><span class="sub">아직 확정되지 않은 정보 — 예약 전 반드시 재확인</span></div><div class="alert" id="checkList"></div></section>
+  <section id="flights"><div class="sec-title"><span class="num">②</span><h2>항공편</h2><span class="sub">전자항공권(Trip.com) 기준 — 일정의 절대 시간 제약</span></div><div class="grid g2" id="flightCards"></div></section>
+  <section id="timeline"><div class="sec-title"><span class="num">③</span><h2>전체 일정 Timeline</h2><span class="sub">추천안(C안) 기준 · 탭을 눌러 날짜 선택</span></div><div class="daytabs" id="dayTabs"></div><div id="dayBody"></div></section>
+  <section id="compare"><div class="sec-title"><span class="num">③-1</span><h2>일정안 비교 (A / B / C)</h2></div><div class="grid g3" id="planCards"></div>
+    <div class="sec-title" style="margin-top:22px"><h2 style="font-size:18px">마지막 날 밤(12/26) 숙박 비교</h2><span class="sub">귀국편 07:15 → 공항 도착 목표 04:15</span></div><div class="grid g3" id="lastNightCards"></div></section>
+  <section id="map"><div class="sec-title"><span class="num">④</span><h2>지역별 장소 &amp; 동선</h2><span class="sub">Google Maps 검색 링크</span></div><div class="grid g3" id="regionCards"></div></section>
+  <section id="shows"><div class="sec-title"><span class="num">⑤</span><h2>공연 &amp; 무료 쇼</h2><span class="sub">이번 여행의 핵심 이벤트</span></div><div class="grid g2" id="showCards"></div></section>
+  <section id="hotels"><div class="sec-title"><span class="num">⑥</span><h2>호텔</h2><span class="sub">가격은 크리스마스 성수기 추정치(1박·객실당) — 예약 시 확인</span></div><div class="filters" id="hotelFilters"></div><div class="grid g3" id="hotelCards"></div></section>
+  <section id="agoda-hotels"><div class="sec-title"><span class="num">⑥-1</span><h2>Agoda 마카오 5성급 호텔 비교</h2><span class="sub">12/23–12/26 · 성인 2명 · 3박 · 1박 30만원 이하</span></div>
+    <div class="alert" style="padding:12px 16px;margin-bottom:14px"><span class="small">⚠ Agoda 가격은 접속 지역, 로그인 상태, 회원 등급, 앱 할인, 쿠폰, 환율, 세금 및 객실 재고에 따라 달라질 수 있습니다. 예약 직전 Agoda에서 최종 결제 금액을 다시 확인하세요.</span></div>
+    <div class="card top" id="agodaStrategy" style="margin-bottom:14px"></div>
+    <div class="grid g4" id="agodaSummary"></div>
+    <div class="card" style="margin-top:14px">
+      <div class="agoda-ctl"><span class="ctl-label">정렬</span><div class="filters" id="agodaSort"></div></div>
+      <div class="agoda-ctl"><span class="ctl-label">지역</span><div class="filters" id="agodaArea"></div></div>
+      <div class="agoda-ctl"><span class="ctl-label">1박 가격</span><div class="filters" id="agodaPrice"></div></div>
+      <div class="agoda-ctl"><span class="ctl-label">조건</span><div class="filters" id="agodaCond"></div></div>
+      <div class="small muted" id="agodaCount"></div><div class="small muted" style="margin-top:4px">가격 기준: 1박 = Agoda “1박당 총 금액(세금 및 수수료 포함)” 최저 요금 · 3박 총액 = 1박 × 3 (예상) · 최저 요금은 대부분 <b>환불 불가</b>이므로 무료취소/조식 포함 요금을 별도 표시 · 거리는 직선거리 기반 추정</div>
+    </div>
+    <div class="grid g3" id="agodaCards" style="margin-top:14px"></div>
+    <details class="card" style="margin-top:14px" id="agodaExcluded"></details>
+  </section>
+  <section id="food"><div class="sec-title"><span class="num">⑦</span><h2>음식</h2><span class="sub">동선 위에 배치 · 맛집 때문에 멀리 이동하지 않음</span></div><div id="foodBody"></div></section>
+  <section id="transport"><div class="sec-title"><span class="num">⑧</span><h2>홍콩 ↔ 마카오 교통</h2></div><div class="grid g2" id="transportCards"></div></section>
+  <section id="budget"><div class="sec-title"><span class="num">⑨</span><h2>예산 (2인)</h2><span class="sub" id="fxNote"></span></div><div class="card" id="budgetBody"></div></section>
+  <section id="checklist"><div class="sec-title"><span class="num">⑩</span><h2>예약 체크리스트</h2><span class="sub">체크 상태는 이 브라우저에 자동 저장됩니다</span></div>
+    <div class="grid g2" style="grid-template-columns:repeat(auto-fit,minmax(min(320px,100%),1fr))"><div class="card" id="checkBody"></div><div class="card prio" id="prioBody"></div></div></section>
+  <section id="history"><div class="sec-title"><span class="num">⑫</span><h2>Update History</h2><span class="sub">수정할 때마다 맨 위에 누적 기록</span></div><div class="card history" id="historyBody"></div>
+    <details class="card" style="margin-top:14px"><summary>조사 출처 (Sources)</summary><ul class="tight small" id="sourceList"></ul></details></section>
+</main>
+<footer><div class="wrap">공개용 사본 — 탑승객 이름·PNR·예약번호 등 개인정보는 제거되었습니다 · 개인 여행 준비용 대시보드 · 데이터 수정은 이 파일의 <code>tripData</code> 객체에서 · 가격/일정은 조사일 기준이며 변동될 수 있음</div></footer>
+
+<!-- =========================================================
+     TRIP DATA — 여행 정보는 여기만 수정하면 화면에 반영됩니다.
+     status: CONFIRMED(확정) / PLANNED(계획) / CANDIDATE(후보) / CHECK(확인 필요)
+     booking: "required"(예약 필수) / "recommended"(예약 권장) / "none"(불필요)
+     map: Google Maps 검색어 (링크는 자동 생성)
+     ========================================================= -->
+<script>
+const tripData = {
+  meta: {
+    title: "Hong Kong & Macau Trip",
+    period: "2026.12.23 (수) — 12.27 (일) · 4박 5일",
+    travelers: "성인 2명",
+    // 개인정보 — publish/index.html 빌드 시 자동 마스킹 (tools/build_publish.py)
+    travelerNames: "비공개",
+    lastUpdated: "2026-10-05",
+    concept: "마카오 메인(약 70%) + 홍콩 핵심만(약 30%). 코타이 리조트 3박 — Broadway Macau 3박 · House of Dancing Water 관람 · 코타이/갤럭시 중심 크리스마스 여행. 마지막 밤은 홍콩 공항호텔에서 새벽 귀국편 대비.",
+    tags: ["마카오 중심 70%", "공연: House of Dancing Water", "Broadway Macau 3박 + 공항호텔 1박", "크리스마스 시즌"],
+    stay: { macau: "3박 · 약 70시간", hongkong: "1박 · 약 15시간 (+공항)" },
+    recommendedPlan: "C",
+    // 호텔 구분 — 예약 전에는 confirmed 를 null 로 두고, 예약 후 호텔명·예약번호 입력
+    // 마카오 숙소 — 예약 완료 시: status "CONFIRMED", bookingStatus "예약 완료", booking 필드 채우기
+    hotelPlan: {
+      selected: "Broadway Macau", status: "SELECTED", bookingStatus: "미예약", trackStatus: "SELECTED / WAITING TO BOOK",
+      checkIn: "2026-12-23", checkOut: "2026-12-26", nights: 3,
+      agodaNightlyKRW: 250288, agodaTotalKRW: 750864, priceNote: "세금·봉사료 포함 · 확인된 최저가는 환불 불가", checkedAt: "2026-10-05",
+      booking: { bookingNo: null, roomType: null, paidKRW: null, freeCancelUntil: null },
+      premiumAlt: "The Londoner Hotel"
+    }
+  },
+
+  // 환율: 2026-09 기준 약 1 HKD ≈ 173 KRW. 계산 편의상 아래 값 사용. 2026년 12월 실제 환율은 달라질 수 있음.
+  fx: { HKD: 175, MOP: 170, KRW: 1, asOf: "2026-10-05 (추정치)" },
+
+  flights: [
+    { id:"out", label:"출국", status:"CONFIRMED", flightNo:"UO617", airline:"HK Express (홍콩익스프레스)", date:"2026-12-23 (수)",
+      from:{ code:"ICN", city:"인천", time:"06:45", terminal:"T1" }, to:{ code:"HKG", city:"홍콩", time:"09:50", terminal:"T1" },
+      duration:"약 4시간 05분 (시차 -1h)", pnr:"비공개", bookingNo:"비공개",
+      notes:["인천공항 T1 03:45까지 도착 권장(출발 3시간 전) — 이 시간대는 공항철도·대부분 공항버스 운행 전이므로 이동수단 별도 준비 필요","도착 후 T1에서 입국심사·수하물 수취"] },
+    { id:"ret", label:"귀국", status:"CONFIRMED", flightNo:"UO618", airline:"HK Express (홍콩익스프레스)", date:"2026-12-27 (일)",
+      from:{ code:"HKG", city:"홍콩", time:"07:15", terminal:"T2 체크인" }, to:{ code:"ICN", city:"인천", time:"11:40", terminal:"T1" },
+      duration:"약 3시간 25분 (시차 +1h)", pnr:"비공개", bookingNo:"비공개",
+      notes:["HK Express는 2026-06-10부터 체크인·백드랍을 T2 Aisle U로 이전 (항공권엔 'T2'로 표기)","체크인 오픈: 출발 3시간 전 04:15 · 키오스크 마감 06:00(75분 전) · 카운터/백드랍 마감 06:15(60분 전)","00:31–05:29 사이 체크인 시: T1으로 걸어서 돌아가 T1에서 보안검색·출국심사 (HK Express 공식 안내)","목표: 04:15 체크인 줄 서기 시작"] }
+  ],
+  baggage: [
+    "개인 물품: 1인 1개, 7kg 이하, 40×25×20cm 이내 (앞좌석 아래)",
+    "기내 휴대 수하물(오버헤드): 무료 허용량 없음",
+    "위탁 수하물: 1인 1개, 개당 20kg, 3변 합 158cm 이내 (출국·귀국 동일)",
+    "→ 쇼핑 많을 경우 귀국 전 20kg 초과 주의 (휴대용 저울 추천)"
+  ],
+
+  // 일정 비교
+  plans: [
+    { id:"A", name:"A안 — 마카오 집중 + 홍콩 시내 마지막 밤", status:"CANDIDATE",
+      flow:"12/23 공항→바로 마카오(3박) → 12/26 홍콩 시내 이동·관광·1박 → 12/27 새벽 공항",
+      rows:{ "이동시간":"HK공항→마카오 약 2.5h / 마카오→HK시내 약 2h / 새벽 시내→공항 40–60분", "마카오 체류":"약 70시간", "홍콩 체류":"약 15시간", "피로도":"중상 (새벽 택시·심야버스)", "비용":"중 (시내 호텔 + 새벽 택시 HKD 300–450)", "귀국 안정성":"보통 — 공항철도 첫차 05:50라 04:15 도착 불가, 택시/심야버스 의존" },
+      pros:["홍콩 시내 야경 늦게까지 가능","시내 호텔 선택지 많음"], cons:["새벽 3시대 택시/N버스 의존","크리스마스 연휴 시내 호텔 비쌈"], verdict:"새벽 이동 리스크 때문에 차선" },
+    { id:"B", name:"B안 — 홍콩 1일 관광 후 마카오", status:"CANDIDATE",
+      flow:"12/23 홍콩 관광·홍콩 1박 → 12/24 마카오(2박) → 12/26 홍콩 복귀·1박 → 12/27 귀국",
+      rows:{ "이동시간":"짐 들고 3회 숙소 이동", "마카오 체류":"약 48시간", "홍콩 체류":"약 40시간", "피로도":"상 (새벽 출국 당일 종일 관광 + 숙소 3곳)", "비용":"상 (홍콩 2박 — 홍콩 호텔이 더 비쌈)", "귀국 안정성":"공항호텔이면 높음" },
+      pros:["홍콩을 여유 있게 볼 수 있음"], cons:["마카오 비중 50% 이하 → 요구사항 미충족","12/23은 03시대 기상 후 종일 관광 → 과로","숙소 3곳, 짐 이동 2회 추가"], verdict:"마카오 메인 목표와 맞지 않아 비추천" },
+    { id:"C", name:"C안 — 마카오 3박 + 공항호텔 1박 (추천)", status:"PLANNED", recommended:true,
+      flow:"12/23 공항→HZMB 버스로 바로 마카오(코타이 3박) → 12/26 오전 홍콩 복귀, 공항호텔에 짐 → 오후·저녁 홍콩 핵심(피크·스타페리·침사추이) → 공항호텔 1박 → 12/27 04:00 도보로 체크인",
+      rows:{ "이동시간":"HK공항→코타이 약 2.5h / 마카오→HK공항 약 2h / 호텔→체크인 도보 10–15분", "마카오 체류":"약 70시간 (≈70%)", "홍콩 체류":"약 15시간 (≈30%)", "피로도":"하–중", "비용":"중 (공항호텔 HKD 1,300–1,900)", "귀국 안정성":"매우 높음 — 교통수단 의존 없음" },
+      pros:["HZMB 금색버스는 공항 옆 홍콩 口岸에서 출발 → 시내 경유 불필요","마카오 숙소 1곳에 3연박 (짐 이동 최소)","홍콩 오후 일정 동안 짐은 공항호텔에 맡김","새벽 귀국 리스크 최소"], cons:["홍콩 야시장·몽콕은 시간상 제외","홍콩 마지막 밤은 21시 전후 복귀 필요"], verdict:"✅ 최종 추천 — 마카오 비중·귀국 안정성 모두 충족" }
+  ],
+
+  lastNight: [
+    { id:"A", name:"A. 마카오 숙박", status:"CANDIDATE", reject:true,
+      rows:{ "공항 도착":"03:30–04:30 (변동 큼)", "첫차/막차":"HZMB 금색버스 24시간 (야간 HKD 70) + B4 버스 24시간", "이동시간":"코타이→HZMB 마카오항 20–30분 + 출입경 2회 + 버스 45분 + B4 10분 ≈ 1.5–2h", "비용":"저렴 (버스 HKD 80/인 + 택시)", "피로도":"매우 높음 (01:30 출발, 사실상 무수면)", "리스크":"출입경 대기·택시 수급·안개/기상으로 교량 통제 시 대안 없음", "항공편 놓칠 위험":"높음" },
+      verdict:"❌ 제외 — 새벽 국경 2회 통과는 현실적으로 위험" },
+    { id:"B", name:"B. 홍콩 시내 숙박", status:"CANDIDATE",
+      rows:{ "공항 도착":"04:00–04:30 (택시)", "첫차/막차":"공항철도 첫차 05:50 → 04:15 도착 불가 / 심야버스(N계열) 운행 — 노선·시간 확인 필요", "이동시간":"택시 35–50분", "비용":"호텔 + 새벽 택시 약 HKD 300–450", "피로도":"중 (03:00 기상)", "리스크":"새벽 택시 호출 실패 가능성", "항공편 놓칠 위험":"낮음–중" },
+      verdict:"△ 가능하지만 C보다 이점 적음" },
+    { id:"C", name:"C. 홍콩 공항 근처 숙박 (추천)", status:"PLANNED", recommended:true,
+      rows:{ "공항 도착":"04:10 (도보)", "첫차/막차":"무관 — 리갈 에어포트 호텔은 실내 연결통로로 T1 연결", "이동시간":"도보 10–15분 (T1 경유 T2 Aisle U, 실제 동선 확인 필요)", "비용":"HKD 1,300–1,900 (추정)", "피로도":"낮음 (03:30 기상)", "리스크":"거의 없음", "항공편 놓칠 위험":"매우 낮음" },
+      verdict:"✅ 추천 — Regal Airport Hotel (대안: Novotel Citygate 퉁청, 택시 10–15분)" }
+  ],
+
+  // 일정 (추천안 C) — 시간순
+  itinerary: [
+    { day:1, date:"12/23 (수)", title:"인천 → 홍콩공항 → 다리 건너 바로 마카오 · 코타이 첫날 밤", goals:["갤럭시 셔틀로 Broadway 도착·체크인","런더너·베네시안 크리스마스 산책 (택시 왕복)","에펠탑 조명쇼"],
+      items:[
+        { time:"03:45", place:"인천국제공항 T1", region:"인천", desc:["출발 3시간 전 도착 · 위탁수하물 1인 20kg"], move:"자차/택시 또는 전날 공항 근처 숙박 (공항철도 첫차로는 불가)", moveTime:"—", cost:"—", booking:"recommended", status:"CHECK" },
+        { time:"06:45–09:50", place:"UO617 인천 → 홍콩", region:"항공", desc:["HK Express · 도착 T1"], move:"항공", moveTime:"4h05m", cost:"예약 완료", booking:"none", status:"CONFIRMED", key:true },
+        { time:"09:50–10:50", place:"홍콩국제공항 T1 입국", region:"홍콩", map:"Hong Kong International Airport Terminal 1", desc:["입국심사·수하물 수취","옥토퍼스 카드(실물/모바일)·eSIM 확인, 소액 HKD 현금"], move:"—", moveTime:"약 60분", cost:"—", booking:"none", status:"PLANNED" },
+        { time:"10:50–11:10", place:"B4 버스 → HZMB 홍콩 口岸", region:"홍콩", map:"HZMB Hong Kong Port Passenger Clearance Building", desc:["공항 버스정류장에서 B4 (24시간, 약 15분 간격)"], move:"B4 버스", moveTime:"약 10분", cost:"HKD 9.8/인", booking:"none", status:"PLANNED" },
+        { time:"11:10–12:45", place:"HZMB 금색버스 → 마카오 口岸", region:"이동", desc:["홍콩 출경 → 금색버스(穿梭巴士) 탑승 → 마카오 입경","캐리어는 직접 들고 탑승"], move:"HZMB 셔틀버스", moveTime:"버스 약 45분 + 출입경", cost:"HKD 65/인", booking:"none", status:"PLANNED", key:true },
+        { time:"12:45–13:30", place:"갤럭시 무료셔틀 → Galaxy Macau (Diamond Lobby)", region:"코타이", map:"Galaxy Macau Diamond Lobby", desc:["HZMB 마카오 口岸 버스 터미널 → Galaxy 무료셔틀 (공식: 10:00–23:00, 평균 10–25분 간격, 약 25분)","Galaxy Diamond Lobby 하차 → 실내 연결로 Broadway Macau까지 도보 (약 5–10분, 현장 안내 확인)","대안: 택시 약 20–25분 · MOP 120–150 (캐리어 많거나 셔틀 대기 길 때)"], move:"갤럭시 무료셔틀 + 도보", moveTime:"대기 포함 30–45분", cost:"무료 (택시 MOP 120–150)", booking:"none", status:"PLANNED", key:true },
+        { time:"13:30–15:00", place:"Broadway Macau 짐 보관 · Broadway Food Street 점심", region:"코타이", map:"Broadway Food Street Macau", desc:["체크인(15:00) 전 프런트/1층에서 짐 보관","호텔 바로 앞 Broadway Food Street에서 로컬 점심 (완탕면·돼지갈비번 등)"], move:"도보 (호텔 바로 앞)", moveTime:"1–3분", cost:"MOP 250 (2인)", booking:"none", status:"PLANNED" },
+        { time:"15:00–17:00", place:"Broadway Macau 체크인 · 휴식", region:"코타이", map:"Broadway Hotel Macau", desc:["체크인 15:00부터 · 새벽 출발 피로 회복 — 낮잠 권장"], move:"—", moveTime:"—", cost:"숙박비 참조", booking:"required", status:"SELECTED" },
+        { time:"17:00–17:15", place:"택시 → The Londoner Macao", region:"이동", desc:["첫날이라 도보(갤럭시→런더너 약 25분) 대신 택시","갤럭시/브로드웨이 택시 승강장 이용 — 저녁 대기 가능"], move:"택시", moveTime:"약 5분 (+대기)", cost:"MOP 40–60", booking:"none", status:"PLANNED" },
+        { time:"17:15–19:00", place:"런더너 → 베네시안 크리스마스 산책", region:"코타이", map:"The Londoner Macao", desc:["런더너 크리스마스 트리·장식, 빅벤 외관 사진 (관광)","런더너 Lord Stow's 에그타르트 간식","실내 연결로 베네시안 그랜드 캐널 쇼핑몰 (곤돌라는 선택)"], move:"도보 (실내 연결)", moveTime:"약 10분", cost:"간식 MOP 60", booking:"none", status:"PLANNED" },
+        { time:"19:00–20:15", place:"저녁 — 베네시안 식당가", region:"코타이", desc:["첫날은 리조트 내에서 간단히 (현장 선택)"], move:"도보", moveTime:"—", cost:"MOP 600 (2인)", booking:"none", status:"PLANNED" },
+        { time:"20:15–21:00", place:"파리지앵 에펠탑 조명쇼", region:"코타이", map:"The Parisian Macao Eiffel Tower", desc:["18:15–24:00 15분 간격 그랜드 일루미네이션","전망대는 선택(유료)"], move:"도보 (베네시안과 연결)", moveTime:"약 10분", cost:"무료", booking:"none", status:"PLANNED" },
+        { time:"21:00–21:20", place:"택시 → Broadway Macau 복귀 · 취침", region:"코타이", desc:["파리지앵/베네시안 택시 승강장 → Broadway (도보는 약 16–20분이라 첫날은 택시)","다음 날 반도 일정"], move:"택시", moveTime:"약 5분 (+대기)", cost:"MOP 40–60", booking:"none", status:"PLANNED" },
+      ]},
+    { day:2, date:"12/24 (목)", title:"마카오 반도 반나절 역사 동선 → 크리스마스 이브 House of Dancing Water", goals:["세계유산 반나절 코스","에그타르트·완탕면","★ House of Dancing Water"],
+      items:[
+        { time:"09:00–10:00", place:"호텔 아침", region:"코타이", desc:["조식 또는 카페"], move:"—", moveTime:"—", cost:"MOP 200 (2인)", booking:"none", status:"PLANNED" },
+        { time:"09:45–10:40", place:"갤럭시 무료셔틀 → StarWorld → 세나도 광장", region:"이동", map:"StarWorld Hotel Macau", desc:["Galaxy Crystal Lobby 탑승 (공식: 09:30–22:00, 평균 10–20분 간격, 외항 경유 약 35분)","StarWorld 하차 → 세나도 광장 도보 약 10–12분","대안: 택시 약 20분 · MOP 110–140"], move:"갤럭시 무료셔틀 + 도보", moveTime:"약 50분", cost:"무료", booking:"none", status:"PLANNED" },
+        { time:"10:40–11:15", place:"세나도 광장 · 성 도미니크 성당", region:"마카오 반도", map:"Senado Square Macau", desc:["물결무늬 포르투갈 타일 광장, 크리스마스 장식","성 도미니크 성당 내부(무료)"], move:"도보", moveTime:"—", cost:"무료", booking:"none", status:"PLANNED" },
+        { time:"11:15–11:45", place:"Margaret's Café e Nata", region:"마카오 반도", map:"Margaret's Cafe e Nata Macau", desc:["원조급 에그타르트 (수요일 휴무 → 목요일 OK)","줄이 길면 포장"], move:"도보", moveTime:"약 8분", cost:"MOP 60 (2인)", booking:"none", status:"PLANNED" },
+        { time:"11:45–12:30", place:"성 바울 성당 유적", region:"마카오 반도", map:"Ruins of St. Paul's Macau", desc:["육포거리 경유, 정면 파사드 사진","뒤쪽 지하 납골당·박물관(무료)"], move:"도보", moveTime:"약 12분", cost:"무료", booking:"none", status:"PLANNED", key:true },
+        { time:"12:30–13:15", place:"몬테 요새 (+마카오 박물관)", region:"마카오 반도", map:"Mount Fortress Macau", desc:["대포·성곽 위에서 구시가지 전망","박물관은 유료·월요일 휴관 (입장료 확인)"], move:"도보 (에스컬레이터)", moveTime:"5분", cost:"요새 무료 / 박물관 소액", booking:"none", status:"PLANNED" },
+        { time:"13:15–14:15", place:"점심 — Wong Chi Kei (黃枝記)", region:"마카오 반도", map:"Wong Chi Kei Senado Square Macau", desc:["새우 완탕면, 죽, 새우알 비빔면"], move:"도보", moveTime:"약 10분", cost:"MOP 200 (2인)", booking:"none", status:"PLANNED" },
+        { time:"14:15–15:15", place:"그랜드 리스보아 외관 → StarWorld에서 갤럭시 셔틀 복귀", region:"마카오 반도", map:"Grand Lisboa Macau", desc:["연꽃 모양 랜드마크 사진 (StarWorld 바로 옆)","StarWorld → Galaxy 무료셔틀 (약 35분) → Broadway 도보","대안: 택시 약 20분 · MOP 110–140"], move:"도보 + 갤럭시 무료셔틀", moveTime:"10분 + 약 35분", cost:"무료", booking:"none", status:"PLANNED" },
+        { time:"15:15–17:00", place:"Broadway Macau 휴식", region:"코타이", desc:["공연 전 체력 보충"], move:"—", moveTime:"—", cost:"—", booking:"none", status:"PLANNED" },
+        { time:"17:00–18:15", place:"이른 저녁 — Broadway Food Street", region:"코타이", map:"Broadway Food Street Macau", desc:["호텔 바로 앞에서 빠르게 식사 → 이동 여유 확보 (이브라 CoD 식당 혼잡 회피)"], move:"도보", moveTime:"1–3분", cost:"MOP 400 (2인)", booking:"none", status:"PLANNED" },
+        { time:"18:20–18:45", place:"택시 → City of Dreams (Dancing Water Theater)", region:"이동", map:"City of Dreams Macau", desc:["Broadway/갤럭시 택시 승강장 → CoD (약 5분) · 크리스마스 이브 대기 고려해 18:20 출발","택시 대기가 길면 도보 대안: 갤럭시 → 베네시안 → CoD 약 20–25분","19:00까지 극장 도착 (공연 30분 전)"], move:"택시 (대안: 도보)", moveTime:"약 5분 + 대기 (도보 20–25분)", cost:"MOP 40–60", booking:"none", status:"PLANNED" },
+        { time:"19:00–21:00", place:"★ The House of Dancing Water", region:"코타이", map:"Dancing Water Theater City of Dreams Macau", desc:["19:00 극장 도착·입장 (공연 30분 전) → 19:30 공연","12월 공연 시간 미공개 — 2026 하절기 기준 16:30 / 19:30 (수–일)","대체일: 12/25(금)"], move:"—", moveTime:"—", cost:"MOP 2,196 (Grand 2석)", booking:"required", status:"CHECK", key:true },
+        { time:"21:00–22:00", place:"크리스마스 이브 코타이 야경 → 걸어서 Broadway 복귀", region:"코타이", map:"The Venetian Macao", desc:["City of Dreams 크리스마스 트리 → 길 건너 베네시안 외관 조명 → 갤럭시 → Broadway","공연 직후 택시 줄이 길어 야경 산책 겸 도보 복귀 (피곤하면 베네시안 택시 승강장)"], move:"도보", moveTime:"약 25분", cost:"무료", booking:"none", status:"PLANNED" },
+      ]},
+    { day:3, date:"12/25 (금·크리스마스)", title:"Broadway에서 걸어서 타이파 빌리지 → 갤럭시 → 윈 팰리스 분수쇼 → 갤럭시 크리스마스 밤", goals:["포르투갈 요리 (António)","갤럭시·윈 팰리스 무료 쇼","Broadway Food Street 크리스마스 저녁"],
+      items:[
+        { time:"10:00–11:00", place:"느긋한 아침", region:"코타이", desc:["크리스마스 당일 · 공휴일 혼잡 대비"], move:"—", moveTime:"—", cost:"MOP 200 (2인)", booking:"none", status:"PLANNED" },
+        { time:"11:00–12:30", place:"Broadway에서 도보 → 타이파 빌리지 · 쿤하 거리", region:"코타이", map:"Rua do Cunha Taipa", desc:["Broadway에서 타이파 빌리지까지 걸어서 이동 (택시 불필요)","포르투갈풍 골목·파스텔 건물 사진","Lord Stow's 타이파점, 아몬드 쿠키·주빠빠오 간식"], move:"도보", moveTime:"약 10–15분", cost:"간식 MOP 100", booking:"none", status:"PLANNED" },
+        { time:"12:30–14:00", place:"점심 — António (포르투갈 요리)", region:"코타이", map:"Antonio Restaurant Taipa Macau", desc:["미쉐린 가이드 추천 · 바칼라우, 해산물 밥, 세라두라","크리스마스 당일 → 예약 필수"], move:"도보", moveTime:"3분", cost:"MOP 1,300 (2인)", booking:"required", status:"PLANNED", key:true },
+        { time:"14:15–15:45", place:"도보 → 갤럭시 마카오 — 포춘 다이아몬드 쇼", region:"코타이", map:"Galaxy Macau Fortune Diamond", desc:["타이파 빌리지에서 걸어서 갤럭시로 (숙소 방향)","공휴일 10:00–24:00 30분 간격 무료 · 크리스마스 장식·쇼핑몰"], move:"도보", moveTime:"약 15분", cost:"무료", booking:"none", status:"PLANNED" },
+        { time:"15:00–16:20", place:"(옵션) Macau 2049 — MGM Cotai", region:"코타이", map:"MGM Cotai Macau", desc:["장이머우 연출 하이테크 공연 (15:00, 80분)","두 번째 공연을 원할 때만 — 이 경우 갤럭시는 저녁에 몰아서"], move:"택시 (갤럭시 승강장)", moveTime:"약 10분", cost:"MOP 976 (B석 2석) + 택시 MOP 50–70", booking:"required", status:"CANDIDATE" },
+        { time:"15:45–17:30", place:"Broadway Macau 휴식", region:"코타이", desc:["갤럭시에서 실내로 바로 복귀 · 짐 1차 정리 (내일 체크아웃)"], move:"도보 (갤럭시 연결)", moveTime:"약 5–10분", cost:"—", booking:"none", status:"PLANNED" },
+        { time:"17:30–19:15", place:"택시 → 윈 팰리스 — 퍼포먼스 레이크 & SkyCab", region:"코타이", map:"Wynn Palace Performance Lake", desc:["Broadway/갤럭시 승강장에서 택시","분수쇼: 목–일 19–22시 20분 간격(낮엔 30분) · 무료 SkyCab에서 분수 조망, 로비 크리스마스 꽃 장식"], move:"택시", moveTime:"약 10분 (+대기)", cost:"무료 (택시 MOP 50–70)", booking:"none", status:"PLANNED", key:true },
+        { time:"19:15–19:30", place:"택시 → Broadway 복귀", region:"이동", desc:["윈 팰리스 택시 승강장 → Broadway (크리스마스 밤 대기 감안)"], move:"택시", moveTime:"약 10분 (+대기)", cost:"MOP 50–70", booking:"none", status:"PLANNED" },
+        { time:"19:30–20:45", place:"크리스마스 저녁 — Broadway Food Street", region:"코타이", map:"Broadway Food Street Macau", desc:["예약 부담 없는 로컬 노점형 식당가 (호텔 바로 앞)","점심 António로 이미 제대로 된 식사 → 저녁은 가볍게"], move:"도보", moveTime:"1–3분", cost:"MOP 500 (2인)", booking:"none", status:"PLANNED" },
+        { time:"20:45–22:00", place:"갤럭시 크리스마스 밤 — 다이아몬드 쇼 · 카지노 구경 → 숙소", region:"코타이", map:"Galaxy Macau", desc:["공휴일 다이아몬드 쇼 24시까지 · 크리스마스 조명 야경","카지노는 만 21세 이상, 여권 지참 · 내부 촬영 금지","끝나면 실내로 Broadway 복귀 (택시 불필요)"], move:"도보 (갤럭시 연결)", moveTime:"5–10분", cost:"—", booking:"none", status:"PLANNED" },
+      ]},
+    { day:4, date:"12/26 (토)", title:"마카오 체크아웃 → 홍콩 핵심 반나절 (피크·스타페리·침사추이) → 공항호텔", goals:["짐은 공항호텔에","빅토리아 피크","하버 야경 & 스타페리"],
+      items:[
+        { time:"08:30–09:30", place:"아침 · 짐 정리", region:"코타이", desc:["위탁 20kg 확인, 남은 MOP 사용"], move:"—", moveTime:"—", cost:"MOP 200 (2인)", booking:"none", status:"PLANNED" },
+        { time:"09:30–10:40", place:"Broadway 체크아웃 → HZMB 마카오 口岸", region:"이동", map:"HZMB Macau Port", desc:["기본안(택시): Broadway/갤럭시 승강장 → HZMB 口岸 약 20–25분 · MOP 120–160 — 09:40 출발","대안(무료): 갤럭시 Diamond Lobby HZMB 셔틀 (공식 10:00–23:00, 10–25분 간격, 약 25분) — 첫차 10:00라 09:50까지 로비 도착","12/26 토요일·연휴 직후 → 택시 대기·출경 혼잡 고려해 시간 여유"], move:"택시 (대안: 갤럭시 무료셔틀)", moveTime:"20–40분 (+대기)", cost:"MOP 120–160 (셔틀 무료)", booking:"none", status:"PLANNED" },
+        { time:"10:40–12:15", place:"HZMB 금색버스 → 홍콩 口岸", region:"이동", desc:["토요일 + 연휴 → 출입경 대기 여유 있게"], move:"HZMB 셔틀버스", moveTime:"약 1.5h", cost:"HKD 65/인", booking:"none", status:"PLANNED" },
+        { time:"12:15–12:45", place:"B4 → 공항 · 리갈 에어포트 호텔 짐 보관", region:"홍콩", map:"Regal Airport Hotel Hong Kong", desc:["체크인 전 짐 보관 (프런트)"], move:"B4 + 도보", moveTime:"20분", cost:"HKD 9.8/인", booking:"required", status:"PLANNED" },
+        { time:"12:45–13:15", place:"공항철도 → 홍콩역 (센트럴)", region:"홍콩", desc:["Airport Express 24분, 10분 간격"], move:"공항철도", moveTime:"24분", cost:"약 HKD 115/인 (확인)", booking:"none", status:"CHECK" },
+        { time:"13:15–14:15", place:"점심 — 팀호완 (홍콩역/IFC)", region:"홍콩", map:"Tim Ho Wan Hong Kong Station", desc:["미쉐린 딤섬 — 차슈번(BBQ pork bun)"], move:"도보 (역 내)", moveTime:"—", cost:"HKD 300 (2인)", booking:"none", status:"PLANNED" },
+        { time:"14:30–17:30", place:"피크트램 → 빅토리아 피크", region:"홍콩", map:"Peak Tram Garden Road Lower Terminus", desc:["가든로드 하부역까지 도보 15분/택시","공휴일(박싱데이) 대기 길 수 있음 → 온라인 티켓","스카이테라스 428 전망, 해 질 녘 조망 (일몰 약 17:45)"], move:"도보 + 피크트램", moveTime:"15분 + 7분", cost:"HKD 216~ (왕복 2인, 주말/공휴일)", booking:"recommended", status:"PLANNED", key:true },
+        { time:"17:30–18:15", place:"하산 → 센트럴 7번 부두", region:"홍콩", map:"Central Pier 7 Star Ferry", desc:["트램 하행 줄이 길면 15번 버스/택시"], move:"피크트램/버스/택시", moveTime:"30–40분", cost:"HKD 100", booking:"none", status:"PLANNED" },
+        { time:"18:15–18:30", place:"스타페리 → 침사추이", region:"홍콩", map:"Star Ferry Tsim Sha Tsui Pier", desc:["야경 보며 10분 항해 — 홍콩 대표 경험"], move:"페리", moveTime:"10분", cost:"약 HKD 10 (2인)", booking:"none", status:"PLANNED" },
+        { time:"18:30–19:15", place:"침사추이 해변 산책로 · Avenue of Stars", region:"홍콩", map:"Avenue of Stars Hong Kong", desc:["빅토리아 하버 야경, 크리스마스 건물 조명"], move:"도보", moveTime:"—", cost:"무료", booking:"none", status:"PLANNED" },
+        { time:"19:15–20:30", place:"저녁 — 침사추이 (하버시티/K11 MUSEA)", region:"홍콩", desc:["완탕면·로스트구스·딤섬 중 택1 (현장)"], move:"도보", moveTime:"10분", cost:"HKD 700 (2인)", booking:"none", status:"PLANNED" },
+        { time:"20:00", place:"Symphony of Lights", region:"홍콩", map:"Tsim Sha Tsui Promenade", desc:["2026년 하반기 종료 예정 — 12월 운영 여부 확인 필요"], move:"도보", moveTime:"—", cost:"무료", booking:"none", status:"CHECK" },
+        { time:"20:45–21:30", place:"공항철도 구룡역 → 공항 → 호텔 체크인", region:"홍콩", desc:["구룡역까지 택시 약 10분","22:00 전 취침 목표"], move:"택시 + 공항철도", moveTime:"약 40분", cost:"약 HKD 250 (2인)", booking:"none", status:"PLANNED" }
+      ]},
+    { day:5, date:"12/27 (일)", title:"새벽 체크인 → 귀국", goals:["04:15 체크인","07:15 출발"],
+      items:[
+        { time:"03:30", place:"기상", region:"홍콩", desc:["전날 짐 정리 완료해둘 것"], move:"—", moveTime:"—", cost:"—", booking:"none", status:"PLANNED" },
+        { time:"04:00–04:15", place:"호텔 → T2 Aisle U (HK Express)", region:"홍콩", map:"Hong Kong International Airport Terminal 2", desc:["리갈 호텔 → T1 연결통로 → T2 (실제 동선 전날 미리 확인)"], move:"도보", moveTime:"10–15분", cost:"—", booking:"none", status:"CHECK" },
+        { time:"04:15–05:00", place:"체크인 · 백드랍", region:"홍콩", desc:["키오스크 06:00 / 카운터 06:15 마감","05:29 이전엔 T1으로 돌아가 보안·출국심사"], move:"도보", moveTime:"—", cost:"—", booking:"none", status:"CONFIRMED", key:true },
+        { time:"05:00–06:30", place:"출국심사 → 탑승구", region:"홍콩", desc:["남은 HKD로 아침·간식"], move:"도보/APM", moveTime:"—", cost:"HKD 150", booking:"none", status:"PLANNED" },
+        { time:"07:15–11:40", place:"UO618 홍콩 → 인천 T1", region:"항공", desc:["HK Express"], move:"항공", moveTime:"3h25m", cost:"예약 완료", booking:"none", status:"CONFIRMED", key:true }
+      ]}
+  ],
+
+  shows: [
+    { id:"hodw", name:"The House of Dancing Water", topPick:true, status:"CHECK", venue:"City of Dreams, Dancing Water Theater (코타이)",
+      style:"수중 + 아크로바틱 + 하이다이빙 + 모터바이크 스턴트 · 270° 원형 극장 · 2025년 리뉴얼 재개막",
+      runtime:"약 80–90분 (인터미션 없음)", times:"2026 하절기: 16:30 / 19:30 (수–일), 월·화 휴연 — 12월 일정 미공개 / 추후 확인 필요",
+      dates:"12/23(수)–12/26(토) 모두 '수–일' 패턴에 해당 → 공연 가능성 높으나 미확정",
+      price:"Gallery MOP 698 · Signature 898 · Grand 1,098 · Premium 1,298 · Golden Circle 1,598 · VVIP Box 28,000+",
+      seats:"Grand·Premium = 정면 중앙 균형 좋음(추천) / Golden Circle = 최고 시야 / A–B열 Splash 구역은 물 튐 / 개별 좌석 지정 불가(등급 단위)",
+      promo:"14일 이상 전 예매 시 지정 등급 20% 할인 (공식, ~2027-03-17) · 페리 왕복 포함 'Show & Sail' MOP 798~",
+      reviews:"Tripadvisor·Klook 평점 4.8/5 수준, '마카오 필수 관람' 평가 다수",
+      pros:["원하는 스타일(대형 수중·서커스)에 정확히 부합","물·조명·다이빙 스케일이 압도적","숙소(Broadway)에서 택시 약 5분 · 도보 20–25분"],
+      cons:["12월 일정 아직 미공개","대부분 환불 불가 조건","가장 비싼 공연"],
+      rating:5, booked:false,
+      links:[{label:"공식 페이지", url:"https://www.cityofdreamsmacau.com/en/house-of-dancing-water"},{label:"공식 예매", url:"https://tickets.cityofdreamsmacau.com/en/hodw"},{label:"Show & Sail", url:"https://www.cityofdreamsmacau.com/en/offers/house-dancing-water-show-sail-package"}],
+      map:"Dancing Water Theater City of Dreams Macau" },
+    { id:"m2049", name:"Macau 2049 (장이머우 연출)", status:"CANDIDATE", venue:"MGM Theater, MGM Cotai (코타이)",
+      style:"하이테크 미디어쇼 — 로봇암·레이저·대형 LED + 중국 전통 공연 (곡예 비중은 낮음)",
+      runtime:"80분", times:"2026-08-01부터 15:00 공연 · 12월 상세 일정·휴연일 확인 필요",
+      dates:"2026-01-01–12-31 레지던시 등록 (MacauTicket) — 12/23–26 회차 확인 필요",
+      price:"MOP 288 · 488 · 688 · 888 (M life 회원 최대 20% 할인)",
+      seats:"688·888 = 정면 중앙 · 미디어 연출 특성상 너무 앞보다 중앙부 추천",
+      promo:"—", reviews:"연출·기술력 호평 / 스토리가 추상적이라는 평도 있음",
+      pros:["HoDW와 스타일이 겹치지 않음","비교적 저렴","오후 공연 → 저녁 일정과 병행 가능"],
+      cons:["수중·서커스 스타일 아님","15:00 단일 회차 → 오후 시간 소모"],
+      rating:4, booked:false,
+      links:[{label:"공식 페이지", url:"https://macau2049.mgm.mo/en"},{label:"공식 예매", url:"https://www.tickets.mgm.mo/macau2049"}], map:"MGM Cotai Macau" },
+    { id:"wynn", name:"Wynn Palace Performance Lake (분수쇼)", status:"PLANNED", venue:"Wynn Palace 앞 호수 (코타이)",
+      style:"음악·조명·불꽃 분수쇼 (무료) + 무료 SkyCab 곤돌라", runtime:"회당 수 분",
+      times:"월–수 12:00–22:00 30분 간격 / 목–일 19:00–22:00 20분 간격 (확인 필요)", dates:"매일", price:"무료", seats:"SkyCab 위 또는 호수 앞 난간",
+      promo:"—", reviews:"코타이 무료 볼거리 중 만족도 상위", pros:["무료","야경 사진 명소"], cons:["회당 짧음","Sands 클러스터에서 택시 필요"],
+      rating:4, booked:false, links:[{label:"Wynn Palace", url:"https://www.wynnmacau.com/en/wynn-palace"}], map:"Wynn Palace Performance Lake" },
+    { id:"diamond", name:"Galaxy Fortune Diamond 쇼", status:"PLANNED", venue:"Galaxy Macau 로비",
+      style:"분수 속에서 대형 다이아몬드가 솟아오르는 로비 쇼 (무료)", runtime:"약 5분",
+      times:"월–목 12:00–22:00 / 금–일·공휴일 10:00–24:00, 30분 간격", dates:"매일", price:"무료", seats:"로비 난간 (5분 전 자리 확보)",
+      promo:"—", reviews:"짧지만 무료라 가볍게 볼 만하다는 평", pros:["무료","갤럭시 크리스마스 장식과 함께"], cons:["짧고 혼잡"],
+      rating:3, booked:false, links:[{label:"Galaxy Macau", url:"https://www.galaxymacau.com/"}], map:"Galaxy Macau Fortune Diamond" },
+    { id:"eiffel", name:"Parisian 에펠탑 조명쇼", status:"PLANNED", venue:"The Parisian Macao",
+      style:"에펠탑 그랜드 일루미네이션 (무료) / 전망대(유료)", runtime:"수 분",
+      times:"18:15–24:00 15분 간격 · 전망대 12:00–23:00", dates:"매일", price:"조명쇼 무료 · 전망대 약 MOP 98~ (확인)", seats:"런더너–파리지앵 사이 광장",
+      promo:"—", reviews:"사진 명소", pros:["숙소 바로 옆","무료"], cons:["짧음"], rating:3, booked:false,
+      links:[{label:"공식 페이지", url:"https://www.parisianmacao.com/"}], map:"The Parisian Macao Eiffel Tower" },
+    { id:"xmas", name:"크리스마스 이벤트 (리조트·Light Up Macau)", status:"CHECK", venue:"런더너·갤럭시·City of Dreams·시내",
+      style:"대형 트리·장식, 리조트 크리스마스 캠페인, 빛 축제", runtime:"—",
+      times:"2026년 행사 미공개 — 2025년 참고: 갤럭시 겨울 테마(~1월 초), CoD 10m 트리, Light Up Macau 12/6–1/11", dates:"추후 확인 필요", price:"대부분 무료", seats:"—",
+      promo:"—", reviews:"—", pros:["이번 여행 시즌과 일치"], cons:["2026 상세 미공개"], rating:4, booked:false,
+      links:[{label:"마카오 관광청 행사", url:"https://www.macaotourism.gov.mo/en/whatson"},{label:"런더너 공연·이벤트", url:"https://www.londonermacao.com/macau-events-shows.html"}], map:"Cotai Strip Macau" }
+  ],
+
+  // tier: budget / mid / premium / airport
+  hotels: [
+    { name:"The Londoner Hotel", area:"코타이 (Sands 클러스터)", tier:"mid", role:"premiumAlt", status:"CANDIDATE", stars:5, price:"Agoda ₩1,381,413/박 (세금 포함·2026-10-05) — 기존 추정 MOP 1,900–2,900 정정",
+      pros:["런더너 크리스마스 장식 한가운데","베네시안·파리지앵 실내 연결, CoD 도보 10–15분","HZMB·페리터미널 무료셔틀"], cons:["성수기 가격 급등","대형 리조트라 체크인 대기"],
+      showAccess:"HoDW 도보 10–15분", sightAccess:"타이파 빌리지 도보 20분 / 반도 택시 20분", shuttle:"있음 (HZMB·외항·타이파 페리)", rating:5,
+      links:[{label:"공식", url:"https://www.londonermacao.com/"},{label:"셔틀 안내", url:"https://www.londonermacao.com/getting-to-macau.html"}], map:"The Londoner Hotel Macao" },
+    { name:"The Parisian Macao", area:"코타이 (Sands 클러스터)", tier:"mid", status:"CANDIDATE", stars:5, price:"Agoda ₩453,892/박 (세금 포함·2026-10-05) — 기존 추정 MOP 1,400–2,300 정정",
+      pros:["에펠탑 뷰 객실","베네시안·런더너 연결"], cons:["객실 노후 평 일부","혼잡"],
+      showAccess:"HoDW 도보 15분", sightAccess:"타이파 빌리지 도보 15분", shuttle:"있음", rating:4,
+      links:[{label:"공식", url:"https://www.parisianmacao.com/"}], map:"The Parisian Macao" },
+    { name:"Sheraton Grand Macao", area:"코타이 (런더너 단지 내)", tier:"budget", status:"CANDIDATE", stars:5, price:"Agoda ₩528,470/박 (현 Londoner Grand, 세금 포함·2026-10-05) — 기존 추정 MOP 1,300–2,000 정정",
+      pros:["런더너와 같은 단지 → 위치는 런더너급","대형 체인 포인트 적립"], cons:["객실 수 많아 대기·혼잡"],
+      showAccess:"HoDW 도보 10–15분", sightAccess:"런더너와 동일", shuttle:"있음 (Sands 셔틀)", rating:4,
+      links:[], map:"Sheraton Grand Macao" },
+    { name:"Broadway Macau", area:"코타이 (갤럭시 단지)", tier:"budget", role:"selected", recommended:true, status:"SELECTED", bookingStatus:"미예약", stars:5, starsNote:"Agoda 분류: 5성급 (Trip.com 등 예약사이트 동일 · 마카오 관광청 공식 등급은 미확인)", price:"Agoda ₩250,288/박 (세금 포함·2026-10-05, 환불 불가 최저가) — 기존 추정 MOP 900–1,500",
+      pros:["30만원 이하 5성 중 유일하게 코타이 리조트 단지 안","갤럭시 크리스마스 장식·다이아몬드 쇼 연결","브로드웨이 푸드스트리트 바로 앞"], cons:["객실 작음(26m²)","Sands·CoD까지 택시 5–7분 / 도보 15–20분","30만원 이하 요금은 환불 불가"],
+      showAccess:"HoDW(CoD) 택시 약 5분 · 도보 20–25분", sightAccess:"갤럭시 연결 · 타이파 빌리지 도보 10–15분", shuttle:"갤럭시 무료셔틀 (HZMB 10:00–23:00 / StarWorld 09:30–22:00)", rating:5,
+      links:[{label:"공식", url:"https://www.broadwaymacau.com.mo/"}], map:"Broadway Macau" },
+    { name:"Grand Hyatt Macau", area:"코타이 (City of Dreams 내)", tier:"mid", status:"CANDIDATE", stars:5, price:"Agoda ₩833,202/박 (세금 포함·2026-10-05) — 기존 추정 MOP 1,800–2,800 정정",
+      pros:["HoDW 극장과 같은 건물 → 공연 후 바로 숙소","서비스 평 좋음"], cons:["Sands 쪽 크리스마스 장식은 길 건너"],
+      showAccess:"HoDW 건물 내", sightAccess:"베네시안 도보 10분", shuttle:"CoD 셔틀", rating:4,
+      links:[], map:"Grand Hyatt Macau" },
+    { name:"Wynn Palace", area:"코타이 북동쪽", tier:"premium", status:"CANDIDATE", stars:5, price:"MOP 3,000–4,800 (추정)",
+      pros:["분수쇼 뷰 객실·SkyCab","꽃 장식·서비스 최상급"], cons:["가격","Sands·CoD까지 택시 필요"],
+      showAccess:"HoDW 택시 10분", sightAccess:"MGM 코타이 인접", shuttle:"있음 (HZMB 포함)", rating:4,
+      links:[{label:"공식", url:"https://www.wynnmacau.com/en/wynn-palace"}], map:"Wynn Palace Macau" },
+    { name:"Sofitel Macau at Ponte 16", area:"마카오 반도 (내항)", tier:"mid", status:"CANDIDATE", stars:5, price:"MOP 1,200–2,000 (추정)",
+      pros:["세나도·성바울 도보권","반도 야경·로컬 식당 접근"], cons:["공연·리조트 동선과 멀어 매일 택시","이번 여행 목적(공연·리조트)과 불일치"],
+      showAccess:"HoDW 택시 20–25분", sightAccess:"세나도 도보 15분", shuttle:"HZMB 셔틀(Ponte 16)", rating:2,
+      links:[], map:"Sofitel Macau at Ponte 16" },
+    { name:"Regal Airport Hotel", area:"홍콩공항 (T1 연결)", tier:"airport", recommended:true, status:"PLANNED", stars:4, price:"HKD 1,300–1,900 (추정)",
+      pros:["실내 연결통로로 터미널 도보","새벽 체크인에 최적"], cons:["시내 관광 후 복귀 시간 필요(공항철도)"],
+      showAccess:"—", sightAccess:"공항철도로 센트럴 24분", shuttle:"도보", rating:5,
+      links:[{label:"공식", url:"https://www.regalhotel.com/regal-airport-hotel"}], map:"Regal Airport Hotel Hong Kong" },
+    { name:"Novotel Citygate Hong Kong", area:"퉁청 (공항 인근)", tier:"airport", status:"CANDIDATE", stars:4, price:"HKD 1,100–1,700 (추정)",
+      pros:["MTR 퉁청역 앞, 아웃렛 연결","리갈보다 저렴할 때 많음"], cons:["새벽 택시 10–15분 필요"],
+      showAccess:"—", sightAccess:"MTR 퉁청선", shuttle:"확인 필요", rating:3,
+      links:[], map:"Novotel Citygate Hong Kong" }
+  ],
+  // ── Agoda 마카오 5성급 비교 ──────────────────────────────
+  // 가격 갱신: agodaHotels 의 nightlyPriceKRW / totalPriceKRW / checkedAt 등만 고치면 화면 전체가 자동 갱신됨.
+  // nightlyPriceKRW = Agoda "1박당 총 금액 (세금 및 수수료 포함)" 최저가. basePriceKRW = 세금 전 표시가.
+  // 30만원 초과·매진·5성 아님 → agodaValid()에서 자동 제외 (agodaExcluded 는 참고 표시용).
+  agodaSearch: { checkIn:"2026-12-23", checkOut:"2026-12-26", nights:3, adults:2, rooms:1, maxNightlyKRW:300000,
+    checkedAt:"2026-10-05", method:"agoda.com/ko-kr 검색(5성급 필터)·호텔 상세페이지 직접 조회, 비로그인·KRW",
+    totalFiveStar:36, soldOut:4,
+    searchUrl:"https://www.agoda.com/ko-kr/search?city=21397&checkIn=2026-12-23&checkOut=2026-12-26&los=3&rooms=1&adults=2&children=0&hotelStarRating=5&currency=KRW" },
+  agodaHotels: [
+    {"name": "Broadway Macau (브로드웨이 호텔)", "agodaName": "브로드웨이 호텔 (Broadway Hotel)", "stars": 5, "area": "Cotai", "areaDetail": "갤럭시 마카오 단지", "available": true, "nightlyPriceKRW": 250288, "basePriceKRW": 217642, "totalPriceKRW": 750864, "nights": 3, "taxIncluded": true, "roomType": "브로드웨이 킹 (Broadway King)", "breakfast": "최저가 요금은 조식 별도 (1인 ₩20,973) · 조식 포함 요금 ₩307,764/박", "breakfastPriceKRW": 307764, "cancellation": "최저가는 환불 불가 · 무료취소 요금 ₩349,349/박 (2026년 12월 22일 전 예약 취소 시)", "freeCancelPriceKRW": 349349, "payLater": "무료취소 요금 선택 시 후불 (자동결제 2026년 12월 20일)", "payLaterYes": true, "kmToCOD": 1.1, "kmToLondoner": 1.3, "kmToSenado": 5.4, "distanceToCOD": "직선 1.1km · 도보 약 16분 (추정)", "distanceToLondoner": "직선 1.3km · 택시 약 8분 (추정)", "distanceToVenetian": "직선 0.8km · 도보 약 12분 (추정)", "distanceToTaipaVillage": "직선 0.8km · 도보 약 12분 (추정)", "distanceToHZMB": "직선 8.0km · 택시 약 23분 (추정)", "agodaUrl": "https://www.agoda.com/ko-kr/broadway-macau-hotel/hotel/macau-mo.html?checkIn=2026-12-23&checkOut=2026-12-26&los=3&rooms=1&adults=2&children=0&currency=KRW", "map": "Broadway Hotel Macau", "status": "SELECTED", "selected": true, "trackStatus": "SELECTED / WAITING TO BOOK", "checkedAt": "2026-10-05", "inResort": true, "starsNote": "Agoda 분류: 5성급", "fitBadge": "여행 적합도 최고", "bookingNature": [{"ok": false, "text": "현재 30만원 이하 요금: 환불 불가 (₩250,288/박)"}, {"ok": false, "text": "무료취소 요금: ₩349,349/박 — 상한 초과"}], "shuttleYes": true, "shuttle": "갤럭시 무료셔틀 (HZMB·페리터미널 등) — 노선 확인", "christmas": "★★★★ 갤럭시 겨울 테마·대형 장식과 연결", "pros": ["갤럭시 리조트와 실내 연결 → 크리스마스 장식·다이아몬드 쇼 바로 앞", "브로드웨이 푸드스트리트 (저렴한 로컬 음식)", "Agoda 8.7 · 리뷰 2.4만 건으로 검증됨", "기존 일정 호텔 후보"], "cons": ["객실 26m²로 작음", "HoDW(CoD)까지 택시 5–7분 또는 도보 15–20분", "30만원 이하 요금은 환불 불가 (무료취소는 ₩349,349)"], "officialUrl": "https://www.broadwaymacau.com.mo/", "linkedHotel": "Broadway Macau", "topRank": 1, "topReason": "TOP 1 — 30만원 이하 5성 중 유일하게 코타이 리조트 단지 안. 갤럭시 크리스마스 분위기 + HoDW 택시 5분대 + 높은 평점·리뷰 수.", "rating": 8.7, "reviewCount": 24402},
+    {"name": "YOHO Hollywood Roosevelt", "agodaName": "요호 할리우드 루즈벨트 호텔 (YOHO Hollywood Roosevelt Hotel)", "stars": 5, "area": "Taipa", "areaDetail": "타이파 Jockey Club LRT역 인근 (코타이 북동쪽)", "available": true, "nightlyPriceKRW": 218886, "basePriceKRW": 190336, "totalPriceKRW": 656658, "nights": 3, "taxIncluded": true, "roomType": "디럭스 코타이 트윈룸 (Deluxe Cotai Twin Room)", "breakfast": "최저가 요금은 조식 별도 (1인 ₩17,906) · 조식 포함 요금 ₩245,863/박", "breakfastPriceKRW": 245863, "cancellation": "최저가는 환불 불가 · 무료취소 요금 확인 안 됨", "freeCancelPriceKRW": 0, "payLater": "최저가 요금은 즉시 결제", "payLaterYes": false, "kmToCOD": 2.0, "kmToLondoner": 2.0, "kmToSenado": 4.8, "distanceToCOD": "도로 약 3km · 택시 약 8–10분", "distanceToLondoner": "도로 약 3km · 택시 약 8–10분", "distanceToVenetian": "도로 약 3.1km · 택시 약 8–10분", "distanceToTaipaVillage": "택시 약 5분", "distanceToHZMB": "직선 6.4km · 택시 약 19분 (추정)", "agodaUrl": "https://www.agoda.com/ko-kr/the-macau-roosevelt/hotel/macau-mo.html?checkIn=2026-12-23&checkOut=2026-12-26&los=3&rooms=1&adults=2&children=0&currency=KRW", "map": "YOHO Hollywood Roosevelt Hotel Macau", "status": "CANDIDATE", "checkedAt": "2026-10-05", "fitBadge": "가격/접근성 균형", "bookingNature": [{"ok": false, "text": "현재 최저가: 환불 불가 (₩218,886/박)"}, {"ok": false, "text": "무료취소 요금: 확인 안 됨"}], "shuttleYes": true, "shuttle": "무료 셔틀 (갤럭시·관광지 방면, Agoda 시설 표기)", "christmas": "★★ 호텔 자체 장식 수준 — 코타이까지 이동 필요", "pros": ["코타이뷰 객실, ₩21.9만으로 저렴", "무료 셔틀 + LRT 역 도보권", "Agoda 8.6 · 리뷰 1.9만 건"], "cons": ["리조트 단지 밖이라 조용한 대신 볼거리 없음", "무료취소 요금 미확인 (확인된 요금은 모두 환불 불가)", "HoDW까지 택시 약 7–10분"], "officialUrl": null, "linkedHotel": null, "topRank": 2, "topReason": "TOP 2 — 코타이 접근성(셔틀·LRT)을 유지하면서 Broadway보다 약 3만원/박 저렴.", "rating": 8.6, "reviewCount": 19384},
+    {"name": "Artyzen Grand Lapa Macau", "agodaName": "아티즌 그랜드 라파 마카오 (Artyzen Grand Lapa Macau)", "stars": 5, "area": "Macau Peninsula", "areaDetail": "외항 인근 (Av. da Amizade, Sands Macao 옆)", "available": true, "nightlyPriceKRW": 219129, "basePriceKRW": 190547, "totalPriceKRW": 657387, "nights": 3, "taxIncluded": true, "roomType": "그랜드룸 (Grand Room)", "breakfast": "최저가 요금은 조식 별도 (1인 ₩37,233) · 조식 포함 요금 ₩283,101/박", "breakfastPriceKRW": 283101, "cancellation": "최저가는 환불 불가 · 무료취소 요금 ₩235,257/박 (2026년 12월 21일 전 예약 취소 시)", "freeCancelPriceKRW": 235257, "payLater": "무료취소 요금 선택 시 후불 (자동결제 2026년 12월 19일)", "payLaterYes": true, "kmToCOD": 4.9, "kmToLondoner": 5.3, "kmToSenado": 1.3, "distanceToCOD": "직선 4.9km · 택시 약 16분 (추정)", "distanceToLondoner": "직선 5.3km · 택시 약 17분 (추정)", "distanceToVenetian": "직선 5.0km · 택시 약 16분 (추정)", "distanceToTaipaVillage": "직선 4.3km · 택시 약 14분 (추정)", "distanceToHZMB": "직선 4.0km · 택시 약 14분 (추정)", "agodaUrl": "https://www.agoda.com/ko-kr/grand-lapa-macau-hotel/hotel/macau-mo.html?checkIn=2026-12-23&checkOut=2026-12-26&los=3&rooms=1&adults=2&children=0&currency=KRW", "map": "Artyzen Grand Lapa Macau Macau", "status": "CANDIDATE", "checkedAt": "2026-10-05", "fitBadge": "예약 안정성 최고", "bookingNature": [{"ok": true, "text": "무료취소 요금 ₩235,257/박 — 30만원 이하 (2026-12-21 전 취소 무료)"}, {"ok": true, "text": "후불 가능 (자동결제 2026-12-19)"}], "shuttleYes": false, "shuttle": "호텔 자체 셔틀 미확인 — 인접 Sands Macao 셔틀 활용 후기 있음", "christmas": "★★ 리조트형 정원·수영장, 시내 장식은 택시 거리", "pros": ["Agoda 9.0 · 리뷰 2만 건 — 30만원 이하 중 최고 평점권", "무료취소 요금 ₩235,257 (조건 내)", "세나도 광장 택시 5분, 외항 페리터미널 근접"], "cons": ["코타이(HoDW)까지 택시 약 15분 — 공연·리조트 동선 매일 택시", "조식 별도 1인 약 ₩3.7만"], "officialUrl": null, "linkedHotel": null, "topRank": 3, "topReason": "TOP 3 — 반도 숙소 중 평점·무료취소 조건이 가장 좋음. D2 반도 일정엔 유리하지만 공연 동선은 불리.", "rating": 9.0, "reviewCount": 20178},
+    {"name": "Regency Art Hotel", "agodaName": "리젠시 아트 호텔 (Regency Art Hotel)", "stars": 5, "area": "Taipa", "areaDetail": "타이파 북쪽 해안 (Estrada Almirante Marques Esparteiro)", "available": true, "nightlyPriceKRW": 124076, "basePriceKRW": 107892, "totalPriceKRW": 372228, "nights": 3, "taxIncluded": true, "roomType": "슈페리어 더블룸 (Superior Double Room)", "breakfast": "최저가 요금은 조식 별도 (1인 ₩16,414) · 조식 포함 요금 ₩138,712/박", "breakfastPriceKRW": 138712, "cancellation": "최저가는 환불 불가 · 무료취소 요금 ₩132,336/박 (2026년 12월 20일 전 예약 취소 시)", "freeCancelPriceKRW": 132336, "payLater": "무료취소 요금 선택 시 후불 (자동결제 2026년 12월 18일)", "payLaterYes": true, "kmToCOD": 1.5, "kmToLondoner": 2.0, "kmToSenado": 4.0, "distanceToCOD": "직선 1.5km · 택시 약 8분 (추정)", "distanceToLondoner": "직선 2.0km · 택시 약 9분 (추정)", "distanceToVenetian": "직선 1.5km · 택시 약 8분 (추정)", "distanceToTaipaVillage": "직선 0.8km · 도보 약 12분 (추정)", "distanceToHZMB": "직선 6.6km · 택시 약 20분 (추정)", "agodaUrl": "https://www.agoda.com/ko-kr/regency-art-hotel/hotel/macau-mo.html?checkIn=2026-12-23&checkOut=2026-12-26&los=3&rooms=1&adults=2&children=0&currency=KRW", "map": "Regency Art Hotel Macau", "status": "CANDIDATE", "checkedAt": "2026-10-05", "shuttleYes": false, "shuttle": "Agoda 요약에 셔틀 언급 — 노선·운영 확인 필요", "christmas": "★ 장식 기대 낮음", "pros": ["조건 내 최저가 ₩124,076/박", "무료취소 요금도 ₩132,336으로 저렴", "타이파 빌리지 근처"], "cons": ["Agoda 7.6 — 비교군 중 최저 평점(노후 시설 후기)", "리조트 분위기 없음", "코타이까지 택시 이동"], "officialUrl": null, "linkedHotel": null, "rating": 7.6, "reviewCount": 14668},
+    {"name": "Hotel Royal Macau", "agodaName": "호텔 로얄 마카오 (Hotel Royal Macau)", "stars": 5, "area": "Macau Peninsula", "areaDetail": "기아 언덕 아래 (Estrada da Vitória)", "available": true, "nightlyPriceKRW": 141199, "basePriceKRW": 122782, "totalPriceKRW": 423597, "nights": 3, "taxIncluded": true, "roomType": "슈페리어 트윈룸 (Superior Twin Room)", "breakfast": "최저가 요금은 조식 별도 (1인 ₩25,619) · 조식 포함 요금 ₩171,448/박", "breakfastPriceKRW": 171448, "cancellation": "최저가는 환불 불가 · 무료취소 요금 확인 안 됨", "freeCancelPriceKRW": 0, "payLater": "최저가 요금은 즉시 결제", "payLaterYes": false, "kmToCOD": 5.7, "kmToLondoner": 6.1, "kmToSenado": 0.7, "distanceToCOD": "직선 5.7km · 택시 약 18분 (추정)", "distanceToLondoner": "직선 6.1km · 택시 약 18분 (추정)", "distanceToVenetian": "직선 5.8km · 택시 약 18분 (추정)", "distanceToTaipaVillage": "직선 5.0km · 택시 약 16분 (추정)", "distanceToHZMB": "직선 4.3km · 택시 약 14분 (추정)", "agodaUrl": "https://www.agoda.com/ko-kr/hotel-royal-macau/hotel/macau-mo.html?checkIn=2026-12-23&checkOut=2026-12-26&los=3&rooms=1&adults=2&children=0&currency=KRW", "map": "Hotel Royal Macau Macau", "status": "CANDIDATE", "checkedAt": "2026-10-05", "shuttleYes": false, "shuttle": "미확인", "christmas": "★ 장식 기대 낮음", "pros": ["₩141,199/박으로 저렴", "세나도 광장 도보권", "리뷰 3.6만 건, 평점 8.3"], "cons": ["무료취소 요금 확인 안 됨", "코타이·HoDW까지 택시 약 20분", "오래된 건물"], "officialUrl": null, "linkedHotel": null, "rating": 8.3, "reviewCount": 36617},
+    {"name": "Riviera Hotel", "agodaName": "리비에라 호텔 (Riviera Hotel)", "stars": 5, "area": "Macau Peninsula", "areaDetail": "펜야 언덕 (남반 호수 서쪽)", "available": true, "nightlyPriceKRW": 146846, "basePriceKRW": 127692, "totalPriceKRW": 440538, "nights": 3, "taxIncluded": true, "roomType": "클래식룸 (트윈베드) (classic twin bed room)", "breakfast": "최저가 요금은 조식 별도 (1인 ₩15,030) · 조식 포함 요금 ₩167,442/박", "breakfastPriceKRW": 167442, "cancellation": "최저가는 환불 불가 · 무료취소 요금 확인 안 됨", "freeCancelPriceKRW": 0, "payLater": "최저가 요금은 즉시 결제", "payLaterYes": false, "kmToCOD": 5.1, "kmToLondoner": 5.5, "kmToSenado": 1.1, "distanceToCOD": "직선 5.1km · 택시 약 16분 (추정)", "distanceToLondoner": "직선 5.5km · 택시 약 17분 (추정)", "distanceToVenetian": "직선 5.0km · 택시 약 16분 (추정)", "distanceToTaipaVillage": "직선 4.3km · 택시 약 14분 (추정)", "distanceToHZMB": "직선 6.0km · 택시 약 18분 (추정)", "agodaUrl": "https://www.agoda.com/ko-kr/riviera-hotel/hotel/macau-mo.html?checkIn=2026-12-23&checkOut=2026-12-26&los=3&rooms=1&adults=2&children=0&currency=KRW", "map": "Riviera Hotel Macau", "status": "CANDIDATE", "checkedAt": "2026-10-05", "shuttleYes": false, "shuttle": "미확인", "christmas": "★ 장식 기대 낮음", "pros": ["₩146,846/박", "오션뷰 객실"], "cons": ["무료취소 요금 확인 안 됨", "언덕 위라 도보 이동 불편", "코타이까지 택시 약 20분"], "officialUrl": null, "linkedHotel": null, "rating": 8.3, "reviewCount": 8316},
+    {"name": "Grand Coloane Resort", "agodaName": "그랜드 콜로안 리조트 (Grand Coloane Resort)", "stars": 5, "area": "Coloane", "areaDetail": "학사 비치 (Estrada de Hac Sa)", "available": true, "nightlyPriceKRW": 168099, "basePriceKRW": 146173, "totalPriceKRW": 504297, "nights": 3, "taxIncluded": true, "roomType": "그랜드 비치뷰 룸 (더블베드 2개) (Grand Beach View Room with 2 Double Beds)", "breakfast": "최저가 요금은 조식 별도 (1인 ₩23,911) · 조식 포함 요금 ₩254,773/박", "breakfastPriceKRW": 254773, "cancellation": "최저가는 환불 불가 · 무료취소 요금 ₩194,632/박 (2026년 12월 22일 전 예약 취소 시)", "freeCancelPriceKRW": 194632, "payLater": "무료취소 요금 선택 시 후불 (자동결제 2026년 12월 20일)", "payLaterYes": true, "kmToCOD": 3.7, "kmToLondoner": 3.3, "kmToSenado": 9.2, "distanceToCOD": "직선 3.7km · 택시 약 13분 (추정)", "distanceToLondoner": "직선 3.3km · 택시 약 12분 (추정)", "distanceToVenetian": "직선 3.7km · 택시 약 13분 (추정)", "distanceToTaipaVillage": "직선 4.4km · 택시 약 15분 (추정)", "distanceToHZMB": "직선 10.6km · 택시 약 28분 (추정)", "agodaUrl": "https://www.agoda.com/ko-kr/grand-coloane-resort/hotel/macau-mo.html?checkIn=2026-12-23&checkOut=2026-12-26&los=3&rooms=1&adults=2&children=0&currency=KRW", "map": "Grand Coloane Resort Macau", "status": "CANDIDATE", "checkedAt": "2026-10-05", "shuttleYes": true, "shuttle": "무료 셔틀 (Agoda 시설 표기) — 코타이 노선 확인", "christmas": "★ 조용한 비치 리조트", "pros": ["비치뷰 리조트 ₩168,099/박", "무료취소 ₩194,632 · 조식 포함 ₩254,773 모두 조건 내"], "cons": ["코타이까지 택시 약 15분, 반도까지 30분 — 일정과 가장 멂", "저녁 공연 후 복귀 불편"], "officialUrl": null, "linkedHotel": null, "rating": 8.3, "reviewCount": 11537},
+    {"name": "New Orient Landmark Hotel", "agodaName": "New Orient Landmark Hotel", "stars": 5, "area": "Macau Peninsula", "areaDetail": "NAPE 신구역 (Av. da Amizade 555)", "available": true, "nightlyPriceKRW": 188398, "basePriceKRW": 163824, "totalPriceKRW": 565194, "nights": 3, "taxIncluded": true, "roomType": "수페리어 더블룸 (Superior Double Room)", "breakfast": "최저가 요금은 조식 별도 · 조식 포함 요금 ₩221,240/박", "breakfastPriceKRW": 221240, "cancellation": "최저가는 환불 불가 · 무료취소 요금 확인 안 됨", "freeCancelPriceKRW": 0, "payLater": "최저가 요금은 즉시 결제", "payLaterYes": false, "kmToCOD": 4.9, "kmToLondoner": 5.3, "kmToSenado": 0.9, "distanceToCOD": "직선 4.9km · 택시 약 16분 (추정)", "distanceToLondoner": "직선 5.3km · 택시 약 17분 (추정)", "distanceToVenetian": "직선 4.9km · 택시 약 16분 (추정)", "distanceToTaipaVillage": "직선 4.2km · 택시 약 14분 (추정)", "distanceToHZMB": "직선 4.4km · 택시 약 15분 (추정)", "agodaUrl": "https://www.agoda.com/ko-kr/new-orient-landmark-hotel-h16138230/hotel/macau-mo.html?checkIn=2026-12-23&checkOut=2026-12-26&los=3&rooms=1&adults=2&children=0&currency=KRW", "map": "New Orient Landmark Hotel Macau", "status": "CANDIDATE", "checkedAt": "2026-10-05", "shuttleYes": true, "shuttle": "셔틀 서비스 (Agoda 시설 표기) — 노선 확인", "christmas": "★ 장식 기대 낮음", "pros": ["₩188,398/박", "리스보아·윈 마카오 도보권"], "cons": ["무료취소 요금 확인 안 됨", "코타이까지 택시 약 15분"], "officialUrl": null, "linkedHotel": null, "rating": 8.5, "reviewCount": 5952},
+    {"name": "Sofitel Macau at Ponte 16", "agodaName": "소피텔 마카오 앳 폰테 16 호텔 (Sofitel Macau at Ponte 16 Hotel)", "stars": 5, "area": "Macau Peninsula", "areaDetail": "내항 (Ponte 16)", "available": true, "nightlyPriceKRW": 207443, "basePriceKRW": 180385, "totalPriceKRW": 622329, "nights": 3, "taxIncluded": true, "roomType": "슈페리어 시티뷰 트윈베드 (Superior Twin City View)", "breakfast": "최저가 요금은 조식 별도 (1인 ₩30,672) · 조식 포함 요금 없음", "breakfastPriceKRW": 0, "cancellation": "최저가는 환불 불가 · 무료취소 요금 ₩272,951/박 (2026년 12월 21일 전 예약 취소 시)", "freeCancelPriceKRW": 272951, "payLater": "무료취소 요금 선택 시 후불 (자동결제 2026년 12월 19일)", "payLaterYes": true, "kmToCOD": 6.1, "kmToLondoner": 6.5, "kmToSenado": 0.7, "distanceToCOD": "직선 6.1km · 택시 약 18분 (추정)", "distanceToLondoner": "직선 6.5km · 택시 약 19분 (추정)", "distanceToVenetian": "직선 6.1km · 택시 약 18분 (추정)", "distanceToTaipaVillage": "직선 5.3km · 택시 약 17분 (추정)", "distanceToHZMB": "직선 5.4km · 택시 약 17분 (추정)", "agodaUrl": "https://www.agoda.com/ko-kr/sofitel-macau-at-ponte-16-hotel/hotel/macau-mo.html?checkIn=2026-12-23&checkOut=2026-12-26&los=3&rooms=1&adults=2&children=0&currency=KRW", "map": "Sofitel Macau at Ponte 16 Hotel Macau", "status": "CANDIDATE", "checkedAt": "2026-10-05", "shuttleYes": true, "shuttle": "Ponte 16 HZMB 셔틀 (2026-10 조사)", "christmas": "★★ 호텔 로비 장식 · 세나도 크리스마스 장식 도보권", "pros": ["세나도·성바울 도보 10–15분", "Agoda 8.7 · 리뷰 2.1만", "기존 일정 호텔 후보"], "cons": ["코타이·HoDW까지 택시 약 20분", "무료취소 요금 ₩272,951 (조건 내지만 최저가 대비 +6.5만)"], "officialUrl": null, "linkedHotel": "Sofitel Macau at Ponte 16", "rating": 8.7, "reviewCount": 21211},
+    {"name": "Legend Palace Hotel", "agodaName": "레전드 팰리스 호텔 (Legend Palace Hotel)", "stars": 5, "area": "Macau Peninsula", "areaDetail": "피셔맨스 워프 (외항 페리터미널 인근)", "available": true, "nightlyPriceKRW": 224736, "basePriceKRW": 195423, "totalPriceKRW": 674208, "nights": 3, "taxIncluded": true, "roomType": "슈페리어룸 (Superior Room)", "breakfast": "최저가 요금은 조식 별도 (1인 ₩27,806) · 조식 포함 요금 ₩267,013/박", "breakfastPriceKRW": 267013, "cancellation": "최저가는 환불 불가 · 무료취소 요금 ₩269,850/박 (2026년 12월 20일 전 예약 취소 시)", "freeCancelPriceKRW": 269850, "payLater": "무료취소 요금 선택 시 후불 (자동결제 2026년 12월 18일)", "payLaterYes": true, "kmToCOD": 5.0, "kmToLondoner": 5.4, "kmToSenado": 1.6, "distanceToCOD": "직선 5.0km · 택시 약 16분 (추정)", "distanceToLondoner": "직선 5.4km · 택시 약 17분 (추정)", "distanceToVenetian": "직선 5.1km · 택시 약 16분 (추정)", "distanceToTaipaVillage": "직선 4.5km · 택시 약 15분 (추정)", "distanceToHZMB": "직선 3.7km · 택시 약 13분 (추정)", "agodaUrl": "https://www.agoda.com/ko-kr/legend-palace-hotel/hotel/macau-mo.html?checkIn=2026-12-23&checkOut=2026-12-26&los=3&rooms=1&adults=2&children=0&currency=KRW", "map": "Legend Palace Hotel Macau", "status": "CANDIDATE", "checkedAt": "2026-10-05", "shuttleYes": false, "shuttle": "미확인 (외항 페리터미널 도보권)", "christmas": "★★ 피셔맨스 워프 야경", "pros": ["Agoda 8.8, 발코니 오션뷰", "무료취소+조식 포함 요금 ₩269,850 (조건 내)"], "cons": ["검색 목록가 ₩208,831과 상세페이지 최저가 ₩224,736이 다름 → 실시간 확인 필요", "코타이까지 택시 약 15분"], "officialUrl": null, "linkedHotel": null, "rating": 8.8, "reviewCount": 12779},
+    {"name": "Crowne Plaza Macau", "agodaName": "크라운 플라자 마카오 바이 IHG (Crowne Plaza Macau By IHG)", "stars": 5, "area": "Macau Peninsula", "areaDetail": "반도 북동쪽 신매립지 (Rua da Pérola Oriental) · HZMB 인근", "available": true, "nightlyPriceKRW": 212336, "basePriceKRW": 184640, "totalPriceKRW": 637008, "nights": 3, "taxIncluded": true, "roomType": "스탠다드룸 (트윈베드 2개) (2 Twin Standard)", "breakfast": "최저가 요금은 조식 별도 (1인 ₩21,222) · 조식 포함 요금 ₩246,656/박", "breakfastPriceKRW": 246656, "cancellation": "최저가는 환불 불가 · 무료취소 요금 ₩249,770/박 (2026년 12월 20일 전 예약 취소 시)", "freeCancelPriceKRW": 249770, "payLater": "무료취소 요금 선택 시 후불 (자동결제 2026년 12월 18일)", "payLaterYes": true, "kmToCOD": 6.3, "kmToLondoner": 6.7, "kmToSenado": 2.1, "distanceToCOD": "직선 6.3km · 택시 약 19분 (추정)", "distanceToLondoner": "직선 6.7km · 택시 약 20분 (추정)", "distanceToVenetian": "직선 6.4km · 택시 약 19분 (추정)", "distanceToTaipaVillage": "직선 5.7km · 택시 약 18분 (추정)", "distanceToHZMB": "직선 3.0km · 택시 약 12분 (추정)", "agodaUrl": "https://www.agoda.com/ko-kr/crowne-plaza-macau/hotel/macau-mo.html?checkIn=2026-12-23&checkOut=2026-12-26&los=3&rooms=1&adults=2&children=0&currency=KRW", "map": "Crowne Plaza Macau By IHG Macau", "status": "CANDIDATE", "checkedAt": "2026-10-05", "shuttleYes": true, "shuttle": "셔틀 서비스 (Agoda 시설 표기) — 노선 확인", "christmas": "★ 주거지역, 장식 기대 낮음", "pros": ["Agoda 9.0", "HZMB 마카오 口岸 가까움 (D1·D4 이동 편함)", "무료취소 ₩249,770 · 조식 포함 ₩246,656 조건 내"], "cons": ["관광지·코타이 모두 멂 (코타이 택시 약 20분)", "주변 상권 적음"], "officialUrl": null, "linkedHotel": null, "rating": 9.0, "reviewCount": 8665},
+    {"name": "YOHO Treasure Island – Rivage Continental", "agodaName": "요호 트레저 아일랜드 호텔 - 리바쥬 콘티넨탈 (YOHO Treasure Island Hotel - Rivage Continental)", "stars": 5, "area": "Macau Peninsula", "areaDetail": "남반 호수 (리스보아·윈 마카오 인근)", "available": true, "nightlyPriceKRW": 236968, "basePriceKRW": 206059, "totalPriceKRW": 710904, "nights": 3, "taxIncluded": true, "roomType": "그랜드 씨뷰 룸 (Grand Sea View Room)", "breakfast": "최저가 요금은 조식 별도 · 조식 포함 요금 ₩337,305/박", "breakfastPriceKRW": 337305, "cancellation": "최저가는 환불 불가 · 무료취소 요금 ₩332,758/박 (2026년 12월 20일 전 예약 취소 시)", "freeCancelPriceKRW": 332758, "payLater": "무료취소 요금 선택 시 후불 (자동결제 2026년 12월 18일)", "payLaterYes": true, "kmToCOD": 4.8, "kmToLondoner": 5.3, "kmToSenado": 0.7, "distanceToCOD": "직선 4.8km · 택시 약 16분 (추정)", "distanceToLondoner": "직선 5.3km · 택시 약 17분 (추정)", "distanceToVenetian": "직선 4.9km · 택시 약 16분 (추정)", "distanceToTaipaVillage": "직선 4.1km · 택시 약 14분 (추정)", "distanceToHZMB": "직선 5.1km · 택시 약 16분 (추정)", "agodaUrl": "https://www.agoda.com/ko-kr/yoho-continental-hotel/hotel/macau-mo.html?checkIn=2026-12-23&checkOut=2026-12-26&los=3&rooms=1&adults=2&children=0&currency=KRW", "map": "YOHO Treasure Island Hotel - Rivage Continental Macau", "status": "CANDIDATE", "checkedAt": "2026-10-05", "shuttleYes": false, "shuttle": "같은 단지(트레저 아일랜드) 셔틀 이용 가능 여부 확인 필요", "christmas": "★★ 윈 마카오·리스보아 조명 도보권", "pros": ["Agoda 8.9, 그랜드 씨뷰 룸", "윈 마카오 분수쇼·리스보아 도보권"], "cons": ["무료취소 요금(₩332,758)은 상한 초과", "리뷰 2천 건으로 적음", "코타이 택시 약 15분"], "officialUrl": null, "linkedHotel": null, "rating": 8.9, "reviewCount": 2024},
+    {"name": "YOHO Treasure Island Hotel", "agodaName": "요호 트레저 아일랜드 호텔 (YOHO Treasure Island Hotel)", "stars": 5, "area": "Macau Peninsula", "areaDetail": "남반 호수 (리스보아·윈 마카오 인근)", "available": true, "nightlyPriceKRW": 248955, "basePriceKRW": 216483, "totalPriceKRW": 746865, "nights": 3, "taxIncluded": true, "roomType": "트레저 아일랜드 레이크뷰 골드 트윈룸 (Treasure Island Lake View Gold Twin Room)", "breakfast": "최저가 요금은 조식 별도 (1인 ₩36,143) · 조식 포함 요금 ₩295,304/박", "breakfastPriceKRW": 295304, "cancellation": "최저가는 환불 불가 · 무료취소 요금 ₩321,964/박 (2026년 12월 20일 전 예약 취소 시)", "freeCancelPriceKRW": 321964, "payLater": "무료취소 요금 선택 시 후불 (자동결제 2026년 12월 18일)", "payLaterYes": true, "kmToCOD": 4.8, "kmToLondoner": 5.3, "kmToSenado": 0.7, "distanceToCOD": "직선 4.8km · 택시 약 16분 (추정)", "distanceToLondoner": "직선 5.3km · 택시 약 17분 (추정)", "distanceToVenetian": "직선 4.9km · 택시 약 16분 (추정)", "distanceToTaipaVillage": "직선 4.1km · 택시 약 14분 (추정)", "distanceToHZMB": "직선 5.1km · 택시 약 16분 (추정)", "agodaUrl": "https://www.agoda.com/ko-kr/yoho-treasure-island-hotel/hotel/macau-mo.html?checkIn=2026-12-23&checkOut=2026-12-26&los=3&rooms=1&adults=2&children=0&currency=KRW", "map": "YOHO Treasure Island Hotel Macau", "status": "CANDIDATE", "checkedAt": "2026-10-05", "shuttleYes": true, "shuttle": "무료 셔틀 (Agoda 시설 표기)", "christmas": "★★ 윈 마카오·리스보아 조명 도보권", "pros": ["레이크뷰 객실, 야경 후기 좋음", "조식 포함 요금 ₩295,304 (조건 내)", "Agoda 8.8 · 리뷰 2.2만"], "cons": ["무료취소 요금(₩321,964)은 상한 초과", "코타이 택시 약 15분"], "officialUrl": null, "linkedHotel": null, "rating": 8.8, "reviewCount": 22499},
+    {"name": "Hotel Lisboa", "agodaName": "호텔 리스보아 (Hotel Lisboa)", "stars": 5, "area": "Macau Peninsula", "areaDetail": "리스보아 (그랜드 리스보아 맞은편)", "available": true, "nightlyPriceKRW": 256388, "basePriceKRW": 222946, "totalPriceKRW": 769164, "nights": 3, "taxIncluded": true, "roomType": "스탠다드룸 (킹베드) (Standard Room - King)", "breakfast": "최저가 요금은 조식 별도 (1인 ₩36,143) · 조식 포함 요금 ₩301,357/박", "breakfastPriceKRW": 301357, "cancellation": "최저가는 환불 불가 · 무료취소 요금 ₩308,338/박 (2026년 12월 20일 전 예약 취소 시)", "freeCancelPriceKRW": 308338, "payLater": "무료취소 요금 선택 시 후불 (자동결제 2026년 12월 18일)", "payLaterYes": true, "kmToCOD": 4.9, "kmToLondoner": 5.4, "kmToSenado": 0.6, "distanceToCOD": "직선 4.9km · 택시 약 16분 (추정)", "distanceToLondoner": "직선 5.4km · 택시 약 17분 (추정)", "distanceToVenetian": "직선 5.0km · 택시 약 16분 (추정)", "distanceToTaipaVillage": "직선 4.2km · 택시 약 14분 (추정)", "distanceToHZMB": "직선 4.9km · 택시 약 16분 (추정)", "agodaUrl": "https://www.agoda.com/ko-kr/hotel-lisboa/hotel/macau-mo.html?checkIn=2026-12-23&checkOut=2026-12-26&los=3&rooms=1&adults=2&children=0&currency=KRW", "map": "Hotel Lisboa Macau", "status": "CANDIDATE", "checkedAt": "2026-10-05", "shuttleYes": true, "shuttle": "SJM 셔틀 (Agoda 시설 표기) — 노선 확인", "christmas": "★★ 그랜드 리스보아·윈 조명, 세나도 도보 10분", "pros": ["세나도 광장 도보 약 10분, Agoda 위치 평점 9.2", "마카오 클래식 카지노 호텔 분위기", "Agoda 8.6 · 리뷰 2.7만"], "cons": ["무료취소 요금 ₩308,338 — 상한 초과", "객실 노후 후기", "코타이 택시 약 15분"], "officialUrl": null, "linkedHotel": null, "rating": 8.6, "reviewCount": 27111}
+  ],
+  agodaStrategy: {
+    title: "현재 예약 전략",
+    points: [
+      "Broadway Macau = 이번 여행 숙소로 선택 (SELECTED · 미예약) — 코타이 리조트 단지 · 갤럭시 크리스마스 · HoDW 택시 5분대",
+      "그러나 30만원 이하 요금은 환불 불가 (무료취소 요금은 ₩349,349/박으로 상한 초과)",
+      "House of Dancing Water 12월 공연 일정도 아직 미확정",
+      "따라서 지금 바로 환불 불가 요금으로 결제하는 것은 권하지 않음"
+    ],
+    steps: [
+      { name:"① 무료취소로 먼저 확보", detail:"Broadway 무료취소 요금(₩349,349/박, 12/22 전 취소 무료·12/20 자동결제)으로 객실을 먼저 잡아둠 — 환불 불가 최저가(₩250,288/박)는 공연일 확정 후 판단" },
+      { name:"② 가격 추적", detail:"HoDW 12월 일정 공개 확인 + Agoda 가격을 주 1회 확인해 agodaHotels 의 가격·checkedAt 갱신" },
+      { name:"③ 최종 확정", detail:"공연 날짜 확정 후 더 싼 요금이 있으면 새로 결제하고, 무료취소 기한 전에 기존 예약 취소 → 예약번호를 hotelPlan.confirmed·체크리스트에 기록" }
+    ]
+  },
+  agodaExcluded: [
+    { name:"The Londoner Hotel", area:"Cotai", nightlyPriceKRW:1381413, reason:"1박 30만원 초과 (현재 일정 추천 호텔)", linkedHotel:"The Londoner Hotel" },
+    { name:"Londoner Grand (구 Sheraton Grand Macao)", area:"Cotai", nightlyPriceKRW:528470, reason:"1박 30만원 초과", linkedHotel:"Sheraton Grand Macao" },
+    { name:"The Parisian Macao", area:"Cotai", nightlyPriceKRW:453892, reason:"1박 30만원 초과", linkedHotel:"The Parisian Macao" },
+    { name:"Grand Hyatt Macau", area:"Cotai", nightlyPriceKRW:833202, reason:"1박 30만원 초과", linkedHotel:"Grand Hyatt Macau" },
+    { name:"Wynn Palace", area:"Cotai", nightlyPriceKRW:0, reason:"Agoda 5성 검색 결과에 없음 — Agoda 실시간 확인 필요", linkedHotel:"Wynn Palace" },
+    { name:"YOHO Resorts World Hotel", area:"Macau Peninsula", nightlyPriceKRW:306007, reason:"1박 30만원 초과 (근소)" },
+    { name:"Altira Macau", area:"Taipa", nightlyPriceKRW:362137, reason:"1박 30만원 초과" },
+    { name:"The Venetian Macao", area:"Cotai", nightlyPriceKRW:583433, reason:"1박 30만원 초과" },
+    { name:"W Macau – Studio City", area:"Cotai", nightlyPriceKRW:599957, reason:"1박 30만원 초과" },
+    { name:"Conrad Macao", area:"Cotai", nightlyPriceKRW:648970, reason:"1박 30만원 초과" },
+    { name:"Studio City Hotel", area:"Cotai", nightlyPriceKRW:693286, reason:"1박 30만원 초과" },
+    { name:"Hotel Okura Macau", area:"Cotai", nightlyPriceKRW:0, reason:"선택 날짜 매진" },
+    { name:"StarWorld Hotel", area:"Macau Peninsula", nightlyPriceKRW:0, reason:"선택 날짜 매진" },
+    { name:"MGM Macau", area:"Macau Peninsula", nightlyPriceKRW:0, reason:"선택 날짜 매진" },
+    { name:"The Karl Lagerfeld", area:"Cotai", nightlyPriceKRW:0, reason:"선택 날짜 매진" }
+  ],
+  hotelTiers: { budget:"가성비", mid:"중급", premium:"프리미엄", airport:"홍콩 공항" },
+
+  // 지역별 장소 (Google Maps 링크 자동 생성)
+  regions: [
+    { name:"홍콩", note:"12/23 경유 · 12/26 오후~12/27 새벽", places:[
+      { name:"홍콩국제공항 T1 / T2", map:"Hong Kong International Airport", day:"D1·D5" },
+      { name:"HZMB 홍콩 口岸", map:"HZMB Hong Kong Port Passenger Clearance Building", day:"D1·D4" },
+      { name:"Regal Airport Hotel", map:"Regal Airport Hotel Hong Kong", day:"D4" },
+      { name:"팀호완 (홍콩역)", map:"Tim Ho Wan Hong Kong Station", day:"D4" },
+      { name:"피크트램 하부역 (Garden Rd)", map:"Peak Tram Garden Road Lower Terminus", day:"D4" },
+      { name:"빅토리아 피크 · Sky Terrace 428", map:"Sky Terrace 428 The Peak", day:"D4" },
+      { name:"스타페리 센트럴 7번 부두", map:"Central Pier 7 Star Ferry", day:"D4" },
+      { name:"Avenue of Stars", map:"Avenue of Stars Hong Kong", day:"D4" },
+      { name:"(후보) 템플스트리트 야시장", map:"Temple Street Night Market", day:"—" } ] },
+    { name:"마카오 반도", note:"12/24 오전~오후 반나절 · 도보 동선", places:[
+      { name:"세나도 광장", map:"Senado Square Macau", day:"D2" },
+      { name:"성 도미니크 성당", map:"St. Dominic's Church Macau", day:"D2" },
+      { name:"Margaret's Café e Nata", map:"Margaret's Cafe e Nata Macau", day:"D2" },
+      { name:"성 바울 성당 유적", map:"Ruins of St. Paul's Macau", day:"D2" },
+      { name:"몬테 요새 · 마카오 박물관", map:"Mount Fortress Macau", day:"D2" },
+      { name:"Wong Chi Kei", map:"Wong Chi Kei Senado Square Macau", day:"D2" },
+      { name:"그랜드 리스보아", map:"Grand Lisboa Macau", day:"D2" },
+      { name:"(후보) 마카오 타워", map:"Macau Tower", day:"—" },
+      { name:"HZMB 마카오 口岸", map:"HZMB Macau Port", day:"D1·D4" } ] },
+    { name:"코타이 · 타이파", note:"숙소 Broadway Macau(갤럭시 단지 남서쪽) 기준 — 갤럭시·타이파 빌리지는 도보, Sands·CoD는 택시 5분 (D1–D4)", places:[
+      { name:"Broadway Macau (숙소) — 갤럭시 마카오와 실내 연결", map:"Broadway Hotel Macau", day:"D1–D4" },
+      { name:"Broadway Food Street (숙소 앞)", map:"Broadway Food Street Macau", day:"D1–D3" },
+      { name:"The Londoner Macao (관광)", map:"The Londoner Macao", day:"D1" },
+      { name:"The Venetian 그랜드 캐널", map:"The Venetian Macao Grand Canal Shoppes", day:"D1" },
+      { name:"Parisian 에펠탑", map:"The Parisian Macao Eiffel Tower", day:"D1" },
+      { name:"City of Dreams · HoDW 극장", map:"Dancing Water Theater City of Dreams Macau", day:"D2" },
+      { name:"타이파 빌리지 · 쿤하 거리", map:"Rua do Cunha Taipa", day:"D3" },
+      { name:"António", map:"Antonio Restaurant Taipa Macau", day:"D3" },
+      { name:"Galaxy Macau (셔틀: Diamond Lobby=HZMB / Crystal Lobby=StarWorld)", map:"Galaxy Macau Fortune Diamond", day:"D1–D4" },
+      { name:"Wynn Palace", map:"Wynn Palace Performance Lake", day:"D3" },
+      { name:"MGM Cotai (Macau 2049)", map:"MGM Cotai Macau", day:"D3 옵션" },
+      { name:"(후보) Studio City 골든릴", map:"Studio City Macau Golden Reel", day:"—" } ] }
+  ],
+  routeTips: [
+    "숙소 Broadway 기준: 갤럭시·Broadway Food Street·타이파 빌리지는 도보 / Sands 클러스터(런더너·베네시안·파리지앵)·City of Dreams는 택시 약 5분 / 윈 팰리스·MGM은 택시 약 10분",
+    "갤럭시 무료셔틀 활용: HZMB 口岸(D1·D4) · StarWorld(D2 반도 왕복)",
+    "반도는 하루 1회만 방문(D2 오전~오후), 코타이↔반도 왕복 반복 없음",
+    "Studio City·City of Dreams 외 다른 리조트(MGM 코타이 내부 등)는 시간 남을 때만"
+  ],
+
+  restaurants: [
+    { region:"마카오 반도", name:"Wong Chi Kei 黃枝記", menu:"새우 완탕면, 죽, 새우알 비빔면", price:"MOP 50–100/인", location:"세나도 광장 17 Largo do Senado", hours:"08:30–23:00", booking:"none", wait:"점심 피크 대기 가능", day:"D2 점심", status:"PLANNED", map:"Wong Chi Kei Senado Square Macau" },
+    { region:"마카오 반도", name:"Margaret's Café e Nata", menu:"에그타르트, 샌드위치", price:"MOP 12 내외/개", location:"Rua do Comandante Mata e Oliveira (세나도 도보 8분)", hours:"평일 08:30–16:30 · 주말 10:00–18:00 · 수요일 휴무 (확인)", booking:"none", wait:"줄 있음, 회전 빠름", day:"D2 오전 간식", status:"PLANNED", map:"Margaret's Cafe e Nata Macau" },
+    { region:"마카오 반도", name:"Riquexó (매캐니즈 가정식)", menu:"아프리칸 치킨, 민치, 매캐니즈 커리", price:"MOP 100–200/인 (확인)", location:"Av. de Sidónio Pais 69", hours:"확인 필요", booking:"none", wait:"보통", day:"후보 (반도 일정 연장 시)", status:"CANDIDATE", map:"Riquexo Macau" },
+    { region:"코타이", name:"António", menu:"바칼라우(대구), 포르투갈 해산물 밥, 세라두라", price:"MOP 500–800/인", location:"타이파 빌리지 Rua dos Clérigos 18", hours:"11:00–22:00", booking:"required", wait:"크리스마스 → 예약 필수", day:"D3 점심", status:"PLANNED", map:"Antonio Restaurant Taipa Macau",
+      links:[{label:"공식", url:"https://antoniomacau.com/"}] },
+    { region:"코타이", name:"Lord Stow's Bakery (런더너 / 타이파)", menu:"원조 포르투갈식 에그타르트", price:"MOP 12 내외/개", location:"런더너 L2 Shop 2113 / 타이파 Rua do Cunha", hours:"런더너 10:00–22:30 · 타이파 09:00–21:00", booking:"none", wait:"짧음", day:"D1 저녁 간식(런더너 관광)·D3 간식(타이파)", status:"PLANNED", map:"Lord Stow's Bakery The Londoner Macao",
+      links:[{label:"매장 목록", url:"https://www.lordstow.com/macau-outlets/"}] },
+    { region:"코타이", name:"쿤하 거리 간식 (타이파)", menu:"주빠빠오(돼지갈비 번), 아몬드 쿠키, 육포", price:"MOP 30–60", location:"Rua do Cunha", hours:"주간~저녁", booking:"none", wait:"인기점 줄", day:"D3 오전", status:"PLANNED", map:"Rua do Cunha Taipa" },
+    { region:"코타이", name:"Broadway Food Street (숙소 앞)", menu:"마카오·홍콩 로컬 노점형 식당가", price:"MOP 80–200/인", location:"Broadway Macau 1층 (갤럭시 연결)", hours:"확인 필요", booking:"none", wait:"저녁 혼잡", day:"D1 점심·D2 이른 저녁·D3 저녁", status:"PLANNED", map:"Broadway Food Street Macau" },
+    { region:"홍콩", name:"Tim Ho Wan 添好運 (홍콩역)", menu:"차슈번, 하가우, 청펀", price:"HKD 100–150/인", location:"홍콩역 IFC 지하", hours:"확인 필요", booking:"none", wait:"점심 대기 20–30분", day:"D4 점심", status:"PLANNED", map:"Tim Ho Wan Hong Kong Station",
+      links:[{label:"공식", url:"https://www.timhowan.com/"}] },
+    { region:"홍콩", name:"침사추이 하버시티 / K11 MUSEA 식당가", menu:"완탕면·로스트구스·딤섬 (현장 선택)", price:"HKD 250–400/인", location:"침사추이 해변 인근", hours:"~22:00", booking:"none", wait:"연휴 대기", day:"D4 저녁", status:"PLANNED", map:"Harbour City Hong Kong" }
+  ],
+
+  transport: [
+    { name:"HZMB 금색 셔틀버스 (港珠澳大橋穿梭巴士)", recommended:true, status:"PLANNED",
+      rows:{ "운행":"24시간 · 피크 5분 / 평시 10–15분 간격", "소요":"버스 약 45분 + 홍콩·마카오 출입경", "가격":"HKD 65 (06:00–23:59) / HKD 70 (00:00–05:59)", "예약":"불필요 (현장 구매)", "입국심사":"HZMB 홍콩 口岸·마카오 口岸에서 각각", "수하물":"직접 들고 탑승 (캐리어 가능)", "첫차/막차":"24시간 운행", "야간":"가능" },
+      note:"공항 → B4 버스(HKD 9.8, 24시간, 10분)로 홍콩 口岸 연결. 마카오 口岸 ↔ 갤럭시 무료셔틀(Diamond Lobby, 10:00–23:00)로 숙소 Broadway 연결. 이번 일정 D1·D4 모두 이 방법 사용 (D4는 택시 기본·셔틀 대안).",
+      links:[{label:"HZMB 버스", url:"https://www.hzmbus.com/"}] },
+    { name:"TurboJET 페리 (셩완 ↔ 마카오 외항)", status:"CANDIDATE",
+      rows:{ "운행":"07:30–23:00, 수시 운항", "소요":"약 60분", "가격":"Economy 평일 HKD 175 · 주말 190 · 야간 220 (요금표 확인 필요)", "예약":"연휴 사전 구매 권장", "입국심사":"페리터미널", "수하물":"무료 허용 한도 있음 (확인)", "첫차/막차":"07:30 / 23:00", "야간":"23시까지" },
+      note:"홍콩 시내(센트럴·셩완)에서 출발할 때 유리. 공항 출발이면 HZMB가 빠르고 저렴.",
+      links:[{label:"운항표·요금", url:"https://www.turbojet.com.hk/en/routing-sailing-schedule/hong-kong-macau/sailing-schedule-fares"}] },
+    { name:"페리 (셩완 ↔ 마카오 타이파)", status:"CANDIDATE",
+      rows:{ "운행":"하루 3–4편 (금–일 증편)", "소요":"약 60분", "가격":"Economy 약 HKD 194–242 (2026 요금)", "예약":"권장", "입국심사":"타이파 페리터미널", "수하물":"확인", "첫차/막차":"HK발 11:00 ~ / 타이파발 ~23:30 (금–일)", "야간":"제한적" },
+      note:"코타이와 가장 가까운 항구지만 편수가 적어 일정이 묶임.",
+      links:[{label:"Cotai Water Jet", url:"https://www.cotaiwaterjet.com/"}] },
+    { name:"SkyPier 공항 페리 (환승객 전용)", status:"CHECK",
+      rows:{ "운행":"홍콩 입국 없이 공항 내 환승 시만 이용", "소요":"약 70분", "가격":"확인 필요", "예약":"항공 연계 필요", "입국심사":"마카오에서만", "수하물":"항공 연계 수하물", "첫차/막차":"확인", "야간":"—" },
+      note:"HK Express 별도 발권 + 홍콩 입국 일정이라 이번 여행엔 해당 가능성 낮음 → 비추천.", links:[] }
+  ],
+
+  // 예산 (2인 합계) — currency: HKD 또는 MOP
+  budget: [
+    { category:"숙박", item:"마카오 3박 — Broadway Macau (Agoda 세금 포함 ₩250,288×3, 2026-10-05, 환불 불가 최저가) · SELECTED/미예약", amount:750864, currency:"KRW" },
+    { category:"숙박", item:"홍콩 공항호텔 1박", amount:1600, currency:"HKD" },
+    { category:"공연", item:"House of Dancing Water Grand 2석", amount:2196, currency:"MOP" },
+    { category:"교통", item:"HZMB 금색버스 왕복 + B4 버스 (2인)", amount:300, currency:"HKD" },
+    { category:"교통", item:"마카오 택시·셔틀", amount:500, currency:"MOP" },
+    { category:"교통", item:"홍콩 공항철도·MTR·스타페리·택시", amount:700, currency:"HKD" },
+    { category:"관광", item:"피크트램 왕복 + Sky Terrace 428", amount:450, currency:"HKD" },
+    { category:"관광", item:"마카오 박물관·에펠탑 전망대 등", amount:300, currency:"MOP" },
+    { category:"식비", item:"마카오 식비 (António 포함)", amount:4200, currency:"MOP" },
+    { category:"식비", item:"홍콩 식비", amount:1150, currency:"HKD" },
+    { category:"간식", item:"에그타르트·카페·쿤하 거리", amount:500, currency:"MOP" },
+    { category:"간식", item:"홍콩 카페·간식", amount:200, currency:"HKD" },
+    { category:"기타", item:"eSIM·예비비·기념품 일부 (여행자보험·인천공항 이동 제외)", amount:1000, currency:"HKD" }
+  ],
+  // 숙박 시나리오 (모두 CANDIDATE — 예약 전). 총액 = Agoda 검색 당시 세금 포함 1박가 × 3
+  budgetLodging: [
+    { label:"선택 숙소 (기본 숙박 예산)", hotel:"Broadway Macau", nightlyKRW:250288, totalKRW:750864, status:"SELECTED", base:true, note:"환불 불가 최저가 · 무료취소 요금은 ₩349,349×3 = ₩1,048,047 (+₩297,183)" },
+    { label:"비교 참고 · 프리미엄 대안 (예산 미포함)", hotel:"The Londoner Hotel", nightlyKRW:1381413, totalKRW:4144239, status:"CANDIDATE", note:"추천 숙소 아님 · 전체 예산 계산에서 제외" }
+  ],
+  budgetOptional: [
+    { item:"(비교 참고, 예산 미포함) The Londoner 3박이었다면 추가비용 (₩4,144,239 − ₩750,864)", amount:3393375, currency:"KRW" },
+    { item:"(옵션) Macau 2049 B석 2석", amount:976, currency:"MOP" },
+    { item:"(옵션) HoDW Premium 업그레이드 (+MOP 200×2)", amount:400, currency:"MOP" }
+  ],
+
+  // 체크리스트 — id는 바꾸지 말 것 (localStorage 키). done:true = 기본 완료
+  checklist: [
+    { id:"flight", label:"항공권 (UO617 / UO618)", ref:"PNR 비공개 · 비공개", status:"CONFIRMED", done:true },
+    { id:"icn-transport", label:"12/23 03:45 인천공항 T1 도착 수단 (자차·택시·전날 숙박)", ref:"", status:"CHECK" },
+    { id:"show-hodw", label:"공연: House of Dancing Water 12/24 19:30 (Grand)", ref:"예약번호: ", status:"CHECK" },
+    { id:"hotel-macau", label:"마카오 호텔: Broadway Macau 3박 (12/23–12/26) — SELECTED / 예약 필요", ref:"예약번호: — · 객실: — · 결제금액: — · 무료취소 기한: — (예약 후 meta.hotelPlan.booking 에도 기록)", status:"SELECTED" },
+    { id:"hotel-hkg", label:"홍콩 공항호텔 1박 (12/26–12/27)", ref:"예약번호: ", status:"PLANNED" },
+    { id:"rest-antonio", label:"식당: António 12/25 12:30 (2인)", ref:"", status:"PLANNED" },
+    { id:"rest-xmas", label:"식당: 12/25 저녁 / 12/24 공연 전 저녁", ref:"", status:"CHECK" },
+    { id:"insurance", label:"여행자 보험", ref:"", status:"PLANNED" },
+    { id:"esim", label:"eSIM / 로밍 (홍콩+마카오 겸용)", ref:"", status:"PLANNED" },
+    { id:"octopus", label:"옥토퍼스 카드 (모바일/실물)", ref:"", status:"PLANNED" },
+    { id:"peak", label:"피크트램 온라인 티켓 (12/26)", ref:"", status:"PLANNED" },
+    { id:"show-2049", label:"(옵션) Macau 2049 12/25 15:00", ref:"", status:"CANDIDATE" },
+    { id:"cash", label:"환전: HKD (마카오에서도 사용 가능, 거스름돈은 MOP)", ref:"", status:"PLANNED" },
+    { id:"checkin", label:"HK Express 온라인 체크인 (귀국편 포함)", ref:"", status:"PLANNED" }
+  ],
+
+  priority: [
+    { when:"지금 예약 (10월)", items:["House of Dancing Water — 12월 일정 공개 즉시 예매 (14일 전 조기예매 20% 할인)","마카오 코타이 호텔 3박 — 크리스마스 성수기, 무료취소 요금으로 선점","홍콩 공항호텔 12/26 — 무료취소 요금으로 선점","인천공항 새벽 도착 수단 결정"] },
+    { when:"1~2개월 전 (10월 말~11월)", items:["António 12/25 점심 예약","12/24·12/25 저녁 식당 확정·예약","여행자 보험 · eSIM 구매","Macau 2049 관람 여부 결정","크리스마스 행사(리조트·Light Up Macau) 발표 확인"] },
+    { when:"1~2주 전 (12월 초)", items:["공연 시간·휴연일 최종 확인","갤럭시 무료셔틀 시간표(HZMB 口岸·StarWorld ↔ Galaxy) 12월 운행 확인","Symphony of Lights 운영 여부 확인","피크트램 온라인 티켓","날씨·HZMB 운행 공지 확인"] },
+    { when:"여행 직전", items:["HK Express 온라인 체크인 · 항공 시간 변경 확인","위탁 20kg / 개인물품 7kg 무게 확인","환전·옥토퍼스 충전","여권 유효기간(6개월 이상) 확인","예약 확인서 오프라인 저장"] }
+  ],
+
+  checkNeeded: [
+    { title:"Broadway Macau 예약 필요 (SELECTED · 미예약)", detail:"Agoda 12/23–26 ₩250,288/박 · 3박 ₩750,864 (세금 포함, 환불 불가 최저가, 2026-10-05). 무료취소 요금은 ₩349,349/박. 예약 전 가격 재조회 · 예약 후 예약번호·객실·결제금액·무료취소 기한 기록." },
+    { title:"House of Dancing Water 12월 공연 일정 미공개", detail:"2026 하절기 기준 16:30/19:30 (수–일). 12/23–26은 수–토라 가능성 높지만 미확정. 공식 예매처에서 날짜 열리는지 주기적 확인." },
+    { title:"Macau 2049 12월 회차", detail:"8/1부터 15:00 공연. 12월 휴연일 확인 필요." },
+    { title:"크리스마스 이벤트 2026 미공개", detail:"리조트별 크리스마스 장식·Light Up Macau 2026 일정 발표 대기 (11월 예상)." },
+    { title:"Symphony of Lights 종료 예정", detail:"홍콩 정부가 2026년 하반기 종료 방침 발표. 12/26 운영 여부 불확실 → 하버 야경 자체는 그대로 감상 가능." },
+    { title:"호텔 가격 변동", detail:"표시 가격은 추정치. 크리스마스 주간은 평소의 1.5–2배까지 오를 수 있음." },
+    { title:"갤럭시 무료셔틀 12월 운행", detail:"공식: HZMB ↔ Galaxy 10:00–23:00(Diamond Lobby), StarWorld ↔ Galaxy 09:30–22:00(Crystal Lobby). 연휴 기간 변경 여부와 Galaxy ↔ Broadway 실내 도보 경로 재확인." },
+    { title:"새벽 공항 동선 (리갈 호텔 → T2 Aisle U)", detail:"HK Express 체크인은 T2. 00:31–05:29엔 체크인 후 T1으로 돌아가 출국심사. 12/26 밤 미리 걸어보기." },
+    { title:"인천공항 03:45 도착 수단", detail:"새벽 공항철도·버스 운행 전 — 자차(장기주차)·택시·전날 공항 근처 숙박 중 결정." },
+    { title:"요금 재확인", detail:"공항철도 요금, TurboJET 요금표, 피크트램 공휴일 요금, 마카오 박물관 입장료." }
+  ],
+
+  history: [
+    { date:"2026-10-05", changes:["마카오 숙소 Broadway Macau로 최종 선택","The Londoner 숙박안 폐기 (프리미엄 대안·비교 참고로만 유지)","Broadway 기준 D1~D4 이동 동선 재설계 (갤럭시 HZMB 셔틀·StarWorld 셔틀·택시)","Galaxy/Broadway 접근성을 일정에 반영 (Broadway Food Street, 포춘 다이아몬드, 타이파 빌리지 도보)","기본 숙박 예산 Broadway 3박 ₩750,864로 확정","실제 예약 완료 전까지 상태는 SELECTED 유지"] },
+    { date:"2026-10-05", changes:["기존 계획 ↔ Agoda 실검색 데이터 불일치 정리","Broadway Macau 성급 4성→5성 수정 (기존 4성은 근거 없는 초기 추정치 · 'Agoda 분류: 5성급' 출처 명시, 공식 등급 미확인)","호텔 구분 분리: 현재 일정 기준 이상적 = The Londoner / 30만원 이하 현실적 추천 = Broadway Macau / 예약 확정 = 없음 (Londoner PLANNED→CANDIDATE)","숙박 예산을 Broadway 3박 ₩750,864(Agoda 세금 포함)로 변경, Londoner 3박 ₩4,144,239는 프리미엄 업그레이드(+₩3,393,375)로 분리 → 총비용 재계산","Broadway 기존 호텔 카드 가격을 Agoda 값으로 갱신","D1–D4 일정 중 Londoner 숙박 전제 14개 항목에 CHECK 표시 (동선은 미변경)","Agoda TOP 3에 예약 성격·배지 추가 (여행 적합도 최고 / 가격·접근성 균형 / 예약 안정성 최고)","Value Score → '가성비 점수'로 이름 변경, '여행 적합도' 점수(100점) 및 정렬 추가","Agoda 탭에 '현재 예약 전략' 카드 추가 (무료취소 확보 → 가격 추적 → 최종 확정)"] },
+    { date:"2026-10-05", changes:["Agoda 마카오 5성급 호텔 비교 탭 추가 (#agoda-hotels)","12/23~12/26, 2인, 3박, 1박 30만원 이하(세금·봉사료 포함) 조건 적용 — Agoda 실검색 결과 14곳","가격/평점/리뷰/공연 접근성/Value Score 정렬 및 지역·가격·조건 필터 추가","TOP 3 추천: Broadway Macau / YOHO Hollywood Roosevelt / Artyzen Grand Lapa","기존 호텔 카드 가격 정정 (Agoda 확인): The Londoner Hotel ₩1,381,413, The Parisian ₩453,892, Sheraton Grand(현 Londoner Grand) ₩528,470, Grand Hyatt ₩833,202 — 1박·세금 포함","확인 필요 항목 추가: 런더너 실제 가격과 예산 불일치 (일정·예산은 미변경)"] },
+    { date:"2026-10-05", changes:["최초 여행 계획 작성 (조사 → A/B/C 비교 → C안 확정)","전자항공권 정보 반영 (UO617 / UO618, 수하물 조건)","HK Express T2 체크인 이전(2026-06-10) 반영 — 귀국 동선 설계","마카오 중심 일정 초안 (코타이 3박 + 홍콩 공항호텔 1박)","공연 TOP PICK: House of Dancing Water (12월 일정 확인 필요)"] }
+  ],
+
+  sources: [
+    { label:"전자항공권 (프로젝트 폴더) — 항공편·수하물 Source of Truth", url:"" },
+    { label:"City of Dreams — House of Dancing Water", url:"https://www.cityofdreamsmacau.com/en/house-of-dancing-water" },
+    { label:"MGM — Macau 2049", url:"https://macau2049.mgm.mo/en" },
+    { label:"HK Express — HKIA T2 이전 안내", url:"https://www.hkexpress.com/Plan/Travel/HKIA-T2" },
+    { label:"TurboJET 운항표·요금", url:"https://www.turbojet.com.hk/en/routing-sailing-schedule/hong-kong-macau/sailing-schedule-fares" },
+    { label:"HZMB 셔틀버스", url:"https://www.hzmbus.com/" },
+    { label:"The Londoner — 교통·셔틀 안내", url:"https://www.londonermacao.com/getting-to-macau.html" },
+    { label:"마카오 관광청 행사", url:"https://www.macaotourism.gov.mo/en/whatson" },
+    { label:"A Symphony of Lights (Avenue of Stars)", url:"https://www.avenueofstars.com.hk/en/a-symphony-of-lights/" },
+    { label:"Symphony of Lights 종료 관련 보도 (2026-09-21)", url:"https://www.travelerstoday.com/articles/61021/20260921/hong-kongs-symphony-lights-resumes-after-weather-halt-its-end-near.htm" },
+    { label:"MTR Airport Express", url:"https://www.mtr.com.hk/en/customer/services/ae_index.html" },
+    { label:"Star Ferry", url:"https://www.starferry.com.hk/en/home" },
+    { label:"The Peak (피크트램)", url:"https://www.thepeak.com.hk/" },
+    { label:"HZMB 요금·B4 버스 정보 (여행 가이드, 2026)", url:"https://en.kowloonvibes.com/hong-kong/article/transport/hk-to-macau-bus-guide/" },
+    { label:"Agoda 마카오 5성급 검색 (12/23–26, 2인)", url:"https://www.agoda.com/ko-kr/search?city=21397&checkIn=2026-12-23&checkOut=2026-12-26&los=3&rooms=1&adults=2&children=0&hotelStarRating=5&currency=KRW" },
+    { label:"HoDW 좌석·시간 가이드 (2026)", url:"https://therighttour.com/guides/house-of-dancing-water-macau-tickets-best-seats-and-show-times-2026" }
+  ]
+};
+</script>
+
+<!-- =========================================================
+     RENDER — 화면 그리기 코드 (일반적으로 수정 불필요)
+     ========================================================= -->
+<script>
+(function(){
+  const D = tripData;
+  const $ = id => document.getElementById(id);
+  const esc = s => String(s ?? "").replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+  const mapUrl = q => "https://www.google.com/maps/search/?api=1&query=" + encodeURIComponent(q);
+  const badge = s => s ? `<span class="badge b-${esc(s)}">${esc(s)}</span>` : "";
+  const rsv = b => b==="required" ? `<span class="rsv req">예약 필수</span>` : b==="recommended" ? `<span class="rsv rec">예약 권장</span>` : `<span class="rsv">예약 불필요</span>`;
+  const stars = n => `<span class="stars" title="추천도 ${n}/5">${"★".repeat(n)}${"☆".repeat(5-n)}</span>`;
+  const linkBtns = (links, map) => {
+    const a = (links||[]).map(l => `<a class="btn" href="${esc(l.url)}" target="_blank" rel="noopener">↗ ${esc(l.label)}</a>`);
+    if (map) a.push(`<a class="btn map" href="${mapUrl(map)}" target="_blank" rel="noopener">📍 Google Maps에서 열기</a>`);
+    return a.length ? `<div class="links">${a.join("")}</div>` : "";
+  };
+  const toKRW = (amt, cur) => amt * (D.fx[cur] || 0);
+  const toHKD = (amt, cur) => cur === "HKD" ? amt : amt * D.fx[cur] / D.fx.HKD;
+  const fmt = n => Math.round(n).toLocaleString("ko-KR");
+  const storeKey = "hkmo2026-checklist";
+  const load = () => { try { return JSON.parse(localStorage.getItem(storeKey)) || {}; } catch(e){ return {}; } };
+  const save = s => { try { localStorage.setItem(storeKey, JSON.stringify(s)); } catch(e){} };
+
+  // Header & nav
+  $("heroText").textContent = D.meta.concept;
+  $("heroTags").innerHTML = D.meta.tags.map(t => `<span>${esc(t)}</span>`).join("");
+  $("asOf").textContent = "최종 수정 " + D.meta.lastUpdated;
+  const navItems = [["summary","요약"],["alerts","⚠ 확인필요"],["flights","항공"],["timeline","일정"],["compare","일정안 비교"],["map","지역·지도"],["shows","공연"],["hotels","호텔"],["agoda-hotels","아고다 호텔"],["food","음식"],["transport","교통"],["budget","예산"],["checklist","체크리스트"],["history","업데이트"]];
+  $("nav").innerHTML = navItems.map(([id,l]) => `<a href="#${id}">${l}</a>`).join("");
+
+  // Budget totals
+  const budgetTotals = () => {
+    let krw = 0, hkd = 0; const cats = {};
+    D.budget.forEach(b => { const k = toKRW(b.amount,b.currency); krw += k; hkd += toHKD(b.amount,b.currency);
+      cats[b.category] = cats[b.category] || {krw:0,hkd:0,items:[]}; cats[b.category].krw += k; cats[b.category].hkd += toHKD(b.amount,b.currency); cats[b.category].items.push(b); });
+    return {krw,hkd,cats};
+  };
+
+  // ① Summary
+  function renderSummary(){
+    const st = load(); const total = D.checklist.length;
+    const done = D.checklist.filter(c => st[c.id] ?? !!c.done).length;
+    const pct = Math.round(done/total*100);
+    const hp = D.meta.hotelPlan;
+    const booked = hp.status === "CONFIRMED";
+    const hk = D.hotels.find(h => h.recommended && h.tier==="airport");
+    const show = D.shows.find(s => s.topPick);
+    const bt = budgetTotals();
+    const o = D.flights[0], r = D.flights[1];
+    const cards = [
+      ["여행기간", D.meta.period, "4박 5일"],
+      ["인원", D.meta.travelers, esc(D.meta.travelerNames)],
+      ["마카오 체류", D.meta.stay.macau, "코타이 3박 — 여행의 중심"],
+      ["홍콩 체류", D.meta.stay.hongkong, "D1 경유 · D4 오후~D5 새벽"],
+      ["항공편", `${o.flightNo} ${o.from.time} → ${r.flightNo} ${r.from.time}`, "HK Express · " + badge(o.status)],
+      ["마카오 숙소", hp.selected, `${hp.nights}박 · 12/23 체크인 → 12/26 체크아웃<br>${badge(hp.status)} ${booked ? `<span class="rsv">예약번호 ${esc(hp.booking.bookingNo||"")}</span>` : '<span class="rsv req">예약 필요</span>'}<br>Agoda ₩${fmt(hp.agodaNightlyKRW)}/박 · 3박 ₩${fmt(hp.agodaTotalKRW)}<br>12/26 ${esc(hk.name)} ${badge(hk.status)}`],
+      ["추천 공연", show.name, `TOP PICK · ${badge(show.status)}`],
+    ];
+    $("summaryCards").innerHTML = cards.map(([l,v,n]) => `<div class="card stat"><div class="label">${l}</div><div class="value">${esc(v)}</div><div class="note">${n}</div></div>`).join("")
+      + `<div class="card stat big"><div class="label">예상 총비용 (2인, 항공 제외)</div><div class="value">₩${fmt(bt.krw)}</div><div class="note">≈ HKD ${fmt(bt.hkd)} · 숙박 ${esc(hp.selected)} 기준</div></div>`
+      + `<div class="card stat"><div class="label">예약 진행률</div><div class="value">${done} / ${total} (${pct}%)</div><div class="progress"><i style="width:${pct}%"></i></div><div class="note"><a href="#checklist">체크리스트로 →</a></div></div>`;
+  }
+
+  // ⑪ Check needed
+  $("checkList").innerHTML = `<h3>⚠ 확인 필요 ${D.checkNeeded.length}건</h3><ul class="tight">${D.checkNeeded.map(c => `<li><b>${esc(c.title)}</b> ${badge("CHECK")}<br><span class="small muted">${esc(c.detail)}</span></li>`).join("")}</ul>`;
+
+  // ② Flights
+  $("flightCards").innerHTML = D.flights.map(f => `
+    <div class="card">
+      <div class="tl-head"><div><h3>${esc(f.label)} · ${esc(f.flightNo)}</h3><div class="meta">${esc(f.airline)} · ${esc(f.date)}</div></div>${badge(f.status)}</div>
+      <div class="flight">
+        <div class="ap"><b>${esc(f.from.code)}</b><div class="t">${esc(f.from.time)}</div><div class="s">${esc(f.from.city)} ${esc(f.from.terminal)}</div></div>
+        <div class="mid">${esc(f.duration)}<div class="line"></div>✈</div>
+        <div class="ap"><b>${esc(f.to.code)}</b><div class="t">${esc(f.to.time)}</div><div class="s">${esc(f.to.city)} ${esc(f.to.terminal)}</div></div>
+      </div>
+      <div class="small muted">PNR <b>${esc(f.pnr)}</b> · ${esc(f.bookingNo)}</div>
+      <ul class="tight small">${f.notes.map(n => `<li>${esc(n)}</li>`).join("")}</ul>
+    </div>`).join("") + `<div class="card"><h3>🧳 수하물 (1인, 왕복 동일)</h3><ul class="tight small">${D.baggage.map(b => `<li>${esc(b)}</li>`).join("")}</ul></div>`;
+
+  // ③ Timeline
+  let curDay = 1;
+  try { curDay = +(localStorage.getItem("hkmo2026-day")) || 1; } catch(e){}
+  function renderDay(){
+    $("dayTabs").innerHTML = D.itinerary.map(d => `<button class="daytab ${d.day===curDay?"on":""}" data-day="${d.day}"><b>DAY ${d.day}</b><span>${esc(d.date)}</span></button>`).join("");
+    const d = D.itinerary.find(x => x.day===curDay) || D.itinerary[0];
+    $("dayBody").innerHTML = `<div class="dayhead"><h3>DAY ${d.day} · ${esc(d.date)} — ${esc(d.title)}</h3><div class="goals">${d.goals.map(g => `<span>🎯 ${esc(g)}</span>`).join("")}</div></div>
+      <div class="tl">${d.items.map(it => `
+        <div class="tl-item ${it.key?"key":""}"><div class="card">
+          <div class="tl-head"><div><div class="tl-time">${esc(it.time)}</div><div class="tl-place">${esc(it.place)}</div></div><div style="text-align:right">${badge(it.status)}<br><span class="region">${esc(it.region)}</span></div></div>
+          ${it.desc && it.desc.length ? `<ul class="tight small">${it.desc.map(x => `<li>${esc(x)}</li>`).join("")}</ul>` : ""}
+          <div class="tl-row"><span>🚶 이동 <b>${esc(it.move)}</b></span><span>⏱ <b>${esc(it.moveTime)}</b></span><span>💰 <b>${esc(it.cost)}</b></span>${rsv(it.booking)}</div>
+          ${it.map ? linkBtns([], it.map) : ""}
+        </div></div>`).join("")}</div>`;
+    document.querySelectorAll(".daytab").forEach(b => b.onclick = () => { curDay = +b.dataset.day; try{localStorage.setItem("hkmo2026-day",curDay);}catch(e){} renderDay(); });
+  }
+
+  // ③-1 Plans
+  const cmpCard = (p) => `<div class="card ${p.recommended?"top":""} ${p.reject?"reject":""} cmp">${p.recommended?'<span class="ribbon">RECOMMENDED</span>':""}
+    <div class="tl-head"><h3>${esc(p.name)}</h3>${badge(p.status)}</div>
+    ${p.flow ? `<p class="small muted" style="margin:6px 0">${esc(p.flow)}</p>` : ""}
+    ${Object.entries(p.rows).map(([k,v]) => `<div class="row"><span>${esc(k)}</span><span>${esc(v)}</span></div>`).join("")}
+    ${p.pros ? `<details><summary>장점 / 단점</summary><div class="small"><b>장점</b><ul class="tight">${p.pros.map(x=>`<li>${esc(x)}</li>`).join("")}</ul><b>단점</b><ul class="tight">${p.cons.map(x=>`<li>${esc(x)}</li>`).join("")}</ul></div></details>` : ""}
+    <div class="verdict">${esc(p.verdict)}</div></div>`;
+  $("planCards").innerHTML = D.plans.map(cmpCard).join("");
+  $("lastNightCards").innerHTML = D.lastNight.map(cmpCard).join("");
+
+  // ④ Regions
+  $("regionCards").innerHTML = D.regions.map(r => `<div class="card"><h3>${esc(r.name)}</h3><div class="meta">${esc(r.note)}</div>
+    <ul class="tight small" style="list-style:none;padding:0">${r.places.map(p => `<li style="display:flex;justify-content:space-between;gap:8px;border-top:1px solid var(--line);padding:6px 0"><span>${esc(p.name)} <span class="region">${esc(p.day)}</span></span><a class="btn map" href="${mapUrl(p.map)}" target="_blank" rel="noopener">📍 지도</a></li>`).join("")}</ul></div>`).join("")
+    + `<div class="card"><h3>동선 원칙</h3><ul class="tight small">${D.routeTips.map(t => `<li>${esc(t)}</li>`).join("")}</ul></div>`;
+
+  // ⑤ Shows
+  $("showCards").innerHTML = D.shows.map(s => `<div class="card ${s.topPick?"top":""}">${s.topPick?'<span class="ribbon">TOP PICK</span>':""}
+    <div class="tl-head"><div><h3>${esc(s.name)}</h3><div class="meta">${esc(s.venue)}</div></div><div style="text-align:right">${badge(s.status)}<br>${stars(s.rating)}</div></div>
+    <dl class="kv"><dt>스타일</dt><dd>${esc(s.style)}</dd><dt>러닝타임</dt><dd>${esc(s.runtime)}</dd><dt>공연시간</dt><dd>${esc(s.times)}</dd><dt>여행일 공연</dt><dd>${esc(s.dates)}</dd><dt>가격</dt><dd>${esc(s.price)}</dd><dt>예약 상태</dt><dd>${s.booked?"✅ 예매 완료":"미예매"}</dd></dl>
+    <details><summary>좌석·할인·후기·장단점</summary><dl class="kv"><dt>좌석</dt><dd>${esc(s.seats)}</dd><dt>할인</dt><dd>${esc(s.promo)}</dd><dt>후기</dt><dd>${esc(s.reviews)}</dd><dt>장점</dt><dd>${s.pros.map(esc).join(" · ")}</dd><dt>단점</dt><dd>${s.cons.map(esc).join(" · ")}</dd></dl></details>
+    ${linkBtns(s.links, s.map)}</div>`).join("");
+
+  // ⑥ Hotels
+  // 호텔 역할: selected(최종 선택) / premiumAlt(프리미엄 대안·비교 참고) / 공항호텔은 recommended
+  const hotelRoleLabel = h => h.role === "selected" ? "SELECTED HOTEL" : h.role === "premiumAlt" ? "프리미엄 대안 (비교 참고)" : h.recommended ? "RECOMMENDED" : "";
+  let tier = "all";
+  function renderHotels(){
+    const tiers = [["all","전체"], ...Object.entries(D.hotelTiers)];
+    $("hotelFilters").innerHTML = tiers.map(([k,l]) => `<button class="btn ${tier===k?"on":""}" data-tier="${k}">${l}</button>`).join("");
+    document.querySelectorAll("#hotelFilters .btn").forEach(b => b.onclick = () => { tier = b.dataset.tier; renderHotels(); });
+    $("hotelCards").innerHTML = D.hotels.filter(h => tier==="all" || h.tier===tier).map(h => { const rb = hotelRoleLabel(h); return `<div class="card ${rb?"top":""}">${rb?`<span class="ribbon">${rb}</span>`:""}
+      <div class="tl-head"><div><h3>${esc(h.name)}</h3><div class="meta">${esc(h.area)} · ${"★".repeat(h.stars)}${h.starsNote?` <span title="${esc(h.starsNote)}">(Agoda 분류)</span>`:""} · ${esc(D.hotelTiers[h.tier])}</div>${h.starsNote?`<div class="small muted">${esc(h.starsNote)}</div>`:""}</div>${badge(h.status)}</div>
+      <dl class="kv">${h.bookingStatus?`<dt>예약 상태</dt><dd><span class="rsv req">${esc(h.bookingStatus)} · 예약 필요</span></dd>`:""}<dt>1박 예상</dt><dd><b>${esc(h.price)}</b></dd><dt>공연 접근</dt><dd>${esc(h.showAccess)}</dd><dt>관광 접근</dt><dd>${esc(h.sightAccess)}</dd><dt>무료셔틀</dt><dd>${esc(h.shuttle)}</dd><dt>추천도</dt><dd>${stars(h.rating)}</dd></dl>
+      <details><summary>장점 / 단점</summary><div class="small"><b>장점</b><ul class="tight">${h.pros.map(x=>`<li>${esc(x)}</li>`).join("")}</ul><b>단점</b><ul class="tight">${h.cons.map(x=>`<li>${esc(x)}</li>`).join("")}</ul></div></details>
+      ${linkBtns(h.links, h.map)}</div>`; }).join("");
+  }
+
+  // ⑥-1 Agoda 호텔 비교 — tripData.agodaHotels 만 수정하면 자동 반영
+  const won = n => "₩" + fmt(n);
+  const clamp01 = x => Math.max(0, Math.min(1, x));
+  // 가성비 점수 (100점, 함수명 valueScore 유지): 가격 30 · 공연 접근성 25 · 위치 20 · Agoda 평점 15 · 셔틀/편의성 10
+  function valueScore(h){
+    const p = h.nightlyPriceKRW, s = D.agodaSearch;
+    const price = 30 * clamp01((s.maxNightlyKRW + 20000 - p) / (s.maxNightlyKRW - 80000));
+    const show = 25 * clamp01(1 - (h.kmToCOD - 0.3) / 6);
+    const loc = 20 * (0.7 * clamp01(1 - (h.kmToLondoner - 0.3) / 6) + 0.3 * clamp01(1 - (h.kmToSenado - 0.3) / 6));
+    const rating = 15 * clamp01((h.rating - 7) / 2.5);
+    const conv = (h.shuttleYes ? 5 : 0) + (agFreeCancel(h) ? 3 : 0) + (h.payLaterYes ? 2 : 0);
+    const parts = { price, show, loc, rating, conv };
+    return { total: Math.round(price + show + loc + rating + conv), parts };
+  }
+  // 여행 적합도 (100점): 코타이/리조트 접근성 30 · HoDW 접근성 25 · 크리스마스/리조트 경험 20 · 평점·후기 10 · 교통/셔틀 10 · 가격 5
+  // → 단순히 싼 호텔이 높게 나오지 않도록 가격 비중을 5점으로 제한
+  function fitScore(h){
+    const cotai = h.inResort ? 30 : 30 * clamp01(1 - (h.kmToLondoner - 0.5) / 5);
+    const show = 25 * clamp01(1 - (h.kmToCOD - 0.3) / 5);
+    const xmas = 20 * Math.min(4, (h.christmas.match(/★/g) || []).length) / 4;
+    const review = 8 * clamp01((h.rating - 7) / 2.5) + 2 * clamp01(h.reviewCount / 20000);
+    const transit = (h.shuttleYes ? 6 : 0) + 4 * clamp01(1 - (Math.min(h.kmToCOD, h.kmToSenado) - 0.5) / 3);
+    const price = 5 * clamp01((D.agodaSearch.maxNightlyKRW + 20000 - h.nightlyPriceKRW) / (D.agodaSearch.maxNightlyKRW - 80000));
+    const parts = { cotai, show, xmas, review, transit, price };
+    return { total: Math.round(cotai + show + xmas + review + transit + price), parts };
+  }
+  // 무료취소·조식 포함 요금이 1박 상한 이내로 존재하는지
+  const agFreeCancel = h => h.freeCancelPriceKRW > 0 && h.freeCancelPriceKRW <= D.agodaSearch.maxNightlyKRW;
+  const agBreakfast = h => h.breakfastPriceKRW > 0 && h.breakfastPriceKRW <= D.agodaSearch.maxNightlyKRW;
+  // 조건 검증: 5성급 + 예약 가능 + 세금 포함 1박가 ≤ 상한
+  const agodaValid = h => h.stars === 5 && h.available && h.nightlyPriceKRW > 0 && h.nightlyPriceKRW <= D.agodaSearch.maxNightlyKRW;
+  const agodaState = { sort: "recommend", area: "all", price: 0, cond: {} };
+  const AG_SORTS = [["recommend","종합 추천순"],["price","낮은 가격순"],["rating","높은 평점순"],["reviews","리뷰 많은 순"],["show","공연 접근성순"],["fit","여행 적합도순"],["value","가성비 점수순"]];
+  const AG_AREAS = [["all","전체"],["Cotai","Cotai"],["Taipa","Taipa"],["Macau Peninsula","Macau Peninsula"],["Coloane","Coloane"]];
+  const AG_PRICES = [[0,"전체"],[150000,"15만원 이하"],[200000,"20만원 이하"],[250000,"25만원 이하"],[300000,"30만원 이하"]];
+  const AG_CONDS = [["freeCancel","무료 취소 (≤30만)"],["breakfast","조식 포함 (≤30만)"],["shuttle","무료 셔틀"]];
+  const linkedHotel = h => h.linkedHotel ? D.hotels.find(x => x.name === h.linkedHotel) : null;
+
+  function renderAgoda(){
+    const S = D.agodaSearch, ST = D.agodaStrategy;
+    $("agodaStrategy").innerHTML = `<span class="ribbon">STRATEGY</span><h3>🧭 ${esc(ST.title)}</h3><ul class="tight small">${ST.points.map(x=>`<li>${esc(x)}</li>`).join("")}</ul>
+      <div class="steps">${ST.steps.map(st => `<div class="step"><b>${esc(st.name)}</b><div class="small muted">${esc(st.detail)}</div></div>`).join("")}</div>`;
+    const valid = D.agodaHotels.filter(agodaValid);
+    const cheapest = valid.slice().sort((a,b) => a.nightlyPriceKRW - b.nightlyPriceKRW)[0];
+    $("agodaSummary").innerHTML = [
+      ["호텔 등급", "5성급", "Agoda 성급 필터"], ["숙박", `${S.nights}박`, `${S.checkIn} → ${S.checkOut}`], ["인원", `성인 ${S.adults}명 · 객실 ${S.rooms}개`, ""],
+      ["1박 상한", "≤ " + won(S.maxNightlyKRW), "세금·봉사료 포함 기준"], ["출처", "Agoda (ko-kr, KRW)", S.method],
+      ["마지막 확인", S.checkedAt, `5성급 ${S.totalFiveStar}곳 검색 · 매진 ${S.soldOut}곳`]
+    ].map(([l,v,n]) => `<div class="card stat"><div class="label">${l}</div><div class="value">${esc(v)}</div><div class="note">${esc(n)}</div></div>`).join("")
+      + `<div class="card stat"><div class="label">Agoda 검색</div><a class="btn" style="margin-top:6px" href="${esc(S.searchUrl)}" target="_blank" rel="noopener">↗ 같은 조건으로 Agoda 열기</a></div>`
+      + `<div class="card stat big"><div class="label">조건 충족 검색 결과</div><div class="value big-count">${valid.length}개</div><div class="note">최저 ${cheapest ? esc(cheapest.name) + " " + won(cheapest.nightlyPriceKRW) : "—"}</div></div>`;
+
+    const btn = (grp, key, label, on) => `<button class="btn ${on?"on":""}" data-grp="${grp}" data-key="${esc(key)}">${esc(label)}</button>`;
+    $("agodaSort").innerHTML = AG_SORTS.map(([k,l]) => btn("sort",k,l,agodaState.sort===k)).join("");
+    $("agodaArea").innerHTML = AG_AREAS.map(([k,l]) => btn("area",k,l,agodaState.area===k)).join("");
+    $("agodaPrice").innerHTML = AG_PRICES.map(([k,l]) => btn("price",k,l,agodaState.price===k)).join("");
+    $("agodaCond").innerHTML = AG_CONDS.map(([k,l]) => btn("cond",k,l,!!agodaState.cond[k])).join("");
+    document.querySelectorAll("#agoda-hotels .filters .btn").forEach(b => b.onclick = () => {
+      const g = b.dataset.grp, k = b.dataset.key;
+      if (g === "cond") agodaState.cond[k] = !agodaState.cond[k];
+      else agodaState[g] = g === "price" ? +k : k;
+      renderAgoda();
+    });
+
+    let list = valid.map(h => ({ h, vs: valueScore(h), fs: fitScore(h) }));
+    list = list.filter(({h}) => (agodaState.area === "all" || h.area === agodaState.area)
+      && (!agodaState.price || h.nightlyPriceKRW <= agodaState.price)
+      && (!agodaState.cond.freeCancel || agFreeCancel(h))
+      && (!agodaState.cond.breakfast || agBreakfast(h))
+      && (!agodaState.cond.shuttle || h.shuttleYes));
+    const sorters = {
+      recommend: (a,b) => (a.h.topRank||99) - (b.h.topRank||99) || b.vs.total - a.vs.total,
+      price: (a,b) => a.h.nightlyPriceKRW - b.h.nightlyPriceKRW,
+      rating: (a,b) => b.h.rating - a.h.rating || b.h.reviewCount - a.h.reviewCount,
+      reviews: (a,b) => b.h.reviewCount - a.h.reviewCount,
+      show: (a,b) => a.h.kmToCOD - b.h.kmToCOD,
+      value: (a,b) => b.vs.total - a.vs.total,
+      fit: (a,b) => b.fs.total - a.fs.total
+    };
+    list.sort(sorters[agodaState.sort]);
+    $("agodaCount").textContent = `표시 ${list.length}개 / 조건 충족 ${valid.length}개`;
+
+    $("agodaCards").innerHTML = list.length ? list.map(({h, vs, fs}) => {
+      const lk = linkedHotel(h);
+      const chip = (ok, yes, no) => `<span class="chip ${ok?"ok":"no"}">${ok?yes:no}</span>`;
+      return `<div class="card ${h.topRank?"top":""}">${h.topRank?`<span class="rank">TOP ${h.topRank}</span>`:""}${h.selected?`<div class="selected-bar">✔ 이번 여행 숙소로 선택 · ${esc(h.trackStatus)}</div>`:""}${lk&&hotelRoleLabel(lk)?`<span class="ribbon">${hotelRoleLabel(lk)}</span>`:""}
+      <div class="tl-head"><div><h3>${esc(h.name)}</h3><div class="meta">${esc(h.agodaName)} · Agoda 분류 <span class="stars">${"★".repeat(h.stars)}</span></div>${h.fitBadge?`<div style="margin-top:4px"><span class="fit-badge">${esc(h.fitBadge)}</span></div>`:""}<div class="meta">${esc(h.area)} · ${esc(h.areaDetail)}</div></div>
+        <div style="text-align:right">${badge(h.status)}${h.selected?`<br><span class="rsv req">미예약 · 예약 필요</span>`:""}${lk?`<br><span class="rsv rec" title="기존 호텔 후보와 연결">기존 호텔 후보</span>`:""}</div></div>
+      <div class="small" style="margin-top:6px">Agoda <b>${h.rating.toFixed(1)}</b> / 10 · 이용후기 ${fmt(h.reviewCount)}개</div>
+      <div class="price-row"><div><span class="lbl">1박 (세금·봉사료 포함)</span><span class="price-big">${won(h.nightlyPriceKRW)}</span></div><div><span class="lbl">3박 총액 (예상)</span><b>${won(h.totalPriceKRW)}</b></div></div>
+      <div class="small muted">세금 전 표시가 ${won(h.basePriceKRW)} · ${esc(h.roomType)}</div>
+      ${h.bookingNature?`<div class="nature"><b>예약 성격</b>${h.bookingNature.map(n => `<div class="${n.ok?"ok":"no"}">${n.ok?"✔":"✖"} ${esc(n.text)}</div>`).join("")}</div>`:""}
+      <div class="chips">${chip(agFreeCancel(h), "무료취소 " + won(h.freeCancelPriceKRW), h.freeCancelPriceKRW ? "무료취소 " + won(h.freeCancelPriceKRW) + " (상한 초과)" : "무료취소 요금 없음")}${chip(agBreakfast(h), "조식포함 " + won(h.breakfastPriceKRW), "조식 별도")}${chip(h.shuttleYes, "셔틀 있음", "셔틀 확인 필요")}${chip(h.payLaterYes, "후불 가능", "선결제")}</div>
+      <div class="small" style="margin-top:8px">
+        <div>🍳 ${esc(h.breakfast)}</div><div>↩ ${esc(h.cancellation)}</div><div>💳 ${esc(h.payLater)}</div></div>
+      <div class="score">여행 적합도 <b>${fs.total}</b>/100 <div class="progress"><i style="width:${fs.total}%"></i></div></div>
+      <div class="score">가성비 점수 <b>${vs.total}</b>/100 <div class="progress"><i style="width:${vs.total}%;background:#9aa6bf"></i></div></div>
+      <details><summary>우리 일정 적합성 · 장단점</summary>
+        <div class="fit">
+          <div><span>House of Dancing Water / CoD</span><span>${esc(h.distanceToCOD)}</span></div>
+          <div><span>The Londoner</span><span>${esc(h.distanceToLondoner)}</span></div>
+          <div><span>Venetian / Parisian</span><span>${esc(h.distanceToVenetian)}</span></div>
+          <div><span>타이파 빌리지</span><span>${esc(h.distanceToTaipaVillage)}</span></div>
+          <div><span>HZMB 마카오 口岸</span><span>${esc(h.distanceToHZMB)}</span></div>
+          <div><span>무료 셔틀</span><span>${esc(h.shuttle)}</span></div>
+          <div><span>크리스마스 분위기</span><span>${esc(h.christmas)}</span></div>
+        </div>
+        <div class="small" style="margin-top:8px"><b>장점</b><ul class="tight">${h.pros.map(x=>`<li>${esc(x)}</li>`).join("")}</ul><b>단점</b><ul class="tight">${h.cons.map(x=>`<li>${esc(x)}</li>`).join("")}</ul></div>
+        <div class="small muted">여행 적합도 내역: 코타이·리조트 ${fs.parts.cotai.toFixed(1)}/30 · HoDW ${fs.parts.show.toFixed(1)}/25 · 크리스마스 ${fs.parts.xmas.toFixed(1)}/20 · 평점·후기 ${fs.parts.review.toFixed(1)}/10 · 교통 ${fs.parts.transit.toFixed(1)}/10 · 가격 ${fs.parts.price.toFixed(1)}/5</div>
+        <div class="small muted">가성비 점수 내역: 가격 ${vs.parts.price.toFixed(1)}/30 · 공연 ${vs.parts.show.toFixed(1)}/25 · 위치 ${vs.parts.loc.toFixed(1)}/20 · 평점 ${vs.parts.rating.toFixed(1)}/15 · 편의 ${vs.parts.conv}/10</div>
+        ${h.topReason?`<div class="verdict">${esc(h.topReason)}</div>`:""}
+      </details>
+      <div class="small muted" style="margin-top:8px">가격 확인: ${esc(h.checkedAt)}</div>
+      ${linkBtns([{label:"Agoda에서 보기", url:h.agodaUrl}].concat(h.officialUrl?[{label:"공식 홈페이지", url:h.officialUrl}]:[]), h.map)}
+    </div>`; }).join("") : `<div class="card muted">조건에 맞는 호텔이 없습니다. 필터를 줄여보세요.</div>`;
+
+    const ex = D.agodaExcluded || [];
+    $("agodaExcluded").innerHTML = `<summary>조건 밖 호텔 ${ex.length}곳 (참고 — 기존 후보 포함)</summary><div class="scroll-x"><table class="simple"><tr><th>호텔</th><th>지역</th><th>1박 (세금 포함)</th><th>제외 사유</th></tr>${ex.map(e => `<tr><td>${esc(e.name)}${e.linkedHotel?` <span class="rsv rec">기존 호텔 후보</span>`:""}</td><td>${esc(e.area)}</td><td>${e.nightlyPriceKRW?won(e.nightlyPriceKRW):"—"}</td><td>${esc(e.reason)}</td></tr>`).join("")}</table></div>`;
+  }
+
+  // ⑦ Food
+  const regionsOrder = ["홍콩","마카오 반도","코타이"];
+  $("foodBody").innerHTML = regionsOrder.map(r => {
+    const list = D.restaurants.filter(x => x.region===r); if (!list.length) return "";
+    return `<h3 style="color:var(--navy);margin:16px 0 10px;font-size:17px">${esc(r)}</h3><div class="grid g3">${list.map(f => `<div class="card">
+      <div class="tl-head"><div><h3>${esc(f.name)}</h3><div class="meta">📅 ${esc(f.day)}</div></div>${badge(f.status)}</div>
+      <dl class="kv"><dt>대표메뉴</dt><dd>${esc(f.menu)}</dd><dt>가격</dt><dd>${esc(f.price)}</dd><dt>위치</dt><dd>${esc(f.location)}</dd><dt>영업시간</dt><dd>${esc(f.hours)}</dd><dt>예약</dt><dd>${rsv(f.booking)}</dd><dt>웨이팅</dt><dd>${esc(f.wait)}</dd></dl>
+      ${linkBtns(f.links, f.map)}</div>`).join("")}</div>`;
+  }).join("");
+
+  // ⑧ Transport
+  $("transportCards").innerHTML = D.transport.map(t => `<div class="card ${t.recommended?"top":""}">${t.recommended?'<span class="ribbon">RECOMMENDED</span>':""}
+    <div class="tl-head"><h3>${esc(t.name)}</h3>${badge(t.status)}</div>
+    <dl class="kv">${Object.entries(t.rows).map(([k,v]) => `<dt>${esc(k)}</dt><dd>${esc(v)}</dd>`).join("")}</dl>
+    <div class="verdict">${esc(t.note)}</div>${linkBtns(t.links)}</div>`).join("");
+
+  // ⑨ Budget
+  $("fxNote").textContent = `환율 1 HKD ≈ ${D.fx.HKD}원 · 1 MOP ≈ ${D.fx.MOP}원 (${D.fx.asOf}) — 2026년 12월 실제 환율은 달라질 수 있음`;
+  (function(){
+    const bt = budgetTotals(); const max = Math.max(...Object.values(bt.cats).map(c => c.krw));
+    const optKRW = D.budgetOptional.reduce((s,o) => s + toKRW(o.amount,o.currency), 0);
+    $("budgetBody").innerHTML = `<div class="total-box"><div><div class="small muted">2인 총 예상 (항공권 제외)</div><div class="krw">₩${fmt(bt.krw)}</div></div><div class="muted">≈ HKD ${fmt(bt.hkd)} · ≈ MOP ${fmt(bt.hkd*D.fx.HKD/D.fx.MOP)}<br>1인 약 ₩${fmt(bt.krw/2)}</div></div>
+      <div class="grid g2" style="margin-top:14px">${D.budgetLodging.map(l => `<div class="card ${l.base?"top":""}" style="box-shadow:none">${l.base?'<span class="ribbon">SELECTED · 총비용 반영</span>':""}<div class="tl-head"><div><div class="small muted">${esc(l.label)}</div><b>${esc(l.hotel)} 3박</b></div>${badge(l.status)}</div><div class="price-row"><div><span class="lbl">3박 총액 (세금 포함)</span><span class="price-big">₩${fmt(l.totalKRW)}</span></div><div><span class="lbl">1박</span><b>₩${fmt(l.nightlyKRW)}</b></div>${l.base?"":`<div><span class="lbl">선택 숙소 대비</span><b style="color:#a23a3a">+₩${fmt(l.totalKRW - D.budgetLodging.find(x=>x.base).totalKRW)}</b></div>`}</div><div class="small muted">${esc(l.note)}</div></div>`).join("")}</div>
+      <div style="margin-top:14px">${Object.entries(bt.cats).map(([k,c]) => `<div class="bar-row"><span>${esc(k)}</span><div class="bar"><i style="width:${(c.krw/max*100).toFixed(1)}%"></i></div><span class="amt">₩${fmt(c.krw)}<small>HKD ${fmt(c.hkd)}</small></span></div>`).join("")}</div>
+      <details><summary>항목별 상세 (원 통화 기준)</summary><div class="scroll-x"><table class="simple"><tr><th>구분</th><th>항목</th><th>금액</th><th>KRW</th></tr>
+      ${D.budget.map(b => `<tr><td>${esc(b.category)}</td><td>${esc(b.item)}</td><td>${esc(b.currency)} ${fmt(b.amount)}</td><td>₩${fmt(toKRW(b.amount,b.currency))}</td></tr>`).join("")}
+      ${D.budgetOptional.map(b => `<tr class="muted"><td>옵션</td><td>${esc(b.item)}</td><td>${esc(b.currency)} ${fmt(b.amount)}</td><td>₩${fmt(toKRW(b.amount,b.currency))}</td></tr>`).join("")}
+      </table></div><p class="small muted">옵션 포함 시 +₩${fmt(optKRW)}. 마카오에서는 HKD가 대부분 1:1로 통용되지만 거스름돈은 MOP로 받는 경우가 많음.</p></details>`;
+  })();
+
+  // ⑩ Checklist
+  function renderChecklist(){
+    const st = load();
+    $("checkBody").innerHTML = `<h3 style="margin-bottom:6px">예약 현황</h3>` + D.checklist.map(c => { const on = st[c.id] ?? !!c.done;
+      return `<div class="check-item ${on?"done":""}"><input type="checkbox" id="ck-${esc(c.id)}" data-id="${esc(c.id)}" ${on?"checked":""}><label for="ck-${esc(c.id)}"><span class="t">${esc(c.label)}</span> ${badge(c.status)}${c.ref?`<div class="ref">${esc(c.ref)}</div>`:""}</label></div>`; }).join("")
+      + `<div class="links"><button class="btn" id="ckReset">체크 상태 초기화</button></div>`;
+    document.querySelectorAll("#checkBody input").forEach(i => i.onchange = () => { const s = load(); s[i.dataset.id] = i.checked; save(s); renderChecklist(); renderSummary(); });
+    $("ckReset").onclick = () => { try{localStorage.removeItem(storeKey);}catch(e){} renderChecklist(); renderSummary(); };
+  }
+  $("prioBody").innerHTML = `<h3 style="margin-bottom:6px">예약 우선순위</h3>` + D.priority.map(p => `<div style="margin-top:12px"><h4>${esc(p.when)}</h4><ul class="tight small">${p.items.map(x=>`<li>${esc(x)}</li>`).join("")}</ul></div>`).join("");
+
+  // ⑫ History & sources
+  $("historyBody").innerHTML = D.history.map(h => `<div class="ver"><b>${esc(h.date)}</b><ul class="tight small">${h.changes.map(c=>`<li>${esc(c)}</li>`).join("")}</ul></div>`).join("");
+  $("sourceList").innerHTML = D.sources.map(s => `<li>${s.url?`<a href="${esc(s.url)}" target="_blank" rel="noopener">${esc(s.label)}</a>`:esc(s.label)}</li>`).join("");
+
+  renderSummary(); renderDay(); renderHotels(); renderAgoda(); renderChecklist();
+})();
+</script>
+</body>
+</html>

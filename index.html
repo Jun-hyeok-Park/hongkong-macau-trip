@@ -63,7 +63,6 @@ ul.tight li{margin:2px 0}
 .b-CONFIRMED{background:var(--c-confirmed)}
 .b-LOCKED{background:var(--navy);box-shadow:inset 0 0 0 1px var(--gold)}
 .b-PLANNED{background:#6d86b8}
-.b-OPTION{background:#8a94a6}
 .b-SAVED{background:#a07d3b}
 .b-CHECK{background:var(--c-check)}
 .ribbon{position:absolute;top:-10px;right:14px;background:var(--gold);color:var(--navy);font-weight:800;font-size:11.5px;padding:3px 10px;border-radius:6px;letter-spacing:.6px;box-shadow:0 2px 6px rgba(0,0,0,.15)}
@@ -248,7 +247,7 @@ footer{padding:30px 0 50px;color:var(--muted);font-size:13px}
 
 <!-- =========================================================
      TRIP DATA — 여행 정보는 여기만 수정하면 화면에 반영됩니다.
-     status: CONFIRMED(예약·결제 완료) / LOCKED(예약은 없지만 내가 확정한 계획) / PLANNED(계획 중·변경 가능) / OPTION(후보·대안)
+     status: CONFIRMED(예약·결제 완료) / LOCKED(예약은 없지만 내가 확정한 계획) / PLANNED(CONFIRMED·LOCKED가 아닌 현재 계획) / SAVED(사용자가 저장하라고 한 맛집만)
      needsCheck:true = 추가 확인 필요 (CHECK 보조 배지 — status 와 별개)
      booking: "required"(예약 필수) / "recommended"(예약 권장) / "none"(불필요)
      map: Google Maps 검색어 (링크는 자동 생성)
@@ -317,7 +316,7 @@ const tripData = {
   ],
 
   // 상태 범례 (화면 상단·일정 섹션에 표시)
-  statusLegend: [ ["CONFIRMED","예약/결제 완료"], ["LOCKED","내가 확정한 일정"], ["PLANNED","현재 일정에 넣어둔 계획"], ["OPTION","대안/후보"], ["SAVED","가보고 싶은 맛집 (맛집 섹션)"], ["CHECK","추가 확인 필요"] ],
+  statusLegend: [ ["CONFIRMED","예약/결제 완료"], ["LOCKED","내가 확정한 일정"], ["PLANNED","아직 확정하지 않은 계획"], ["SAVED","가보고 싶은 맛집 저장"], ["CHECK","추가 확인 필요"] ],
 
   // 예약 링크 — 여러 섹션에서 bookingRef 로 재사용 (URL은 여기만 수정)
   bookingLinks: {
@@ -365,7 +364,7 @@ const tripData = {
         { time:"11:00–12:30", place:"Broadway에서 도보 → 타이파 빌리지 · 쿤하 거리", region:"코타이", map:"Rua do Cunha Taipa", desc:["Broadway에서 타이파 빌리지까지 걸어서 이동 (택시 불필요)","포르투갈풍 골목·파스텔 건물 사진","Lord Stow's 타이파점, 아몬드 쿠키·주빠빠오 간식"], move:"도보", moveTime:"약 10–15분", cost:"간식 MOP 100", booking:"none", status:"PLANNED" },
         { time:"12:30–14:00", place:"점심 — António (포르투갈 요리)", region:"코타이", map:"Antonio Restaurant Taipa Macau", desc:["미쉐린 가이드 추천 · 바칼라우, 해산물 밥, 세라두라","크리스마스 당일 → 예약 필수"], move:"도보", moveTime:"3분", cost:"MOP 1,300 (2인)", booking:"required", status:"PLANNED", key:true },
         { time:"14:15–15:45", place:"도보 → 갤럭시 마카오 — 포춘 다이아몬드 쇼", region:"코타이", map:"Galaxy Macau Fortune Diamond", desc:["타이파 빌리지에서 걸어서 갤럭시로 (숙소 방향)","공휴일 10:00–24:00 30분 간격 무료 · 크리스마스 장식·쇼핑몰"], move:"도보", moveTime:"약 15분", cost:"무료", booking:"none", status:"PLANNED" },
-        { time:"15:00–16:20", place:"(옵션) Macau 2049 — MGM Cotai", region:"코타이", map:"MGM Cotai Macau", desc:["장이머우 연출 하이테크 공연 (15:00, 80분)","두 번째 공연을 원할 때만 — 이 경우 갤럭시는 저녁에 몰아서"], move:"택시 (갤럭시 승강장)", moveTime:"약 10분", cost:"MOP 976 (B석 2석) + 택시 MOP 50–70", booking:"required", status:"OPTION" },
+        { time:"15:00–16:20", place:"(옵션) Macau 2049 — MGM Cotai", region:"코타이", map:"MGM Cotai Macau", desc:["장이머우 연출 하이테크 공연 (15:00, 80분)","두 번째 공연을 원할 때만 — 이 경우 갤럭시는 저녁에 몰아서"], move:"택시 (갤럭시 승강장)", moveTime:"약 10분", cost:"MOP 976 (B석 2석) + 택시 MOP 50–70", booking:"required", status:"PLANNED" },
         { time:"15:45–17:30", place:"Broadway Hotel 휴식", region:"코타이", desc:["갤럭시에서 실내로 바로 복귀 · 짐 1차 정리 (내일 체크아웃)"], move:"도보 (갤럭시 연결)", moveTime:"약 5–10분", cost:"—", booking:"none", status:"PLANNED" },
         { time:"17:30–19:15", place:"택시 → 윈 팰리스 — 퍼포먼스 레이크 & SkyCab", region:"코타이", map:"Wynn Palace Performance Lake", desc:["Broadway/갤럭시 승강장에서 택시","분수쇼: 목–일 19–22시 20분 간격(낮엔 30분) · 무료 SkyCab에서 분수 조망, 로비 크리스마스 꽃 장식"], move:"택시", moveTime:"약 10분 (+대기)", cost:"무료 (택시 MOP 50–70)", booking:"none", status:"PLANNED", key:true },
         { time:"19:15–19:30", place:"택시 → Broadway 복귀", region:"이동", desc:["윈 팰리스 택시 승강장 → Broadway (크리스마스 밤 대기 감안)"], move:"택시", moveTime:"약 10분 (+대기)", cost:"MOP 50–70", booking:"none", status:"PLANNED" },
@@ -418,7 +417,7 @@ const tripData = {
         notes:["전자티켓으로 직접 입장 (실물 교환 불필요)","공연 15분 전 도착 권장","환불·교환 불가"] },
       links:[{label:"공식 페이지", url:"https://www.cityofdreamsmacau.com/en/house-of-dancing-water"}],
       map:"Dancing Water Theater City of Dreams Macau" },
-    { id:"m2049", name:"Macau 2049 (장이머우 연출)", status:"OPTION", venue:"MGM Theater, MGM Cotai (코타이)",
+    { id:"m2049", name:"Macau 2049 (장이머우 연출)", status:"PLANNED", venue:"MGM Theater, MGM Cotai (코타이)",
       style:"하이테크 미디어쇼 — 로봇암·레이저·대형 LED + 중국 전통 공연 (곡예 비중은 낮음)",
       runtime:"80분", times:"2026-08-01부터 15:00 공연 · 12월 상세 일정·휴연일 확인 필요",
       dates:"2026-01-01–12-31 레지던시 등록 (MacauTicket) — 12/23–26 회차 확인 필요",
@@ -444,7 +443,7 @@ const tripData = {
       times:"18:15–24:00 15분 간격 · 전망대 12:00–23:00", dates:"매일", price:"조명쇼 무료 · 전망대 약 MOP 98~ (확인)", seats:"런더너–파리지앵 사이 광장",
       promo:"—", reviews:"사진 명소", pros:["숙소 바로 옆","무료"], cons:["짧음"], rating:3, booked:false,
       links:[{label:"공식 페이지", url:"https://www.parisianmacao.com/"}], map:"The Parisian Macao Eiffel Tower" },
-    { id:"xmas", name:"크리스마스 이벤트 (리조트·Light Up Macau)", needsCheck:true, status:"OPTION", venue:"런더너·갤럭시·City of Dreams·시내",
+    { id:"xmas", name:"크리스마스 이벤트 (리조트·Light Up Macau)", needsCheck:true, status:"PLANNED", venue:"런더너·갤럭시·City of Dreams·시내",
       style:"대형 트리·장식, 리조트 크리스마스 캠페인, 빛 축제", runtime:"—",
       times:"2026년 행사 미공개 — 2025년 참고: 갤럭시 겨울 테마(~1월 초), CoD 10m 트리, Light Up Macau 12/6–1/11", dates:"추후 확인 필요", price:"대부분 무료", seats:"—",
       promo:"—", reviews:"—", pros:["이번 여행 시즌과 일치"], cons:["2026 상세 미공개"], rating:4, booked:false,
@@ -508,11 +507,11 @@ const tripData = {
     "Studio City·City of Dreams 외 다른 리조트(MGM 코타이 내부 등)는 시간 남을 때만"
   ],
 
-  // 맛집 — status: CONFIRMED(예약 완료) / PLANNED(일정에 넣음, Timeline 에 있음) / SAVED(가보고 싶어 저장, day:"" · Timeline 에 넣지 않음)
+  // 맛집 — status: CONFIRMED(예약 완료) / PLANNED(현재 계획, day:"" 면 방문일 미정 · Timeline 포함 여부는 별개) / SAVED(사용자가 "저장해두자"고 한 곳만 · Timeline 에 넣지 않음)
   restaurants: [
     { region:"마카오 반도", name:"Wong Chi Kei 黃枝記", menu:"새우 완탕면, 죽, 새우알 비빔면", price:"MOP 50–100/인", location:"세나도 광장 17 Largo do Senado", hours:"08:30–23:00", booking:"none", wait:"점심 피크 대기 가능", day:"D2 점심", status:"PLANNED", map:"Wong Chi Kei Senado Square Macau" },
-    { region:"마카오 반도", name:"Margaret's Café e Nata", menu:"에그타르트, 샌드위치", price:"MOP 12 내외/개", location:"Rua do Comandante Mata e Oliveira (세나도 도보 8분)", hours:"평일 08:30–16:30 · 주말 10:00–18:00 · 수요일 휴무 (확인)", booking:"none", wait:"줄 있음, 회전 빠름", day:"", status:"SAVED", map:"Margaret's Cafe e Nata Macau" },
-    { region:"마카오 반도", name:"Riquexó (매캐니즈 가정식)", menu:"아프리칸 치킨, 민치, 매캐니즈 커리", price:"MOP 100–200/인 (확인)", location:"Av. de Sidónio Pais 69", hours:"확인 필요", booking:"none", wait:"보통", day:"", status:"SAVED", map:"Riquexo Macau" },
+    { region:"마카오 반도", name:"Margaret's Café e Nata", menu:"에그타르트, 샌드위치", price:"MOP 12 내외/개", location:"Rua do Comandante Mata e Oliveira (세나도 도보 8분)", hours:"평일 08:30–16:30 · 주말 10:00–18:00 · 수요일 휴무 (확인)", booking:"none", wait:"줄 있음, 회전 빠름", day:"", status:"PLANNED", map:"Margaret's Cafe e Nata Macau" },
+    { region:"마카오 반도", name:"Riquexó (매캐니즈 가정식)", menu:"아프리칸 치킨, 민치, 매캐니즈 커리", price:"MOP 100–200/인 (확인)", location:"Av. de Sidónio Pais 69", hours:"확인 필요", booking:"none", wait:"보통", day:"", status:"PLANNED", map:"Riquexo Macau" },
     { region:"코타이", name:"North / 北方館 / 북방관", menu:"북방 중국요리 (면·만두·요리)", price:"현장 결제 (식비 예산 참조)", location:"The Venetian Macao · Level 1", hours:"예약 17:00", booking:"done", wait:"예약 완료", day:"D2 저녁 (12/24 17:00)", status:"CONFIRMED", map:"North Restaurant The Venetian Macao",
       reservation:{ date:"2026-12-24 (목)", time:"17:00", guests:"성인 2명", request:"1주년 기념 식사 · 좋은 테이블 요청", bookingNo:"비공개" },
       menuMemo:[ ["뱡뱡면","Traditional Shanxi biáng biáng noodles with chicken"], ["가지튀김","Deep-fried eggplant with caramel and spices"] ] },
@@ -535,15 +534,15 @@ const tripData = {
       rows:{ "운행":"24시간 · 피크 5분 / 평시 10–15분 간격", "소요":"버스 약 45분 + 홍콩·마카오 출입경", "가격":"HKD 65 (06:00–23:59) / HKD 70 (00:00–05:59)", "예약":"불필요 (현장 구매)", "입국심사":"HZMB 홍콩 口岸·마카오 口岸에서 각각", "수하물":"직접 들고 탑승 (캐리어 가능)", "첫차/막차":"24시간 운행", "야간":"가능" },
       note:"12/26에만 사용 (일반 유료 · 홍콩 口岸에서 홍콩 입국). 홍콩 口岸 → B4 버스(HKD 9.8, 24시간, 약 10분)로 공항·Regal Airport Hotel. 12/23에는 사용하지 않음 (Macau HK Airport Direct 이용).",
       links:[{label:"HZMB Golden Bus 공식", url:"https://www.hzmbus.com/"}] },
-    { name:"TurboJET 페리 (셩완 ↔ 마카오 외항)", status:"OPTION",
+    { name:"TurboJET 페리 (셩완 ↔ 마카오 외항)", status:"PLANNED",
       rows:{ "운행":"07:30–23:00, 수시 운항", "소요":"약 60분", "가격":"Economy 평일 HKD 175 · 주말 190 · 야간 220 (요금표 확인 필요)", "예약":"연휴 사전 구매 권장", "입국심사":"페리터미널", "수하물":"무료 허용 한도 있음 (확인)", "첫차/막차":"07:30 / 23:00", "야간":"23시까지" },
       note:"홍콩 시내(센트럴·셩완)에서 출발할 때 유리. 공항 출발이면 HZMB가 빠르고 저렴.",
       links:[{label:"운항표·요금", url:"https://www.turbojet.com.hk/en/routing-sailing-schedule/hong-kong-macau/sailing-schedule-fares"}] },
-    { name:"페리 (셩완 ↔ 마카오 타이파)", status:"OPTION",
+    { name:"페리 (셩완 ↔ 마카오 타이파)", status:"PLANNED",
       rows:{ "운행":"하루 3–4편 (금–일 증편)", "소요":"약 60분", "가격":"Economy 약 HKD 194–242 (2026 요금)", "예약":"권장", "입국심사":"타이파 페리터미널", "수하물":"확인", "첫차/막차":"HK발 11:00 ~ / 타이파발 ~23:30 (금–일)", "야간":"제한적" },
       note:"코타이와 가장 가까운 항구지만 편수가 적어 일정이 묶임.",
       links:[{label:"Cotai Water Jet", url:"https://www.cotaiwaterjet.com/"}] },
-    { name:"SkyPier 공항 페리 (환승객 전용)", status:"OPTION",
+    { name:"SkyPier 공항 페리 (환승객 전용)", status:"PLANNED",
       rows:{ "운행":"홍콩 입국 없이 공항 내 환승 시만 이용", "소요":"약 70분", "가격":"확인 필요", "예약":"항공 연계 필요", "입국심사":"마카오에서만", "수하물":"항공 연계 수하물", "첫차/막차":"확인", "야간":"—" },
       note:"HK Express 별도 발권 + 홍콩 입국 일정이라 이번 여행엔 해당 가능성 낮음 → 비추천.", links:[] }
   ],
@@ -590,7 +589,7 @@ const tripData = {
     { id:"esim", label:"eSIM / 로밍 (홍콩+마카오 겸용)", ref:"", status:"PLANNED" },
     { id:"octopus", label:"옥토퍼스 카드 (모바일/실물)", ref:"", status:"PLANNED" },
     { id:"peak", label:"피크트램 온라인 티켓 (12/26)", ref:"", status:"PLANNED" },
-    { id:"show-2049", label:"(옵션) Macau 2049 12/25 15:00", ref:"", status:"OPTION" },
+    { id:"show-2049", label:"(옵션) Macau 2049 12/25 15:00", ref:"", status:"PLANNED" },
     { id:"cash", label:"환전: HKD (마카오에서도 사용 가능, 거스름돈은 MOP)", ref:"", status:"PLANNED" },
     { id:"checkin", label:"HK Express 온라인 체크인 (귀국편 포함)", ref:"", status:"PLANNED" }
   ],
@@ -622,6 +621,7 @@ const tripData = {
   ],
 
   history: [
+    { date:"2026-10-06", changes:["상태체계 정리: CONFIRMED / LOCKED / PLANNED / SAVED + CHECK(보조)","OPTION 제거 → 기존 OPTION 항목은 PLANNED로 통합","SAVED는 사용자가 저장하라고 지정한 맛집에만 사용 — 현재 0곳 (Margaret's·Riquexó는 PLANNED로 변경, Timeline 포함 여부는 별개)","맛집 필터 이름: 전체 / 예약 완료 / 계획 / 저장한 맛집"] },
     { date:"2026-10-06", changes:["사이트 실행형 대시보드 정리 및 맛집 저장 기능 개편","A/B/C 비교 제거 (실제 예약 기준 단일 일정)","호텔 예약 전 비교 제거 — 호텔은 확정 2곳만","Agoda 비교 제거 (섹션·데이터·정렬/필터·점수 계산·CSS)","맛집 SAVED 상태 추가 · 맛집 필터(전체/예약 완료/일정에 넣음/저장한 맛집)","음식 → 맛집 역할 개편 (Margaret's·Riquexó는 SAVED, Margaret's는 DAY 2 Timeline에서 제외)","nav 단순화 · 섹션 번호 재정렬","Update History/Sources 하단 접기","불필요한 비교 코드 정리"] },
     { date:"2026-10-06", changes:["기존 A/B/C 일정안 비교 종료 및 실제 예약 기준 단일 일정으로 통합"] },
     { date:"2026-10-06", changes:["North 예약 확정 및 일정 상태체계 개편","12/24 17:00 North / 북방관 예약 완료 (The Venetian Macao · Level 1 · 성인 2명)","1주년 기념 식사 반영 (좋은 테이블 요청 — 보장되지 않음) · 먹어볼 메뉴 메모: 뱡뱡면·가지튀김","DAY 2 식사 → HoDW 동선 확정 (North 17:00 → 도보 → 19:00 극장 도착 → 19:30 공연)","CONFIRMED / LOCKED / PLANNED / OPTION 상태 구분 + CHECK는 보조 배지로 분리 · 상태 범례 추가","사용자가 결정한 이동 동선을 LOCKED로 재분류 (12/23 E2→Airport Direct→Galaxy→Broadway, 12/26 Broadway→Galaxy→HZMB→Golden Bus→B4→Regal, 12/27 Regal→T2→T1)","미확정 관광 일정은 PLANNED 유지 · 기존 CANDIDATE는 OPTION으로 통일"] },
@@ -806,9 +806,9 @@ const tripData = {
     $("hotelConfirmed").innerHTML = confirmedCard(hp, "숙소 ① 마카오 · 12/23 → 12/26") + confirmedCard(D.meta.hkHotelPlan, "숙소 ② 홍콩 공항 · 12/26 → 12/27");
   }
 
-  // ⑧ 맛집 — status: CONFIRMED(예약 완료) / PLANNED(일정에 넣음) / SAVED(저장한 맛집) · SAVED 는 Timeline 에 넣지 않음
+  // ⑧ 맛집 — status: CONFIRMED(예약 완료) / PLANNED(계획) / SAVED(사용자 지정 저장 맛집) · SAVED 는 Timeline 에 넣지 않음
   const FOOD_REGIONS = ["홍콩","마카오 반도","타이파","코타이"];
-  const FOOD_FILTERS = [["ALL","전체"],["CONFIRMED","예약 완료"],["PLANNED","일정에 넣음"],["SAVED","저장한 맛집"]];
+  const FOOD_FILTERS = [["ALL","전체"],["CONFIRMED","예약 완료"],["PLANNED","계획"],["SAVED","저장한 맛집"]];
   let foodFilter = "ALL";
   function renderFood(){
     const count = k => k === "ALL" ? D.restaurants.length : D.restaurants.filter(f => f.status === k).length;
@@ -818,13 +818,13 @@ const tripData = {
     $("foodBody").innerHTML = FOOD_REGIONS.map(r => {
       const list = shown.filter(x => x.region === r); if (!list.length) return "";
       return `<h3 style="color:var(--navy);margin:16px 0 10px;font-size:17px">${esc(r)}</h3><div class="grid g3">${list.map(f => `<div class="card">
-        <div class="tl-head"><div><h3>${esc(f.name)}</h3><div class="meta">📍 ${esc(f.location)}</div><div class="meta">📅 ${f.day ? esc(f.day) : "방문일 미정 (저장)"}</div></div>${stBadges(f)}</div>
+        <div class="tl-head"><div><h3>${esc(f.name)}</h3><div class="meta">📍 ${esc(f.location)}</div><div class="meta">📅 ${f.day ? esc(f.day) : (f.status === "SAVED" ? "저장한 맛집 · 방문일 미정" : "방문일 미정")}</div></div>${stBadges(f)}</div>
         <dl class="kv"><dt>대표메뉴</dt><dd>${esc(f.menu)}</dd><dt>가격</dt><dd>${esc(f.price)}</dd><dt>예약</dt><dd>${rsv(f.booking)}</dd></dl>
         ${f.reservation ? `<div class="booked-box"><b>✔ 예약 완료</b> · ${esc(f.reservation.date)} ${esc(f.reservation.time)} · ${esc(f.reservation.guests)}<br>${esc(f.reservation.request)} <span class="small muted">(요청사항 — 보장되지 않음)</span><br><span class="small muted">예약번호 ${esc(f.reservation.bookingNo)}</span></div>` : ""}
         ${f.menuMemo ? `<div class="menu-memo"><b>먹어볼 메뉴</b><ul class="tight small">${f.menuMemo.map(([k,e]) => `<li>${esc(k)} <span class="muted">(${esc(e)})</span></li>`).join("")}</ul></div>` : ""}
         ${(f.hours || f.wait) ? `<details><summary>영업시간 · 웨이팅</summary><div class="small">${esc(f.hours||"—")} · ${esc(f.wait||"—")}</div></details>` : ""}
         ${linkBtns(f.links, f.map)}</div>`).join("")}</div>`;
-    }).join("") || `<div class="card muted">해당 상태의 맛집이 없습니다.</div>`;
+    }).join("") || `<div class="card muted">${foodFilter === "SAVED" ? "저장한 맛집이 아직 없습니다." : "해당 상태의 맛집이 없습니다."}</div>`;
   }
 
   // ⑧ Transport

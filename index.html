@@ -190,6 +190,8 @@ footer{padding:30px 0 50px;color:var(--muted);font-size:13px}
 .fit{font-size:12.8px;margin-top:8px}
 .fit div{display:flex;justify-content:space-between;gap:8px;border-top:1px dashed var(--line);padding:4px 0}
 .fit div span:first-child{color:var(--muted)}
+.why{margin-top:8px;padding:8px 10px;border-radius:8px;background:#eef4ff;border:1px solid #c9dafb;font-size:12.8px;line-height:1.55}
+.why b{color:var(--navy)}
 .big-count{font-size:30px;font-weight:800;color:var(--gold)}
 .selected-bar{margin:4px 0 8px;padding:6px 10px;border-radius:8px;background:var(--navy);color:var(--gold);font-weight:700;font-size:13px}
 .fit-badge{display:inline-block;font-size:11.5px;font-weight:700;padding:2px 9px;border-radius:6px;background:var(--gold-soft);color:#7a5a12;border:1px solid #e6cf95}
@@ -278,7 +280,7 @@ const tripData = {
     travelers: "성인 2명",
     // 개인정보 — publish/index.html 빌드 시 자동 마스킹 (publish/tools/build_publish.py)
     travelerNames: "비공개",
-    lastUpdated: "2026-10-05",
+    lastUpdated: "2026-10-06",
     concept: "마카오 메인(약 70%) + 홍콩 핵심만(약 30%). 코타이 리조트 3박 — Broadway Hotel 3박(예약 완료) · House of Dancing Water 관람 · 코타이/갤럭시 중심 크리스마스 여행. 12/26 홍콩 1박은 12/27 07:15 조기 출국을 위해 Regal Airport Hotel(예약 완료).",
     tags: ["마카오 중심 70%", "공연: House of Dancing Water", "항공권 왕복 예약 완료", "숙소 4박 예약 완료 (Broadway 3박 + Regal Airport 1박)", "크리스마스 시즌"],
     stay: { macau: "3박 · 약 70시간", hongkong: "1박 · 약 15시간 (+공항)" },
@@ -321,11 +323,11 @@ const tripData = {
     { id:"out", label:"출국", status:"CONFIRMED", flightNo:"UO617", airline:"HK Express (홍콩익스프레스)", date:"2026-12-23 (수)",
       from:{ code:"ICN", city:"인천", time:"06:45", terminal:"T1" }, to:{ code:"HKG", city:"홍콩", time:"09:50", terminal:"T1" },
       duration:"약 4시간 05분 (시차 -1h)", pnr:"비공개", bookingNo:"비공개",
-      notes:["인천공항 T1 03:45까지 도착 권장(출발 3시간 전) — 이 시간대는 공항철도·대부분 공항버스 운행 전이므로 이동수단 별도 준비 필요","도착 후 T1에서 입국심사·수하물 수취"] },
+      notes:["인천공항 T1 03:45까지 도착 권장(출발 3시간 전) — 이 시간대는 공항철도·대부분 공항버스 운행 전이므로 이동수단 별도 준비 필요","도착 후 홍콩 입국심사 없이 T1 제한구역 E2 Macau HK Airport Direct 카운터로 이동 → 마카오 직행 (12/23 이동 동선 참고)"] },
     { id:"ret", label:"귀국", status:"CONFIRMED", flightNo:"UO618", airline:"HK Express (홍콩익스프레스)", date:"2026-12-27 (일)",
       from:{ code:"HKG", city:"홍콩", time:"07:15", terminal:"T2 체크인" }, to:{ code:"ICN", city:"인천", time:"11:40", terminal:"T1" },
       duration:"약 3시간 25분 (시차 +1h)", pnr:"비공개", bookingNo:"비공개",
-      notes:["HK Express는 2026-06-10부터 체크인·백드랍을 T2 Aisle U로 이전 (항공권엔 'T2'로 표기)","체크인 오픈: 출발 3시간 전 04:15 · 키오스크 마감 06:00(75분 전) · 카운터/백드랍 마감 06:15(60분 전)","00:31–05:29 사이 체크인 시: T1으로 걸어서 돌아가 T1에서 보안검색·출국심사 (HK Express 공식 안내)","목표: 04:15 체크인 줄 서기 시작"] }
+      notes:["HK Express는 2026-06-10부터 체크인·백드랍을 T2 Aisle U로 이전 (항공권엔 'T2'로 표기)","체크인 오픈: 출발 3시간 전 04:15 · 키오스크 마감 06:00(75분 전) · 카운터/백드랍 마감 06:15(60분 전)","00:31–05:29에는 T2 출국시설·APM 운영 중단 → T2에서 체크인·수하물 위탁 후 T1까지 도보 약 15분 이동, T1에서 보안검색·출국심사 (HK Express 공식 안내)","목표: 04:15 체크인 줄 서기 시작"] }
   ],
   baggage: [
     "개인 물품: 1인 1개, 7kg 이하, 40×25×20cm 이내 (앞좌석 아래)",
@@ -345,9 +347,9 @@ const tripData = {
       rows:{ "이동시간":"짐 들고 3회 숙소 이동", "마카오 체류":"약 48시간", "홍콩 체류":"약 40시간", "피로도":"상 (새벽 출국 당일 종일 관광 + 숙소 3곳)", "비용":"상 (홍콩 2박 — 홍콩 호텔이 더 비쌈)", "귀국 안정성":"공항호텔이면 높음" },
       pros:["홍콩을 여유 있게 볼 수 있음"], cons:["마카오 비중 50% 이하 → 요구사항 미충족","12/23은 03시대 기상 후 종일 관광 → 과로","숙소 3곳, 짐 이동 2회 추가"], verdict:"마카오 메인 목표와 맞지 않아 비추천 — C안 채택으로 비교 종료" },
     { id:"C", name:"C안 — 마카오 3박 + 공항호텔 1박 (채택)", status:"PLANNED", recommended:true,
-      flow:"12/23 공항→HZMB 버스로 바로 마카오(Broadway Hotel 3박 · 예약 완료) → 12/26 오전 홍콩 복귀, Regal Airport Hotel에 짐 → 오후·저녁 홍콩 핵심(피크·스타페리·침사추이) → Regal Airport Hotel 1박 (예약 완료) → 12/27 04:00 도보로 공항 체크인",
+      flow:"12/23 공항 제한구역에서 Macau HK Airport Direct로 바로 마카오(홍콩 입국 없음 · Broadway Hotel 3박 · 예약 완료) → 12/26 오전 HZMB Golden Bus로 홍콩 복귀, Regal Airport Hotel에 짐 → 오후·저녁 홍콩 핵심(피크·스타페리·침사추이) → Regal Airport Hotel 1박 (예약 완료) → 12/27 04:00 도보로 공항 체크인",
       rows:{ "이동시간":"HK공항→코타이 약 2.5h / 마카오→HK공항 약 2h / 호텔→체크인 도보 10–15분", "마카오 체류":"약 70시간 (≈70%)", "홍콩 체류":"약 15시간 (≈30%)", "피로도":"하–중", "비용":"숙박 확정 ₩915,768 (Broadway ₩726,939 + Regal ₩188,829)", "귀국 안정성":"매우 높음 — 교통수단 의존 없음" },
-      pros:["HZMB 금색버스는 공항 옆 홍콩 口岸에서 출발 → 시내 경유 불필요","마카오 숙소 1곳에 3연박 (짐 이동 최소)","홍콩 오후 일정 동안 짐은 Regal Airport Hotel에 맡김","새벽 귀국 리스크 최소"], cons:["홍콩 야시장·몽콕은 시간상 제외","홍콩 마지막 밤은 21시 전후 복귀 필요"], verdict:"✅ 채택 — 항공권·숙소 4박 모두 예약 완료" }
+      pros:["12/23은 공항 제한구역에서 마카오로 바로 이동(홍콩 입국 없음), 12/26은 Golden Bus로 공항 옆 홍콩 口岸 도착 → 시내 경유 불필요","마카오 숙소 1곳에 3연박 (짐 이동 최소)","홍콩 오후 일정 동안 짐은 Regal Airport Hotel에 맡김","새벽 귀국 리스크 최소"], cons:["홍콩 야시장·몽콕은 시간상 제외","홍콩 마지막 밤은 21시 전후 복귀 필요"], verdict:"✅ 채택 — 항공권·숙소 4박 모두 예약 완료" }
   ],
 
   lastNight: [
@@ -364,13 +366,13 @@ const tripData = {
 
   // 일정 (추천안 C) — 시간순
   itinerary: [
-    { day:1, date:"12/23 (수)", title:"인천 → 홍콩공항 → 다리 건너 바로 마카오 · 코타이 첫날 밤", goals:["갤럭시 셔틀로 Broadway Hotel 도착 (13~14시) · 15:00 체크인","런더너·베네시안 크리스마스 산책 (택시 왕복)","에펠탑 조명쇼"],
+    { day:1, date:"12/23 (수)", title:"인천 → 홍콩공항 제한구역 → Macau HK Airport Direct로 바로 마카오 · 코타이 첫날 밤", goals:["갤럭시 셔틀로 Broadway Hotel 도착 (13~14시) · 15:00 체크인","런더너·베네시안 크리스마스 산책 (택시 왕복)","에펠탑 조명쇼"],
       items:[
         { time:"03:45", place:"인천국제공항 T1", region:"인천", desc:["출발 3시간 전 도착 · 위탁수하물 1인 20kg"], move:"자차/택시 또는 전날 공항 근처 숙박 (공항철도 첫차로는 불가)", moveTime:"—", cost:"—", booking:"recommended", status:"CHECK" },
         { time:"06:45–09:50", place:"UO617 인천 → 홍콩", region:"항공", desc:["HK Express · 도착 T1"], move:"항공", moveTime:"4h05m", cost:"예약 완료", booking:"none", status:"CONFIRMED", key:true },
-        { time:"09:50–10:50", place:"홍콩국제공항 T1 입국", region:"홍콩", map:"Hong Kong International Airport Terminal 1", desc:["입국심사·수하물 수취","옥토퍼스 카드(실물/모바일)·eSIM 확인, 소액 HKD 현금"], move:"—", moveTime:"약 60분", cost:"—", booking:"none", status:"PLANNED" },
-        { time:"10:50–11:10", place:"B4 버스 → HZMB 홍콩 口岸", region:"홍콩", map:"HZMB Hong Kong Port Passenger Clearance Building", desc:["공항 버스정류장에서 B4 (24시간, 약 15분 간격)"], move:"B4 버스", moveTime:"약 10분", cost:"HKD 9.8/인", booking:"none", status:"PLANNED" },
-        { time:"11:10–12:45", place:"HZMB 금색버스 → 마카오 口岸", region:"이동", desc:["홍콩 출경 → 금색버스(穿梭巴士) 탑승 → 마카오 입경","캐리어는 직접 들고 탑승"], move:"HZMB 셔틀버스", moveTime:"버스 약 45분 + 출입경", cost:"HKD 65/인", booking:"none", status:"PLANNED", key:true },
+        { time:"09:50–10:30", place:"HKG T1 도착 → 제한구역 E2 · Macau HK Airport Direct 카운터", region:"홍콩", map:"Hong Kong International Airport Terminal 1", desc:["홍콩 입국심사 진행하지 않음 — 제한구역(E2)에서 바로 마카오행 무료 직통버스 수속","위탁수하물(1인 20kg) 처리 방법은 예약 시·카운터에서 확인","홍콩에 입국하지 않으므로 HKD·옥토퍼스는 D4에 준비"], move:"도보 (공항 내)", moveTime:"약 30–40분", cost:"—", booking:"required", status:"CHECK" },
+        { time:"10:30–12:30", place:"Macau HK Airport Direct 무료 직통버스 → HZMB Macao Port", region:"이동", desc:["홍콩공항 제한구역 → HZMB Macao Port 직행 (무료 프로모션 대상 · 예약 대기)","출발 시각은 예약 시 선택 — 11/22부터 예약창 확인, 늦어도 11/23 예약 시도","※ 12/26에 타는 유료 HZMB Golden Bus와 다른 버스"], move:"Macau HK Airport Direct", moveTime:"출발 시각·소요시간 예약 시 확인", cost:"무료 (프로모션)", booking:"required", status:"CHECK", key:true },
+        { time:"12:30–12:45", place:"HZMB Macao Port — 마카오 입국심사", region:"이동", map:"HZMB Macau Port", desc:["이번 여행 첫 입국심사는 마카오에서 진행","캐리어 들고 Galaxy 셔틀 승차장으로 이동"], move:"도보", moveTime:"약 15분 (+대기)", cost:"—", booking:"none", status:"PLANNED" },
         { time:"12:45–13:30", place:"갤럭시 무료셔틀 → Galaxy Macau (Diamond Lobby)", region:"코타이", map:"Galaxy Macau Diamond Lobby", desc:["HZMB 마카오 口岸 버스 터미널 → Galaxy 무료셔틀 (공식: 10:00–23:00, 평균 10–25분 간격, 약 25분)","Galaxy Diamond Lobby 하차 → 실내 연결로 Broadway Hotel까지 도보 (약 5–10분, 현장 안내 확인)","대안: 택시 약 20–25분 · MOP 120–150 (캐리어 많거나 셔틀 대기 길 때)"], move:"갤럭시 무료셔틀 + 도보", moveTime:"대기 포함 30–45분", cost:"무료 (택시 MOP 120–150)", booking:"none", status:"PLANNED", key:true },
         { time:"13:30–15:00", place:"Broadway Hotel 도착 · 짐 보관 · Broadway Food Street 점심", region:"코타이", map:"Broadway Food Street Macau", desc:["13:00~14:00 호텔 도착 예정 / 공식 체크인 15:00","Early check-in requested, subject to availability — 조기 체크인 확정 아님","체크인 전 프런트/1층에서 짐 보관 → 호텔 바로 앞 Broadway Food Street 로컬 점심"], move:"도보 (호텔 바로 앞)", moveTime:"1–3분", cost:"MOP 250 (2인)", booking:"none", status:"PLANNED" },
         { time:"15:00–17:00", place:"Broadway Hotel 체크인 (예약 완료) · 휴식", region:"코타이", map:"Broadway Hotel Macau", desc:["공식 체크인 15:00 · Broadway King · 조식 불포함 · 3박 (12/23–12/26)","요청사항(허니문·금연·고층·전망·엘리베이터에서 먼 조용한 객실)은 호텔 재량 — 보장되지 않음","새벽 출발 피로 회복 — 낮잠 권장"], move:"—", moveTime:"—", cost:"예약 완료 (3박 ₩726,939)", booking:"done", status:"CONFIRMED" },
@@ -413,8 +415,8 @@ const tripData = {
       items:[
         { time:"08:30–09:30", place:"아침 · 짐 정리", region:"코타이", desc:["위탁 20kg 확인, 남은 MOP 사용"], move:"—", moveTime:"—", cost:"MOP 200 (2인)", booking:"none", status:"PLANNED" },
         { time:"09:30–10:40", place:"Broadway Hotel 체크아웃 (기한 11:00) → HZMB 마카오 口岸", region:"이동", map:"HZMB Macau Port", desc:["체크아웃 기한 11:00 (예약 기준) — 09:30 체크아웃","기본안(택시): Broadway/갤럭시 승강장 → HZMB 口岸 약 20–25분 · MOP 120–160 — 09:40 출발","대안(무료): 갤럭시 Diamond Lobby HZMB 셔틀 (공식 10:00–23:00, 10–25분 간격, 약 25분) — 첫차 10:00라 09:50까지 로비 도착","12/26 토요일·연휴 직후 → 택시 대기·출경 혼잡 고려해 시간 여유"], move:"택시 (대안: 갤럭시 무료셔틀)", moveTime:"20–40분 (+대기)", cost:"MOP 120–160 (셔틀 무료)", booking:"none", status:"PLANNED" },
-        { time:"10:40–12:15", place:"HZMB 금색버스 → 홍콩 口岸", region:"이동", desc:["토요일 + 연휴 → 출입경 대기 여유 있게"], move:"HZMB 셔틀버스", moveTime:"약 1.5h", cost:"HKD 65/인", booking:"none", status:"PLANNED" },
-        { time:"12:15–12:45", place:"B4 → 공항 · Regal Airport Hotel 짐 보관", region:"홍콩", map:"Regal Airport Hotel Hong Kong", desc:["Regal Airport Hotel 예약 완료 (12/26 → 12/27 · Superior Room)","공식 체크인 15:00 전이므로 프런트에 짐만 맡기고 홍콩 관광 (짐 보관 가능 여부 현장 확인)"], move:"B4 + 도보", moveTime:"20분", cost:"HKD 9.8/인", booking:"done", status:"PLANNED" },
+        { time:"10:40–12:15", place:"HZMB Shuttle Bus (Golden Bus) → HZMB 홍콩 口岸", region:"이동", desc:["마카오 출경 → 일반 유료 Golden Bus → 홍콩 口岸에서 홍콩 입국심사","※ 12/23의 Macau HK Airport Direct(무료·제한구역 직행)와 다른 버스","토요일 + 연휴 → 출입경 대기 여유 있게"], move:"HZMB Golden Bus", moveTime:"약 1.5h", cost:"HKD 65/인", booking:"none", status:"PLANNED" },
+        { time:"12:15–12:45", place:"B4 → 공항 · Regal Airport Hotel 짐 보관", region:"홍콩", map:"Regal Airport Hotel Hong Kong", desc:["12/27 07:15 HK Express 조기 출국 때문에 마지막 1박은 Regal Airport Hotel로 예약 — 새벽 장거리 이동 리스크를 줄이기 위해 공항 숙박 선택","공식 체크인 15:00 전이므로 프런트에 짐만 맡기고 홍콩 관광 (짐 보관 가능 여부 현장 확인)"], move:"B4 + 도보", moveTime:"20분", cost:"HKD 9.8/인", booking:"done", status:"PLANNED" },
         { time:"12:45–13:15", place:"공항철도 → 홍콩역 (센트럴)", region:"홍콩", desc:["Airport Express 24분, 10분 간격"], move:"공항철도", moveTime:"24분", cost:"약 HKD 115/인 (확인)", booking:"none", status:"CHECK" },
         { time:"13:15–14:15", place:"점심 — 팀호완 (홍콩역/IFC)", region:"홍콩", map:"Tim Ho Wan Hong Kong Station", desc:["미쉐린 딤섬 — 차슈번(BBQ pork bun)"], move:"도보 (역 내)", moveTime:"—", cost:"HKD 300 (2인)", booking:"none", status:"PLANNED" },
         { time:"14:30–17:30", place:"피크트램 → 빅토리아 피크", region:"홍콩", map:"Peak Tram Garden Road Lower Terminus", desc:["가든로드 하부역까지 도보 15분/택시","공휴일(박싱데이) 대기 길 수 있음 → 온라인 티켓","스카이테라스 428 전망, 해 질 녘 조망 (일몰 약 17:45)"], move:"도보 + 피크트램", moveTime:"15분 + 7분", cost:"HKD 216~ (왕복 2인, 주말/공휴일)", booking:"recommended", status:"PLANNED", key:true },
@@ -425,12 +427,16 @@ const tripData = {
         { time:"20:00", place:"Symphony of Lights", region:"홍콩", map:"Tsim Sha Tsui Promenade", desc:["2026년 하반기 종료 예정 — 12월 운영 여부 확인 필요"], move:"도보", moveTime:"—", cost:"무료", booking:"none", status:"CHECK" },
         { time:"20:45–21:30", place:"공항철도 구룡역 → 공항 → Regal Airport Hotel 체크인", region:"홍콩", map:"Regal Airport Hotel Hong Kong", desc:["구룡역까지 택시 약 10분","실제 도착 약 21:30 — 공식 체크인 15:00 이후라 바로 체크인 (Superior Room · 조식 불포함)","요청사항(금연·고층·조용한 객실)은 보장되지 않음","22:00 전 취침 목표"], move:"택시 + 공항철도", moveTime:"약 40분", cost:"약 HKD 250 (2인) · 숙박 예약 완료 ₩188,829", booking:"done", status:"CONFIRMED" },
       ]},
-    { day:5, date:"12/27 (일)", title:"Regal Airport Hotel 새벽 퇴실 → 공항 체크인 → 귀국", goals:["04:00 퇴실 (공식 체크아웃 12:00)","04:15 체크인","07:15 출발"],
+    { day:5, date:"12/27 (일)", title:"Regal Airport Hotel 새벽 퇴실 → T2 체크인 → T1 출국 → 귀국", goals:["03:50–04:00 퇴실 (공식 체크아웃 12:00)","04:15 T2 체크인","T2 → T1 도보 이동","07:15 출발"],
       items:[
         { time:"03:30", place:"기상 (Regal Airport Hotel)", region:"홍콩", desc:["전날 짐 정리 완료해둘 것"], move:"—", moveTime:"—", cost:"—", booking:"none", status:"PLANNED" },
-        { time:"04:00–04:15", place:"Regal Airport Hotel 퇴실 → T2 Aisle U (HK Express)", region:"홍콩", map:"Hong Kong International Airport Terminal 2", desc:["실제 퇴실 04:00 — 호텔 공식 체크아웃 12:00과 별개 (객실 키 반납)","리갈 호텔 → T1 연결통로 → T2 (실제 동선 전날 미리 확인)"], move:"도보", moveTime:"10–15분", cost:"—", booking:"none", status:"CHECK" },
-        { time:"04:15–05:00", place:"체크인 · 백드랍", region:"홍콩", desc:["키오스크 06:00 / 카운터 06:15 마감","05:29 이전엔 T1으로 돌아가 보안·출국심사"], move:"도보", moveTime:"—", cost:"—", booking:"none", status:"CONFIRMED", key:true },
-        { time:"05:00–06:30", place:"출국심사 → 탑승구", region:"홍콩", desc:["남은 HKD로 아침·간식"], move:"도보/APM", moveTime:"—", cost:"HKD 150", booking:"none", status:"PLANNED" },
+        { time:"03:50–04:00", place:"Regal Airport Hotel 체크아웃", region:"홍콩", map:"Regal Airport Hotel Hong Kong", desc:["실제 퇴실 03:50–04:00 — 호텔 공식 체크아웃 12:00과 별개 (객실 키 반납)"], move:"—", moveTime:"—", cost:"—", booking:"none", status:"PLANNED",
+          why:{ q:"왜 이렇게 일찍 출발하나요?", a:"새벽 00:31~05:29에는 홍콩공항 T2 출국시설과 APM이 운영되지 않는다. 따라서 HK Express T2에서 체크인과 수하물 위탁을 마친 뒤 약 15분 걸어서 T1으로 이동해 보안검색과 출국심사를 받아야 한다. 일반 시간대보다 이동 단계가 하나 더 있어 충분한 여유시간을 확보한다." } },
+        { time:"04:00–04:15", place:"도보 → HKG T2 U구역 (HK Express)", region:"홍콩", map:"Hong Kong International Airport Terminal 2", desc:["리갈 호텔 → T1 연결통로 → T2 (실제 동선 전날 미리 확인)"], move:"도보", moveTime:"10–15분", cost:"—", booking:"none", status:"CHECK" },
+        { time:"04:15–04:45", place:"T2 U구역 — 체크인 · 수하물 위탁", region:"홍콩", desc:["체크인·수하물 위탁 시작: 출발 3시간 전 04:15","키오스크 06:00 / 카운터 06:15 마감"], move:"—", moveTime:"—", cost:"—", booking:"none", status:"CONFIRMED", key:true },
+        { time:"04:45–05:00", place:"T2 → T1 도보 이동", region:"홍콩", desc:["00:31~05:29 T2 출국시설·APM 운영 중단 → T1까지 걸어서 이동"], move:"도보", moveTime:"약 15분", cost:"—", booking:"none", status:"PLANNED" },
+        { time:"05:00–06:00", place:"T1 보안검색 · 출국심사", region:"홍콩", desc:["남은 HKD로 아침·간식"], move:"—", moveTime:"—", cost:"HKD 150", booking:"none", status:"PLANNED" },
+        { time:"06:00–06:45", place:"탑승 게이트 이동", region:"홍콩", desc:["게이트 번호는 탑승권·공항 안내판 확인"], move:"도보/APM", moveTime:"—", cost:"—", booking:"none", status:"PLANNED" },
         { time:"07:15–11:40", place:"UO618 홍콩 → 인천 T1", region:"항공", desc:["HK Express"], move:"항공", moveTime:"3h25m", cost:"예약 완료", booking:"none", status:"CONFIRMED", key:true }
       ]}
   ],
@@ -581,7 +587,8 @@ const tripData = {
   regions: [
     { name:"홍콩", note:"12/23 경유 · 12/26 오후~12/27 새벽", places:[
       { name:"홍콩국제공항 T1 / T2", map:"Hong Kong International Airport", day:"D1·D5" },
-      { name:"HZMB 홍콩 口岸", map:"HZMB Hong Kong Port Passenger Clearance Building", day:"D1·D4" },
+      { name:"HKG T1 제한구역 E2 — Macau HK Airport Direct 카운터", map:"Hong Kong International Airport Terminal 1", day:"D1" },
+      { name:"HZMB 홍콩 口岸 (Golden Bus 도착)", map:"HZMB Hong Kong Port Passenger Clearance Building", day:"D4" },
       { name:"Regal Airport Hotel (숙소 · 예약 완료)", map:"Regal Airport Hotel Hong Kong", day:"D4–D5" },
       { name:"팀호완 (홍콩역)", map:"Tim Ho Wan Hong Kong Station", day:"D4" },
       { name:"피크트램 하부역 (Garden Rd)", map:"Peak Tram Garden Road Lower Terminus", day:"D4" },
@@ -615,7 +622,8 @@ const tripData = {
   ],
   routeTips: [
     "숙소 Broadway 기준: 갤럭시·Broadway Food Street·타이파 빌리지는 도보 / Sands 클러스터(런더너·베네시안·파리지앵)·City of Dreams는 택시 약 5분 / 윈 팰리스·MGM은 택시 약 10분",
-    "갤럭시 무료셔틀 활용: HZMB 口岸(D1·D4) · StarWorld(D2 반도 왕복)",
+    "갤럭시 무료셔틀 활용: HZMB Macao Port(D1·D4) · StarWorld(D2 반도 왕복)",
+    "12/23 HKG → Macao = Macau HK Airport Direct (무료·홍콩 입국 없음) / 12/26 Macao → HK = HZMB Golden Bus (유료·홍콩 입국)",
     "반도는 하루 1회만 방문(D2 오전~오후), 코타이↔반도 왕복 반복 없음",
     "Studio City·City of Dreams 외 다른 리조트(MGM 코타이 내부 등)는 시간 남을 때만"
   ],
@@ -636,10 +644,13 @@ const tripData = {
   ],
 
   transport: [
-    { name:"HZMB 금색 셔틀버스 (港珠澳大橋穿梭巴士)", recommended:true, status:"PLANNED",
+    { name:"Macau HK Airport Direct — 12/23 HKG → Macao", recommended:true, status:"CHECK",
+      rows:{ "구간":"홍콩공항 T1 제한구역(E2 카운터) → HZMB Macao Port", "입국심사":"홍콩 입국 없음 → 마카오 口岸에서 마카오 입국", "가격":"무료 (프로모션 대상)", "예약":"필요 · 예약 대기 — 2026-10-06 확인 시 달력은 11/06까지 선택 가능 (약 30~31일 전부터로 보임)", "예약 시점":"11/22(일)부터 예약창 확인 · 늦어도 11/23(월) 예약 시도", "수하물":"위탁수하물 처리 절차는 예약 시·카운터에서 확인", "운행·소요":"예약 페이지에서 확인" },
+      note:"12/23 메인 동선. 예약 가능 기간은 운영사 정책에 따라 변경될 수 있으므로 11/22에 실제 예약 페이지에서 다시 확인.", links:[] },
+    { name:"HZMB Shuttle Bus (Golden Bus · 港珠澳大橋穿梭巴士) — 12/26 Macao → HK", recommended:true, status:"PLANNED",
       rows:{ "운행":"24시간 · 피크 5분 / 평시 10–15분 간격", "소요":"버스 약 45분 + 홍콩·마카오 출입경", "가격":"HKD 65 (06:00–23:59) / HKD 70 (00:00–05:59)", "예약":"불필요 (현장 구매)", "입국심사":"HZMB 홍콩 口岸·마카오 口岸에서 각각", "수하물":"직접 들고 탑승 (캐리어 가능)", "첫차/막차":"24시간 운행", "야간":"가능" },
-      note:"공항 → B4 버스(HKD 9.8, 24시간, 10분)로 홍콩 口岸 연결. 마카오 口岸 ↔ 갤럭시 무료셔틀(Diamond Lobby, 10:00–23:00)로 숙소 Broadway 연결. 이번 일정 D1·D4 모두 이 방법 사용 (D4는 택시 기본·셔틀 대안).",
-      links:[{label:"HZMB 버스", url:"https://www.hzmbus.com/"}] },
+      note:"12/26에만 사용 (일반 유료 · 홍콩 口岸에서 홍콩 입국). 홍콩 口岸 → B4 버스(HKD 9.8, 24시간, 약 10분)로 공항·Regal Airport Hotel. 12/23에는 사용하지 않음 (Macau HK Airport Direct 이용).",
+      links:[{label:"HZMB Golden Bus 공식", url:"https://www.hzmbus.com/"}] },
     { name:"TurboJET 페리 (셩완 ↔ 마카오 외항)", status:"CANDIDATE",
       rows:{ "운행":"07:30–23:00, 수시 운항", "소요":"약 60분", "가격":"Economy 평일 HKD 175 · 주말 190 · 야간 220 (요금표 확인 필요)", "예약":"연휴 사전 구매 권장", "입국심사":"페리터미널", "수하물":"무료 허용 한도 있음 (확인)", "첫차/막차":"07:30 / 23:00", "야간":"23시까지" },
       note:"홍콩 시내(센트럴·셩완)에서 출발할 때 유리. 공항 출발이면 HZMB가 빠르고 저렴.",
@@ -659,7 +670,7 @@ const tripData = {
     { category:"숙박", item:"마카오 3박 — Broadway Hotel (NOL 예약 완료 · Broadway King · 조식 불포함)", amount:726939, currency:"KRW", status:"confirmed" },
     { category:"숙박", item:"홍콩 1박 — Regal Airport Hotel (NOL 예약 완료 · Superior Room · 조식 불포함)", amount:188829, currency:"KRW", status:"confirmed" },
     { category:"공연", item:"House of Dancing Water Grand 2석 — 미예매 추정", amount:2196, currency:"MOP", status:"unbooked" },
-    { category:"교통", item:"HZMB 금색버스 왕복 + B4 버스 (2인)", amount:300, currency:"HKD" },
+    { category:"교통", item:"HZMB Golden Bus 편도(12/26) + B4 버스 (2인) · 12/23 Macau HK Airport Direct는 무료", amount:150, currency:"HKD" },
     { category:"교통", item:"마카오 택시·셔틀", amount:500, currency:"MOP" },
     { category:"교통", item:"홍콩 공항철도·MTR·스타페리·택시", amount:700, currency:"HKD" },
     { category:"관광", item:"피크트램 왕복 + Sky Terrace 428", amount:450, currency:"HKD" },
@@ -684,6 +695,7 @@ const tripData = {
   checklist: [
     { id:"flight-out", label:"항공권: 인천 → 홍콩 UO617 (12/23 06:45) — 예약 완료", ref:"PNR 비공개 · 비공개", status:"CONFIRMED", done:true },
     { id:"flight-ret", label:"항공권: 홍콩 → 인천 UO618 (12/27 07:15) — 예약 완료", ref:"PNR 비공개 · 비공개", status:"CONFIRMED", done:true },
+    { id:"airport-direct", label:"[예약 대기] Macau HK Airport Direct 무료버스 — 12/23 HKG → Macao · 성인 2명", ref:"11/22(일)부터 예약창 확인 · 늦어도 11/23(월) 예약 시도 · 예약 가능 기간은 운영사 정책에 따라 변경 가능", status:"CHECK" },
     { id:"icn-transport", label:"12/23 03:45 인천공항 T1 도착 수단 (자차·택시·전날 숙박)", ref:"", status:"CHECK" },
     { id:"show-hodw", label:"공연: House of Dancing Water 12/24 19:30 (Grand)", ref:"예약번호: ", status:"CHECK" },
     { id:"hotel-macau-confirmed", label:"마카오 호텔: Broadway Hotel 12/23–12/26 (3박) — 예약 완료", ref:"예약번호: 비공개 · NOL · Broadway King · 조식 불포함 · ₩726,939", status:"CONFIRMED", done:true },
@@ -701,6 +713,7 @@ const tripData = {
 
   priority: [
     { when:"✔ 예약 완료", items:["항공권 왕복 UO617 / UO618","마카오 Broadway Hotel 3박 (12/23–12/26)","홍콩 Regal Airport Hotel 1박 (12/26–12/27)"] },
+    { when:"⏰ 2026-11-22(일) ~ 11-23(월) — 높은 우선순위", items:["★ Macau HK Airport Direct 무료버스 (12/23 HKG → Macao, 성인 2명) — 예약 대기: 11/22부터 예약창 확인, 늦어도 11/23 예약 시도"] },
     { when:"지금 예약 (10월)", items:["① House of Dancing Water — 12월 일정 공개 즉시 예매 (14일 전 조기예매 20% 할인)","② António 12/25 점심 등 크리스마스 식당 예약","인천공항 새벽 도착 수단 결정"] },
     { when:"1~2개월 전 (10월 말~11월)", items:["12/24·12/25 저녁 식당 확정 (현재 Broadway Food Street 계획 — 예약 불필요)","여행자 보험 · eSIM 구매","Macau 2049 관람 여부 결정","크리스마스 행사(리조트·Light Up Macau) 발표 확인"] },
     { when:"1~2주 전 (12월 초)", items:["공연 시간·휴연일 최종 확인","갤럭시 무료셔틀 시간표(HZMB 口岸·StarWorld ↔ Galaxy) 12월 운행 확인","Symphony of Lights 운영 여부 확인","③ 피크트램 온라인 티켓 (12/26)","날씨·HZMB 운행 공지 확인"] },
@@ -708,7 +721,8 @@ const tripData = {
   ],
 
   checkNeeded: [
-    { title:"아직 예약하지 않은 항목", detail:"House of Dancing Water 예매 · António 12/25 점심 예약 · 피크트램 온라인 티켓 (항공권·숙소 4박은 모두 예약 완료)." },
+    { title:"Macau HK Airport Direct 무료버스 — 예약 대기 (11/22부터)", detail:"12/23 홍콩공항 → 마카오 무료 직통버스는 현재 예약 페이지 기준 약 1개월 전부터 날짜 선택이 가능한 것으로 보임. 11/22부터 예약창 확인, 늦어도 11/23에 예약 시도. 예약 가능 기간은 운영사 정책에 따라 변경될 수 있으므로 11/22에 실제 예약 페이지에서 다시 확인. 위탁수하물 처리 절차도 함께 확인." },
+    { title:"아직 예약하지 않은 항목", detail:"Macau HK Airport Direct 무료버스(11/22~) · House of Dancing Water 예매 · António 12/25 점심 예약 · 피크트램 온라인 티켓 (항공권·숙소 4박은 모두 예약 완료)." },
     { title:"House of Dancing Water 12월 공연 일정 미공개", detail:"2026 하절기 기준 16:30/19:30 (수–일). 12/23–26은 수–토라 가능성 높지만 미확정. 공식 예매처에서 날짜 열리는지 주기적 확인." },
     { title:"Macau 2049 12월 회차", detail:"8/1부터 15:00 공연. 12월 휴연일 확인 필요." },
     { title:"크리스마스 이벤트 2026 미공개", detail:"리조트별 크리스마스 장식·Light Up Macau 2026 일정 발표 대기 (11월 예상)." },
@@ -716,12 +730,13 @@ const tripData = {
     { title:"Regal Airport Hotel 숙박세 안내", detail:"바우처에 홍콩 호텔숙박세(HAT) 3%가 총 숙박비에 영향을 줄 수 있다는 안내 — 결제금액 ₩188,829에 포함 여부를 체크인 시 확인 (예산엔 추가 반영 안 함)." },
     { title:"Broadway 투숙 혜택 · 요청사항", detail:"Grand Resort Deck 무료 이용은 날씨·계절 휴장에 따라 12월 운영 여부 확인 필요. 조기 체크인·고층·전망 등 요청사항은 보장되지 않음 (공식 체크인 15:00)." },
     { title:"갤럭시 무료셔틀 12월 운행", detail:"공식: HZMB ↔ Galaxy 10:00–23:00(Diamond Lobby), StarWorld ↔ Galaxy 09:30–22:00(Crystal Lobby). 연휴 기간 변경 여부와 Galaxy ↔ Broadway 실내 도보 경로 재확인." },
-    { title:"새벽 공항 동선 (Regal Airport Hotel → T2 Aisle U)", detail:"HK Express 체크인은 T2. 00:31–05:29엔 체크인 후 T1으로 돌아가 출국심사. 12/26 밤 체크인 후 미리 걸어보기." },
+    { title:"새벽 공항 동선 (Regal → T2 U구역 → T1)", detail:"HK Express 체크인·수하물 위탁은 T2. 00:31–05:29엔 T2 출국시설·APM 운영 중단 → T1까지 도보 약 15분 후 보안검색·출국심사. 12/26 밤 체크인 후 Regal → T2 경로 미리 걸어보기." },
     { title:"인천공항 03:45 도착 수단", detail:"새벽 공항철도·버스 운행 전 — 자차(장기주차)·택시·전날 공항 근처 숙박 중 결정." },
     { title:"요금 재확인", detail:"공항철도 요금, TurboJET 요금표, 피크트램 공휴일 요금, 마카오 박물관 입장료." }
   ],
 
   history: [
+    { date:"2026-10-06", changes:["공항↔숙소 이동 동선 확정 및 마카오 무료버스 예약 일정 추가","12/23 HKG → Macao: Macau HK Airport Direct 사용 예정 (홍콩 입국 없이 T1 제한구역 E2 → HZMB Macao Port, 예약 대기)","11/22부터 무료버스 예약창 확인 (늦어도 11/23 예약 시도 · 예약 가능 기간은 변경될 수 있음)","12/26 Macao → Hong Kong: Golden Bus 사용 (유료 · 홍콩 입국)","Regal Airport Hotel 선택 이유 추가","12/27 T2 체크인 후 T1 도보 이동 절차 추가 ('왜 이렇게 일찍 출발하나요?' 안내)","교통 예산 조정: Golden Bus 왕복 → 편도 (12/23 무료버스)"] },
     { date:"2026-10-05", changes:["Regal Airport Hotel 예약 확정","12/26~12/27 Regal Airport Hotel 예약 완료 (NOL · 체크인 12/26 토 15:00 / 공식 체크아웃 12/27 일 12:00, 실제 퇴실은 새벽)","Superior Room / 성인 2명 / 조식 불포함","1박 ₩188,829 반영 (HAT 3% 안내는 추가 반영 안 함)","마지막 홍콩 숙박 미확정 상태 제거 · 마지막 밤 숙박 비교·공항 호텔 후보는 '예약 전 비교 기록'으로 이동","숙박 4박 전체 예약 완료 (숙박 확정 합계 ₩915,768)","DAY 4 / DAY 5 동선 업데이트","예산 및 체크리스트·예약 우선순위·확인 필요 업데이트"] },
     { date:"2026-10-05", changes:["항공권 및 Broadway Hotel 예약 확정 반영","UO617 / UO618 항공권 확정 정보 반영 (전자항공권 재대조 · 체크리스트 왕복 2건 완료)","Broadway Hotel 12/23~12/26 예약 확정 (NOL · 체크인 15:00 / 체크아웃 11:00)","Broadway King / 조식 불포함 / 3박 726,939원 (1박 평균 242,313원) 반영","일정 및 예산 업데이트 (확정·예상·미예약 비용 구분, 도착 13~14시는 요청사항일 뿐 공식 체크인 15:00)","호텔 비교 상태 정리 (마카오 후보·Agoda 비교 → '예약 전 비교 기록'으로 접기)","예약 체크리스트 업데이트","12/26 홍콩 숙박은 미확정 상태 유지"] },
     { date:"2026-10-05", changes:["공개용 publish/index.html 빌드 구조 추가 (python tools/build_publish.py) — 탑승객 이름·PNR·예약번호 자동 마스킹 및 잔존 검사","탑승객 이름을 meta.travelerNames 한 곳으로 모음 (요약 카드 하드코딩 제거)"] },
@@ -739,7 +754,7 @@ const tripData = {
     { label:"MGM — Macau 2049", url:"https://macau2049.mgm.mo/en" },
     { label:"HK Express — HKIA T2 이전 안내", url:"https://www.hkexpress.com/Plan/Travel/HKIA-T2" },
     { label:"TurboJET 운항표·요금", url:"https://www.turbojet.com.hk/en/routing-sailing-schedule/hong-kong-macau/sailing-schedule-fares" },
-    { label:"HZMB 셔틀버스", url:"https://www.hzmbus.com/" },
+    { label:"HZMB Shuttle Bus (Golden Bus)", url:"https://www.hzmbus.com/" },
     { label:"The Londoner — 교통·셔틀 안내", url:"https://www.londonermacao.com/getting-to-macau.html" },
     { label:"마카오 관광청 행사", url:"https://www.macaotourism.gov.mo/en/whatson" },
     { label:"A Symphony of Lights (Avenue of Stars)", url:"https://www.avenueofstars.com.hk/en/a-symphony-of-lights/" },
@@ -846,6 +861,7 @@ const tripData = {
         <div class="tl-item ${it.key?"key":""}"><div class="card">
           <div class="tl-head"><div><div class="tl-time">${esc(it.time)}</div><div class="tl-place">${esc(it.place)}</div></div><div style="text-align:right">${badge(it.status)}<br><span class="region">${esc(it.region)}</span></div></div>
           ${it.desc && it.desc.length ? `<ul class="tight small">${it.desc.map(x => `<li>${esc(x)}</li>`).join("")}</ul>` : ""}
+          ${it.why ? `<div class="why"><b>ⓘ ${esc(it.why.q)}</b><div>${esc(it.why.a)}</div></div>` : ""}
           <div class="tl-row"><span>🚶 이동 <b>${esc(it.move)}</b></span><span>⏱ <b>${esc(it.moveTime)}</b></span><span>💰 <b>${esc(it.cost)}</b></span>${rsv(it.booking)}</div>
           ${it.map ? linkBtns([], it.map) : ""}
         </div></div>`).join("")}</div>`;

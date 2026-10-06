@@ -124,13 +124,8 @@ ul.tight li{margin:2px 0}
 .tl-head{display:flex;justify-content:space-between;gap:8px;align-items:flex-start}
 .region{font-size:11px;padding:1px 7px;border-radius:6px;background:#eef1f7;color:var(--muted);white-space:nowrap}
 
-/* Compare */
-.cmp .row{display:flex;justify-content:space-between;gap:10px;border-top:1px dashed var(--line);padding:6px 0;font-size:13.5px}
-.cmp .row span:first-child{color:var(--muted);flex:0 0 96px}
-.cmp .row span:last-child{text-align:right}
+/* Verdict box (교통·Agoda 카드) */
 .verdict{margin-top:10px;font-size:13.5px;padding:8px 10px;border-radius:8px;background:#f4f6fb}
-.card.reject{opacity:.85}
-.card.reject .verdict{background:#fdf1f1;color:#a23a3a}
 
 /* Filters */
 .filters{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:12px}
@@ -252,9 +247,7 @@ footer{padding:30px 0 50px;color:var(--muted);font-size:13px}
   <section id="summary"><div class="sec-title"><span class="num">①</span><h2>여행 요약</h2><span class="sub" id="asOf"></span></div><div class="status-legend"></div><div class="grid g4" id="summaryCards"></div></section>
   <section id="alerts"><div class="sec-title"><span class="num">⑪</span><h2>확인 필요</h2><span class="sub">아직 확정되지 않은 정보 — 예약 전 반드시 재확인</span></div><div class="alert" id="checkList"></div></section>
   <section id="flights"><div class="sec-title"><span class="num">②</span><h2>항공편</h2><span class="sub">전자항공권(Trip.com) 기준 — 일정의 절대 시간 제약</span></div><div class="grid g2" id="flightCards"></div></section>
-  <section id="timeline"><div class="sec-title"><span class="num">③</span><h2>전체 일정 Timeline</h2><span class="sub">추천안(C안) 기준 · 탭을 눌러 날짜 선택</span></div><div class="status-legend"></div><div class="daytabs" id="dayTabs"></div><div id="dayBody"></div></section>
-  <section id="compare"><div class="sec-title"><span class="num">③-1</span><h2>일정안 비교 (A / B / C)</h2><span class="sub">C안 채택 · 항공권·숙소 4박 예약 완료</span></div><div class="grid g3" id="planCards"></div>
-    <details class="card" style="margin-top:16px"><summary>예약 전 비교 기록 — 마지막 날 밤(12/26) 숙박 비교 (Regal Airport Hotel 예약 완료로 결정 종료)</summary><div class="small muted" style="margin:6px 0 10px">귀국편 07:15 → 공항 도착 목표 04:15 기준으로 비교했던 기록입니다.</div><div class="grid g3" id="lastNightCards"></div></details></section>
+  <section id="timeline"><div class="sec-title"><span class="num">③</span><h2>전체 일정 Timeline</h2><span class="sub">실제 예약 기준 단일 일정 · 탭을 눌러 날짜 선택</span></div><div class="status-legend"></div><div class="daytabs" id="dayTabs"></div><div id="dayBody"></div></section>
   <section id="map"><div class="sec-title"><span class="num">④</span><h2>지역별 장소 &amp; 동선</h2><span class="sub">Google Maps 검색 링크</span></div><div class="grid g3" id="regionCards"></div></section>
   <section id="shows"><div class="sec-title"><span class="num">⑤</span><h2>공연 &amp; 무료 쇼</h2><span class="sub">이번 여행의 핵심 이벤트</span></div><div class="grid g2" id="showCards"></div></section>
   <section id="hotels"><div class="sec-title"><span class="num">⑥</span><h2>호텔</h2><span class="sub">숙박 4박 전부 예약 완료 — 마카오 3박 + 홍콩 1박</span></div>
@@ -306,7 +299,6 @@ const tripData = {
     concept: "마카오 메인(약 70%) + 홍콩 핵심만(약 30%). 코타이 리조트 3박 — Broadway Hotel 3박(예약 완료) · House of Dancing Water 관람 · 코타이/갤럭시 중심 크리스마스 여행. 12/26 홍콩 1박은 12/27 07:15 조기 출국을 위해 Regal Airport Hotel(예약 완료).",
     tags: ["마카오 중심 70%", "공연: House of Dancing Water 12/24 19:30 예약 완료", "항공권 왕복 예약 완료", "숙소 4박 예약 완료 (Broadway 3박 + Regal Airport 1박)", "크리스마스 시즌"],
     stay: { macau: "3박 · 약 70시간", hongkong: "1박 · 약 15시간 (+공항)" },
-    recommendedPlan: "C",
     // 호텔 구분 — 예약 전에는 confirmed 를 null 로 두고, 예약 후 호텔명·예약번호 입력
     // 마카오 숙소 (예약 완료 · NOL 바우처 기준). booking 의 번호들은 publish 빌드에서 자동 마스킹됨
     hotelPlan: {
@@ -365,34 +357,6 @@ const tripData = {
   bookingLinks: {
     macauAirportDirect: { label:"Macau HK Airport Direct 예매하기", url:"https://ticket.macauhkairportbus.com/en/" }
   },
-
-  // 일정 비교
-  plans: [
-    { id:"A", name:"A안 — 마카오 집중 + 홍콩 시내 마지막 밤", status:"OPTION",
-      flow:"12/23 공항→바로 마카오(3박) → 12/26 홍콩 시내 이동·관광·1박 → 12/27 새벽 공항",
-      rows:{ "이동시간":"HK공항→마카오 약 2.5h / 마카오→HK시내 약 2h / 새벽 시내→공항 40–60분", "마카오 체류":"약 70시간", "홍콩 체류":"약 15시간", "피로도":"중상 (새벽 택시·심야버스)", "비용":"중 (시내 호텔 + 새벽 택시 HKD 300–450)", "귀국 안정성":"보통 — 공항철도 첫차 05:50라 04:15 도착 불가, 택시/심야버스 의존" },
-      pros:["홍콩 시내 야경 늦게까지 가능","시내 호텔 선택지 많음"], cons:["새벽 3시대 택시/N버스 의존","크리스마스 연휴 시내 호텔 비쌈"], verdict:"새벽 이동 리스크 때문에 차선 — C안 채택으로 비교 종료" },
-    { id:"B", name:"B안 — 홍콩 1일 관광 후 마카오", status:"OPTION",
-      flow:"12/23 홍콩 관광·홍콩 1박 → 12/24 마카오(2박) → 12/26 홍콩 복귀·1박 → 12/27 귀국",
-      rows:{ "이동시간":"짐 들고 3회 숙소 이동", "마카오 체류":"약 48시간", "홍콩 체류":"약 40시간", "피로도":"상 (새벽 출국 당일 종일 관광 + 숙소 3곳)", "비용":"상 (홍콩 2박 — 홍콩 호텔이 더 비쌈)", "귀국 안정성":"공항호텔이면 높음" },
-      pros:["홍콩을 여유 있게 볼 수 있음"], cons:["마카오 비중 50% 이하 → 요구사항 미충족","12/23은 03시대 기상 후 종일 관광 → 과로","숙소 3곳, 짐 이동 2회 추가"], verdict:"마카오 메인 목표와 맞지 않아 비추천 — C안 채택으로 비교 종료" },
-    { id:"C", name:"C안 — 마카오 3박 + 공항호텔 1박 (채택)", status:"LOCKED", recommended:true,
-      flow:"12/23 공항 제한구역에서 Macau HK Airport Direct로 바로 마카오(홍콩 입국 없음 · Broadway Hotel 3박 · 예약 완료) → 12/26 오전 HZMB Golden Bus로 홍콩 복귀, Regal Airport Hotel에 짐 → 오후·저녁 홍콩 핵심(피크·스타페리·침사추이) → Regal Airport Hotel 1박 (예약 완료) → 12/27 04:00 도보로 공항 체크인",
-      rows:{ "이동시간":"HK공항→코타이 약 2.5h / 마카오→HK공항 약 2h / 호텔→체크인 도보 10–15분", "마카오 체류":"약 70시간 (≈70%)", "홍콩 체류":"약 15시간 (≈30%)", "피로도":"하–중", "비용":"숙박 확정 ₩915,768 (Broadway ₩726,939 + Regal ₩188,829)", "귀국 안정성":"매우 높음 — 교통수단 의존 없음" },
-      pros:["12/23은 공항 제한구역에서 마카오로 바로 이동(홍콩 입국 없음), 12/26은 Golden Bus로 공항 옆 홍콩 口岸 도착 → 시내 경유 불필요","마카오 숙소 1곳에 3연박 (짐 이동 최소)","홍콩 오후 일정 동안 짐은 Regal Airport Hotel에 맡김","새벽 귀국 리스크 최소"], cons:["홍콩 야시장·몽콕은 시간상 제외","홍콩 마지막 밤은 21시 전후 복귀 필요"], verdict:"✅ 채택 — 항공권·숙소 4박 모두 예약 완료" }
-  ],
-
-  lastNight: [
-    { id:"A", name:"A. 마카오 숙박", status:"OPTION", reject:true,
-      rows:{ "공항 도착":"03:30–04:30 (변동 큼)", "첫차/막차":"HZMB 금색버스 24시간 (야간 HKD 70) + B4 버스 24시간", "이동시간":"코타이→HZMB 마카오항 20–30분 + 출입경 2회 + 버스 45분 + B4 10분 ≈ 1.5–2h", "비용":"저렴 (버스 HKD 80/인 + 택시)", "피로도":"매우 높음 (01:30 출발, 사실상 무수면)", "리스크":"출입경 대기·택시 수급·안개/기상으로 교량 통제 시 대안 없음", "항공편 놓칠 위험":"높음" },
-      verdict:"❌ 제외 — 새벽 국경 2회 통과는 현실적으로 위험" },
-    { id:"B", name:"B. 홍콩 시내 숙박", status:"OPTION",
-      rows:{ "공항 도착":"04:00–04:30 (택시)", "첫차/막차":"공항철도 첫차 05:50 → 04:15 도착 불가 / 심야버스(N계열) 운행 — 노선·시간 확인 필요", "이동시간":"택시 35–50분", "비용":"호텔 + 새벽 택시 약 HKD 300–450", "피로도":"중 (03:00 기상)", "리스크":"새벽 택시 호출 실패 가능성", "항공편 놓칠 위험":"낮음–중" },
-      verdict:"△ 가능하지만 C보다 이점 적음" },
-    { id:"C", name:"C. 홍콩 공항 근처 숙박 (채택 · 예약 완료)", status:"CONFIRMED", recommended:true,
-      rows:{ "공항 도착":"04:10 (도보)", "첫차/막차":"무관 — 리갈 에어포트 호텔은 실내 연결통로로 T1 연결", "이동시간":"도보 10–15분 (T1 경유 T2 Aisle U, 실제 동선 확인 필요)", "비용":"Regal Airport Hotel ₩188,829 (예약 완료)", "피로도":"낮음 (03:30 기상)", "리스크":"거의 없음", "항공편 놓칠 위험":"매우 낮음" },
-      verdict:"✅ 채택 — Regal Airport Hotel 예약 완료 (12/26 → 12/27)" }
-  ],
 
   // 일정 (추천안 C) — 시간순
   itinerary: [
@@ -775,6 +739,7 @@ const tripData = {
   ],
 
   history: [
+    { date:"2026-10-06", changes:["기존 A/B/C 일정안 비교 종료 및 실제 예약 기준 단일 일정으로 통합"] },
     { date:"2026-10-06", changes:["North 예약 확정 및 일정 상태체계 개편","12/24 17:00 North / 북방관 예약 완료 (The Venetian Macao · Level 1 · 성인 2명)","1주년 기념 식사 반영 (좋은 테이블 요청 — 보장되지 않음) · 먹어볼 메뉴 메모: 뱡뱡면·가지튀김","DAY 2 식사 → HoDW 동선 확정 (North 17:00 → 도보 → 19:00 극장 도착 → 19:30 공연)","CONFIRMED / LOCKED / PLANNED / OPTION 상태 구분 + CHECK는 보조 배지로 분리 · 상태 범례 추가","사용자가 결정한 이동 동선을 LOCKED로 재분류 (12/23 E2→Airport Direct→Galaxy→Broadway, 12/26 Broadway→Galaxy→HZMB→Golden Bus→B4→Regal, 12/27 Regal→T2→T1)","미확정 관광 일정은 PLANNED 유지 · 기존 CANDIDATE는 OPTION으로 통일"] },
     { date:"2026-10-06", changes:["House of Dancing Water 예약 완료 및 무료버스 예약정보 추가","12/24 19:30 House of Dancing Water 예약 완료 (e-ticket·영수증 대조)","Grand / Section 500 / Row C / Seats 512–513","Early Bird × 2 / MOP 1,756 (외화 확정 · 원화 청구액은 미확정이라 환산값은 예상으로 표시)","확인 필요에서 HoDW 제거","체크리스트 완료 처리 · 예약 우선순위 정리","DAY 2 공연 일정 확정","Macau HK Airport Direct 예약 입력정보 추가 (Direction · Date · Flight · Arrival · Passengers)"] },
     { date:"2026-10-06", changes:["Macau HK Airport Direct 예약 항목 강조","확인 필요 섹션 상단에 강조 카드 추가 (우선 확인 · 예약 대기 11/22부터 · 12/23 HKG → Macao · 예매 버튼)","예약 링크를 bookingLinks 한 곳에서 관리 → 확인 필요·예약 우선순위·체크리스트·교통·DAY 1에서 재사용","위탁수하물 안내 갱신 (E2 환승 카운터에서 baggage tag receipt 제시 → 수하물 이송)"] },
@@ -849,7 +814,7 @@ const tripData = {
   $("heroText").textContent = D.meta.concept;
   $("heroTags").innerHTML = D.meta.tags.map(t => `<span>${esc(t)}</span>`).join("");
   $("asOf").textContent = "최종 수정 " + D.meta.lastUpdated;
-  const navItems = [["summary","요약"],["alerts","⚠ 확인필요"],["flights","항공"],["timeline","일정"],["compare","일정안 비교"],["map","지역·지도"],["shows","공연"],["hotels","호텔"],["agoda-hotels","호텔 비교 기록"],["food","음식"],["transport","교통"],["budget","예산"],["checklist","체크리스트"],["history","업데이트"]];
+  const navItems = [["summary","요약"],["alerts","⚠ 확인필요"],["flights","항공"],["timeline","일정"],["map","지역·지도"],["shows","공연"],["hotels","호텔"],["agoda-hotels","호텔 비교 기록"],["food","음식"],["transport","교통"],["budget","예산"],["checklist","체크리스트"],["history","업데이트"]];
   $("nav").innerHTML = navItems.map(([id,l]) => `<a href="#${id}">${l}</a>`).join("");
 
   // Budget totals
@@ -929,16 +894,6 @@ const tripData = {
         </div></div>`).join("")}</div>`;
     document.querySelectorAll(".daytab").forEach(b => b.onclick = () => { curDay = +b.dataset.day; try{localStorage.setItem("hkmo2026-day",curDay);}catch(e){} renderDay(); });
   }
-
-  // ③-1 Plans
-  const cmpCard = (p) => `<div class="card ${p.recommended?"top":""} ${p.reject?"reject":""} cmp">${p.recommended?'<span class="ribbon">RECOMMENDED</span>':""}
-    <div class="tl-head"><h3>${esc(p.name)}</h3>${stBadges(p)}</div>
-    ${p.flow ? `<p class="small muted" style="margin:6px 0">${esc(p.flow)}</p>` : ""}
-    ${Object.entries(p.rows).map(([k,v]) => `<div class="row"><span>${esc(k)}</span><span>${esc(v)}</span></div>`).join("")}
-    ${p.pros ? `<details><summary>장점 / 단점</summary><div class="small"><b>장점</b><ul class="tight">${p.pros.map(x=>`<li>${esc(x)}</li>`).join("")}</ul><b>단점</b><ul class="tight">${p.cons.map(x=>`<li>${esc(x)}</li>`).join("")}</ul></div></details>` : ""}
-    <div class="verdict">${esc(p.verdict)}</div></div>`;
-  $("planCards").innerHTML = D.plans.map(cmpCard).join("");
-  $("lastNightCards").innerHTML = D.lastNight.map(cmpCard).join("");
 
   // ④ Regions
   $("regionCards").innerHTML = D.regions.map(r => `<div class="card"><h3>${esc(r.name)}</h3><div class="meta">${esc(r.note)}</div>

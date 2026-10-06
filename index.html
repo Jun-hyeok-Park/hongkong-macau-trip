@@ -190,6 +190,14 @@ footer{padding:30px 0 50px;color:var(--muted);font-size:13px}
 .fit{font-size:12.8px;margin-top:8px}
 .fit div{display:flex;justify-content:space-between;gap:8px;border-top:1px dashed var(--line);padding:4px 0}
 .fit div span:first-child{color:var(--muted)}
+.hl-card{background:#fff;border:2px solid var(--gold);border-left:6px solid var(--navy);border-radius:12px;padding:12px 14px;margin:8px 0 12px;box-shadow:var(--shadow)}
+.hl-card h4{font-size:16px;color:var(--navy);margin:6px 0 4px}
+.hl-badges{display:flex;flex-wrap:wrap;gap:6px}
+.hl-badge{font-size:11.5px;font-weight:700;padding:2px 9px;border-radius:99px;background:var(--gold-soft);color:#7a5a12;border:1px solid #e6cf95}
+.hl-badge.hi{background:var(--navy);color:var(--gold);border-color:var(--navy)}
+.hl-route,.hl-action{font-size:13.5px;font-weight:600;color:var(--text)}
+.btn.book{background:var(--navy);color:#fff;border-color:var(--navy);font-weight:700;padding:8px 14px;font-size:13.5px}
+.btn.book:hover{background:var(--navy-2);color:var(--gold)}
 .why{margin-top:8px;padding:8px 10px;border-radius:8px;background:#eef4ff;border:1px solid #c9dafb;font-size:12.8px;line-height:1.55}
 .why b{color:var(--navy)}
 .big-count{font-size:30px;font-weight:800;color:var(--gold)}
@@ -336,6 +344,11 @@ const tripData = {
     "→ 쇼핑 많을 경우 귀국 전 20kg 초과 주의 (휴대용 저울 추천)"
   ],
 
+  // 예약 링크 — 여러 섹션에서 bookingRef 로 재사용 (URL은 여기만 수정)
+  bookingLinks: {
+    macauAirportDirect: { label:"Macau HK Airport Direct 예매하기", url:"https://ticket.macauhkairportbus.com/en/" }
+  },
+
   // 일정 비교
   plans: [
     { id:"A", name:"A안 — 마카오 집중 + 홍콩 시내 마지막 밤", status:"CANDIDATE",
@@ -370,8 +383,8 @@ const tripData = {
       items:[
         { time:"03:45", place:"인천국제공항 T1", region:"인천", desc:["출발 3시간 전 도착 · 위탁수하물 1인 20kg"], move:"자차/택시 또는 전날 공항 근처 숙박 (공항철도 첫차로는 불가)", moveTime:"—", cost:"—", booking:"recommended", status:"CHECK" },
         { time:"06:45–09:50", place:"UO617 인천 → 홍콩", region:"항공", desc:["HK Express · 도착 T1"], move:"항공", moveTime:"4h05m", cost:"예약 완료", booking:"none", status:"CONFIRMED", key:true },
-        { time:"09:50–10:30", place:"HKG T1 도착 → 제한구역 E2 · Macau HK Airport Direct 카운터", region:"홍콩", map:"Hong Kong International Airport Terminal 1", desc:["홍콩 입국심사 진행하지 않음 — 제한구역(E2)에서 바로 마카오행 무료 직통버스 수속","위탁수하물(1인 20kg) 처리 방법은 예약 시·카운터에서 확인","홍콩에 입국하지 않으므로 HKD·옥토퍼스는 D4에 준비"], move:"도보 (공항 내)", moveTime:"약 30–40분", cost:"—", booking:"required", status:"CHECK" },
-        { time:"10:30–12:30", place:"Macau HK Airport Direct 무료 직통버스 → HZMB Macao Port", region:"이동", desc:["홍콩공항 제한구역 → HZMB Macao Port 직행 (무료 프로모션 대상 · 예약 대기)","출발 시각은 예약 시 선택 — 11/22부터 예약창 확인, 늦어도 11/23 예약 시도","※ 12/26에 타는 유료 HZMB Golden Bus와 다른 버스"], move:"Macau HK Airport Direct", moveTime:"출발 시각·소요시간 예약 시 확인", cost:"무료 (프로모션)", booking:"required", status:"CHECK", key:true },
+        { time:"09:50–10:30", place:"HKG T1 도착 → 제한구역 E2 · Macau HK Airport Direct 카운터", region:"홍콩", map:"Hong Kong International Airport Terminal 1", desc:["홍콩 입국심사 진행하지 않음 — 제한구역(E2)에서 바로 마카오행 무료 직통버스 수속","위탁수하물이 있는 경우 홍콩공항에서 직접 수하물을 찾지 않고 E2 환승 카운터로 이동해 baggage tag receipt를 제시하여 수하물 이송 절차를 진행한다. 실제 예약 시 운영 안내를 다시 확인.","홍콩에 입국하지 않으므로 HKD·옥토퍼스는 D4에 준비"], move:"도보 (공항 내)", moveTime:"약 30–40분", cost:"—", booking:"required", status:"CHECK" },
+        { time:"10:30–12:30", place:"Macau HK Airport Direct 무료 직통버스 → HZMB Macao Port", region:"이동", desc:["홍콩공항 제한구역 → HZMB Macao Port 직행 (무료 프로모션 대상 · 예약 대기)","출발 시각은 예약 시 선택 — 11/22부터 예약창 확인, 늦어도 11/23 예약 시도","※ 12/26에 타는 유료 HZMB Golden Bus와 다른 버스"], move:"Macau HK Airport Direct", moveTime:"출발 시각·소요시간 예약 시 확인", cost:"무료 (프로모션)", booking:"required", status:"CHECK", key:true, bookingRef:"macauAirportDirect" },
         { time:"12:30–12:45", place:"HZMB Macao Port — 마카오 입국심사", region:"이동", map:"HZMB Macau Port", desc:["이번 여행 첫 입국심사는 마카오에서 진행","캐리어 들고 Galaxy 셔틀 승차장으로 이동"], move:"도보", moveTime:"약 15분 (+대기)", cost:"—", booking:"none", status:"PLANNED" },
         { time:"12:45–13:30", place:"갤럭시 무료셔틀 → Galaxy Macau (Diamond Lobby)", region:"코타이", map:"Galaxy Macau Diamond Lobby", desc:["HZMB 마카오 口岸 버스 터미널 → Galaxy 무료셔틀 (공식: 10:00–23:00, 평균 10–25분 간격, 약 25분)","Galaxy Diamond Lobby 하차 → 실내 연결로 Broadway Hotel까지 도보 (약 5–10분, 현장 안내 확인)","대안: 택시 약 20–25분 · MOP 120–150 (캐리어 많거나 셔틀 대기 길 때)"], move:"갤럭시 무료셔틀 + 도보", moveTime:"대기 포함 30–45분", cost:"무료 (택시 MOP 120–150)", booking:"none", status:"PLANNED", key:true },
         { time:"13:30–15:00", place:"Broadway Hotel 도착 · 짐 보관 · Broadway Food Street 점심", region:"코타이", map:"Broadway Food Street Macau", desc:["13:00~14:00 호텔 도착 예정 / 공식 체크인 15:00","Early check-in requested, subject to availability — 조기 체크인 확정 아님","체크인 전 프런트/1층에서 짐 보관 → 호텔 바로 앞 Broadway Food Street 로컬 점심"], move:"도보 (호텔 바로 앞)", moveTime:"1–3분", cost:"MOP 250 (2인)", booking:"none", status:"PLANNED" },
@@ -645,8 +658,8 @@ const tripData = {
 
   transport: [
     { name:"Macau HK Airport Direct — 12/23 HKG → Macao", recommended:true, status:"CHECK",
-      rows:{ "구간":"홍콩공항 T1 제한구역(E2 카운터) → HZMB Macao Port", "입국심사":"홍콩 입국 없음 → 마카오 口岸에서 마카오 입국", "가격":"무료 (프로모션 대상)", "예약":"필요 · 예약 대기 — 2026-10-06 확인 시 달력은 11/06까지 선택 가능 (약 30~31일 전부터로 보임)", "예약 시점":"11/22(일)부터 예약창 확인 · 늦어도 11/23(월) 예약 시도", "수하물":"위탁수하물 처리 절차는 예약 시·카운터에서 확인", "운행·소요":"예약 페이지에서 확인" },
-      note:"12/23 메인 동선. 예약 가능 기간은 운영사 정책에 따라 변경될 수 있으므로 11/22에 실제 예약 페이지에서 다시 확인.", links:[] },
+      rows:{ "구간":"홍콩공항 T1 제한구역(E2 카운터) → HZMB Macao Port", "입국심사":"홍콩 입국 없음 → 마카오 口岸에서 마카오 입국", "가격":"무료 (프로모션 대상)", "예약":"필요 · 예약 대기 — 2026-10-06 확인 시 달력은 11/06까지 선택 가능 (약 30~31일 전부터로 보임)", "예약 시점":"11/22(일)부터 예약창 확인 · 늦어도 11/23(월) 예약 시도", "수하물":"위탁수하물이 있는 경우 홍콩공항에서 직접 수하물을 찾지 않고 E2 환승 카운터로 이동해 baggage tag receipt를 제시하여 수하물 이송 절차를 진행한다. 실제 예약 시 운영 안내를 다시 확인.", "운행·소요":"예약 페이지에서 확인" },
+      note:"12/23 메인 동선. 예약 가능 기간은 운영사 정책에 따라 변경될 수 있으므로 11/22에 실제 예약 페이지에서 다시 확인.", links:[], bookingRef:"macauAirportDirect" },
     { name:"HZMB Shuttle Bus (Golden Bus · 港珠澳大橋穿梭巴士) — 12/26 Macao → HK", recommended:true, status:"PLANNED",
       rows:{ "운행":"24시간 · 피크 5분 / 평시 10–15분 간격", "소요":"버스 약 45분 + 홍콩·마카오 출입경", "가격":"HKD 65 (06:00–23:59) / HKD 70 (00:00–05:59)", "예약":"불필요 (현장 구매)", "입국심사":"HZMB 홍콩 口岸·마카오 口岸에서 각각", "수하물":"직접 들고 탑승 (캐리어 가능)", "첫차/막차":"24시간 운행", "야간":"가능" },
       note:"12/26에만 사용 (일반 유료 · 홍콩 口岸에서 홍콩 입국). 홍콩 口岸 → B4 버스(HKD 9.8, 24시간, 약 10분)로 공항·Regal Airport Hotel. 12/23에는 사용하지 않음 (Macau HK Airport Direct 이용).",
@@ -695,7 +708,7 @@ const tripData = {
   checklist: [
     { id:"flight-out", label:"항공권: 인천 → 홍콩 UO617 (12/23 06:45) — 예약 완료", ref:"PNR 비공개 · 비공개", status:"CONFIRMED", done:true },
     { id:"flight-ret", label:"항공권: 홍콩 → 인천 UO618 (12/27 07:15) — 예약 완료", ref:"PNR 비공개 · 비공개", status:"CONFIRMED", done:true },
-    { id:"airport-direct", label:"[예약 대기] Macau HK Airport Direct 무료버스 — 12/23 HKG → Macao · 성인 2명", ref:"11/22(일)부터 예약창 확인 · 늦어도 11/23(월) 예약 시도 · 예약 가능 기간은 운영사 정책에 따라 변경 가능", status:"CHECK" },
+    { id:"airport-direct", label:"[예약 대기] Macau HK Airport Direct 무료버스 — 12/23 HKG → Macao · 성인 2명", ref:"11/22(일)부터 예약창 확인 · 늦어도 11/23(월) 예약 시도 · 예약 가능 기간은 운영사 정책에 따라 변경 가능", status:"CHECK", bookingRef:"macauAirportDirect" },
     { id:"icn-transport", label:"12/23 03:45 인천공항 T1 도착 수단 (자차·택시·전날 숙박)", ref:"", status:"CHECK" },
     { id:"show-hodw", label:"공연: House of Dancing Water 12/24 19:30 (Grand)", ref:"예약번호: ", status:"CHECK" },
     { id:"hotel-macau-confirmed", label:"마카오 호텔: Broadway Hotel 12/23–12/26 (3박) — 예약 완료", ref:"예약번호: 비공개 · NOL · Broadway King · 조식 불포함 · ₩726,939", status:"CONFIRMED", done:true },
@@ -713,7 +726,7 @@ const tripData = {
 
   priority: [
     { when:"✔ 예약 완료", items:["항공권 왕복 UO617 / UO618","마카오 Broadway Hotel 3박 (12/23–12/26)","홍콩 Regal Airport Hotel 1박 (12/26–12/27)"] },
-    { when:"⏰ 2026-11-22(일) ~ 11-23(월) — 높은 우선순위", items:["★ Macau HK Airport Direct 무료버스 (12/23 HKG → Macao, 성인 2명) — 예약 대기: 11/22부터 예약창 확인, 늦어도 11/23 예약 시도"] },
+    { when:"⏰ 2026-11-22(일) ~ 11-23(월) — 높은 우선순위", items:[{ text:"★ Macau HK Airport Direct 무료버스 (12/23 HKG → Macao, 성인 2명) — 예약 대기: 11/22부터 예약창 확인, 늦어도 11/23 예약 시도", bookingRef:"macauAirportDirect" }] },
     { when:"지금 예약 (10월)", items:["① House of Dancing Water — 12월 일정 공개 즉시 예매 (14일 전 조기예매 20% 할인)","② António 12/25 점심 등 크리스마스 식당 예약","인천공항 새벽 도착 수단 결정"] },
     { when:"1~2개월 전 (10월 말~11월)", items:["12/24·12/25 저녁 식당 확정 (현재 Broadway Food Street 계획 — 예약 불필요)","여행자 보험 · eSIM 구매","Macau 2049 관람 여부 결정","크리스마스 행사(리조트·Light Up Macau) 발표 확인"] },
     { when:"1~2주 전 (12월 초)", items:["공연 시간·휴연일 최종 확인","갤럭시 무료셔틀 시간표(HZMB 口岸·StarWorld ↔ Galaxy) 12월 운행 확인","Symphony of Lights 운영 여부 확인","③ 피크트램 온라인 티켓 (12/26)","날씨·HZMB 운행 공지 확인"] },
@@ -721,7 +734,9 @@ const tripData = {
   ],
 
   checkNeeded: [
-    { title:"Macau HK Airport Direct 무료버스 — 예약 대기 (11/22부터)", detail:"12/23 홍콩공항 → 마카오 무료 직통버스는 현재 예약 페이지 기준 약 1개월 전부터 날짜 선택이 가능한 것으로 보임. 11/22부터 예약창 확인, 늦어도 11/23에 예약 시도. 예약 가능 기간은 운영사 정책에 따라 변경될 수 있으므로 11/22에 실제 예약 페이지에서 다시 확인. 위탁수하물 처리 절차도 함께 확인." },
+    { title:"Macau HK Airport Direct 무료버스 — 예약 대기", highlight:true, badges:["우선 확인","예약 대기 · 11/22부터 확인"], route:"12/23 HKG → Macao · 성인 2명", action:"11/22 예약창 확인 → 늦어도 11/23 예약 시도", bookingRef:"macauAirportDirect",
+      lines:["12/23 홍콩공항 → 마카오 무료 직통버스는 현재 예약 페이지 기준 약 1개월 전부터 날짜 선택이 가능한 것으로 보임.","11/22부터 예약창 확인, 늦어도 11/23에 예약 시도.","예약 가능 기간은 운영사 정책에 따라 변경될 수 있으므로 11/22에 실제 예약 페이지에서 다시 확인.","위탁수하물이 있는 경우 홍콩공항에서 직접 수하물을 찾지 않고 E2 환승 카운터로 이동해 baggage tag receipt를 제시하여 수하물 이송 절차를 진행한다. 실제 예약 시 운영 안내를 다시 확인."],
+      detail:"12/23 HKG → Macao 무료 직통버스 — 11/22부터 예약창 확인, 늦어도 11/23 예약 시도." },
     { title:"아직 예약하지 않은 항목", detail:"Macau HK Airport Direct 무료버스(11/22~) · House of Dancing Water 예매 · António 12/25 점심 예약 · 피크트램 온라인 티켓 (항공권·숙소 4박은 모두 예약 완료)." },
     { title:"House of Dancing Water 12월 공연 일정 미공개", detail:"2026 하절기 기준 16:30/19:30 (수–일). 12/23–26은 수–토라 가능성 높지만 미확정. 공식 예매처에서 날짜 열리는지 주기적 확인." },
     { title:"Macau 2049 12월 회차", detail:"8/1부터 15:00 공연. 12월 휴연일 확인 필요." },
@@ -736,6 +751,7 @@ const tripData = {
   ],
 
   history: [
+    { date:"2026-10-06", changes:["Macau HK Airport Direct 예약 항목 강조","확인 필요 섹션 상단에 강조 카드 추가 (우선 확인 · 예약 대기 11/22부터 · 12/23 HKG → Macao · 예매 버튼)","예약 링크를 bookingLinks 한 곳에서 관리 → 확인 필요·예약 우선순위·체크리스트·교통·DAY 1에서 재사용","위탁수하물 안내 갱신 (E2 환승 카운터에서 baggage tag receipt 제시 → 수하물 이송)"] },
     { date:"2026-10-06", changes:["공항↔숙소 이동 동선 확정 및 마카오 무료버스 예약 일정 추가","12/23 HKG → Macao: Macau HK Airport Direct 사용 예정 (홍콩 입국 없이 T1 제한구역 E2 → HZMB Macao Port, 예약 대기)","11/22부터 무료버스 예약창 확인 (늦어도 11/23 예약 시도 · 예약 가능 기간은 변경될 수 있음)","12/26 Macao → Hong Kong: Golden Bus 사용 (유료 · 홍콩 입국)","Regal Airport Hotel 선택 이유 추가","12/27 T2 체크인 후 T1 도보 이동 절차 추가 ('왜 이렇게 일찍 출발하나요?' 안내)","교통 예산 조정: Golden Bus 왕복 → 편도 (12/23 무료버스)"] },
     { date:"2026-10-05", changes:["Regal Airport Hotel 예약 확정","12/26~12/27 Regal Airport Hotel 예약 완료 (NOL · 체크인 12/26 토 15:00 / 공식 체크아웃 12/27 일 12:00, 실제 퇴실은 새벽)","Superior Room / 성인 2명 / 조식 불포함","1박 ₩188,829 반영 (HAT 3% 안내는 추가 반영 안 함)","마지막 홍콩 숙박 미확정 상태 제거 · 마지막 밤 숙박 비교·공항 호텔 후보는 '예약 전 비교 기록'으로 이동","숙박 4박 전체 예약 완료 (숙박 확정 합계 ₩915,768)","DAY 4 / DAY 5 동선 업데이트","예산 및 체크리스트·예약 우선순위·확인 필요 업데이트"] },
     { date:"2026-10-05", changes:["항공권 및 Broadway Hotel 예약 확정 반영","UO617 / UO618 항공권 확정 정보 반영 (전자항공권 재대조 · 체크리스트 왕복 2건 완료)","Broadway Hotel 12/23~12/26 예약 확정 (NOL · 체크인 15:00 / 체크아웃 11:00)","Broadway King / 조식 불포함 / 3박 726,939원 (1박 평균 242,313원) 반영","일정 및 예산 업데이트 (확정·예상·미예약 비용 구분, 도착 13~14시는 요청사항일 뿐 공식 체크인 15:00)","호텔 비교 상태 정리 (마카오 후보·Agoda 비교 → '예약 전 비교 기록'으로 접기)","예약 체크리스트 업데이트","12/26 홍콩 숙박은 미확정 상태 유지"] },
@@ -755,6 +771,7 @@ const tripData = {
     { label:"HK Express — HKIA T2 이전 안내", url:"https://www.hkexpress.com/Plan/Travel/HKIA-T2" },
     { label:"TurboJET 운항표·요금", url:"https://www.turbojet.com.hk/en/routing-sailing-schedule/hong-kong-macau/sailing-schedule-fares" },
     { label:"HZMB Shuttle Bus (Golden Bus)", url:"https://www.hzmbus.com/" },
+    { label:"Macau HK Airport Direct — 예약 페이지", url:"https://ticket.macauhkairportbus.com/en/" },
     { label:"The Londoner — 교통·셔틀 안내", url:"https://www.londonermacao.com/getting-to-macau.html" },
     { label:"마카오 관광청 행사", url:"https://www.macaotourism.gov.mo/en/whatson" },
     { label:"A Symphony of Lights (Avenue of Stars)", url:"https://www.avenueofstars.com.hk/en/a-symphony-of-lights/" },
@@ -781,6 +798,8 @@ const tripData = {
   const badge = s => s ? `<span class="badge b-${esc(s)}">${esc(s)}</span>` : "";
   const rsv = b => b==="done" ? `<span class="rsv done">예약 완료</span>` : b==="required" ? `<span class="rsv req">예약 필수</span>` : b==="recommended" ? `<span class="rsv rec">예약 권장</span>` : `<span class="rsv">예약 불필요</span>`;
   const stars = n => `<span class="stars" title="추천도 ${n}/5">${"★".repeat(n)}${"☆".repeat(5-n)}</span>`;
+  // bookingLinks 참조 → 예매 버튼 (새 탭)
+  const bookingBtn = ref => { const b = ref && D.bookingLinks[ref]; return b ? `<a class="btn book" href="${esc(b.url)}" target="_blank" rel="noopener noreferrer">🎫 ${esc(b.label)}</a>` : ""; };
   const linkBtns = (links, map) => {
     const a = (links||[]).map(l => `<a class="btn" href="${esc(l.url)}" target="_blank" rel="noopener">↗ ${esc(l.label)}</a>`);
     if (map) a.push(`<a class="btn map" href="${mapUrl(map)}" target="_blank" rel="noopener">📍 Google Maps에서 열기</a>`);
@@ -835,7 +854,15 @@ const tripData = {
   }
 
   // ⑪ Check needed
-  $("checkList").innerHTML = `<h3>⚠ 확인 필요 ${D.checkNeeded.length}건</h3><ul class="tight">${D.checkNeeded.map(c => `<li><b>${esc(c.title)}</b> ${badge("CHECK")}<br><span class="small muted">${esc(c.detail)}</span></li>`).join("")}</ul>`;
+  // 강조(highlight) 항목은 상단 카드로, 나머지는 기존 목록 — 총 개수는 동일하게 표시
+  $("checkList").innerHTML = `<h3>⚠ 확인 필요 ${D.checkNeeded.length}건</h3>`
+    + D.checkNeeded.filter(c => c.highlight).map(c => `<div class="hl-card">
+        <div class="hl-badges">${c.badges.map((b,i) => `<span class="hl-badge ${i===0?"hi":""}">${esc(b)}</span>`).join("")}</div>
+        <h4>${esc(c.title)}</h4>
+        <div class="hl-route">🚌 ${esc(c.route)}</div><div class="hl-action">📅 ${esc(c.action)}</div>
+        <div class="links">${bookingBtn(c.bookingRef)}</div>
+        <ul class="tight small">${c.lines.map(x => `<li>${esc(x)}</li>`).join("")}</ul></div>`).join("")
+    + `<ul class="tight">${D.checkNeeded.filter(c => !c.highlight).map(c => `<li><b>${esc(c.title)}</b> ${badge("CHECK")}<br><span class="small muted">${esc(c.detail)}</span></li>`).join("")}</ul>`;
 
   // ② Flights
   $("flightCards").innerHTML = D.flights.map(f => `
@@ -863,6 +890,7 @@ const tripData = {
           ${it.desc && it.desc.length ? `<ul class="tight small">${it.desc.map(x => `<li>${esc(x)}</li>`).join("")}</ul>` : ""}
           ${it.why ? `<div class="why"><b>ⓘ ${esc(it.why.q)}</b><div>${esc(it.why.a)}</div></div>` : ""}
           <div class="tl-row"><span>🚶 이동 <b>${esc(it.move)}</b></span><span>⏱ <b>${esc(it.moveTime)}</b></span><span>💰 <b>${esc(it.cost)}</b></span>${rsv(it.booking)}</div>
+          ${it.bookingRef ? `<div class="links">${bookingBtn(it.bookingRef)}</div>` : ""}
           ${it.map ? linkBtns([], it.map) : ""}
         </div></div>`).join("")}</div>`;
     document.querySelectorAll(".daytab").forEach(b => b.onclick = () => { curDay = +b.dataset.day; try{localStorage.setItem("hkmo2026-day",curDay);}catch(e){} renderDay(); });
@@ -1051,7 +1079,7 @@ const tripData = {
   $("transportCards").innerHTML = D.transport.map(t => `<div class="card ${t.recommended?"top":""}">${t.recommended?'<span class="ribbon">RECOMMENDED</span>':""}
     <div class="tl-head"><h3>${esc(t.name)}</h3>${badge(t.status)}</div>
     <dl class="kv">${Object.entries(t.rows).map(([k,v]) => `<dt>${esc(k)}</dt><dd>${esc(v)}</dd>`).join("")}</dl>
-    <div class="verdict">${esc(t.note)}</div>${linkBtns(t.links)}</div>`).join("");
+    <div class="verdict">${esc(t.note)}</div>${t.bookingRef?`<div class="links">${bookingBtn(t.bookingRef)}</div>`:""}${linkBtns(t.links)}</div>`).join("");
 
   // ⑨ Budget
   $("fxNote").textContent = `환율 1 HKD ≈ ${D.fx.HKD}원 · 1 MOP ≈ ${D.fx.MOP}원 (${D.fx.asOf}) — 2026년 12월 실제 환율은 달라질 수 있음`;
@@ -1072,12 +1100,12 @@ const tripData = {
   function renderChecklist(){
     const st = load();
     $("checkBody").innerHTML = `<h3 style="margin-bottom:6px">예약 현황</h3>` + D.checklist.map(c => { const on = st[c.id] ?? !!c.done;
-      return `<div class="check-item ${on?"done":""}"><input type="checkbox" id="ck-${esc(c.id)}" data-id="${esc(c.id)}" ${on?"checked":""}><label for="ck-${esc(c.id)}"><span class="t">${esc(c.label)}</span> ${badge(c.status)}${c.ref?`<div class="ref">${esc(c.ref)}</div>`:""}</label></div>`; }).join("")
+      return `<div class="check-item ${on?"done":""}"><input type="checkbox" id="ck-${esc(c.id)}" data-id="${esc(c.id)}" ${on?"checked":""}><label for="ck-${esc(c.id)}"><span class="t">${esc(c.label)}</span> ${badge(c.status)}${c.ref?`<div class="ref">${esc(c.ref)}</div>`:""}${c.bookingRef?`<div class="links" style="margin-top:6px">${bookingBtn(c.bookingRef)}</div>`:""}</label></div>`; }).join("")
       + `<div class="links"><button class="btn" id="ckReset">체크 상태 초기화</button></div>`;
     document.querySelectorAll("#checkBody input").forEach(i => i.onchange = () => { const s = load(); s[i.dataset.id] = i.checked; save(s); renderChecklist(); renderSummary(); });
     $("ckReset").onclick = () => { try{localStorage.removeItem(storeKey);}catch(e){} renderChecklist(); renderSummary(); };
   }
-  $("prioBody").innerHTML = `<h3 style="margin-bottom:6px">예약 우선순위</h3>` + D.priority.map(p => `<div style="margin-top:12px"><h4>${esc(p.when)}</h4><ul class="tight small">${p.items.map(x=>`<li>${esc(x)}</li>`).join("")}</ul></div>`).join("");
+  $("prioBody").innerHTML = `<h3 style="margin-bottom:6px">예약 우선순위</h3>` + D.priority.map(p => `<div style="margin-top:12px"><h4>${esc(p.when)}</h4><ul class="tight small">${p.items.map(x => typeof x === "string" ? `<li>${esc(x)}</li>` : `<li>${esc(x.text)}<div class="links" style="margin-top:6px">${bookingBtn(x.bookingRef)}</div></li>`).join("")}</ul></div>`).join("");
 
   // ⑫ History & sources
   $("historyBody").innerHTML = D.history.map(h => `<div class="ver"><b>${esc(h.date)}</b><ul class="tight small">${h.changes.map(c=>`<li>${esc(c)}</li>`).join("")}</ul></div>`).join("");

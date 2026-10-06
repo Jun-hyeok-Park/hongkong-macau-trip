@@ -196,6 +196,16 @@ footer{padding:30px 0 50px;color:var(--muted);font-size:13px}
 .hl-badge{font-size:11.5px;font-weight:700;padding:2px 9px;border-radius:99px;background:var(--gold-soft);color:#7a5a12;border:1px solid #e6cf95}
 .hl-badge.hi{background:var(--navy);color:var(--gold);border-color:var(--navy)}
 .hl-route,.hl-action{font-size:13.5px;font-weight:600;color:var(--text)}
+.inputs{margin:10px 0 6px;border:1px solid var(--line);border-radius:10px;background:#f7f8fb;padding:8px 12px}
+.inputs-title{font-size:12.5px;font-weight:700;color:var(--navy);margin-bottom:4px}
+.in-row{display:grid;grid-template-columns:96px 1fr;gap:8px;padding:4px 0;border-top:1px dashed var(--line);font-size:13.5px}
+.in-row:first-of-type{border-top:none}
+.in-k{color:var(--muted);font-weight:600}
+.in-v{font-weight:700;color:var(--text);font-variant-numeric:tabular-nums}
+.in-v small{display:block;font-weight:400;color:var(--muted);font-size:11.5px}
+@media (max-width:420px){.in-row{grid-template-columns:1fr;gap:0}}
+.booked-box{margin-top:10px;padding:10px 12px;border-radius:10px;background:#e7f5ee;border:1px solid #a8d9bf;font-size:13.5px}
+.booked-box b{color:#1e7a4d}
 .btn.book{background:var(--navy);color:#fff;border-color:var(--navy);font-weight:700;padding:8px 14px;font-size:13.5px}
 .btn.book:hover{background:var(--navy-2);color:var(--gold)}
 .why{margin-top:8px;padding:8px 10px;border-radius:8px;background:#eef4ff;border:1px solid #c9dafb;font-size:12.8px;line-height:1.55}
@@ -290,7 +300,7 @@ const tripData = {
     travelerNames: "비공개",
     lastUpdated: "2026-10-06",
     concept: "마카오 메인(약 70%) + 홍콩 핵심만(약 30%). 코타이 리조트 3박 — Broadway Hotel 3박(예약 완료) · House of Dancing Water 관람 · 코타이/갤럭시 중심 크리스마스 여행. 12/26 홍콩 1박은 12/27 07:15 조기 출국을 위해 Regal Airport Hotel(예약 완료).",
-    tags: ["마카오 중심 70%", "공연: House of Dancing Water", "항공권 왕복 예약 완료", "숙소 4박 예약 완료 (Broadway 3박 + Regal Airport 1박)", "크리스마스 시즌"],
+    tags: ["마카오 중심 70%", "공연: House of Dancing Water 12/24 19:30 예약 완료", "항공권 왕복 예약 완료", "숙소 4박 예약 완료 (Broadway 3박 + Regal Airport 1박)", "크리스마스 시즌"],
     stay: { macau: "3박 · 약 70시간", hongkong: "1박 · 약 15시간 (+공항)" },
     recommendedPlan: "C",
     // 호텔 구분 — 예약 전에는 confirmed 를 null 로 두고, 예약 후 호텔명·예약번호 입력
@@ -407,8 +417,8 @@ const tripData = {
         { time:"14:15–15:15", place:"그랜드 리스보아 외관 → StarWorld에서 갤럭시 셔틀 복귀", region:"마카오 반도", map:"Grand Lisboa Macau", desc:["연꽃 모양 랜드마크 사진 (StarWorld 바로 옆)","StarWorld → Galaxy 무료셔틀 (약 35분) → Broadway 도보","대안: 택시 약 20분 · MOP 110–140"], move:"도보 + 갤럭시 무료셔틀", moveTime:"10분 + 약 35분", cost:"무료", booking:"none", status:"PLANNED" },
         { time:"15:15–17:00", place:"Broadway Hotel 휴식", region:"코타이", desc:["공연 전 체력 보충"], move:"—", moveTime:"—", cost:"—", booking:"none", status:"PLANNED" },
         { time:"17:00–18:15", place:"이른 저녁 — Broadway Food Street", region:"코타이", map:"Broadway Food Street Macau", desc:["호텔 바로 앞에서 빠르게 식사 → 이동 여유 확보 (이브라 CoD 식당 혼잡 회피)"], move:"도보", moveTime:"1–3분", cost:"MOP 400 (2인)", booking:"none", status:"PLANNED" },
-        { time:"18:20–18:45", place:"택시 → City of Dreams (Dancing Water Theater)", region:"이동", map:"City of Dreams Macau", desc:["Broadway/갤럭시 택시 승강장 → CoD (약 5분) · 크리스마스 이브 대기 고려해 18:20 출발","택시 대기가 길면 도보 대안: 갤럭시 → 베네시안 → CoD 약 20–25분","19:00까지 극장 도착 (공연 30분 전)"], move:"택시 (대안: 도보)", moveTime:"약 5분 + 대기 (도보 20–25분)", cost:"MOP 40–60", booking:"none", status:"PLANNED" },
-        { time:"19:00–21:00", place:"★ The House of Dancing Water", region:"코타이", map:"Dancing Water Theater City of Dreams Macau", desc:["19:00 극장 도착·입장 (공연 30분 전) → 19:30 공연","12월 공연 시간 미공개 — 2026 하절기 기준 16:30 / 19:30 (수–일)","대체일: 12/25(금)"], move:"—", moveTime:"—", cost:"MOP 2,196 (Grand 2석)", booking:"required", status:"CHECK", key:true },
+        { time:"18:20–18:45", place:"택시 → City of Dreams (Dancing Water Theater)", region:"이동", map:"City of Dreams Macau", desc:["Broadway/갤럭시 택시 승강장 → CoD (약 5분) · 크리스마스 이브 대기 고려해 18:20 출발","택시 대기가 길면 도보 대안: 갤럭시 → 베네시안 → CoD 약 20–25분","19:00까지 극장 도착 (공연 15분 전 도착 권장 → 여유 확보)"], move:"택시 (대안: 도보)", moveTime:"약 5분 + 대기 (도보 20–25분)", cost:"MOP 40–60", booking:"none", status:"PLANNED" },
+        { time:"19:00–21:00", place:"★ House of Dancing Water 19:30 (예약 완료)", region:"코타이", map:"Dancing Water Theater City of Dreams Macau", desc:["Grand · Section 500 · Row C · Seats 512–513 · Early Bird × 2","19:00 극장 도착 목표 — 늦어도 공연 15분 전(19:15)까지 도착","전자티켓으로 직접 입장 (실물 교환 불필요) · 공연 중 촬영·플래시 금지"], move:"—", moveTime:"—", cost:"MOP 1,756 (2인, 결제 완료)", booking:"done", status:"CONFIRMED", key:true },
         { time:"21:00–22:00", place:"크리스마스 이브 코타이 야경 → 걸어서 Broadway 복귀", region:"코타이", map:"The Venetian Macao", desc:["City of Dreams 크리스마스 트리 → 길 건너 베네시안 외관 조명 → 갤럭시 → Broadway","공연 직후 택시 줄이 길어 야경 산책 겸 도보 복귀 (피곤하면 베네시안 택시 승강장)"], move:"도보", moveTime:"약 25분", cost:"무료", booking:"none", status:"PLANNED" },
       ]},
     { day:3, date:"12/25 (금·크리스마스)", title:"Broadway에서 걸어서 타이파 빌리지 → 갤럭시 → 윈 팰리스 분수쇼 → 갤럭시 크리스마스 밤", goals:["포르투갈 요리 (António)","갤럭시·윈 팰리스 무료 쇼","Broadway Food Street 크리스마스 저녁"],
@@ -455,18 +465,20 @@ const tripData = {
   ],
 
   shows: [
-    { id:"hodw", name:"The House of Dancing Water", topPick:true, status:"CHECK", venue:"City of Dreams, Dancing Water Theater (코타이)",
+    { id:"hodw", name:"The House of Dancing Water", topPick:true, status:"CONFIRMED", venue:"Dancing Water Theater · City of Dreams (코타이)",
       style:"수중 + 아크로바틱 + 하이다이빙 + 모터바이크 스턴트 · 270° 원형 극장 · 2025년 리뉴얼 재개막",
-      runtime:"약 80–90분 (인터미션 없음)", times:"2026 하절기: 16:30 / 19:30 (수–일), 월·화 휴연 — 12월 일정 미공개 / 추후 확인 필요",
-      dates:"12/23(수)–12/26(토) 모두 '수–일' 패턴에 해당 → 공연 가능성 높으나 미확정",
-      price:"Gallery MOP 698 · Signature 898 · Grand 1,098 · Premium 1,298 · Golden Circle 1,598 · VVIP Box 28,000+",
-      seats:"Grand·Premium = 정면 중앙 균형 좋음(추천) / Golden Circle = 최고 시야 / A–B열 Splash 구역은 물 튐 / 개별 좌석 지정 불가(등급 단위)",
-      promo:"14일 이상 전 예매 시 지정 등급 20% 할인 (공식, ~2027-03-17) · 페리 왕복 포함 'Show & Sail' MOP 798~",
+      runtime:"약 80–90분 (인터미션 없음)", times:"예약 회차: 12/24(목) 19:30",
+      dates:"2026-12-24 (목) 19:30 — 예약 완료",
+      price:"Early Bird Grand MOP 878 × 2 = MOP 1,756 (결제 통화 MOP)",
+      seats:"Grand · Section 500 · Row C · Seats 512–513 · 앞 2열은 물 튈 수 있음(티켓 안내)",
+      promo:"Early Bird 예약 · Melco Beyond 계정으로 구매",
       reviews:"Tripadvisor·Klook 평점 4.8/5 수준, '마카오 필수 관람' 평가 다수",
       pros:["원하는 스타일(대형 수중·서커스)에 정확히 부합","물·조명·다이빙 스케일이 압도적","숙소(Broadway)에서 택시 약 5분 · 도보 20–25분"],
-      cons:["12월 일정 아직 미공개","대부분 환불 불가 조건","가장 비싼 공연"],
-      rating:5, booked:false,
-      links:[{label:"공식 페이지", url:"https://www.cityofdreamsmacau.com/en/house-of-dancing-water"},{label:"공식 예매", url:"https://tickets.cityofdreamsmacau.com/en/hodw"},{label:"Show & Sail", url:"https://www.cityofdreamsmacau.com/en/offers/house-dancing-water-show-sail-package"}],
+      cons:["구매 후 환불·교환 불가","공연 중 촬영·플래시·녹화 금지"],
+      rating:5, booked:true,
+      booking:{ date:"2026-12-24 (목)", time:"19:30", ticket:"Early Bird × 2", seat:"Grand · Section 500 · Row C · Seats 512–513", totalMOP:1756, bookingNo:"비공개",
+        notes:["전자티켓으로 직접 입장 (실물 교환 불필요)","공연 15분 전 도착 권장","환불·교환 불가"] },
+      links:[{label:"공식 페이지", url:"https://www.cityofdreamsmacau.com/en/house-of-dancing-water"}],
       map:"Dancing Water Theater City of Dreams Macau" },
     { id:"m2049", name:"Macau 2049 (장이머우 연출)", status:"CANDIDATE", venue:"MGM Theater, MGM Cotai (코타이)",
       style:"하이테크 미디어쇼 — 로봇암·레이저·대형 LED + 중국 전통 공연 (곡예 비중은 낮음)",
@@ -677,12 +689,12 @@ const tripData = {
       note:"HK Express 별도 발권 + 홍콩 입국 일정이라 이번 여행엔 해당 가능성 낮음 → 비추천.", links:[] }
   ],
 
-  // 예산 (2인 합계) — currency: HKD / MOP / KRW · status: confirmed(확정 비용) / estimate(예상) / unbooked(미예약 추정)
+  // 예산 (2인 합계) — currency: HKD / MOP / KRW · status: confirmed(확정 비용, KRW 결제) / confirmedFx(외화 금액 확정, 원화 환산은 예상) / estimate(예상) / unbooked(미예약 추정)
   // 항공권은 결제금액 근거(전자항공권)에 금액이 없어 제외
   budget: [
     { category:"숙박", item:"마카오 3박 — Broadway Hotel (NOL 예약 완료 · Broadway King · 조식 불포함)", amount:726939, currency:"KRW", status:"confirmed" },
     { category:"숙박", item:"홍콩 1박 — Regal Airport Hotel (NOL 예약 완료 · Superior Room · 조식 불포함)", amount:188829, currency:"KRW", status:"confirmed" },
-    { category:"공연", item:"House of Dancing Water Grand 2석 — 미예매 추정", amount:2196, currency:"MOP", status:"unbooked" },
+    { category:"공연", item:"House of Dancing Water — Early Bird Grand × 2 (MOP 확정 · 원화 청구액 미확정)", amount:1756, currency:"MOP", status:"confirmedFx" },
     { category:"교통", item:"HZMB Golden Bus 편도(12/26) + B4 버스 (2인) · 12/23 Macau HK Airport Direct는 무료", amount:150, currency:"HKD" },
     { category:"교통", item:"마카오 택시·셔틀", amount:500, currency:"MOP" },
     { category:"교통", item:"홍콩 공항철도·MTR·스타페리·택시", amount:700, currency:"HKD" },
@@ -700,8 +712,7 @@ const tripData = {
     { label:"홍콩 1박 · 확정 비용", hotel:"Regal Airport Hotel", nights:1, nightlyKRW:188829, totalKRW:188829, status:"CONFIRMED", base:true, note:"NOL 예약 완료 · Superior Room · 조식 불포함 · HAT 3% 안내는 추가 반영 안 함" }
   ],
   budgetOptional: [
-    { item:"(옵션) Macau 2049 B석 2석", amount:976, currency:"MOP" },
-    { item:"(옵션) HoDW Premium 업그레이드 (+MOP 200×2)", amount:400, currency:"MOP" }
+    { item:"(옵션) Macau 2049 B석 2석", amount:976, currency:"MOP" }
   ],
 
   // 체크리스트 — id는 바꾸지 말 것 (localStorage 키). done:true = 기본 완료 (실제 예약 근거가 있는 항목만)
@@ -710,7 +721,7 @@ const tripData = {
     { id:"flight-ret", label:"항공권: 홍콩 → 인천 UO618 (12/27 07:15) — 예약 완료", ref:"PNR 비공개 · 비공개", status:"CONFIRMED", done:true },
     { id:"airport-direct", label:"[예약 대기] Macau HK Airport Direct 무료버스 — 12/23 HKG → Macao · 성인 2명", ref:"11/22(일)부터 예약창 확인 · 늦어도 11/23(월) 예약 시도 · 예약 가능 기간은 운영사 정책에 따라 변경 가능", status:"CHECK", bookingRef:"macauAirportDirect" },
     { id:"icn-transport", label:"12/23 03:45 인천공항 T1 도착 수단 (자차·택시·전날 숙박)", ref:"", status:"CHECK" },
-    { id:"show-hodw", label:"공연: House of Dancing Water 12/24 19:30 (Grand)", ref:"예약번호: ", status:"CHECK" },
+    { id:"show-hodw-confirmed", label:"공연: House of Dancing Water 12/24 19:30 — 예약 완료 (Grand · Section 500 · Row C · Seats 512–513 · Early Bird × 2)", ref:"예약번호: 비공개 · MOP 1,756 · 전자티켓 2장", status:"CONFIRMED", done:true },
     { id:"hotel-macau-confirmed", label:"마카오 호텔: Broadway Hotel 12/23–12/26 (3박) — 예약 완료", ref:"예약번호: 비공개 · NOL · Broadway King · 조식 불포함 · ₩726,939", status:"CONFIRMED", done:true },
     { id:"hotel-hkg-confirmed", label:"홍콩 호텔: Regal Airport Hotel 12/26–12/27 (1박) — 예약 완료", ref:"예약번호: 비공개 · NOL · Superior Room · 조식 불포함 · ₩188,829", status:"CONFIRMED", done:true },
     { id:"rest-antonio", label:"식당: António 12/25 12:30 (2인)", ref:"", status:"PLANNED" },
@@ -725,20 +736,20 @@ const tripData = {
   ],
 
   priority: [
-    { when:"✔ 예약 완료", items:["항공권 왕복 UO617 / UO618","마카오 Broadway Hotel 3박 (12/23–12/26)","홍콩 Regal Airport Hotel 1박 (12/26–12/27)"] },
+    { when:"✔ 예약 완료", items:["항공권 왕복 UO617 / UO618","마카오 Broadway Hotel 3박 (12/23–12/26)","House of Dancing Water 12/24 19:30 (Grand · 500/C/512–513)","홍콩 Regal Airport Hotel 1박 (12/26–12/27)"] },
     { when:"⏰ 2026-11-22(일) ~ 11-23(월) — 높은 우선순위", items:[{ text:"★ Macau HK Airport Direct 무료버스 (12/23 HKG → Macao, 성인 2명) — 예약 대기: 11/22부터 예약창 확인, 늦어도 11/23 예약 시도", bookingRef:"macauAirportDirect" }] },
-    { when:"지금 예약 (10월)", items:["① House of Dancing Water — 12월 일정 공개 즉시 예매 (14일 전 조기예매 20% 할인)","② António 12/25 점심 등 크리스마스 식당 예약","인천공항 새벽 도착 수단 결정"] },
+    { when:"지금 예약 (10월)", items:["① António 12/25 점심 등 크리스마스 식당 예약","② 12/23 새벽 인천공항 도착 수단 결정"] },
     { when:"1~2개월 전 (10월 말~11월)", items:["12/24·12/25 저녁 식당 확정 (현재 Broadway Food Street 계획 — 예약 불필요)","여행자 보험 · eSIM 구매","Macau 2049 관람 여부 결정","크리스마스 행사(리조트·Light Up Macau) 발표 확인"] },
-    { when:"1~2주 전 (12월 초)", items:["공연 시간·휴연일 최종 확인","갤럭시 무료셔틀 시간표(HZMB 口岸·StarWorld ↔ Galaxy) 12월 운행 확인","Symphony of Lights 운영 여부 확인","③ 피크트램 온라인 티켓 (12/26)","날씨·HZMB 운행 공지 확인"] },
+    { when:"1~2주 전 (12월 초)", items:["갤럭시 무료셔틀 시간표(HZMB 口岸·StarWorld ↔ Galaxy) 12월 운행 확인","Symphony of Lights 운영 여부 확인","③ 피크트램 온라인 티켓 (12/26)","날씨·HZMB 운행 공지 확인"] },
     { when:"여행 직전", items:["HK Express 온라인 체크인 · 항공 시간 변경 확인","위탁 20kg / 개인물품 7kg 무게 확인","환전·옥토퍼스 충전","여권 유효기간(6개월 이상) 확인","예약 확인서 오프라인 저장"] }
   ],
 
   checkNeeded: [
     { title:"Macau HK Airport Direct 무료버스 — 예약 대기", highlight:true, badges:["우선 확인","예약 대기 · 11/22부터 확인"], route:"12/23 HKG → Macao · 성인 2명", action:"11/22 예약창 확인 → 늦어도 11/23 예약 시도", bookingRef:"macauAirportDirect",
-      lines:["12/23 홍콩공항 → 마카오 무료 직통버스는 현재 예약 페이지 기준 약 1개월 전부터 날짜 선택이 가능한 것으로 보임.","11/22부터 예약창 확인, 늦어도 11/23에 예약 시도.","예약 가능 기간은 운영사 정책에 따라 변경될 수 있으므로 11/22에 실제 예약 페이지에서 다시 확인.","위탁수하물이 있는 경우 홍콩공항에서 직접 수하물을 찾지 않고 E2 환승 카운터로 이동해 baggage tag receipt를 제시하여 수하물 이송 절차를 진행한다. 실제 예약 시 운영 안내를 다시 확인."],
+      inputs:[ ["Direction","Hong Kong Airport → Macao","예약 화면 표기: HK Int'l Airport → HZMB Macau Port"], ["Date","2026-12-23"], ["Flight","UO617"], ["Arrival","09:50"], ["Passengers","2"] ],
+      lines:["현재 예약 페이지 기준 약 1개월 전부터 날짜 선택이 가능한 것으로 보임 — 예약 가능 기간은 운영사 정책에 따라 변경될 수 있으므로 11/22 실제 예약 페이지에서 다시 확인.","위탁수하물이 있는 경우 홍콩공항에서 직접 수하물을 찾지 않고 E2 환승 카운터로 이동해 baggage tag receipt를 제시하여 수하물 이송 절차를 진행한다. 실제 예약 시 운영 안내를 다시 확인."],
       detail:"12/23 HKG → Macao 무료 직통버스 — 11/22부터 예약창 확인, 늦어도 11/23 예약 시도." },
-    { title:"아직 예약하지 않은 항목", detail:"Macau HK Airport Direct 무료버스(11/22~) · House of Dancing Water 예매 · António 12/25 점심 예약 · 피크트램 온라인 티켓 (항공권·숙소 4박은 모두 예약 완료)." },
-    { title:"House of Dancing Water 12월 공연 일정 미공개", detail:"2026 하절기 기준 16:30/19:30 (수–일). 12/23–26은 수–토라 가능성 높지만 미확정. 공식 예매처에서 날짜 열리는지 주기적 확인." },
+    { title:"아직 예약하지 않은 항목", detail:"Macau HK Airport Direct 무료버스(11/22~) · António 12/25 점심 예약 · 피크트램 온라인 티켓 · 12/23 새벽 인천공항 이동 수단 (항공권·숙소 4박·House of Dancing Water는 예약 완료)." },
     { title:"Macau 2049 12월 회차", detail:"8/1부터 15:00 공연. 12월 휴연일 확인 필요." },
     { title:"크리스마스 이벤트 2026 미공개", detail:"리조트별 크리스마스 장식·Light Up Macau 2026 일정 발표 대기 (11월 예상)." },
     { title:"Symphony of Lights 종료 예정", detail:"홍콩 정부가 2026년 하반기 종료 방침 발표. 12/26 운영 여부 불확실 → 하버 야경 자체는 그대로 감상 가능." },
@@ -751,6 +762,7 @@ const tripData = {
   ],
 
   history: [
+    { date:"2026-10-06", changes:["House of Dancing Water 예약 완료 및 무료버스 예약정보 추가","12/24 19:30 House of Dancing Water 예약 완료 (e-ticket·영수증 대조)","Grand / Section 500 / Row C / Seats 512–513","Early Bird × 2 / MOP 1,756 (외화 확정 · 원화 청구액은 미확정이라 환산값은 예상으로 표시)","확인 필요에서 HoDW 제거","체크리스트 완료 처리 · 예약 우선순위 정리","DAY 2 공연 일정 확정","Macau HK Airport Direct 예약 입력정보 추가 (Direction · Date · Flight · Arrival · Passengers)"] },
     { date:"2026-10-06", changes:["Macau HK Airport Direct 예약 항목 강조","확인 필요 섹션 상단에 강조 카드 추가 (우선 확인 · 예약 대기 11/22부터 · 12/23 HKG → Macao · 예매 버튼)","예약 링크를 bookingLinks 한 곳에서 관리 → 확인 필요·예약 우선순위·체크리스트·교통·DAY 1에서 재사용","위탁수하물 안내 갱신 (E2 환승 카운터에서 baggage tag receipt 제시 → 수하물 이송)"] },
     { date:"2026-10-06", changes:["공항↔숙소 이동 동선 확정 및 마카오 무료버스 예약 일정 추가","12/23 HKG → Macao: Macau HK Airport Direct 사용 예정 (홍콩 입국 없이 T1 제한구역 E2 → HZMB Macao Port, 예약 대기)","11/22부터 무료버스 예약창 확인 (늦어도 11/23 예약 시도 · 예약 가능 기간은 변경될 수 있음)","12/26 Macao → Hong Kong: Golden Bus 사용 (유료 · 홍콩 입국)","Regal Airport Hotel 선택 이유 추가","12/27 T2 체크인 후 T1 도보 이동 절차 추가 ('왜 이렇게 일찍 출발하나요?' 안내)","교통 예산 조정: Golden Bus 왕복 → 편도 (12/23 무료버스)"] },
     { date:"2026-10-05", changes:["Regal Airport Hotel 예약 확정","12/26~12/27 Regal Airport Hotel 예약 완료 (NOL · 체크인 12/26 토 15:00 / 공식 체크아웃 12/27 일 12:00, 실제 퇴실은 새벽)","Superior Room / 성인 2명 / 조식 불포함","1박 ₩188,829 반영 (HAT 3% 안내는 추가 반영 안 함)","마지막 홍콩 숙박 미확정 상태 제거 · 마지막 밤 숙박 비교·공항 호텔 후보는 '예약 전 비교 기록'으로 이동","숙박 4박 전체 예약 완료 (숙박 확정 합계 ₩915,768)","DAY 4 / DAY 5 동선 업데이트","예산 및 체크리스트·예약 우선순위·확인 필요 업데이트"] },
@@ -766,6 +778,7 @@ const tripData = {
     { label:"전자항공권 (로컬 비공개 자료) — 항공편·수하물 Source of Truth", url:"" },
     { label:"Broadway Hotel 예약 바우처 (NOL, 로컬 비공개 자료) — 마카오 숙박 Source of Truth", url:"" },
     { label:"Regal Airport Hotel 예약 바우처 (NOL, 로컬 비공개 자료) — 홍콩 숙박 Source of Truth", url:"" },
+    { label:"House of Dancing Water e-ticket 2장·영수증 (로컬 비공개 자료) — 공연 Source of Truth", url:"" },
     { label:"City of Dreams — House of Dancing Water", url:"https://www.cityofdreamsmacau.com/en/house-of-dancing-water" },
     { label:"MGM — Macau 2049", url:"https://macau2049.mgm.mo/en" },
     { label:"HK Express — HKIA T2 이전 안내", url:"https://www.hkexpress.com/Plan/Travel/HKIA-T2" },
@@ -845,11 +858,11 @@ const tripData = {
       ["항공권", `${o.flightNo} ${o.from.time} → ${r.flightNo} ${r.from.time}`, `HK Express · 왕복 <span class="rsv done">예약 완료</span> ${badge(o.status)}`],
       ["숙소 ① 마카오 3박", hp.selected, `${hp.nights}박 · 12/23 ${hp.checkInTime} 체크인 → 12/26 ${hp.checkOutTime} 체크아웃<br>${esc(hp.roomType)} · ${esc(hp.meal.split(" (")[0])} · ₩${fmt(hp.paidKRW)}<br><span class="rsv done">${esc(hp.bookingStatus)}</span> ${badge(hp.status)}`],
       ["숙소 ② 홍콩 1박", hh.selected, `${hh.nights}박 · 12/26 ${hh.checkInTime} 체크인 → 12/27 새벽 퇴실 (공식 체크아웃 ${hh.checkOutTime})<br>${esc(hh.roomType)} · ${esc(hh.meal.split(" (")[0])} · ₩${fmt(hh.paidKRW)}<br><span class="rsv done">${esc(hh.bookingStatus)}</span> ${badge(hh.status)}`],
-      ["예약 현황", "항공권·숙소 4박 예약 완료", `항공권 왕복 <span class="rsv done">완료</span><br>Broadway 3박 + Regal Airport 1박 <span class="rsv done">완료</span><br>숙박 확정 합계 ₩${fmt(hp.paidKRW + hh.paidKRW)}`],
-      ["추천 공연", show.name, `TOP PICK · ${badge(show.status)}`],
+      ["예약 현황", "항공권·숙소·공연 예약 완료", `항공권 왕복 <span class="rsv done">완료</span><br>Broadway 3박 + Regal Airport 1박 <span class="rsv done">완료</span><br>House of Dancing Water <span class="rsv done">완료</span><br>Airport Direct 무료버스 <span class="rsv req">예약 대기 · 11/22~</span>`],
+      ["공연", show.name, show.booking ? `${esc(show.booking.date)} ${esc(show.booking.time)}<br>${esc(show.booking.seat)}<br><span class="rsv done">예약 완료</span> ${badge(show.status)}` : `TOP PICK · ${badge(show.status)}`],
     ];
     $("summaryCards").innerHTML = cards.map(([l,v,n]) => `<div class="card stat"><div class="label">${l}</div><div class="value">${esc(v)}</div><div class="note">${n}</div></div>`).join("")
-      + `<div class="card stat big"><div class="label">예상 총비용 (2인, 항공 제외)</div><div class="value">₩${fmt(bt.krw)}</div><div class="note">≈ HKD ${fmt(bt.hkd)} <br>확정 ₩${fmt(bt.byStatus.confirmed||0)} · 예상 ₩${fmt(bt.byStatus.estimate||0)} · 미예약 ₩${fmt(bt.byStatus.unbooked||0)}</div></div>`
+      + `<div class="card stat big"><div class="label">예상 총비용 (2인, 항공 제외)</div><div class="value">₩${fmt(bt.krw)}</div><div class="note">≈ HKD ${fmt(bt.hkd)} <br>확정 ₩${fmt(bt.byStatus.confirmed||0)} · 확정(외화) ${D.budget.filter(b=>b.status==="confirmedFx").map(b=>esc(b.currency)+" "+fmt(b.amount)).join(", ")} · 예상 ₩${fmt(bt.byStatus.estimate||0)} · 미예약 ₩${fmt(bt.byStatus.unbooked||0)}</div></div>`
       + `<div class="card stat"><div class="label">예약 진행률</div><div class="value">${done} / ${total} (${pct}%)</div><div class="progress"><i style="width:${pct}%"></i></div><div class="note"><a href="#checklist">체크리스트로 →</a></div></div>`;
   }
 
@@ -861,6 +874,7 @@ const tripData = {
         <h4>${esc(c.title)}</h4>
         <div class="hl-route">🚌 ${esc(c.route)}</div><div class="hl-action">📅 ${esc(c.action)}</div>
         <div class="links">${bookingBtn(c.bookingRef)}</div>
+        ${c.inputs ? `<div class="inputs"><div class="inputs-title">예약 입력정보</div>${c.inputs.map(([k,v,n]) => `<div class="in-row"><span class="in-k">${esc(k)}</span><span class="in-v">${esc(v)}${n?`<small>${esc(n)}</small>`:""}</span></div>`).join("")}</div>` : ""}
         <ul class="tight small">${c.lines.map(x => `<li>${esc(x)}</li>`).join("")}</ul></div>`).join("")
     + `<ul class="tight">${D.checkNeeded.filter(c => !c.highlight).map(c => `<li><b>${esc(c.title)}</b> ${badge("CHECK")}<br><span class="small muted">${esc(c.detail)}</span></li>`).join("")}</ul>`;
 
@@ -912,9 +926,10 @@ const tripData = {
     + `<div class="card"><h3>동선 원칙</h3><ul class="tight small">${D.routeTips.map(t => `<li>${esc(t)}</li>`).join("")}</ul></div>`;
 
   // ⑤ Shows
-  $("showCards").innerHTML = D.shows.map(s => `<div class="card ${s.topPick?"top":""}">${s.topPick?'<span class="ribbon">TOP PICK</span>':""}
+  $("showCards").innerHTML = D.shows.map(s => `<div class="card ${s.topPick?"top":""}">${s.topPick?`<span class="ribbon">${s.booked?"예약 완료":"TOP PICK"}</span>`:""}
     <div class="tl-head"><div><h3>${esc(s.name)}</h3><div class="meta">${esc(s.venue)}</div></div><div style="text-align:right">${badge(s.status)}<br>${stars(s.rating)}</div></div>
-    <dl class="kv"><dt>스타일</dt><dd>${esc(s.style)}</dd><dt>러닝타임</dt><dd>${esc(s.runtime)}</dd><dt>공연시간</dt><dd>${esc(s.times)}</dd><dt>여행일 공연</dt><dd>${esc(s.dates)}</dd><dt>가격</dt><dd>${esc(s.price)}</dd><dt>예약 상태</dt><dd>${s.booked?"✅ 예매 완료":"미예매"}</dd></dl>
+    <dl class="kv"><dt>스타일</dt><dd>${esc(s.style)}</dd><dt>러닝타임</dt><dd>${esc(s.runtime)}</dd><dt>공연시간</dt><dd>${esc(s.times)}</dd><dt>여행일 공연</dt><dd>${esc(s.dates)}</dd><dt>가격</dt><dd>${esc(s.price)}</dd><dt>예약 상태</dt><dd>${s.booked?'<span class="rsv done">예약 완료</span>':"미예매"}</dd></dl>
+    ${s.booking?`<div class="booked-box"><b>✔ 예약 완료</b> · ${esc(s.booking.date)} ${esc(s.booking.time)}<br>${esc(s.booking.seat)}<br>${esc(s.booking.ticket)} · MOP ${fmt(s.booking.totalMOP)}<ul class="tight small">${s.booking.notes.map(n=>`<li>${esc(n)}</li>`).join("")}</ul></div>`:""}
     <details><summary>좌석·할인·후기·장단점</summary><dl class="kv"><dt>좌석</dt><dd>${esc(s.seats)}</dd><dt>할인</dt><dd>${esc(s.promo)}</dd><dt>후기</dt><dd>${esc(s.reviews)}</dd><dt>장점</dt><dd>${s.pros.map(esc).join(" · ")}</dd><dt>단점</dt><dd>${s.cons.map(esc).join(" · ")}</dd></dl></details>
     ${linkBtns(s.links, s.map)}</div>`).join("");
 
@@ -1086,12 +1101,12 @@ const tripData = {
   (function(){
     const bt = budgetTotals(); const max = Math.max(...Object.values(bt.cats).map(c => c.krw));
     const optKRW = D.budgetOptional.reduce((s,o) => s + toKRW(o.amount,o.currency), 0);
-    $("budgetBody").innerHTML = `<div class="total-box"><div><div class="small muted">2인 총 예상 (항공권 제외 · 확정+예상+미예약 추정)</div><div class="krw">₩${fmt(bt.krw)}</div></div><div class="muted">≈ HKD ${fmt(bt.hkd)} · ≈ MOP ${fmt(bt.hkd*D.fx.HKD/D.fx.MOP)}<br>1인 약 ₩${fmt(bt.krw/2)}</div></div>
-      <div class="chips" style="margin-top:10px"><span class="chip ok">확정 비용 ₩${fmt(bt.byStatus.confirmed||0)}</span><span class="chip ok">숙박 확정 합계 ₩${fmt(D.budget.filter(b=>b.category==="숙박"&&b.status==="confirmed").reduce((a,b)=>a+toKRW(b.amount,b.currency),0))}</span><span class="chip">예상 비용 ₩${fmt(bt.byStatus.estimate||0)}</span><span class="chip no">미예약 (추정) ₩${fmt(bt.byStatus.unbooked||0)}</span></div>
+    $("budgetBody").innerHTML = `<div class="total-box"><div><div class="small muted">2인 총 예상 (항공권 제외 · 확정 + 외화 확정의 원화 환산 + 예상 + 미예약 추정)</div><div class="krw">₩${fmt(bt.krw)}</div></div><div class="muted">≈ HKD ${fmt(bt.hkd)} · ≈ MOP ${fmt(bt.hkd*D.fx.HKD/D.fx.MOP)}<br>1인 약 ₩${fmt(bt.krw/2)}</div></div>
+      <div class="chips" style="margin-top:10px"><span class="chip ok">확정 비용 ₩${fmt(bt.byStatus.confirmed||0)}</span><span class="chip ok">숙박 확정 합계 ₩${fmt(D.budget.filter(b=>b.category==="숙박"&&b.status==="confirmed").reduce((a,b)=>a+toKRW(b.amount,b.currency),0))}</span>${D.budget.filter(b=>b.status==="confirmedFx").map(b=>`<span class="chip ok">확정(외화) ${esc(b.currency)} ${fmt(b.amount)} · 원화 환산 약 ₩${fmt(toKRW(b.amount,b.currency))} (예상)</span>`).join("")}<span class="chip">예상 비용 ₩${fmt(bt.byStatus.estimate||0)}</span><span class="chip no">미예약 (추정) ₩${fmt(bt.byStatus.unbooked||0)}</span></div>
       <div class="grid g2" style="margin-top:14px">${D.budgetLodging.map(l => `<div class="card ${l.base?"top":""}" style="box-shadow:none">${l.base?'<span class="ribbon">예약 완료</span>':""}<div class="tl-head"><div><div class="small muted">${esc(l.label)}</div><b>${esc(l.hotel)} ${l.nights}박</b></div>${badge(l.status)}</div><div class="price-row"><div><span class="lbl">${l.nights}박 총액</span><span class="price-big">₩${fmt(l.totalKRW)}</span></div><div><span class="lbl">1박${l.base?" 평균":""}</span><b>₩${fmt(l.nightlyKRW)}</b></div></div><div class="small muted">${esc(l.note)}</div></div>`).join("")}</div>
       <div style="margin-top:14px">${Object.entries(bt.cats).map(([k,c]) => `<div class="bar-row"><span>${esc(k)}</span><div class="bar"><i style="width:${(c.krw/max*100).toFixed(1)}%"></i></div><span class="amt">₩${fmt(c.krw)}<small>HKD ${fmt(c.hkd)}</small></span></div>`).join("")}</div>
       <details><summary>항목별 상세 (원 통화 기준)</summary><div class="scroll-x"><table class="simple"><tr><th>구분</th><th>항목</th><th>상태</th><th>금액</th><th>KRW</th></tr>
-      ${D.budget.map(b => `<tr><td>${esc(b.category)}</td><td>${esc(b.item)}</td><td>${({confirmed:"확정",unbooked:"미예약",estimate:"예상"})[b.status||"estimate"]}</td><td>${esc(b.currency)} ${fmt(b.amount)}</td><td>₩${fmt(toKRW(b.amount,b.currency))}</td></tr>`).join("")}
+      ${D.budget.map(b => `<tr><td>${esc(b.category)}</td><td>${esc(b.item)}</td><td>${({confirmed:"확정",confirmedFx:"확정(외화)",unbooked:"미예약",estimate:"예상"})[b.status||"estimate"]}</td><td>${esc(b.currency)} ${fmt(b.amount)}</td><td>${b.status==="confirmedFx"?"≈":""}₩${fmt(toKRW(b.amount,b.currency))}${b.status==="confirmedFx"?" (환산 예상)":""}</td></tr>`).join("")}
       ${D.budgetOptional.map(b => `<tr class="muted"><td>옵션</td><td>${esc(b.item)}</td><td>미포함</td><td>${esc(b.currency)} ${fmt(b.amount)}</td><td>₩${fmt(toKRW(b.amount,b.currency))}</td></tr>`).join("")}
       </table></div><p class="small muted">옵션 포함 시 +₩${fmt(optKRW)}. 마카오에서는 HKD가 대부분 1:1로 통용되지만 거스름돈은 MOP로 받는 경우가 많음.</p></details>`;
   })();

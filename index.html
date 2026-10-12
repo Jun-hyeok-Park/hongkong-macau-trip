@@ -521,6 +521,9 @@ const tripData = {
       links:[{label:"매장 목록", url:"https://www.lordstow.com/macau-outlets/"}] },
     { region:"타이파", name:"쿤하 거리 간식", menu:"주빠빠오(돼지갈비 번), 아몬드 쿠키, 육포", price:"MOP 30–60", location:"Rua do Cunha", hours:"주간~저녁", booking:"none", wait:"인기점 줄", day:"D3 오전", status:"PLANNED", map:"Rua do Cunha Taipa" },
     { region:"코타이", name:"Broadway Food Street (숙소 앞)", menu:"마카오·홍콩 로컬 노점형 식당가", price:"MOP 80–200/인", location:"Broadway Hotel 1층 (갤럭시 연결)", hours:"확인 필요", booking:"none", wait:"저녁 혼잡", day:"D1 점심·D3 저녁", status:"PLANNED", map:"Broadway Food Street Macau" },
+    { region:"타이파", name:"Mochi Macau / 澳門長洲糯米糍", category:"디저트 · 망고모찌 (마카오 장저우 찹쌀떡)", menu:"망고모찌", menuNote:"Mango · Durian · Strawberry · Red Bean · Sesame Mochi · Fresh Mango Juice", price:"약 MOP 20~22 · 현장 확인", location:"타이파 빌리지 · 관야가(Rua do Cunha) 인근 · Rua de Horta e Sousa No. 4 (澳門氹仔柯打蘇沙街4號)", hours:"출처별 10:30~22:00 / 11:00~21:00 안내 · 방문 전 확인", booking:"none", wait:"", day:"", status:"SAVED", needsCheck:true, map:"Mochi Macau Rua de Horta e Sousa No. 4 Taipa Macau",
+      desc:"얇고 쫄깃한 찹쌀피 안에 생망고를 큼직하게 넣어 만드는 타이파 빌리지 인기 디저트.",
+      locNote:"과일과 찹쌀떡을 조합한 수제 스타일 디저트 전문점 · 두리안·딸기 등 다른 과일 모찌도 판매 · ☎ +853 2822 6663 · CHECK: 영업시간 출처별 차이 → 방문 전 재확인 · 타이파 일정 때 가기로 하면 PLANNED로 변경" },
     { region:"코타이", name:"CHAGEE / 霸王茶姬", category:"차 · 밀크티 · 음료", menu:"伯牙絕弦", menuNote:"Bo Ya Jue Xian · 브랜드 대표 자스민 계열 원엽 밀크티", price:"현장 확인", location:"The Venetian Macao · Level 3 · Grand Canal Street · Shop 875 (澳門威尼斯人購物中心 3樓 大運河街 875號舖)", hours:"10:00~22:00 · 방문 전 재확인", booking:"none", wait:"", day:"", status:"SAVED", map:"CHAGEE The Venetian Macao",
       desc:"중국 윈난에서 시작한 현대식 티 브랜드 CHAGEE의 마카오 1호점. 베네시안 마카오 안에 있어 코타이 일정 중 들르기 편함.",
       locNote:"North / 북방관과 같은 The Venetian Macao에 위치 (12/24 일정에는 넣지 않음 · 가기로 하면 PLANNED로 변경)" },
@@ -624,6 +627,7 @@ const tripData = {
   ],
 
   history: [
+    { date:"2026-10-12", changes:["맛집 SAVED 추가: Mochi Macau / 澳門長洲糯米糍 (타이파 빌리지 · Rua de Horta e Sousa No. 4 · 대표 메뉴 망고모찌) — CHECK: 영업시간 출처별 차이 · Timeline 미포함"] },
     { date:"2026-10-12", changes:["맛집 SAVED 추가: CHAGEE / 霸王茶姬 (코타이 · The Venetian Macao L3 Shop 875 · 10:00~22:00 · 대표 메뉴 伯牙絕弦) — Timeline 미포함"] },
     { date:"2026-10-06", changes:["상태체계 정리: CONFIRMED / LOCKED / PLANNED / SAVED + CHECK(보조)","OPTION 제거 → 기존 OPTION 항목은 PLANNED로 통합","SAVED는 사용자가 저장하라고 지정한 맛집에만 사용 — 현재 0곳 (Margaret's·Riquexó는 PLANNED로 변경, Timeline 포함 여부는 별개)","맛집 필터 이름: 전체 / 예약 완료 / 계획 / 저장한 맛집"] },
     { date:"2026-10-06", changes:["사이트 실행형 대시보드 정리 및 맛집 저장 기능 개편","A/B/C 비교 제거 (실제 예약 기준 단일 일정)","호텔 예약 전 비교 제거 — 호텔은 확정 2곳만","Agoda 비교 제거 (섹션·데이터·정렬/필터·점수 계산·CSS)","맛집 SAVED 상태 추가 · 맛집 필터(전체/예약 완료/일정에 넣음/저장한 맛집)","음식 → 맛집 역할 개편 (Margaret's·Riquexó는 SAVED, Margaret's는 DAY 2 Timeline에서 제외)","nav 단순화 · 섹션 번호 재정렬","Update History/Sources 하단 접기","불필요한 비교 코드 정리"] },
@@ -642,6 +646,7 @@ const tripData = {
   ],
 
   sources: [
+    { label:"Mochi Macau / 澳門長洲糯米糍 — 주소·전화·대표메뉴·영업시간 참고 (Macao Government Tourism Office · Taipa Village Macau)", url:"" },
     { label:"전자항공권 (로컬 비공개 자료) — 항공편·수하물 Source of Truth", url:"" },
     { label:"Broadway Hotel 예약 바우처 (NOL, 로컬 비공개 자료) — 마카오 숙박 Source of Truth", url:"" },
     { label:"Regal Airport Hotel 예약 바우처 (NOL, 로컬 비공개 자료) — 홍콩 숙박 Source of Truth", url:"" },

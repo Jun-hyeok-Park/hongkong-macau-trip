@@ -358,14 +358,16 @@ const tripData = {
         { time:"19:00–21:00", place:"★ House of Dancing Water 19:30 (예약 완료)", region:"코타이", map:"Dancing Water Theater City of Dreams Macau", desc:["Grand · Section 500 · Row C · Seats 512–513 · Early Bird × 2","19:00 극장 도착 목표 — 늦어도 공연 15분 전(19:15)까지 도착","전자티켓으로 직접 입장 (실물 교환 불필요) · 공연 중 촬영·플래시 금지"], move:"—", moveTime:"—", cost:"MOP 1,756 (2인, 결제 완료)", booking:"done", status:"CONFIRMED", key:true },
         { time:"21:00–22:00", place:"크리스마스 이브 코타이 야경 → 걸어서 Broadway 복귀", region:"코타이", map:"The Venetian Macao", desc:["City of Dreams 크리스마스 트리 → 길 건너 베네시안 외관 조명 → 갤럭시 → Broadway","공연 직후 택시 줄이 길어 야경 산책 겸 도보 복귀 (피곤하면 베네시안 택시 승강장)"], move:"도보", moveTime:"약 25분", cost:"무료", booking:"none", status:"PLANNED" },
       ]},
-    { day:3, date:"12/25 (금·크리스마스)", title:"Broadway에서 걸어서 타이파 빌리지 → 갤럭시 → 윈 팰리스 분수쇼 → 갤럭시 크리스마스 밤", goals:["포르투갈 요리 (António)","갤럭시·윈 팰리스 무료 쇼","Broadway Food Street 크리스마스 저녁"],
+    { day:3, date:"12/25 (금·크리스마스)", title:"Broadway에서 걸어서 타이파 빌리지 → 콜로안 빌리지 → 윈 팰리스 분수쇼 → 갤럭시 크리스마스 밤", goals:["포르투갈 요리 (António)","콜로안 빌리지 산책 · Lord Stow’s 원조점","갤럭시·윈 팰리스 무료 쇼","Broadway Food Street 크리스마스 저녁"],
       items:[
         { time:"10:00–11:00", place:"느긋한 아침", region:"코타이", desc:["크리스마스 당일 · 공휴일 혼잡 대비"], move:"—", moveTime:"—", cost:"MOP 200 (2인)", booking:"none", status:"PLANNED" },
         { time:"11:00–12:30", place:"Broadway에서 도보 → 타이파 빌리지 · 쿤하 거리", region:"코타이", map:"Rua do Cunha Taipa", desc:["Broadway에서 타이파 빌리지까지 걸어서 이동 (택시 불필요)","포르투갈풍 골목·파스텔 건물 사진","아몬드 쿠키·주빠빠오 간식"], move:"도보", moveTime:"약 10–15분", cost:"간식 MOP 100", booking:"none", status:"PLANNED" },
         { time:"12:30–14:00", place:"점심 — António (포르투갈 요리)", region:"코타이", map:"Antonio Restaurant Taipa Macau", desc:["미쉐린 가이드 추천 · 바칼라우, 해산물 밥, 세라두라","크리스마스 당일 → 예약 필수"], move:"도보", moveTime:"3분", cost:"MOP 1,300 (2인)", booking:"required", status:"PLANNED", key:true },
-        { time:"14:15–15:45", place:"도보 → 갤럭시 마카오 — 포춘 다이아몬드 쇼", region:"코타이", map:"Galaxy Macau Fortune Diamond", desc:["타이파 빌리지에서 걸어서 갤럭시로 (숙소 방향)","공휴일 10:00–24:00 30분 간격 무료 · 크리스마스 장식·쇼핑몰"], move:"도보", moveTime:"약 15분", cost:"무료", booking:"none", status:"PLANNED" },
-        { time:"15:00–16:20", place:"(옵션) Macau 2049 — MGM Cotai", region:"코타이", map:"MGM Cotai Macau", desc:["장이머우 연출 하이테크 공연 (15:00, 80분)","두 번째 공연을 원할 때만 — 이 경우 갤럭시는 저녁에 몰아서"], move:"택시 (갤럭시 승강장)", moveTime:"약 10분", cost:"MOP 976 (B석 2석) + 택시 MOP 50–70", booking:"required", status:"PLANNED" },
-        { time:"15:45–17:30", place:"Broadway Hotel 휴식", region:"코타이", desc:["갤럭시에서 실내로 바로 복귀 · 짐 1차 정리 (내일 체크아웃)"], move:"도보 (갤럭시 연결)", moveTime:"약 5–10분", cost:"—", booking:"none", status:"PLANNED" },
+        { time:"14:00–14:15", place:"택시 → 콜로안 빌리지", region:"이동", map:"Coloane Village Macau", desc:["António 앞(타이파 빌리지)에서 택시 · 크리스마스 당일 대기 감안"], move:"택시", moveTime:"약 10–15분", cost:"택시 (현장)", booking:"none", status:"PLANNED" },
+        { time:"14:15–16:00", place:"콜로안 빌리지 산책 · Lord Stow’s 원조점", region:"콜로안", map:"Coloane Village Macau", desc:["성 프란시스 사비에르 성당 · 바닷가 골목 산책","Lord Stow’s Bakery 원조점(1 Rua do Tassara) 에그타르트 — 07:00~21:00 안내 · 연휴 영업 재확인","학사 비치는 시간이 빠듯해 제외","일몰 약 17:45 — 밝을 때 산책"], move:"도보", moveTime:"—", cost:"에그타르트 MOP 12 내외/개 (확인)", booking:"none", status:"PLANNED" },
+        { time:"16:00–16:20", place:"택시 → Broadway 복귀", region:"이동", map:"Broadway Hotel Macau", desc:["콜로안은 택시가 적을 수 있음 → 복귀 여유 두기"], move:"택시", moveTime:"약 15–20분", cost:"택시 (현장)", booking:"none", status:"PLANNED" },
+        { time:"15:00–16:20", place:"(옵션) Macau 2049 — MGM Cotai", region:"코타이", map:"MGM Cotai Macau", desc:["장이머우 연출 하이테크 공연 (15:00, 80분)","콜로안 오후 일정과 시간이 겹침 — 2049를 보려면 콜로안 대신 선택 (택1)"], move:"택시 (갤럭시 승강장)", moveTime:"약 10분", cost:"MOP 976 (B석 2석) + 택시 MOP 50–70", booking:"required", status:"PLANNED" },
+        { time:"16:20–17:30", place:"Broadway Hotel 휴식", region:"코타이", desc:["짐 1차 정리 (내일 체크아웃)","갤럭시 포춘 다이아몬드 쇼는 밤(20:45~) 갤럭시 일정에서 관람"], move:"—", moveTime:"—", cost:"—", booking:"none", status:"PLANNED" },
         { time:"17:30–19:15", place:"택시 → 윈 팰리스 — 퍼포먼스 레이크 & SkyCab", region:"코타이", map:"Wynn Palace Performance Lake", desc:["Broadway/갤럭시 승강장에서 택시","분수쇼: 목–일 19–22시 20분 간격(낮엔 30분) · 무료 SkyCab에서 분수 조망, 로비 크리스마스 꽃 장식"], move:"택시", moveTime:"약 10분 (+대기)", cost:"무료 (택시 MOP 50–70)", booking:"none", status:"PLANNED", key:true },
         { time:"19:15–19:30", place:"택시 → Broadway 복귀", region:"이동", desc:["윈 팰리스 택시 승강장 → Broadway (크리스마스 밤 대기 감안)"], move:"택시", moveTime:"약 10분 (+대기)", cost:"MOP 50–70", booking:"none", status:"PLANNED" },
         { time:"19:30–20:45", place:"크리스마스 저녁 — Broadway Food Street", region:"코타이", map:"Broadway Food Street Macau", desc:["예약 부담 없는 로컬 노점형 식당가 (호텔 바로 앞)","점심 António로 이미 제대로 된 식사 → 저녁은 가볍게"], move:"도보", moveTime:"1–3분", cost:"MOP 500 (2인)", booking:"none", status:"PLANNED" },
@@ -496,8 +498,11 @@ const tripData = {
       { name:"António", map:"Antonio Restaurant Taipa Macau", day:"D3" },
       { name:"Galaxy Macau (셔틀: Diamond Lobby=HZMB / Crystal Lobby=StarWorld)", map:"Galaxy Macau Fortune Diamond", day:"D1–D4" },
       { name:"Wynn Palace", map:"Wynn Palace Performance Lake", day:"D3" },
-      { name:"MGM Cotai (Macau 2049)", map:"MGM Cotai Macau", day:"D3 옵션" },
-      { name:"(후보) Studio City 골든릴", map:"Studio City Macau Golden Reel", day:"—" } ] }
+      { name:"MGM Cotai (Macau 2049)", map:"MGM Cotai Macau", day:"D3 옵션 (콜로안과 택1)" },
+      { name:"(후보) Studio City 골든릴", map:"Studio City Macau Golden Reel", day:"—" } ] },
+    { name:"콜로안", note:"12/25 오후 · 타이파 빌리지에서 택시 약 10–15분", places:[
+      { name:"콜로안 빌리지 · 성 프란시스 사비에르 성당", map:"Chapel of St. Francis Xavier Coloane", day:"D3" },
+      { name:"Lord Stow’s Bakery 원조점", map:"Lord Stow's Bakery 1 Rua do Tassara Coloane Macau", day:"D3" } ] }
   ],
   routeTips: [
     "숙소 Broadway 기준: 갤럭시·Broadway Food Street·타이파 빌리지는 도보 / Sands 클러스터(런더너·베네시안·파리지앵)·City of Dreams는 택시 약 5분 / 윈 팰리스·MGM은 택시 약 10분",
@@ -639,6 +644,7 @@ const tripData = {
   ],
 
   history: [
+    { date:"2026-10-28", changes:["D3(12/25) 오후에 콜로안 추가: António 점심 후 택시 → 콜로안 빌리지(성 프란시스 사비에르 성당 · Lord Stow’s 원조점) 14:15–16:00 → Broadway 복귀 (모두 PLANNED)","낮 갤럭시 다이아몬드 쇼 제거 — 밤 갤럭시 일정에서 관람 · 휴식 16:20–17:30으로 단축","Macau 2049 옵션은 콜로안과 시간이 겹쳐 택1로 표시","지도 지역에 콜로안 추가 · CONFIRMED/LOCKED 일정 변경 없음"] },
     { date:"2026-10-12", changes:["맛집 SAVED + CHECK 추가: 酸辣粉 / Suan La Fen (마카오 반도 · 신커우안/베이징거리 · 北京街183F 地下K舖 · 영업시간·가격 재확인) — Timeline 미포함"] },
     { date:"2026-10-12", changes:["SAVED 베이커리 기준 지점을 코타이로 변경: Lord Stow’s 콜로안 원조점·Élysée 마카오 반도점 카드 제거 → Lord Stow’s Venetian(Shop 870 & 308) · Lord Stow’s Londoner(Shop 2113 L2) · Élysée Parisian(Shop K302 L3) 3곳 SAVED · Timeline 미포함"] },
     { date:"2026-10-12", changes:["Lord Stow’s Bakery: PLANNED → SAVED · 기준 지점을 콜로안 원조점(1 Rua do Tassara · 07:00~21:00)으로 변경 · D1/D3 Timeline의 Lord Stow's 간식 언급 제거 (방문일 미정)","맛집 SAVED + CHECK 추가: Élysée Bakery (마카오 반도 · 24–28 Avenida de Dom João IV · 지점 많음/영업시간 재확인) — Timeline 미포함","맛집 지역에 콜로안 추가"] },

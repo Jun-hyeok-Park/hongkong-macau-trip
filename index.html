@@ -320,12 +320,13 @@ const tripData = {
 
   // 예약 링크 — 여러 섹션에서 bookingRef 로 재사용 (URL은 여기만 수정)
   bookingLinks: {
-    macauAirportDirect: { label:"Macau HK Airport Direct 예매하기", url:"https://ticket.macauhkairportbus.com/en/" }
+    macauAirportDirect: { label:"Macau HK Airport Direct 예매하기", url:"https://ticket.macauhkairportbus.com/en/" },
+    casaMaquista: { label:"Casa Maquista 예약하기", url:"https://inline.app/booking/-OPn7-p3_QvmCAbt5IT1%3Ainline-live-3/-OPn7-wz38lwZeWBqqK-?hl=ko-KR" }
   },
 
   // 일정 (추천안 C) — 시간순
   itinerary: [
-    { day:1, date:"12/23 (수)", title:"인천 → 홍콩공항 제한구역 → Macau HK Airport Direct로 바로 마카오 · 코타이 첫날 밤", goals:["갤럭시 셔틀로 Broadway Hotel 도착 (13~14시) · 15:00 체크인","런더너·베네시안 크리스마스 산책 (택시 왕복)","에펠탑 조명쇼"],
+    { day:1, date:"12/23 (수)", title:"인천 → 홍콩공항 제한구역 → Macau HK Airport Direct로 바로 마카오 · 코타이 첫날 밤", goals:["Casa Maquista 17:00 저녁 (예약 대기)","갤럭시 셔틀로 Broadway Hotel 도착 (13~14시) · 15:00 체크인","런더너·베네시안 크리스마스 산책 (택시 왕복)","에펠탑 조명쇼"],
       items:[
         { time:"03:45", place:"인천국제공항 T1", region:"인천", desc:["출발 3시간 전 도착 · 위탁수하물 1인 20kg"], move:"자차/택시 또는 전날 공항 근처 숙박 (공항철도 첫차로는 불가)", moveTime:"—", cost:"—", booking:"recommended", needsCheck:true, status:"PLANNED" },
         { time:"06:45–09:50", place:"UO617 인천 → 홍콩", region:"항공", desc:["HK Express · 도착 T1"], move:"항공", moveTime:"4h05m", cost:"예약 완료", booking:"none", status:"CONFIRMED", key:true },
@@ -336,11 +337,12 @@ const tripData = {
         { time:"13:30–13:45", place:"Broadway Hotel 도착 · 짐 보관", region:"코타이", map:"Broadway Hotel Macau", desc:["13:00~14:00 호텔 도착 예정 / 공식 체크인 15:00","Early check-in requested, subject to availability — 조기 체크인 확정 아님","체크인 전 프런트/1층에서 짐 보관"], move:"도보 (갤럭시 실내 연결)", moveTime:"5–10분", cost:"—", booking:"none", status:"LOCKED" },
         { time:"13:45–15:00", place:"점심 — Broadway Food Street", region:"코타이", map:"Broadway Food Street Macau", desc:["호텔 바로 앞 로컬 점심 (완탕면·돼지갈비번 등)"], move:"도보 (호텔 바로 앞)", moveTime:"1–3분", cost:"MOP 250 (2인)", booking:"none", status:"PLANNED" },
         { time:"15:00–17:00", place:"Broadway Hotel 체크인 (예약 완료) · 휴식", region:"코타이", map:"Broadway Hotel Macau", desc:["공식 체크인 15:00 · Broadway King · 조식 불포함 · 3박 (12/23–12/26)","요청사항(허니문·금연·고층·전망·엘리베이터에서 먼 조용한 객실)은 호텔 재량 — 보장되지 않음","새벽 출발 피로 회복 — 낮잠 권장"], move:"—", moveTime:"—", cost:"예약 완료 (3박 ₩726,939)", booking:"done", status:"CONFIRMED" },
-        { time:"17:00–17:15", place:"택시 → The Londoner Macao", region:"이동", desc:["첫날이라 도보(갤럭시→런더너 약 25분) 대신 택시","갤럭시/브로드웨이 택시 승강장 이용 — 저녁 대기 가능"], move:"택시", moveTime:"약 5분 (+대기)", cost:"MOP 40–60", booking:"none", status:"PLANNED" },
-        { time:"17:15–19:00", place:"런더너 → 베네시안 크리스마스 산책", region:"코타이", map:"The Londoner Macao", desc:["런더너 크리스마스 트리·장식, 빅벤 외관 사진 (관광)","실내 연결로 베네시안 그랜드 캐널 쇼핑몰 (곤돌라는 선택)"], move:"도보 (실내 연결)", moveTime:"약 10분", cost:"간식 MOP 60", booking:"none", status:"PLANNED" },
-        { time:"19:00–20:15", place:"저녁 — 베네시안 식당가", region:"코타이", desc:["첫날은 리조트 내에서 간단히 (현장 선택)"], move:"도보", moveTime:"—", cost:"MOP 600 (2인)", booking:"none", status:"PLANNED" },
-        { time:"20:15–21:00", place:"파리지앵 에펠탑 조명쇼", region:"코타이", map:"The Parisian Macao Eiffel Tower", desc:["18:15–24:00 15분 간격 그랜드 일루미네이션","전망대는 선택(유료)"], move:"도보 (베네시안과 연결)", moveTime:"약 10분", cost:"무료", booking:"none", status:"PLANNED" },
-        { time:"21:00–21:20", place:"택시 → Broadway Hotel 복귀 · 취침", region:"코타이", desc:["파리지앵/베네시안 택시 승강장 → Broadway (도보는 약 16–20분이라 첫날은 택시)","다음 날 반도 일정"], move:"택시", moveTime:"약 5분 (+대기)", cost:"MOP 40–60", booking:"none", status:"PLANNED" },
+        { time:"16:45–17:00", place:"Broadway → Casa Maquista (Taipa Houses)", region:"이동", map:"Casa Maquista Taipa Houses Macau", desc:["체크인·휴식 후 16:45 출발","Taipa Houses(Avenida da Praia)까지 택시 약 5분 또는 도보 약 15분 (확인)"], move:"택시 또는 도보", moveTime:"약 5–15분", cost:"MOP 40–60 (택시)", booking:"none", status:"LOCKED" },
+        { time:"17:00–19:00", place:"★ 저녁 — Casa Maquista 土生公館 (매캐니즈)", region:"코타이", map:"Casa Maquista Taipa Houses Macau", desc:["Taipa Houses-Museum 안 매캐니즈 가정식 · 성인 2명 · 넉넉하게 2시간","예약 대기 — inline 예약창은 약 1개월 전 오픈 (12/23은 11/21경 예상) · 11/20부터 확인","저녁 시간대 17:00~20:00 · 라스트 오더 21:15","★ 꼭 먹을 메뉴: 해산물 빠에야","대표 메뉴: Capela(미트로프) · 생강 닭찜 · 바칼라우 양배추 롤"], move:"—", moveTime:"—", cost:"현장 결제 (식비 예산 참조)", booking:"required", needsCheck:true, status:"LOCKED", key:true, bookingRef:"casaMaquista" },
+        { time:"19:00–19:15", place:"택시 → 파리지앵", region:"이동", map:"The Parisian Macao", desc:["Taipa Houses 앞에서 택시 · 저녁 대기 가능"], move:"택시", moveTime:"약 5분 (+대기)", cost:"MOP 40–60", booking:"none", status:"PLANNED" },
+        { time:"19:15–20:00", place:"파리지앵 에펠탑 조명쇼", region:"코타이", map:"The Parisian Macao Eiffel Tower", desc:["18:15–24:00 15분 간격 그랜드 일루미네이션","전망대는 선택(유료)"], move:"—", moveTime:"—", cost:"무료", booking:"none", status:"PLANNED" },
+        { time:"20:00–21:15", place:"파리지앵 → 베네시안 → 런더너 크리스마스 산책", region:"코타이", map:"The Londoner Macao", desc:["실내 연결로 베네시안 그랜드 캐널 쇼핑몰 (곤돌라는 선택)","런더너 크리스마스 트리·장식, 빅벤 외관 사진 (관광)"], move:"도보 (실내 연결)", moveTime:"약 10–15분", cost:"간식 MOP 60", booking:"none", status:"PLANNED" },
+        { time:"21:15–21:35", place:"택시 → Broadway Hotel 복귀 · 취침", region:"코타이", desc:["런더너 택시 승강장 → Broadway (첫날이라 택시)","다음 날 반도 일정"], move:"택시", moveTime:"약 5분 (+대기)", cost:"MOP 40–60", booking:"none", status:"PLANNED" },
       ]},
     { day:2, date:"12/24 (목)", title:"마카오 반도 반나절 역사 동선 → North 1주년 저녁 → 크리스마스 이브 House of Dancing Water", goals:["세계유산 반나절 코스","★ North 17:00 (1주년 기념 식사)","★ House of Dancing Water 19:30"],
       items:[
@@ -490,6 +492,7 @@ const tripData = {
     { name:"코타이 · 타이파", note:"숙소 Broadway Hotel(갤럭시 단지 남서쪽) 기준 — 갤럭시·타이파 빌리지는 도보, Sands·CoD는 택시 5분 (D1–D4)", places:[
       { name:"Broadway Hotel (숙소) — 갤럭시 마카오와 실내 연결", map:"Broadway Hotel Macau", day:"D1–D4" },
       { name:"Broadway Food Street (숙소 앞)", map:"Broadway Food Street Macau", day:"D1–D3" },
+      { name:"Casa Maquista 土生公館 (Taipa Houses) — 12/23 저녁", map:"Casa Maquista Taipa Houses Macau", day:"D1" },
       { name:"The Londoner Macao (관광)", map:"The Londoner Macao", day:"D1" },
       { name:"The Venetian 그랜드 캐널", map:"The Venetian Macao Grand Canal Shoppes", day:"D1" },
       { name:"Parisian 에펠탑", map:"The Parisian Macao Eiffel Tower", day:"D1" },
@@ -517,6 +520,11 @@ const tripData = {
     { region:"마카오 반도", name:"Wong Chi Kei 黃枝記", menu:"새우 완탕면, 죽, 새우알 비빔면", price:"MOP 50–100/인", location:"세나도 광장 17 Largo do Senado", hours:"08:30–23:00", booking:"none", wait:"점심 피크 대기 가능", day:"D2 점심", status:"PLANNED", map:"Wong Chi Kei Senado Square Macau" },
     { region:"마카오 반도", name:"Margaret's Café e Nata", menu:"에그타르트, 샌드위치", price:"MOP 12 내외/개", location:"Rua do Comandante Mata e Oliveira (세나도 도보 8분)", hours:"평일 08:30–16:30 · 주말 10:00–18:00 · 수요일 휴무 (확인)", booking:"none", wait:"줄 있음, 회전 빠름", day:"", status:"PLANNED", map:"Margaret's Cafe e Nata Macau" },
     { region:"마카오 반도", name:"Riquexó (매캐니즈 가정식)", menu:"아프리칸 치킨, 민치, 매캐니즈 커리", price:"MOP 100–200/인 (확인)", location:"Av. de Sidónio Pais 69", hours:"확인 필요", booking:"none", wait:"보통", day:"", status:"PLANNED", map:"Riquexo Macau" },
+    { region:"코타이", name:"Casa Maquista 土生公館", category:"매캐니즈 가정식 · Taipa Houses-Museum", menu:"Capela(미트로프), 생강 닭찜(Galinha Chau Chau Parida), 바칼라우 양배추 롤", price:"현장 결제 (식비 예산 참조)", location:"Avenida da Praia, Taipa (Taipa Houses-Museum 안)", hours:"10:00–22:00 · 메인 12시부터 · 라스트 오더 21:15", booking:"required", wait:"예약 대기 (inline · 약 1개월 전 오픈)", day:"D1 저녁 (12/23 17:00–19:00)", status:"PLANNED", needsCheck:true, map:"Casa Maquista Taipa Houses Macau", bookingRef:"casaMaquista",
+      desc:"Taipa Houses 안 100년 된 저택에서 매캐니즈 가정식. 일정은 12/23 17:00로 확정, 예약은 오픈 후 진행.",
+      locNote:"☎ / WhatsApp +853 6217 6332 · 예약창 오픈(12/23은 11/21경 예상) 후 inline에서 성인 2명 17:00 예약 · 이름·연락처는 직접 입력",
+      menuMemo:[ ["★ 해산물 빠에야 (꼭 먹기)","Seafood Paella"] ],
+      links:[{label:"Instagram", url:"https://www.instagram.com/casamaquista"}] },
     { region:"코타이", name:"North / 北方館 / 북방관", menu:"북방 중국요리 (면·만두·요리)", price:"현장 결제 (식비 예산 참조)", location:"The Venetian Macao · Level 1", hours:"예약 17:00", booking:"done", wait:"예약 완료", day:"D2 저녁 (12/24 17:00)", status:"CONFIRMED", map:"North Restaurant The Venetian Macao",
       reservation:{ date:"2026-12-24 (목)", time:"17:00", guests:"성인 2명", request:"1주년 기념 식사 · 좋은 테이블 요청", bookingNo:"비공개" },
       menuMemo:[ ["뱡뱡면","Traditional Shanxi biáng biáng noodles with chicken"], ["가지튀김","Deep-fried eggplant with caramel and spices"] ] },
@@ -601,6 +609,7 @@ const tripData = {
     { id:"flight-out", label:"항공권: 인천 → 홍콩 UO617 (12/23 06:45) — 예약 완료", ref:"PNR 비공개 · 비공개", status:"CONFIRMED", done:true },
     { id:"flight-ret", label:"항공권: 홍콩 → 인천 UO618 (12/27 07:15) — 예약 완료", ref:"PNR 비공개 · 비공개", status:"CONFIRMED", done:true },
     { id:"airport-direct", label:"[예약 대기] Macau HK Airport Direct 무료버스 — 12/23 HKG → Macao · 성인 2명", ref:"11/22 확인 · 11/23 예약 시도", needsCheck:true, status:"LOCKED", bookingRef:"macauAirportDirect" },
+    { id:"casa-maquista", label:"[예약 대기] Casa Maquista 土生公館 — 12/23 17:00 · 성인 2명", ref:"inline 예약창 약 1개월 전 오픈 · 11/20부터 확인 (11/21경 예상)", needsCheck:true, status:"LOCKED", bookingRef:"casaMaquista" },
     { id:"icn-transport", label:"12/23 03:45 인천공항 T1 도착 수단 (자차·택시·전날 숙박)", ref:"", needsCheck:true, status:"PLANNED" },
     { id:"show-hodw-confirmed", label:"공연: House of Dancing Water 12/24 19:30 — 예약 완료 (Grand · Section 500 · Row C · Seats 512–513 · Early Bird × 2)", ref:"예약번호: 비공개 · MOP 1,756 · 전자티켓 2장", status:"CONFIRMED", done:true },
     { id:"hotel-macau-confirmed", label:"마카오 호텔: Broadway Hotel 12/23–12/26 (3박) — 예약 완료", ref:"예약번호: 비공개 · NOL · Broadway King · 조식 불포함 · ₩726,939", status:"CONFIRMED", done:true },
@@ -620,6 +629,7 @@ const tripData = {
   priority: [
     { when:"✔ 예약 완료", items:["항공권 왕복 UO617 / UO618","마카오 Broadway Hotel 3박 (12/23–12/26)","North / 북방관 12/24 17:00 (성인 2명)","House of Dancing Water 12/24 19:30 (Grand · 500/C/512–513)","홍콩 Regal Airport Hotel 1박 (12/26–12/27)"] },
     { when:"⏰ 2026-11-22(일) ~ 11-23(월) — 높은 우선순위", items:[{ text:"★ Macau HK Airport Direct 무료버스 (12/23 HKG → Macao, 성인 2명) — 예약 대기: 11/22부터 예약창 확인, 늦어도 11/23 예약 시도", bookingRef:"macauAirportDirect" }] },
+    { when:"⏰ 2026-11-20(금) ~ 11-21(토) — 높은 우선순위", items:[{ text:"★ Casa Maquista 土生公館 (12/23 17:00, 성인 2명) — 예약 대기: 11/20부터 inline 예약창 확인 (약 1개월 전 오픈 · 11/21경 예상)", bookingRef:"casaMaquista" }] },
     { when:"지금 예약 (10월)", items:["① António 12/25 점심 예약 (미예약)","② 12/23 새벽 인천공항 도착 수단 결정"] },
     { when:"1~2개월 전 (10월 말~11월)", items:["12/24·12/25 저녁 식당 확정 (현재 Broadway Food Street 계획 — 예약 불필요)","여행자 보험 · eSIM 구매","Macau 2049 관람 여부 결정","크리스마스 행사(리조트·Light Up Macau) 발표 확인"] },
     { when:"1~2주 전 (12월 초)", items:["갤럭시 무료셔틀 시간표(HZMB 口岸·StarWorld ↔ Galaxy) 12월 운행 확인","Symphony of Lights 운영 여부 확인","③ 피크트램 온라인 티켓 (12/26)","날씨·HZMB 운행 공지 확인"] },
@@ -627,6 +637,10 @@ const tripData = {
   ],
 
   checkNeeded: [
+    { title:"Casa Maquista 土生公館 — 예약 대기", highlight:true, badges:["우선 확인","예약 대기 · 11/20부터 확인"], route:"12/23 17:00 저녁 · 성인 2명", action:"11/20부터 inline 예약창 확인 → 열리면 바로 17:00 예약", bookingRef:"casaMaquista",
+      inputs:[ ["Party size","2 Adults · 0 Kids"], ["Dining date","2026-12-23 (Wed)"], ["Time","17:00","EVENING 시간대"] ],
+      lines:["2026-10-28 확인 시 예약 가능 날짜가 오늘+약 32일(11/29)까지 — 12/23은 11/21경 열릴 것으로 예상 (추정).","17:00이 안 되면 17:30/18:00 → 그래도 안 되면 전화·WhatsApp +853 6217 6332 문의 또는 D3 저녁 대안."],
+      detail:"12/23 저녁 Casa Maquista — 11/20부터 예약창 확인, 열리면 17:00 예약." },
     { title:"Macau HK Airport Direct 무료버스 — 예약 대기", highlight:true, badges:["우선 확인","예약 대기 · 11/22부터 확인"], route:"12/23 HKG → Macao · 성인 2명", action:"11/22 예약창 확인 → 늦어도 11/23 예약 시도", bookingRef:"macauAirportDirect",
       inputs:[ ["Direction","Hong Kong Airport → Macao","예약 화면 표기: HK Int'l Airport → HZMB Macau Port"], ["Date","2026-12-23"], ["Flight","UO617"], ["Arrival","09:50"], ["Passengers","2"] ],
       lines:["현재 예약 페이지 기준 약 1개월 전부터 날짜 선택이 가능한 것으로 보임 — 예약 가능 기간은 운영사 정책에 따라 변경될 수 있으므로 11/22 실제 예약 페이지에서 다시 확인.","위탁수하물이 있는 경우 홍콩공항에서 직접 수하물을 찾지 않고 E2 환승 카운터로 이동해 baggage tag receipt를 제시하여 수하물 이송 절차를 진행한다. 실제 예약 시 운영 안내를 다시 확인."],
@@ -644,6 +658,7 @@ const tripData = {
   ],
 
   history: [
+    { date:"2026-10-28", changes:["D1(12/23) 저녁 Casa Maquista 土生公館 17:00–19:00 확정 (LOCKED · 예약 대기) · 꼭 먹을 메뉴: 해산물 빠에야","D1 저녁 순서 변경: Casa Maquista → 택시 → 파리지앵 에펠탑 → 베네시안 → 런더너 산책 → 21:15 택시 복귀","Casa Maquista 예약하기 버튼 추가 (inline) — Timeline·맛집·체크리스트·우선순위·확인필요","CONFIRMED 체크인 일정은 변경 없음"] },
     { date:"2026-10-28", changes:["D3(12/25) 오후에 콜로안 추가: António 점심 후 택시 → 콜로안 빌리지(성 프란시스 사비에르 성당 · Lord Stow’s 원조점) 14:15–16:00 → Broadway 복귀 (모두 PLANNED)","낮 갤럭시 다이아몬드 쇼 제거 — 밤 갤럭시 일정에서 관람 · 휴식 16:20–17:30으로 단축","Macau 2049 옵션은 콜로안과 시간이 겹쳐 택1로 표시","지도 지역에 콜로안 추가 · CONFIRMED/LOCKED 일정 변경 없음"] },
     { date:"2026-10-12", changes:["맛집 SAVED + CHECK 추가: 酸辣粉 / Suan La Fen (마카오 반도 · 신커우안/베이징거리 · 北京街183F 地下K舖 · 영업시간·가격 재확인) — Timeline 미포함"] },
     { date:"2026-10-12", changes:["SAVED 베이커리 기준 지점을 코타이로 변경: Lord Stow’s 콜로안 원조점·Élysée 마카오 반도점 카드 제거 → Lord Stow’s Venetian(Shop 870 & 308) · Lord Stow’s Londoner(Shop 2113 L2) · Élysée Parisian(Shop K302 L3) 3곳 SAVED · Timeline 미포함"] },
@@ -856,7 +871,7 @@ const tripData = {
         ${f.menuMemo ? `<div class="menu-memo"><b>먹어볼 메뉴</b><ul class="tight small">${f.menuMemo.map(([k,e]) => `<li>${esc(k)} <span class="muted">(${esc(e)})</span></li>`).join("")}</ul></div>` : ""}
         ${(f.hours || f.wait) ? `<details><summary>영업시간 · 웨이팅</summary><div class="small">${esc(f.hours||"—")} · ${esc(f.wait||"—")}</div></details>` : ""}
         ${f.locNote ? `<div class="small muted" style="margin-top:6px">📌 ${esc(f.locNote)}</div>` : ""}
-        ${linkBtns(f.links, f.map)}</div>`).join("")}</div>`;
+        ${f.bookingRef ? `<div class="links">${bookingBtn(f.bookingRef)}</div>` : ""}${linkBtns(f.links, f.map)}</div>`).join("")}</div>`;
     }).join("") || `<div class="card muted">${foodFilter === "SAVED" ? "저장한 맛집이 아직 없습니다." : "해당 상태의 맛집이 없습니다."}</div>`;
   }
 

@@ -339,10 +339,13 @@ const tripData = {
         { time:"15:00–17:00", place:"Broadway Hotel 체크인 (예약 완료) · 휴식", region:"코타이", map:"Broadway Hotel Macau", desc:["공식 체크인 15:00 · Broadway King · 조식 불포함 · 3박 (12/23–12/26)","요청사항(허니문·금연·고층·전망·엘리베이터에서 먼 조용한 객실)은 호텔 재량 — 보장되지 않음","새벽 출발 피로 회복 — 낮잠 권장"], move:"—", moveTime:"—", cost:"예약 완료 (3박 ₩726,939)", booking:"done", status:"CONFIRMED" },
         { time:"16:45–17:00", place:"Broadway → Casa Maquista (Taipa Houses)", region:"이동", map:"Casa Maquista Taipa Houses Macau", desc:["체크인·휴식 후 16:45 출발","Taipa Houses(Avenida da Praia)까지 택시 약 5분 또는 도보 약 15분 (확인)"], move:"택시 또는 도보", moveTime:"약 5–15분", cost:"MOP 40–60 (택시)", booking:"none", status:"LOCKED" },
         { time:"17:00–19:00", place:"★ 저녁 — Casa Maquista 土生公館 (매캐니즈)", region:"코타이", map:"Casa Maquista Taipa Houses Macau", desc:["Taipa Houses-Museum 안 매캐니즈 가정식 · 성인 2명 · 넉넉하게 2시간","예약 대기 — inline 예약창은 약 1개월 전 오픈 (12/23은 11/21경 예상) · 11/20부터 확인","저녁 시간대 17:00~20:00 · 라스트 오더 21:15","★ 꼭 먹을 메뉴: 해산물 빠에야","대표 메뉴: Capela(미트로프) · 생강 닭찜 · 바칼라우 양배추 롤"], move:"—", moveTime:"—", cost:"현장 결제 (식비 예산 참조)", booking:"required", needsCheck:true, status:"LOCKED", key:true, bookingRef:"casaMaquista" },
-        { time:"19:00–19:15", place:"택시 → 파리지앵", region:"이동", map:"The Parisian Macao", desc:["Taipa Houses 앞에서 택시 · 저녁 대기 가능"], move:"택시", moveTime:"약 5분 (+대기)", cost:"MOP 40–60", booking:"none", status:"PLANNED" },
-        { time:"19:15–20:00", place:"파리지앵 에펠탑 조명쇼", region:"코타이", map:"The Parisian Macao Eiffel Tower", desc:["18:15–24:00 15분 간격 그랜드 일루미네이션","전망대는 선택(유료)"], move:"—", moveTime:"—", cost:"무료", booking:"none", status:"PLANNED" },
-        { time:"20:00–21:15", place:"파리지앵 → 베네시안 → 런더너 크리스마스 산책", region:"코타이", map:"The Londoner Macao", desc:["실내 연결로 베네시안 그랜드 캐널 쇼핑몰 (곤돌라는 선택)","런더너 크리스마스 트리·장식, 빅벤 외관 사진 (관광)"], move:"도보 (실내 연결)", moveTime:"약 10–15분", cost:"간식 MOP 60", booking:"none", status:"PLANNED" },
-        { time:"21:15–21:35", place:"택시 → Broadway Hotel 복귀 · 취침", region:"코타이", desc:["런더너 택시 승강장 → Broadway (첫날이라 택시)","다음 날 반도 일정"], move:"택시", moveTime:"약 5분 (+대기)", cost:"MOP 40–60", booking:"none", status:"PLANNED" },
+        { time:"19:00–19:25", place:"도보 → The Londoner Macao", region:"이동", map:"The Londoner Macao", desc:["Casa Maquista(Taipa Houses) → 베네시안 옆 → 코타이 스트립 건너 런더너","약 1.5km (직선 1.06km)"], move:"도보", moveTime:"약 22분", cost:"—", booking:"none", status:"LOCKED" },
+        { time:"19:25–20:05", place:"런더너 크리스마스 산책", region:"코타이", map:"The Londoner Macao", desc:["런더너 크리스마스 트리·장식, 빅벤 외관 사진 (관광)"], move:"—", moveTime:"—", cost:"간식 MOP 60", booking:"none", status:"LOCKED" },
+        { time:"20:05–20:15", place:"도보 → 파리지앵", region:"이동", map:"The Parisian Macao", desc:["런더너 → 파리지앵 약 530m (직선 360m)"], move:"도보", moveTime:"약 8분", cost:"—", booking:"none", status:"LOCKED" },
+        { time:"20:15–20:45", place:"파리지앵 에펠탑 조명", region:"코타이", map:"The Parisian Macao Eiffel Tower", desc:["18:15–24:00 15분 간격 그랜드 일루미네이션 — 시간 맞출 필요 없음","전망대는 선택(유료)"], move:"—", moveTime:"—", cost:"무료", booking:"none", status:"LOCKED" },
+        { time:"20:45–20:55", place:"실내 연결 → 베네시안", region:"이동", map:"The Venetian Macao Grand Canal Shoppes", desc:["파리지앵 → 베네시안 실내 연결 약 700m (직선 490m)"], move:"도보 (실내 연결)", moveTime:"약 10분", cost:"—", booking:"none", status:"LOCKED" },
+        { time:"20:55–21:35", place:"베네시안 그랜드 캐널 쇼핑몰", region:"코타이", map:"The Venetian Macao Grand Canal Shoppes", desc:["그랜드 캐널 · 크리스마스 장식 (곤돌라는 선택)","피곤하면 줄이고 바로 복귀"], move:"—", moveTime:"—", cost:"—", booking:"none", status:"LOCKED" },
+        { time:"21:35–21:55", place:"도보 → 갤럭시 → Broadway Hotel 복귀 · 취침", region:"코타이", map:"Broadway Hotel Macau", desc:["베네시안 → 갤럭시 → Broadway 약 1.2km (직선 820m)","다음 날 반도 일정"], move:"도보", moveTime:"약 17분", cost:"무료", booking:"none", status:"LOCKED" },
       ]},
     { day:2, date:"12/24 (목)", title:"마카오 반도 반나절 역사 동선 → North 1주년 저녁 → 크리스마스 이브 House of Dancing Water", goals:["쏸라펀 → 세나도 → 육포거리 망고모찌 → 성 바울 → 몬테 요새","★ North 17:00 (1주년 기념 식사)","★ House of Dancing Water 19:30"],
       items:[
@@ -664,6 +667,7 @@ const tripData = {
   ],
 
   history: [
+    { date:"2026-10-28", changes:["D1 저녁 후 동선 확정 (전부 도보 · LOCKED): Casa Maquista → 런더너 → 파리지앵 에펠탑 → 실내로 베네시안 → 갤럭시 → Broadway 21:55 도착","택시 이동 제거 · 루트는 구글 지도 좌표 기준 직선거리 합계가 가장 짧은 순서"] },
     { date:"2026-10-28", changes:["D2 공연 후 CHAGEE / 霸王茶姬 추가: City of Dreams → 베네시안 L3 CHAGEE 21:20–21:40 → 걸어서 Broadway 22:05 도착 (LOCKED · 22:00 마감 CHECK)","CHAGEE 맛집 카드 SAVED → PLANNED"] },
     { date:"2026-10-28", changes:["D2 North 저녁 17:00–19:00 (2시간) → 19:00–19:15 극장 도보 → 19:15 House of Dancing Water 도착","D2 전체 일정 LOCKED (내가 확정한 계획) — 예약 완료 항목은 CONFIRMED 유지"] },
     { date:"2026-10-28", changes:["D2 시간 조정: 세나도까지 도보 11:50–12:10 → 세나도 12:10–12:30 → 육포거리 이동 12:30–12:40 → 육포거리·망고모찌 12:40–13:00"] },

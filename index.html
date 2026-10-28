@@ -361,7 +361,9 @@ const tripData = {
         { time:"17:00–19:00", place:"★ North / 北方館 / 북방관 저녁 (예약 완료)", region:"코타이", map:"North Restaurant The Venetian Macao", desc:["The Venetian Macao · Level 1 · 성인 2명","1주년 기념 식사 · 좋은 테이블 요청 (요청사항 — 보장되지 않음)","먹어볼 메뉴: 뱡뱡면 · 가지튀김"], move:"—", moveTime:"—", cost:"식비 예산 참조 (현장 결제)", booking:"done", status:"CONFIRMED", key:true },
         { time:"19:00–19:15", place:"North → Dancing Water Theater (City of Dreams) 도보", region:"이동", map:"Dancing Water Theater City of Dreams Macau", desc:["베네시안 → 길 건너 City of Dreams · 도보 약 10–15분","19:00 North 출발 → 19:15 극장 도착 (공연 15분 전 · 여유 없음 → 19:00 정각 출발)"], move:"도보", moveTime:"약 10–15분", cost:"—", booking:"none", status:"LOCKED" },
         { time:"19:15–21:00", place:"★ House of Dancing Water 19:30 (예약 완료)", region:"코타이", map:"Dancing Water Theater City of Dreams Macau", desc:["Grand · Section 500 · Row C · Seats 512–513 · Early Bird × 2","19:15 극장 도착 — 공연 15분 전","전자티켓으로 직접 입장 (실물 교환 불필요) · 공연 중 촬영·플래시 금지"], move:"—", moveTime:"—", cost:"MOP 1,756 (2인, 결제 완료)", booking:"done", status:"CONFIRMED", key:true },
-        { time:"21:00–22:00", place:"크리스마스 이브 코타이 야경 → 걸어서 Broadway 복귀", region:"코타이", map:"The Venetian Macao", desc:["City of Dreams 크리스마스 트리 → 길 건너 베네시안 외관 조명 → 갤럭시 → Broadway","공연 직후 택시 줄이 길어 야경 산책 겸 도보 복귀 (피곤하면 베네시안 택시 승강장)"], move:"도보", moveTime:"약 25분", cost:"무료", booking:"none", status:"LOCKED" },
+        { time:"21:00–21:20", place:"City of Dreams → 베네시안 L3 CHAGEE 도보", region:"이동", map:"CHAGEE The Venetian Macao", desc:["공연 끝나면 바로 출발 — CHAGEE 22:00 마감","City of Dreams 크리스마스 트리 → 길 건너 베네시안 → Level 3 Grand Canal Street Shop 875"], move:"도보", moveTime:"약 15–20분", cost:"—", booking:"none", status:"LOCKED" },
+        { time:"21:20–21:40", place:"CHAGEE / 霸王茶姬 — 伯牙絕弦", region:"코타이", map:"CHAGEE The Venetian Macao", desc:["The Venetian Macao · Level 3 · Grand Canal Street · Shop 875","대표 메뉴 伯牙絕弦 (자스민 원엽 밀크티)","영업 10:00~22:00 · 크리스마스 이브 영업시간·라스트 오더 방문 전 확인"], move:"—", moveTime:"—", cost:"현장 확인", booking:"none", needsCheck:true, status:"LOCKED" },
+        { time:"21:40–22:05", place:"베네시안 → 갤럭시 → 걸어서 Broadway 복귀", region:"코타이", map:"Broadway Hotel Macau", desc:["베네시안 외관 크리스마스 조명 → 갤럭시 → Broadway","공연 후 택시 줄이 길어 도보 복귀 (피곤하면 베네시안 택시 승강장)"], move:"도보", moveTime:"약 20–25분", cost:"무료", booking:"none", status:"LOCKED" },
       ]},
     { day:3, date:"12/25 (금·크리스마스)", title:"Broadway에서 걸어서 타이파 빌리지 → 콜로안 빌리지 → 윈 팰리스 분수쇼 → 갤럭시 크리스마스 밤", goals:["포르투갈 요리 (António)","콜로안 빌리지 산책 · Lord Stow’s 원조점","갤럭시·윈 팰리스 무료 쇼","Broadway Food Street 크리스마스 저녁"],
       items:[
@@ -553,9 +555,9 @@ const tripData = {
       desc:"얇은 찹쌀피 안에 생망고를 크게 넣은 망고모찌. 성 바울 성당 유적 바로 앞 육포거리에 있어 반도 관광 중 들르기 좋음.",
       locNote:"CHECK: 구글 지도에 영업시간·전화번호 정보 없음 → 방문 전 확인 · 바로 앞 골목에 앉아서 먹기 좋음 (리뷰)",
       links:[{label:"Google Maps (저장한 장소)", url:"https://maps.app.goo.gl/UD88yH8C7HxuH3uz5"}] },
-    { region:"코타이", name:"CHAGEE / 霸王茶姬", category:"차 · 밀크티 · 음료", menu:"伯牙絕弦", menuNote:"Bo Ya Jue Xian · 브랜드 대표 자스민 계열 원엽 밀크티", price:"현장 확인", location:"The Venetian Macao · Level 3 · Grand Canal Street · Shop 875 (澳門威尼斯人購物中心 3樓 大運河街 875號舖)", hours:"10:00~22:00 · 방문 전 재확인", booking:"none", wait:"", day:"", status:"SAVED", map:"CHAGEE The Venetian Macao",
+    { region:"코타이", name:"CHAGEE / 霸王茶姬", category:"차 · 밀크티 · 음료", menu:"伯牙絕弦", menuNote:"Bo Ya Jue Xian · 브랜드 대표 자스민 계열 원엽 밀크티", price:"현장 확인", location:"The Venetian Macao · Level 3 · Grand Canal Street · Shop 875 (澳門威尼斯人購物中心 3樓 大運河街 875號舖)", hours:"10:00~22:00 · 방문 전 재확인", booking:"none", wait:"", day:"D2 공연 후 (12/24 21:20–21:40)", status:"PLANNED", needsCheck:true, map:"CHAGEE The Venetian Macao",
       desc:"중국 윈난에서 시작한 현대식 티 브랜드 CHAGEE의 마카오 1호점. 베네시안 마카오 안에 있어 코타이 일정 중 들르기 편함.",
-      locNote:"North / 북방관과 같은 The Venetian Macao에 위치 (12/24 일정에는 넣지 않음 · 가기로 하면 PLANNED로 변경)" },
+      locNote:"House of Dancing Water 끝나고 걸어서 호텔 가는 길에 들름 · 22:00 마감이라 공연 후 바로 이동 · 크리스마스 이브 영업시간 확인" },
     { region:"홍콩", name:"Tim Ho Wan 添好運 (홍콩역)", menu:"차슈번, 하가우, 청펀", price:"HKD 100–150/인", location:"홍콩역 IFC 지하", hours:"확인 필요", booking:"none", wait:"점심 대기 20–30분", day:"D4 점심", status:"PLANNED", map:"Tim Ho Wan Hong Kong Station",
       links:[{label:"공식", url:"https://www.timhowan.com/"}] },
     { region:"홍콩", name:"침사추이 하버시티 / K11 MUSEA 식당가", menu:"완탕면·로스트구스·딤섬 (현장 선택)", price:"HKD 250–400/인", location:"침사추이 해변 인근", hours:"~22:00", booking:"none", wait:"연휴 대기", day:"D4 저녁", status:"PLANNED", map:"Harbour City Hong Kong" }
@@ -662,6 +664,7 @@ const tripData = {
   ],
 
   history: [
+    { date:"2026-10-28", changes:["D2 공연 후 CHAGEE / 霸王茶姬 추가: City of Dreams → 베네시안 L3 CHAGEE 21:20–21:40 → 걸어서 Broadway 22:05 도착 (LOCKED · 22:00 마감 CHECK)","CHAGEE 맛집 카드 SAVED → PLANNED"] },
     { date:"2026-10-28", changes:["D2 North 저녁 17:00–19:00 (2시간) → 19:00–19:15 극장 도보 → 19:15 House of Dancing Water 도착","D2 전체 일정 LOCKED (내가 확정한 계획) — 예약 완료 항목은 CONFIRMED 유지"] },
     { date:"2026-10-28", changes:["D2 시간 조정: 세나도까지 도보 11:50–12:10 → 세나도 12:10–12:30 → 육포거리 이동 12:30–12:40 → 육포거리·망고모찌 12:40–13:00"] },
     { date:"2026-10-28", changes:["D2 시간 조정: 셔틀 09:45–10:45 → 쏸라펀 10:50–11:50 → 세나도 12:00–12:20 (이동 10분 → 택시 권장) → 육포거리·망고모찌 12:30–13:00 → 성 바울 & 몬테 요새 13:00–13:30 → StarWorld 14:00 셔틀 → 휴식 14:40–16:20 → 16:20 North 이동"] },

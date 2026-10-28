@@ -81,6 +81,10 @@ nav.tabs button.on{background:rgba(255,255,255,.13);color:#fff;font-weight:700;b
 .ptitle{font-size:18px;color:var(--navy);margin:22px 0 10px}
 .ptitle .sub{font-size:12.5px;color:var(--muted);font-weight:400;margin-left:6px}
 details.fold{margin-top:12px}
+.tips{display:grid;gap:10px}
+.tip{display:flex;gap:10px;align-items:flex-start;padding:10px 12px;border-radius:10px;background:var(--gold-soft)}
+.tip .ti{font-size:20px;line-height:1.2}
+.tip b{color:var(--navy)}
 details.fold>summary{font-size:15px;padding:2px 0}
 details.fold[open]>summary{margin-bottom:12px}
 .progress-card{display:flex;flex-wrap:wrap;gap:10px 20px;align-items:center}
@@ -305,6 +309,7 @@ table.simple th{color:var(--muted);font-weight:600;font-size:12.5px}
   </div>
 
   <div class="panel" data-panel="info">
+    <details class="card fold" open><summary>🍯 주연이 꿀팁 — 마카오 돈 쓰는 법</summary><div class="tips" id="tipsBody"></div></details>
     <details class="card fold"><summary>🚌 홍콩 ↔ 마카오 교통 (이번 여행에서 타는 것)</summary><div class="grid g2" id="transportCards"></div></details>
     <details class="card fold"><summary>🎆 무료 쇼 · 크리스마스 이벤트</summary><div class="grid g2" id="showCards"></div></details>
     <details class="card fold"><summary>💰 예산 (2인)</summary><div class="small muted" id="fxNote"></div><div id="budgetBody" style="margin-top:10px"></div></details>
@@ -579,6 +584,14 @@ const tripData = {
   ],
 
   // 지역별 장소 (Google Maps 링크 자동 생성)
+  // 정보 탭 — 주연이 꿀팁 (마카오 돈 쓰는 법)
+  tips: [
+    { icon:"🎰", title:"카지노", text:"거의 홍콩 달러(HKD) 현금만 받음" },
+    { icon:"🛍", title:"일반 상점", text:"카카오페이 또는 마카오 현금(MOP)" },
+    { icon:"🏧", title:"마카오 현금 뽑기", text:"마카오 ATM에서 출금 · 트래블월렛 카드로 HSBC ATM에서 뽑으면 수수료 없음" },
+    { icon:"🚌", title:"버스", text:"버스카드로 타면 반값 · 충전된 버스카드를 자판기에서 사는 방식인데 현금으로만 살 수 있음" }
+  ],
+
   routeTips: [
     "숙소 Broadway 기준: 갤럭시·Broadway Food Street·타이파 빌리지는 도보 / Sands 클러스터(런더너·베네시안·파리지앵)·City of Dreams는 택시 약 5분 / 윈 팰리스·MGM은 택시 약 10분",
     "갤럭시 무료셔틀 활용: HZMB Macao Port(D1·D4) · StarWorld(D2 반도 왕복)",
@@ -725,6 +738,7 @@ const tripData = {
   ],
 
   history: [
+    { date:"2026-10-28", changes:["정보 탭 맨 위에 '주연이 꿀팁 — 마카오 돈 쓰는 법' 추가 (카지노 HKD 현금 · 상점 카카오페이/MOP · 트래블월렛 HSBC ATM 무료 출금 · 버스카드 반값/현금 구매)"] },
     { date:"2026-10-28", changes:["일정 설명 전체를 쉬운 말로 다시 씀 (口岸·E2·APM 같은 용어 풀어서 설명)","먹는 일정은 주황색으로 표시 (카드 왼쪽 줄 · 번호 · 지도 핀)","D1 Casa Maquista = 포르투갈 음식점(마카오식) 설명 추가 · 런더너/파리지앵/베네시안에 에그타르트집 표시","D2 쏸라펀 한국어 표기","D3 시간표 확정 (LOCKED): 11:00 타이파 빌리지 → 점심 택1 → 산책 → 젤라또 → 콜로안(원조 에그타르트·성당·탐꽁 사원) → 휴식 → CHAGEE 들고 걸어서 윈 팰리스 → 분수쇼 → TACOS 저녁 18:40–20:40 → 갤럭시 21:00–23:00","D4 점심 딤섬 · 저녁 북경오리 (식당 미정)","맛집에서 Margaret's Café e Nata · Riquexó · 쿤하 거리 간식 제거","윈 팰리스 분수쇼 시간 정정: 매일 정오~자정 20–30분마다"] },
     { date:"2026-10-28", changes:["대시보드를 탭 4개로 재구성: 🗺 일정(경로 지도 + 타임라인) / 🎫 예약 / 🍜 맛집 / ℹ️ 정보 · 모바일은 하단 탭 바","일정 카드는 시간·장소만 보이고 누르면 펼침 (모두 펼치기 버튼) · 예약 버튼은 항상 표시","제거: 상단 큰 헤더 · 요약 카드 · 지역별 장소 섹션(지도로 대체) · 안 쓰는 교통수단(TurboJET·타이파 페리·SkyPier) · 하단 문구","접힘 처리: 예약 대기 입력정보, 항공 메모·수하물, 호텔 요청사항·혜택·위치, 맛집 상세, 정보 탭 전체(교통·무료 쇼·예산·동선 원칙·출처·기록)"] },
     { date:"2026-10-28", changes:["일정 Timeline을 트리플식 지도 화면으로 개편: 날짜별 지도에 번호 핀 + 이동 경로(도보·택시·버스·철도·트램·페리·항공 색 구분)","일정 카드를 누르면 지도 해당 핀으로 이동 · 핀을 누르면 해당 일정 카드로 스크롤","지역 버튼(전체/마카오 반도/코타이·타이파/콜로안/홍콩 공항/홍콩 시내/인천) · 모바일은 지도 상단 고정 + 접기","장소 좌표: Google Maps 장소 좌표 (인천공항·HZMB 마카오 口岸·피크트램 하부역은 OpenStreetMap)"] },
@@ -1007,6 +1021,7 @@ const tripData = {
   }
 
   // 정보 탭: 동선 원칙
+  $("tipsBody").innerHTML = D.tips.map(t => `<div class="tip"><span class="ti">${t.icon}</span><div><b>${esc(t.title)}</b><div class="small">${esc(t.text)}</div></div></div>`).join("");
   $("routeTips").innerHTML = D.routeTips.map(t => `<li>${esc(t)}</li>`).join("");
 
   // ⑤ Shows

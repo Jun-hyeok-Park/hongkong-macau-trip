@@ -436,7 +436,14 @@ const tripData = {
     AOS:[22.2959261,114.1768374],
     HARBOUR:[22.2953381,114.1688303],
     KOWLOON:[22.304306,114.161475],
-    TAMKUNG:[22.1141647,113.5501331]
+    TAMKUNG:[22.1141647,113.5501331],
+    DIMSUM:[22.284886,114.1513815],
+    MANMO:[22.2839963,114.1502256],
+    ESCALATOR:[22.2838464,114.1549689],
+    TAIKWUN:[22.2811686,114.154023],
+    PMQ:[22.283328,114.1515669],
+    PEKING:[22.2946924,114.1690422],
+    CLOCK:[22.2935624,114.1695528]
   },
 
   itinerary: [
@@ -502,20 +509,24 @@ const tripData = {
         { time:"20:40–21:00", geo:"GALAXY", mode:"walk", place:"걸어서 → 갤럭시", region:"이동", map:"Galaxy Macau", desc:["타이파 빌리지에서 숙소 방향으로 약 1km"], move:"걷기", moveTime:"20분", cost:"—", booking:"none", status:"LOCKED" },
         { time:"21:00–23:00", geo:["GALAXY","BROADWAY"], mode:"walk", place:"갤럭시 크리스마스 밤 — 다이아몬드 쇼 · 카지노", region:"코타이", map:"Galaxy Macau", desc:["다이아몬드 쇼: 로비에서 하는 무료 쇼 (거대한 다이아몬드가 올라옴) · 공휴일 자정까지","카지노는 만 21세 이상 · 여권 챙기기 · 안에서 사진 금지","끝나면 건물 안으로 숙소까지 걸어서"], move:"걷기 (건물 안)", moveTime:"5–10분", cost:"—", booking:"none", status:"LOCKED" }
       ]},
-    { day:4, start:"BROADWAY", date:"12/26 (토)", title:"마카오 체크아웃 → 홍콩으로 → 피크 전망대 · 스타페리 · 야경 → 공항 호텔", goals:["짐은 공항 호텔(Regal)에 맡기고 시내로","빅토리아 피크 전망","스타페리 · 하버 야경"],
+    { day:4, start:"BROADWAY", date:"12/26 (토)", title:"마카오 체크아웃 → 홍콩으로 → 딤섬 · 센트럴 골목 · 스타페리 · 북경오리 → 공항 호텔", goals:["짐은 공항 호텔(Regal)에 맡기고 시내로","딤섬 스퀘어 → 만모 사원 → 에스컬레이터 · 소호 → 타이쿤 → PMQ","노을 스타페리 · Peking Garden 북경오리 · 심포니 오브 라이트"],
       items:[
         { time:"08:30–09:30", geo:"BROADWAY", mode:"walk", place:"아침 · 짐 싸기", region:"코타이", desc:["부칠 짐 20kg 넘는지 확인","남은 마카오 돈(MOP)은 여기서 쓰기"], move:"—", moveTime:"—", cost:"2인 MOP 200 정도", booking:"none", status:"PLANNED" },
         { time:"09:30–10:40", geo:["GALAXY","HZMB_MO"], mode:"bus", place:"체크아웃 → 무료셔틀로 마카오 출국장", region:"이동", map:"HZMB Macau Port", desc:["09:30 체크아웃 (마감 11:00)","갤럭시 'Diamond Lobby'에서 출국장행 무료셔틀 — 첫차 10:00이라 09:50까지 로비 도착","셔틀 줄이 길면 택시 (20–25분 · MOP 120–160)","연휴 직후 토요일이라 출국장이 붐빌 수 있음"], move:"무료셔틀 (또는 택시)", moveTime:"약 25분 + 기다리는 시간", cost:"무료", booking:"none", status:"LOCKED" },
         { time:"10:40–12:15", geo:"HZMB_HK", mode:"bus", place:"골든버스 → 홍콩 입국장", region:"이동", desc:["마카오 출국심사 → 유료 셔틀버스(골든버스)로 다리 건너기 → 홍콩 입국심사","12/23에 탄 무료버스와는 다른 버스 (예약 없이 현장에서 표 구매)"], move:"골든버스", moveTime:"약 1시간 30분", cost:"1인 HKD 65", booking:"none", status:"LOCKED" },
         { time:"12:15–12:45", geo:"REGAL", mode:"bus", place:"B4 버스 → 공항 호텔 Regal에 짐 맡기기", region:"홍콩", map:"Regal Airport Hotel Hong Kong", desc:["다음 날 새벽 비행기라 마지막 밤은 공항 바로 옆 호텔","체크인(15:00) 전이라 프런트에 짐만 맡기고 시내로 (짐 보관은 현장 확인)"], move:"B4 버스 + 걷기", moveTime:"20분", cost:"1인 HKD 9.8", booking:"done", status:"LOCKED" },
         { time:"12:45–13:15", geo:"HKSTN", mode:"rail", place:"공항철도 → 홍콩역 (시내 중심)", region:"홍콩", desc:["Airport Express · 24분 · 10분마다"], move:"공항철도", moveTime:"24분", cost:"1인 약 HKD 115 (확인)", booking:"none", needsCheck:true, status:"PLANNED" },
-        { time:"13:15–14:15", geo:"HKSTN", mode:"walk", food:true, place:"점심 — 딤섬 (식당 미정)", region:"홍콩", map:"dim sum near Hong Kong Station", desc:["메뉴는 딤섬으로 결정 · 식당은 아직 못 정함","후보: 팀호완(홍콩역 지하 · 미쉐린 딤섬, 차슈번 유명)"], move:"걷기", moveTime:"—", cost:"2인 HKD 300 정도", booking:"none", needsCheck:true, status:"PLANNED" },
-        { time:"14:30–17:30", geo:["PEAKLOW","SKY428"], mode:"tram", place:"피크트램 → 빅토리아 피크 전망대", region:"홍콩", map:"Peak Tram Garden Road Lower Terminus", desc:["산 위로 올라가는 케이블 기차 — 타는 곳(가든로드)까지 걸어서 15분 또는 택시","공휴일이라 줄이 길 수 있음 → 온라인 티켓 미리 사기","스카이테라스 428에서 홍콩 전경 · 해 질 무렵(17:45쯤)까지"], move:"걷기 + 피크트램", moveTime:"15분 + 7분", cost:"2인 왕복 HKD 216~", booking:"recommended", status:"PLANNED", key:true },
-        { time:"17:30–18:15", geo:"PIER7", mode:"tram", place:"내려와서 → 스타페리 선착장", region:"홍콩", map:"Central Pier 7 Star Ferry", desc:["피크트램 내려가는 줄이 길면 15번 버스나 택시"], move:"피크트램·버스·택시", moveTime:"30–40분", cost:"HKD 100 정도", booking:"none", status:"PLANNED" },
-        { time:"18:15–18:30", geo:"TSTPIER", mode:"ferry", place:"스타페리 → 침사추이", region:"홍콩", map:"Star Ferry Tsim Sha Tsui Pier", desc:["야경 보면서 바다 건너는 10분짜리 배 — 홍콩 대표 체험"], move:"페리", moveTime:"10분", cost:"2인 HKD 10 정도", booking:"none", status:"PLANNED" },
-        { time:"18:30–19:15", geo:"AOS", mode:"walk", place:"침사추이 바닷가 산책 (스타의 거리)", region:"홍콩", map:"Avenue of Stars Hong Kong", desc:["홍콩섬 빌딩 야경 · 크리스마스 건물 조명"], move:"걷기", moveTime:"—", cost:"무료", booking:"none", status:"PLANNED" },
-        { time:"19:15–20:30", geo:"HARBOUR", mode:"walk", food:true, place:"저녁 — 북경오리 (식당 미정)", region:"홍콩", map:"Peking duck Tsim Sha Tsui", desc:["메뉴는 북경오리로 결정 · 식당은 아직 못 정함 (침사추이 근처로 찾기)","인기 식당은 예약하는 게 좋음"], move:"걷기", moveTime:"10분", cost:"2인 HKD 700 정도", booking:"recommended", needsCheck:true, status:"PLANNED" },
-        { time:"20:00", geo:"AOS", mode:"walk", place:"심포니 오브 라이트 (레이저쇼)", region:"홍콩", map:"Tsim Sha Tsui Promenade", desc:["홍콩섬 빌딩들이 음악에 맞춰 조명을 쏘는 쇼","2026년 하반기 종료 예정이라 12월에 하는지 확인 필요"], move:"걷기", moveTime:"—", cost:"무료", booking:"none", needsCheck:true, status:"PLANNED" },
+        { time:"13:15–13:30", geo:"DIMSUM", mode:"walk", place:"걸어서 → 딤섬 스퀘어 (성완)", region:"이동", map:"Dim Sum Square Sheung Wan", desc:["홍콩역에서 서쪽으로 약 1km"], move:"걷기", moveTime:"15분", cost:"—", booking:"none", status:"LOCKED" },
+        { time:"13:30–14:30", geo:"DIMSUM", mode:"walk", food:true, place:"점심 — 딤섬 스퀘어 聚點坊", region:"홍콩", map:"Dim Sum Square Sheung Wan", desc:["로컬 딤섬 전문점 · 구글 평점 4.0 (리뷰 3,000개 이상)","추천: 차슈바오(달콤한 바비큐 돼지고기 번) · 창펀(쌀피에 바삭한 튀김을 넣어 만 것 — 나오면 바로 먹기)","현금만 받는다는 후기가 많음 → 홍콩 달러 현금 챙기기","예약 없이 가는 곳이라 점심때 줄 설 수 있음 · 10:00부터 영업"], move:"—", moveTime:"—", cost:"2인 HKD 200–300 정도", booking:"none", needsCheck:true, status:"LOCKED" },
+        { time:"14:30–14:45", geo:"MANMO", mode:"walk", place:"만모 사원 (할리우드 로드)", region:"홍콩", map:"Man Mo Temple Hollywood Road", desc:["딤섬집에서 언덕 위로 약 200m","천장에 매달린 나선형 향이 가득한 오래된 도교 사원 · 무료 · 08:00–18:00"], move:"걷기", moveTime:"5분", cost:"무료", booking:"none", status:"LOCKED" },
+        { time:"14:45–15:15", geo:"ESCALATOR", mode:"walk", place:"미드레벨 에스컬레이터 — 타고 올라가며 소호 구경", region:"홍콩", map:"Central-Mid-Levels Escalator", desc:["언덕 위 주택가까지 이어지는 세계에서 가장 긴 야외 에스컬레이터 (약 800m)","10시 이후엔 올라가는 방향으로만 운행 — 중간에 내려서 소호 골목 구경","만모 사원에서 할리우드 로드 따라 걸어가 중간에서 타도 됨"], move:"걷기 + 에스컬레이터", moveTime:"—", cost:"무료", booking:"none", status:"LOCKED" },
+        { time:"15:15–16:00", geo:"TAIKWUN", mode:"walk", place:"타이쿤 大館", region:"홍콩", map:"Tai Kwun Hong Kong", desc:["옛 경찰서와 감옥을 고쳐 만든 문화공간 — 건물 사이 광장, 전시, 카페","에스컬레이터 바로 옆 · 입장 무료"], move:"걷기", moveTime:"3–5분", cost:"무료", booking:"none", status:"LOCKED" },
+        { time:"16:00–16:45", geo:"PMQ", mode:"walk", place:"PMQ 元創方", region:"홍콩", map:"PMQ Hong Kong", desc:["옛 경찰 기숙사를 고쳐 만든 디자인 소품 가게 거리","타이쿤에서 걸어서 약 5분 · 가게는 12:00부터"], move:"걷기", moveTime:"5분", cost:"무료 (쇼핑 별도)", booking:"none", status:"LOCKED" },
+        { time:"16:45–17:15", geo:"PIER7", mode:"walk", place:"걸어서 → 센트럴 스타페리 선착장 (7번 부두)", region:"이동", map:"Central Pier 7 Star Ferry", desc:["언덕을 내려와 바닷가 쪽으로 약 1.8km · 다리 아프면 택시 10분"], move:"걷기", moveTime:"25–30분", cost:"—", booking:"none", status:"LOCKED" },
+        { time:"17:15–17:30", geo:"TSTPIER", mode:"ferry", place:"스타페리 → 침사추이", region:"홍콩", map:"Star Ferry Tsim Sha Tsui Pier", desc:["바다를 건너는 10분짜리 배 — 해 지기 직전(일몰 17:45쯤) 하버 풍경","옥토퍼스 카드나 동전으로 탑승"], move:"페리", moveTime:"10분", cost:"2인 HKD 10 정도", booking:"none", status:"LOCKED" },
+        { time:"17:30–18:00", geo:"CLOCK", mode:"walk", place:"침사추이 바닷가 · 시계탑에서 노을", region:"홍콩", map:"Tsim Sha Tsui Clock Tower", desc:["선착장 바로 옆 붉은 벽돌 시계탑 · 홍콩섬 노을과 야경 사진"], move:"걷기", moveTime:"2분", cost:"무료", booking:"none", status:"LOCKED" },
+        { time:"18:00–20:00", geo:"PEKING", mode:"walk", food:true, place:"저녁 — Peking Garden 北京樓 (북경오리)", region:"홍콩", map:"Peking Garden Star House Tsim Sha Tsui", desc:["북경오리 전문 중식당 · 스타페리 선착장 앞 Star House 3층 · 2시간 여유 있게","북경오리 반 마리 가능 (한 마리 HKD 418 정도 — 2024년 다른 지점 기준) · 계산서에 봉사료 10% 붙음","공휴일(박싱데이)이라 전화 예약 권장: +852 2735 8211 — 반 마리 가격도 같이 물어보기","창가 자리면 시계탑과 하버 야경이 보임 (후기)"], move:"걷기", moveTime:"2분", cost:"2인 HKD 500–700 예상", booking:"recommended", needsCheck:true, status:"LOCKED" },
+        { time:"20:00–20:30", geo:"AOS", mode:"walk", place:"심포니 오브 라이트 · 바닷가 산책", region:"홍콩", map:"Avenue of Stars Hong Kong", desc:["20:00 홍콩섬 빌딩들이 음악에 맞춰 조명을 쏘는 쇼 (약 10분) — 식당 앞 바닷가에서 보기","2026년 하반기 종료 예정이라 12월에 하는지 확인 필요","끝나고 스타의 거리 따라 짧게 산책"], move:"걷기", moveTime:"—", cost:"무료", booking:"none", needsCheck:true, status:"LOCKED" },
         { time:"20:45–21:30", geo:["KOWLOON","REGAL"], pin:1, mode:"rail", place:"공항철도 → 공항 호텔 Regal 체크인", region:"홍콩", map:"Regal Airport Hotel Hong Kong", desc:["구룡역까지 택시 10분 → 공항철도 → 호텔","Superior 객실 · 조식 없음 · 예약 완료","다음 날 03:30 기상이라 22:00 전에 자기"], move:"택시 + 공항철도", moveTime:"약 40분", cost:"2인 HKD 250 정도 · 숙박 결제 완료 (₩188,829)", booking:"done", status:"CONFIRMED" }
       ]},
     { day:5, date:"12/27 (일)", title:"새벽 퇴실 → 제2터미널 체크인 → 제1터미널 출국 → 귀국", goals:["03:50 호텔 퇴실","04:15 제2터미널에서 짐 부치기","07:15 비행기"],
@@ -646,9 +657,11 @@ const tripData = {
     { region:"코타이", name:"CHAGEE / 霸王茶姬", category:"차 · 밀크티 · 음료", menu:"伯牙絕弦", menuNote:"Bo Ya Jue Xian · 브랜드 대표 자스민 계열 원엽 밀크티", price:"현장 확인", location:"The Venetian Macao · Level 3 · Grand Canal Street · Shop 875 (澳門威尼斯人購物中心 3樓 大運河街 875號舖)", hours:"10:00~22:00 · 방문 전 재확인", booking:"none", wait:"", day:"D2 공연 후 (12/24 21:20) · D3 윈 팰리스 가는 길 (12/25 17:00)", status:"PLANNED", needsCheck:true, map:"CHAGEE The Venetian Macao",
       desc:"중국 윈난에서 시작한 현대식 티 브랜드 CHAGEE의 마카오 1호점. 베네시안 마카오 안에 있어 코타이 일정 중 들르기 편함.",
       locNote:"D2 공연 끝나고 숙소 가는 길 + D3 윈 팰리스까지 걸어가는 길에 들름 · 22:00 마감 · 크리스마스 영업시간 확인" },
-    { region:"홍콩", name:"Tim Ho Wan 添好運 (홍콩역) — D4 딤섬 후보", menu:"차슈번, 하가우, 청펀", price:"HKD 100–150/인", location:"홍콩역 IFC 지하", hours:"확인 필요", booking:"none", wait:"점심 대기 20–30분", day:"D4 점심 딤섬 후보 (식당 미정)", needsCheck:true, status:"PLANNED", map:"Tim Ho Wan Hong Kong Station",
-      links:[{label:"공식", url:"https://www.timhowan.com/"}] },
-    { region:"홍콩", name:"북경오리 — 식당 미정 (침사추이 근처)", menu:"북경오리", price:"2인 HKD 700 정도 (예상)", location:"침사추이 근처에서 찾기", hours:"—", booking:"recommended", wait:"인기 식당은 예약 권장", day:"D4 저녁 (12/26 19:15)", status:"PLANNED", needsCheck:true, map:"Peking duck Tsim Sha Tsui" }
+    { region:"홍콩", name:"딤섬 스퀘어 聚點坊 (성완)", category:"딤섬 전문점 · D4 점심 확정", menu:"차슈바오 · 창펀(에그롤 쌀국수 롤)", price:"2인 HKD 200–300 정도", location:"78 Jervois St, Sheung Wan (홍콩역에서 도보 15분)", hours:"10:00부터", booking:"none", wait:"점심 피크 줄 설 수 있음", day:"D4 점심 (12/26 13:30–14:30)", status:"PLANNED", needsCheck:true, map:"Dim Sum Square Sheung Wan",
+      desc:"구글 평점 4.0 (리뷰 3,071개) 로컬 딤섬집.", locNote:"☎ +852 2851 8088 · 현금만 받는다는 후기 많음 → HKD 현금 준비" },
+    { region:"홍콩", name:"Peking Garden 北京樓 (침사추이 Star House)", category:"북경오리 전문 중식당 · D4 저녁 확정", menu:"북경오리 (반 마리 가능)", price:"한 마리 HKD 418 정도 (2024 몽콕점 기준) · 봉사료 10% · 2인 HKD 500–700 예상", location:"3/F Star House, 3 Salisbury Rd, Tsim Sha Tsui (스타페리 선착장 바로 앞)", hours:"점심 11:30–15:00 · 저녁 18:00–22:30 (Maxim's 기준)", booking:"recommended", wait:"공휴일 예약 권장", day:"D4 저녁 (12/26 18:00–20:00)", status:"PLANNED", needsCheck:true, map:"Peking Garden Star House Tsim Sha Tsui",
+      desc:"Maxim's 그룹 북경요리 전문점 · 구글 평점 3.8 (리뷰 1,582개) · 북경오리·춘권 호평.", locNote:"☎ +852 2735 8211 전화 예약 (온라인 예약 없음) · 반 마리 가격 확인 · 창가 자리는 시계탑·하버 야경",
+      links:[{label:"Google Maps (저장한 장소)", url:"https://maps.app.goo.gl/a3HAZKb3GnPYyQfB9"}] }
   ],
 
   transport: [
@@ -670,7 +683,7 @@ const tripData = {
     { category:"교통", item:"HZMB Golden Bus 편도(12/26) + B4 버스 (2인) · 12/23 Macau HK Airport Direct는 무료", amount:150, currency:"HKD" },
     { category:"교통", item:"마카오 택시·셔틀", amount:500, currency:"MOP" },
     { category:"교통", item:"홍콩 공항철도·MTR·스타페리·택시", amount:700, currency:"HKD" },
-    { category:"관광", item:"피크트램 왕복 + Sky Terrace 428", amount:450, currency:"HKD" },
+    { category:"관광", item:"홍콩 시내 (스타페리 · 타이쿤·PMQ 무료 · 간식)", amount:150, currency:"HKD" },
     { category:"관광", item:"마카오 박물관·에펠탑 전망대 등", amount:300, currency:"MOP" },
     { category:"식비", item:"마카오 식비", amount:4200, currency:"MOP" },
     { category:"식비", item:"홍콩 식비", amount:1150, currency:"HKD" },
@@ -691,7 +704,7 @@ const tripData = {
     { id:"flight-ret", label:"항공권: 홍콩 → 인천 UO618 (12/27 07:15) — 예약 완료", ref:"PNR 비공개 · 비공개", status:"CONFIRMED", done:true },
     { id:"airport-direct", label:"[예약 대기] Macau HK Airport Direct 무료버스 — 12/23 HKG → Macao · 성인 2명", ref:"11/22 확인 · 11/23 예약 시도", needsCheck:true, status:"LOCKED", bookingRef:"macauAirportDirect" },
     { id:"casa-maquista", label:"[예약 대기] Casa Maquista 土生公館 — 12/23 17:00 · 성인 2명", ref:"inline 예약창 약 1개월 전 오픈 · 11/20부터 확인 (11/21경 예상)", needsCheck:true, status:"LOCKED", bookingRef:"casaMaquista" },
-    { id:"d4-restaurants", label:"D4 12/26 식당 정하기 — 점심 딤섬 · 저녁 북경오리", ref:"메뉴는 결정 · 식당 미정 (북경오리는 예약 권장)", needsCheck:true, status:"PLANNED" },
+    { id:"d4-restaurants", label:"Peking Garden 전화 예약 — 12/26 18:00 · 성인 2명", ref:"☎ +852 2735 8211 · 반 마리 가격 확인 · 창가 자리 요청", needsCheck:true, status:"PLANNED" },
     { id:"icn-transport", label:"12/23 03:45 인천공항 T1 도착 수단 (자차·택시·전날 숙박)", ref:"", needsCheck:true, status:"PLANNED" },
     { id:"show-hodw-confirmed", label:"공연: House of Dancing Water 12/24 19:30 — 예약 완료 (Grand · Section 500 · Row C · Seats 512–513 · Early Bird × 2)", ref:"예약번호: 비공개 · MOP 1,756 · 전자티켓 2장", status:"CONFIRMED", done:true },
     { id:"hotel-macau-confirmed", label:"마카오 호텔: Broadway Hotel 12/23–12/26 (3박) — 예약 완료", ref:"예약번호: 비공개 · NOL · Broadway King · 조식 불포함 · ₩726,939", status:"CONFIRMED", done:true },
@@ -702,7 +715,6 @@ const tripData = {
     { id:"insurance", label:"여행자 보험", ref:"", status:"PLANNED" },
     { id:"esim", label:"eSIM / 로밍 (홍콩+마카오 겸용)", ref:"", status:"PLANNED" },
     { id:"octopus", label:"옥토퍼스 카드 (모바일/실물)", ref:"", status:"PLANNED" },
-    { id:"peak", label:"피크트램 온라인 티켓 (12/26)", ref:"", status:"PLANNED" },
     { id:"cash", label:"환전: HKD (마카오에서도 사용 가능, 거스름돈은 MOP)", ref:"", status:"PLANNED" },
     { id:"checkin", label:"HK Express 온라인 체크인 (귀국편 포함)", ref:"", status:"PLANNED" }
   ],
@@ -712,8 +724,8 @@ const tripData = {
     { when:"⏰ 2026-11-22(일) ~ 11-23(월) — 높은 우선순위", items:[{ text:"★ Macau HK Airport Direct 무료버스 (12/23 HKG → Macao, 성인 2명) — 예약 대기: 11/22부터 예약창 확인, 늦어도 11/23 예약 시도", bookingRef:"macauAirportDirect" }] },
     { when:"⏰ 2026-11-20(금) ~ 11-21(토) — 높은 우선순위", items:[{ text:"★ Casa Maquista 土生公館 (12/23 17:00, 성인 2명) — 예약 대기: 11/20부터 inline 예약창 확인 (약 1개월 전 오픈 · 11/21경 예상)", bookingRef:"casaMaquista" }] },
     { when:"지금 예약 (10월)", items:["① D3 점심 결정 — La Cucina Italiana로 가면 전화 예약 (+853 2882 7818)","② 12/23 새벽 인천공항 도착 수단 결정"] },
-    { when:"1~2개월 전 (10월 말~11월)", items:["12/25 저녁 TACOS by miumiu 예약 여부 확인 (☎ +853 2875 0151)","12/26 점심 딤섬 · 저녁 북경오리 식당 정하기","여행자 보험 · eSIM 구매","크리스마스 행사(리조트·Light Up Macau) 발표 확인"] },
-    { when:"1~2주 전 (12월 초)", items:["갤럭시 무료셔틀 시간표(HZMB 口岸·StarWorld ↔ Galaxy) 12월 운행 확인","Symphony of Lights 운영 여부 확인","③ 피크트램 온라인 티켓 (12/26)","날씨·HZMB 운행 공지 확인"] },
+    { when:"1~2개월 전 (10월 말~11월)", items:["12/25 저녁 TACOS by miumiu 예약 여부 확인 (☎ +853 2875 0151)","12/26 저녁 Peking Garden 전화 예약 (☎ +852 2735 8211)","여행자 보험 · eSIM 구매","크리스마스 행사(리조트·Light Up Macau) 발표 확인"] },
+    { when:"1~2주 전 (12월 초)", items:["갤럭시 무료셔틀 시간표(HZMB 口岸·StarWorld ↔ Galaxy) 12월 운행 확인","Symphony of Lights 운영 여부 확인","날씨·HZMB 운행 공지 확인"] },
     { when:"여행 직전", items:["HK Express 온라인 체크인 · 항공 시간 변경 확인","위탁 20kg / 개인물품 7kg 무게 확인","환전·옥토퍼스 충전","여권 유효기간(6개월 이상) 확인","예약 확인서 오프라인 저장"] }
   ],
 
@@ -726,7 +738,7 @@ const tripData = {
       inputs:[ ["Direction","Hong Kong Airport → Macao","예약 화면 표기: HK Int'l Airport → HZMB Macau Port"], ["Date","2026-12-23"], ["Flight","UO617"], ["Arrival","09:50"], ["Passengers","2"] ],
       lines:["현재 예약 페이지 기준 약 1개월 전부터 날짜 선택이 가능한 것으로 보임 — 예약 가능 기간은 운영사 정책에 따라 변경될 수 있으므로 11/22 실제 예약 페이지에서 다시 확인.","위탁수하물이 있는 경우 홍콩공항에서 직접 수하물을 찾지 않고 E2 환승 카운터로 이동해 baggage tag receipt를 제시하여 수하물 이송 절차를 진행한다. 실제 예약 시 운영 안내를 다시 확인."],
       detail:"12/23 HKG → Macao 무료 직통버스 — 11/22부터 예약창 확인, 늦어도 11/23 예약 시도." },
-    { title:"아직 예약하지 않은 항목", detail:"Macau HK Airport Direct 무료버스(11/22~) · D3 점심 결정 (La Cucina면 전화 예약) · 피크트램 온라인 티켓 · 12/23 새벽 인천공항 이동 수단 (항공권·숙소 4박·North·House of Dancing Water는 예약 완료)." },
+    { title:"아직 예약하지 않은 항목", detail:"Macau HK Airport Direct 무료버스(11/22~) · D3 점심 결정 (La Cucina면 전화 예약) · 12/26 Peking Garden 전화 예약 · 12/23 새벽 인천공항 이동 수단 (항공권·숙소 4박·North·House of Dancing Water는 예약 완료)." },
     { title:"크리스마스 이벤트 2026 미공개", detail:"리조트별 크리스마스 장식·Light Up Macau 2026 일정 발표 대기 (11월 예상)." },
     { title:"Symphony of Lights 종료 예정", detail:"홍콩 정부가 2026년 하반기 종료 방침 발표. 12/26 운영 여부 불확실 → 하버 야경 자체는 그대로 감상 가능." },
     { title:"Regal Airport Hotel 숙박세 안내", detail:"바우처에 홍콩 호텔숙박세(HAT) 3%가 총 숙박비에 영향을 줄 수 있다는 안내 — 결제금액 ₩188,829에 포함 여부를 체크인 시 확인 (예산엔 추가 반영 안 함)." },
@@ -734,10 +746,11 @@ const tripData = {
     { title:"갤럭시 무료셔틀 12월 운행", detail:"공식: HZMB ↔ Galaxy 10:00–23:00(Diamond Lobby), StarWorld ↔ Galaxy 09:30–22:00(Crystal Lobby). 연휴 기간 변경 여부와 Galaxy ↔ Broadway 실내 도보 경로 재확인." },
     { title:"새벽 공항 동선 (Regal → T2 U구역 → T1)", detail:"HK Express 체크인·수하물 위탁은 T2. 00:31–05:29엔 T2 출국시설·APM 운영 중단 → T1까지 도보 약 15분 후 보안검색·출국심사. 12/26 밤 체크인 후 Regal → T2 경로 미리 걸어보기." },
     { title:"인천공항 03:45 도착 수단", detail:"새벽 공항철도·버스 운행 전 — 자차(장기주차)·택시·전날 공항 근처 숙박 중 결정." },
-    { title:"요금 재확인", detail:"공항철도 요금, 피크트램 공휴일 요금, 마카오 박물관 입장료." }
+    { title:"요금 재확인", detail:"공항철도 요금, Peking Garden 북경오리 반 마리 가격." }
   ],
 
   history: [
+    { date:"2026-10-29", changes:["D4 확정 (LOCKED): 점심 딤섬 스퀘어 13:30 → 만모 사원 → 미드레벨 에스컬레이터·소호 → 타이쿤 → PMQ → 스타페리 17:15 → 시계탑 노을 → 저녁 Peking Garden 18:00–20:00 (2시간) → 20:00 심포니 오브 라이트","피크트램·빅토리아 피크 제외 (연휴 줄)","맛집: Tim Ho Wan 후보 → 딤섬 스퀘어 · 북경오리 미정 → Peking Garden"] },
     { date:"2026-10-28", changes:["정보 탭 맨 위에 '주연이 꿀팁 — 마카오 돈 쓰는 법' 추가 (카지노 HKD 현금 · 상점 카카오페이/MOP · 트래블월렛 HSBC ATM 무료 출금 · 버스카드 반값/현금 구매)"] },
     { date:"2026-10-28", changes:["일정 설명 전체를 쉬운 말로 다시 씀 (口岸·E2·APM 같은 용어 풀어서 설명)","먹는 일정은 주황색으로 표시 (카드 왼쪽 줄 · 번호 · 지도 핀)","D1 Casa Maquista = 포르투갈 음식점(마카오식) 설명 추가 · 런더너/파리지앵/베네시안에 에그타르트집 표시","D2 쏸라펀 한국어 표기","D3 시간표 확정 (LOCKED): 11:00 타이파 빌리지 → 점심 택1 → 산책 → 젤라또 → 콜로안(원조 에그타르트·성당·탐꽁 사원) → 휴식 → CHAGEE 들고 걸어서 윈 팰리스 → 분수쇼 → TACOS 저녁 18:40–20:40 → 갤럭시 21:00–23:00","D4 점심 딤섬 · 저녁 북경오리 (식당 미정)","맛집에서 Margaret's Café e Nata · Riquexó · 쿤하 거리 간식 제거","윈 팰리스 분수쇼 시간 정정: 매일 정오~자정 20–30분마다"] },
     { date:"2026-10-28", changes:["대시보드를 탭 4개로 재구성: 🗺 일정(경로 지도 + 타임라인) / 🎫 예약 / 🍜 맛집 / ℹ️ 정보 · 모바일은 하단 탭 바","일정 카드는 시간·장소만 보이고 누르면 펼침 (모두 펼치기 버튼) · 예약 버튼은 항상 표시","제거: 상단 큰 헤더 · 요약 카드 · 지역별 장소 섹션(지도로 대체) · 안 쓰는 교통수단(TurboJET·타이파 페리·SkyPier) · 하단 문구","접힘 처리: 예약 대기 입력정보, 항공 메모·수하물, 호텔 요청사항·혜택·위치, 맛집 상세, 정보 탭 전체(교통·무료 쇼·예산·동선 원칙·출처·기록)"] },
@@ -794,7 +807,6 @@ const tripData = {
     { label:"Symphony of Lights 종료 관련 보도 (2026-09-21)", url:"https://www.travelerstoday.com/articles/61021/20260921/hong-kongs-symphony-lights-resumes-after-weather-halt-its-end-near.htm" },
     { label:"MTR Airport Express", url:"https://www.mtr.com.hk/en/customer/services/ae_index.html" },
     { label:"Star Ferry", url:"https://www.starferry.com.hk/en/home" },
-    { label:"The Peak (피크트램)", url:"https://www.thepeak.com.hk/" },
     { label:"HZMB 요금·B4 버스 정보 (여행 가이드, 2026)", url:"https://en.kowloonvibes.com/hong-kong/article/transport/hk-to-macau-bus-guide/" },
     { label:"HoDW 좌석·시간 가이드 (2026)", url:"https://therighttour.com/guides/house-of-dancing-water-macau-tickets-best-seats-and-show-times-2026" }
   ]
@@ -912,7 +924,7 @@ const tripData = {
     taxi:{label:"택시", icon:"🚕", color:"#e0703a", weight:4},
     bus:{label:"버스·셔틀", icon:"🚌", color:"#2f6fd6", weight:4},
     rail:{label:"철도", icon:"🚆", color:"#7b5cc4", weight:4},
-    tram:{label:"피크트램", icon:"🚋", color:"#7b5cc4", dash:"8 6", weight:4},
+    tram:{label:"트램", icon:"🚋", color:"#7b5cc4", dash:"8 6", weight:4},
     ferry:{label:"페리", icon:"⛴", color:"#1fa2b8", dash:"10 6", weight:4},
     flight:{label:"항공", icon:"✈", color:"#8a94a6", dash:"4 8", weight:2}
   };

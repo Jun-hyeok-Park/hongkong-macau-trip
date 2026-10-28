@@ -24,22 +24,6 @@ a{color:var(--planned,#2f6fd6)}
 h1,h2,h3,h4{line-height:1.3;margin:0}
 .wrap{max-width:1180px;margin:0 auto;padding:0 16px}
 
-/* Header */
-header.hero{background:linear-gradient(135deg,var(--navy) 0%,var(--navy-2) 60%,#2a2350 100%);color:#fff;padding:36px 0 30px}
-.hero h1{font-size:clamp(26px,5vw,40px);letter-spacing:.5px}
-.hero h2{font-size:clamp(16px,3vw,20px);color:var(--gold);font-weight:600;margin-top:6px;letter-spacing:1px}
-.hero p{color:#c9d2e6;margin:12px 0 0;max-width:760px}
-.hero .tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
-.hero .tags span{border:1px solid rgba(201,162,74,.6);color:#f3e3b9;padding:3px 10px;border-radius:99px;font-size:13px}
-
-/* Sticky nav */
-nav.top{position:sticky;top:0;z-index:50;background:rgba(15,29,61,.97);border-bottom:2px solid var(--gold)}
-nav.top .wrap{display:flex;gap:4px;overflow-x:auto;scrollbar-width:none;padding-top:8px;padding-bottom:8px}
-nav.top .wrap::-webkit-scrollbar{display:none}
-nav.top a{color:#dfe5f2;text-decoration:none;font-size:13.5px;white-space:nowrap;padding:6px 10px;border-radius:8px}
-nav.top a:hover{background:rgba(255,255,255,.1);color:#fff}
-
-section{padding:30px 0 6px}
 .sec-title{display:flex;align-items:baseline;gap:10px;margin-bottom:14px;flex-wrap:wrap}
 .sec-title h2{font-size:22px;color:var(--navy)}
 .sec-title .num{color:var(--gold);font-weight:700;font-size:22px}
@@ -82,6 +66,40 @@ ul.tight li{margin:2px 0}
 .btn.map{color:#1a6b3c}
 .btn.on{background:var(--navy);color:#fff;border-color:var(--navy)}
 
+/* App bar + 탭 */
+.top{position:sticky;top:0;z-index:60;background:var(--navy);color:#fff;border-bottom:2px solid var(--gold)}
+.appbar{display:flex;align-items:center;justify-content:space-between;gap:8px;height:46px}
+.appbar b{font-size:16px;letter-spacing:.3px}
+.appbar .dates{color:var(--gold);font-size:13px;margin-left:8px}
+.dday{font-size:12px;background:var(--gold);color:var(--navy);font-weight:800;padding:2px 10px;border-radius:99px;white-space:nowrap}
+nav.tabs{display:flex;gap:4px;padding-bottom:6px}
+nav.tabs button{flex:0 1 150px;background:none;border:0;color:#c9d2e6;font:inherit;font-size:14px;padding:7px 10px;border-radius:8px;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:6px}
+nav.tabs button:hover{background:rgba(255,255,255,.08);color:#fff}
+nav.tabs button.on{background:rgba(255,255,255,.13);color:#fff;font-weight:700;box-shadow:inset 0 -3px 0 var(--gold)}
+.panel{display:none;padding:12px 0 30px}
+.panel.on{display:block}
+.ptitle{font-size:18px;color:var(--navy);margin:22px 0 10px}
+.ptitle .sub{font-size:12.5px;color:var(--muted);font-weight:400;margin-left:6px}
+details.fold{margin-top:12px}
+details.fold>summary{font-size:15px;padding:2px 0}
+details.fold[open]>summary{margin-bottom:12px}
+.progress-card{display:flex;flex-wrap:wrap;gap:10px 20px;align-items:center}
+.progress-card .pv{font-size:20px;font-weight:800;color:var(--navy)}
+.progress-card .progress{flex:1 1 180px;margin:0}
+.done-list{display:grid;gap:6px;margin-top:12px;font-size:13.5px}
+.done-list div{display:flex;gap:8px;align-items:baseline}
+.done-list .k{flex:0 0 auto}
+@media (max-width:899px){
+  nav.tabs{position:fixed;left:0;right:0;bottom:0;z-index:70;background:var(--navy);border-top:2px solid var(--gold);padding:4px 6px calc(4px + env(safe-area-inset-bottom));gap:2px}
+  nav.tabs button{flex:1 1 0;flex-direction:column;gap:0;font-size:11.5px;padding:5px 2px}
+  nav.tabs button .ic{font-size:19px;line-height:1.2}
+  nav.tabs button.on{box-shadow:inset 0 3px 0 var(--gold)}
+  body{padding-bottom:70px}
+  .appbar .nights{display:none}
+  .appbar b{font-size:15px}
+  .dayhead h3{font-size:14px}
+}
+
 /* Summary */
 .stat .label{font-size:12.5px;color:var(--muted)}
 .stat .value{font-size:18px;font-weight:700;color:var(--navy);margin-top:2px}
@@ -109,8 +127,7 @@ ul.tight li{margin:2px 0}
 .daytab.on{background:var(--navy);border-color:var(--navy)}
 .daytab.on b{color:var(--gold)}
 .daytab.on span{color:#c4cde2}
-.dayhead{margin:14px 0 8px}
-.dayhead h3{font-size:19px;color:var(--navy)}
+.dayhead h3{color:var(--navy)}
 .dayhead .goals{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}
 .dayhead .goals span{background:var(--gold-soft);color:#7a5a12;font-size:12.5px;padding:3px 10px;border-radius:99px}
 .tl{position:relative;margin-left:8px;padding-left:22px;border-left:2px solid #d5dbe7}
@@ -128,7 +145,7 @@ ul.tight li{margin:2px 0}
 
 /* Day map (지도 + 타임라인) */
 .daygrid{display:grid;gap:16px;align-items:start}
-.daymap-wrap{position:sticky;top:52px;z-index:5;background:var(--bg);padding:6px 0 4px}
+.daymap-wrap{position:sticky;top:48px;z-index:5;background:var(--bg);padding:6px 0 4px}
 .daymap{height:240px;border-radius:var(--radius);border:1px solid var(--line);box-shadow:var(--shadow);overflow:hidden;background:#e9edf3}
 .daymap-wrap.folded .daymap{display:none}
 .map-bar{display:flex;flex-wrap:wrap;gap:6px;align-items:center;margin-top:6px}
@@ -137,8 +154,8 @@ ul.tight li{margin:2px 0}
 .map-legend i{display:inline-block;width:18px;height:0;border-top:3px solid;vertical-align:middle;margin-right:3px}
 @media (min-width:900px){
   .daygrid{grid-template-columns:minmax(0,1fr) minmax(0,1.05fr)}
-  .daymap-wrap{order:2;top:60px;padding:0}
-  .daymap{height:calc(100vh - 130px);min-height:420px}
+  .daymap-wrap{order:2;top:104px;padding:0}
+  .daymap{height:calc(100vh - 160px);min-height:420px}
   .map-fold{display:none}
 }
 .pin{display:flex;align-items:center;justify-content:center;min-width:26px;height:26px;padding:0 6px;border-radius:13px;color:#fff;font-weight:800;font-size:12.5px;border:2px solid #fff;box-shadow:0 1px 4px rgba(0,0,0,.35);white-space:nowrap;transform:translate(-50%,-50%)}
@@ -154,7 +171,18 @@ ul.tight li{margin:2px 0}
 .tl-num.mv{background:#fff;color:var(--muted);font-size:12px;box-shadow:0 0 0 1px #d5dbe7}
 .tl-item.has-num::before{display:none}
 .tl-item .card.focus{box-shadow:0 0 0 3px var(--gold),var(--shadow)}
-.tl-item[data-geo] .tl-head{cursor:pointer}
+.tl-item .tl-head{cursor:pointer}
+.tl-item .tl-body{display:none}
+.tl-item.open .tl-body{display:block}
+.tl-item .card{padding:10px 12px}
+.tl-sub{font-size:12.5px;color:var(--muted);margin-top:2px}
+.tl-more{font-size:11.5px;color:var(--muted);margin-left:6px}
+.tl-item.open .tl-more{display:none}
+.tl-item .links{margin-top:8px}
+.tl-tools{display:flex;justify-content:flex-end;margin:4px 0 6px}
+.tl-tools .btn{padding:3px 9px;font-size:12px}
+.dayhead{margin:2px 0 10px}
+.dayhead h3{font-size:15.5px}
 
 /* Verdict box (교통 카드) */
 .verdict{margin-top:10px;font-size:13.5px;padding:8px 10px;border-radius:8px;background:#f4f6fb}
@@ -195,7 +223,6 @@ table.simple th,table.simple td{border-bottom:1px solid var(--line);padding:7px 
 table.simple th{color:var(--muted);font-weight:600;font-size:12.5px}
 .scroll-x{overflow-x:auto}
 
-footer{padding:30px 0 50px;color:var(--muted);font-size:13px}
 .history .ver{border-left:3px solid var(--gold);padding:4px 0 4px 12px;margin:10px 0}
 .history .ver b{color:var(--navy)}
 
@@ -240,42 +267,47 @@ footer{padding:30px 0 50px;color:var(--muted);font-size:13px}
   .total-box .krw{font-size:26px}
   .g2,.g3{grid-template-columns:1fr}
 }
-@media print{nav.top{display:none}.daytabs{display:none}}
+@media print{.top{display:none}.daytabs{display:none}.panel{display:block!important}}
 </style>
 </head>
 <body>
 
-<header class="hero">
+<div class="top">
   <div class="wrap">
-    <h1>Hong Kong &amp; Macau Trip</h1>
-    <h2>2026.12.23 — 2026.12.27</h2>
-    <p id="heroText"></p>
-    <div class="tags" id="heroTags"></div>
+    <div class="appbar"><div><b>Hong Kong &amp; Macau</b><span class="dates">12.23 – 12.27<span class="nights"> · 4박 5일</span></span></div><span class="dday" id="dday"></span></div>
+    <nav class="tabs" id="tabs"></nav>
   </div>
-</header>
-
-<nav class="top"><div class="wrap" id="nav"></div></nav>
+</div>
 
 <main class="wrap">
-  <section id="summary"><div class="sec-title"><span class="num">①</span><h2>여행 요약</h2><span class="sub" id="asOf"></span></div><div class="status-legend"></div><div class="grid g4" id="summaryCards"></div></section>
-  <section id="alerts"><div class="sec-title"><span class="num">②</span><h2>확인 필요</h2><span class="sub">아직 확정되지 않은 정보 — 예약 전 반드시 재확인</span></div><div class="alert" id="checkList"></div></section>
-  <section id="flights"><div class="sec-title"><span class="num">③</span><h2>항공편</h2><span class="sub">전자항공권(Trip.com) 기준 — 일정의 절대 시간 제약</span></div><div class="grid g2" id="flightCards"></div></section>
-  <section id="timeline"><div class="sec-title"><span class="num">④</span><h2>전체 일정 Timeline</h2><span class="sub">날짜를 고르면 지도에 번호 핀과 이동 경로 · 일정을 누르면 지도에서 위치 표시</span></div><div class="status-legend"></div><div class="daytabs" id="dayTabs"></div><div id="dayBody"></div></section>
-  <section id="map"><div class="sec-title"><span class="num">⑤</span><h2>지역별 장소 &amp; 동선</h2><span class="sub">Google Maps 검색 링크</span></div><div class="grid g3" id="regionCards"></div></section>
-  <section id="shows"><div class="sec-title"><span class="num">⑥</span><h2>공연 &amp; 무료 쇼</h2><span class="sub">이번 여행의 핵심 이벤트</span></div><div class="grid g2" id="showCards"></div></section>
-  <section id="hotels"><div class="sec-title"><span class="num">⑦</span><h2>호텔</h2><span class="sub">숙박 4박 전부 예약 완료 — 마카오 3박 + 홍콩 1박</span></div>
-    <div id="hotelConfirmed"></div>
-  </section>
-  <section id="food"><div class="sec-title"><span class="num">⑧</span><h2>맛집</h2><span class="sub">예약 · 일정 · 저장 맛집</span></div><div class="filters" id="foodFilters"></div><div id="foodBody"></div></section>
-  <section id="transport"><div class="sec-title"><span class="num">⑨</span><h2>홍콩 ↔ 마카오 교통</h2></div><div class="grid g2" id="transportCards"></div></section>
-  <section id="budget"><div class="sec-title"><span class="num">⑩</span><h2>예산 (2인)</h2><span class="sub" id="fxNote"></span></div><div class="card" id="budgetBody"></div></section>
-  <section id="checklist"><div class="sec-title"><span class="num">⑪</span><h2>예약 체크리스트</h2><span class="sub">체크 상태는 이 브라우저에 자동 저장됩니다</span></div>
-    <div class="grid g2" style="grid-template-columns:repeat(auto-fit,minmax(min(320px,100%),1fr))"><div class="card" id="checkBody"></div><div class="card prio" id="prioBody"></div></div></section>
-  <section id="history">
-    <details class="card"><summary>Sources / References</summary><ul class="tight small" id="sourceList"></ul></details>
-    <details class="card history" style="margin-top:12px"><summary>Update History <span class="small muted">— 수정할 때마다 맨 위에 누적 기록</span></summary><div id="historyBody"></div></details></section>
+  <div class="panel" data-panel="plan">
+    <div class="daytabs" id="dayTabs"></div>
+    <div id="dayBody"></div>
+  </div>
+
+  <div class="panel" data-panel="book">
+    <div id="bookTop"></div>
+    <div class="alert" id="checkList"></div>
+    <h2 class="ptitle">✈ 항공</h2><div class="grid g2" id="flightCards"></div>
+    <h2 class="ptitle">🏨 숙소</h2><div class="grid g2" id="hotelConfirmed"></div>
+    <h2 class="ptitle">✅ 예약 체크리스트 <span class="sub">체크 상태는 이 브라우저에 저장</span></h2><div class="card" id="checkBody"></div>
+    <details class="card fold"><summary>📅 예약 우선순위 (언제 무엇을)</summary><div id="prioBody"></div></details>
+  </div>
+
+  <div class="panel" data-panel="food">
+    <div class="filters" id="foodFilters"></div>
+    <div id="foodBody"></div>
+  </div>
+
+  <div class="panel" data-panel="info">
+    <details class="card fold"><summary>🚌 홍콩 ↔ 마카오 교통 (이번 여행에서 타는 것)</summary><div class="grid g2" id="transportCards"></div></details>
+    <details class="card fold"><summary>🎆 무료 쇼 · 크리스마스 이벤트</summary><div class="grid g2" id="showCards"></div></details>
+    <details class="card fold"><summary>💰 예산 (2인)</summary><div class="small muted" id="fxNote"></div><div id="budgetBody" style="margin-top:10px"></div></details>
+    <details class="card fold"><summary>🧭 동선 원칙 · 상태 표시 안내</summary><div class="status-legend" style="margin:6px 0 8px"></div><ul class="tight small" id="routeTips"></ul></details>
+    <details class="card fold"><summary>🔗 Sources / References</summary><ul class="tight small" id="sourceList"></ul></details>
+    <details class="card fold history"><summary>🕘 Update History <span class="small muted" id="asOf"></span></summary><div id="historyBody"></div></details>
+  </div>
 </main>
-<footer><div class="wrap">공개용 사본 — 탑승객 이름·PNR·예약번호 등 개인정보는 제거되었습니다 · 개인 여행 준비용 대시보드 · 데이터 수정은 이 파일의 <code>tripData</code> 객체에서 · 가격/일정은 조사일 기준이며 변동될 수 있음</div></footer>
 
 <!-- =========================================================
      TRIP DATA — 여행 정보는 여기만 수정하면 화면에 반영됩니다.
@@ -537,48 +569,6 @@ const tripData = {
   ],
 
   // 지역별 장소 (Google Maps 링크 자동 생성)
-  regions: [
-    { name:"홍콩", note:"12/23 경유 · 12/26 오후~12/27 새벽", places:[
-      { name:"홍콩국제공항 T1 / T2", map:"Hong Kong International Airport", day:"D1·D5" },
-      { name:"HKG T1 제한구역 E2 — Macau HK Airport Direct 카운터", map:"Hong Kong International Airport Terminal 1", day:"D1" },
-      { name:"HZMB 홍콩 口岸 (Golden Bus 도착)", map:"HZMB Hong Kong Port Passenger Clearance Building", day:"D4" },
-      { name:"Regal Airport Hotel (숙소 · 예약 완료)", map:"Regal Airport Hotel Hong Kong", day:"D4–D5" },
-      { name:"팀호완 (홍콩역)", map:"Tim Ho Wan Hong Kong Station", day:"D4" },
-      { name:"피크트램 하부역 (Garden Rd)", map:"Peak Tram Garden Road Lower Terminus", day:"D4" },
-      { name:"빅토리아 피크 · Sky Terrace 428", map:"Sky Terrace 428 The Peak", day:"D4" },
-      { name:"스타페리 센트럴 7번 부두", map:"Central Pier 7 Star Ferry", day:"D4" },
-      { name:"Avenue of Stars", map:"Avenue of Stars Hong Kong", day:"D4" },
-      { name:"(후보) 템플스트리트 야시장", map:"Temple Street Night Market", day:"—" } ] },
-    { name:"마카오 반도", note:"12/24 오전~오후 반나절 · 도보 동선", places:[
-      { name:"酸辣粉 / Suan La Fen (北京街183F)", map:"酸辣粉 澳門新口岸北京街183F +85328700077", day:"D2" },
-      { name:"세나도 광장", map:"Senado Square Macau", day:"D2" },
-      { name:"성 도미니크 성당", map:"St. Dominic's Church Macau", day:"D2" },
-      { name:"Margaret's Café e Nata", map:"Margaret's Cafe e Nata Macau", day:"D2" },
-      { name:"육포거리 · 林記長洲糯米糍 망고모찌", map:"林記長洲糯米糍 38 Rua de São Paulo Macau", day:"D2" },
-      { name:"성 바울 성당 유적", map:"Ruins of St. Paul's Macau", day:"D2" },
-      { name:"몬테 요새 · 마카오 박물관", map:"Mount Fortress Macau", day:"D2" },
-      { name:"그랜드 리스보아", map:"Grand Lisboa Macau", day:"D2" },
-      { name:"(후보) 마카오 타워", map:"Macau Tower", day:"—" },
-      { name:"HZMB 마카오 口岸", map:"HZMB Macau Port", day:"D1·D4" } ] },
-    { name:"코타이 · 타이파", note:"숙소 Broadway Hotel(갤럭시 단지 남서쪽) 기준 — 갤럭시·타이파 빌리지는 도보, Sands·CoD는 택시 5분 (D1–D4)", places:[
-      { name:"Broadway Hotel (숙소) — 갤럭시 마카오와 실내 연결", map:"Broadway Hotel Macau", day:"D1–D4" },
-      { name:"Broadway Food Street (숙소 앞)", map:"Broadway Food Street Macau", day:"D1" },
-      { name:"Casa Maquista 土生公館 (Taipa Houses) — 12/23 저녁", map:"Casa Maquista Taipa Houses Macau", day:"D1" },
-      { name:"The Londoner Macao (관광)", map:"The Londoner Macao", day:"D1" },
-      { name:"The Venetian 그랜드 캐널", map:"The Venetian Macao Grand Canal Shoppes", day:"D1" },
-      { name:"Parisian 에펠탑", map:"The Parisian Macao Eiffel Tower", day:"D1" },
-      { name:"City of Dreams · HoDW 극장", map:"Dancing Water Theater City of Dreams Macau", day:"D2" },
-      { name:"타이파 빌리지 · 쿤하 거리", map:"Rua do Cunha Taipa", day:"D3" },
-      { name:"(D3 점심 후보) Lao Day Beef Offal · 세이 키 카페 · La Cucina Italiana", map:"Lao Day Beef Offal 2 Rua do Cunha Taipa", day:"D3" },
-      { name:"TACOS by miumiu (D3 저녁)", map:"TACOS by miumiu Taipa Macau", day:"D3" },
-      { name:"Lemoncello Gelato", map:"Lemoncello Gelato Taipa Macau", day:"D3" },
-      { name:"Galaxy Macau (셔틀: Diamond Lobby=HZMB / Crystal Lobby=StarWorld)", map:"Galaxy Macau Fortune Diamond", day:"D1–D4" },
-      { name:"Wynn Palace", map:"Wynn Palace Performance Lake", day:"D3" },
-      { name:"(후보) Studio City 골든릴", map:"Studio City Macau Golden Reel", day:"—" } ] },
-    { name:"콜로안", note:"12/25 오후 · 타이파 빌리지에서 택시 약 10–15분", places:[
-      { name:"콜로안 빌리지 · 성 프란시스 사비에르 성당", map:"Chapel of St. Francis Xavier Coloane", day:"D3" },
-      { name:"Lord Stow’s Bakery 원조점", map:"Lord Stow's Bakery 1 Rua do Tassara Coloane Macau", day:"D3" } ] }
-  ],
   routeTips: [
     "숙소 Broadway 기준: 갤럭시·Broadway Food Street·타이파 빌리지는 도보 / Sands 클러스터(런더너·베네시안·파리지앵)·City of Dreams는 택시 약 5분 / 윈 팰리스·MGM은 택시 약 10분",
     "갤럭시 무료셔틀 활용: HZMB Macao Port(D1·D4) · StarWorld(D2 반도 왕복)",
@@ -648,18 +638,7 @@ const tripData = {
     { name:"HZMB Shuttle Bus (Golden Bus · 港珠澳大橋穿梭巴士) — 12/26 Macao → HK", recommended:true, status:"LOCKED",
       rows:{ "운행":"24시간 · 피크 5분 / 평시 10–15분 간격", "소요":"버스 약 45분 + 홍콩·마카오 출입경", "가격":"HKD 65 (06:00–23:59) / HKD 70 (00:00–05:59)", "예약":"불필요 (현장 구매)", "입국심사":"HZMB 홍콩 口岸·마카오 口岸에서 각각", "수하물":"직접 들고 탑승 (캐리어 가능)", "첫차/막차":"24시간 운행", "야간":"가능" },
       note:"12/26에만 사용 (일반 유료 · 홍콩 口岸에서 홍콩 입국). 홍콩 口岸 → B4 버스(HKD 9.8, 24시간, 약 10분)로 공항·Regal Airport Hotel. 12/23에는 사용하지 않음 (Macau HK Airport Direct 이용).",
-      links:[{label:"HZMB Golden Bus 공식", url:"https://www.hzmbus.com/"}] },
-    { name:"TurboJET 페리 (셩완 ↔ 마카오 외항)", status:"PLANNED",
-      rows:{ "운행":"07:30–23:00, 수시 운항", "소요":"약 60분", "가격":"Economy 평일 HKD 175 · 주말 190 · 야간 220 (요금표 확인 필요)", "예약":"연휴 사전 구매 권장", "입국심사":"페리터미널", "수하물":"무료 허용 한도 있음 (확인)", "첫차/막차":"07:30 / 23:00", "야간":"23시까지" },
-      note:"홍콩 시내(센트럴·셩완)에서 출발할 때 유리. 공항 출발이면 HZMB가 빠르고 저렴.",
-      links:[{label:"운항표·요금", url:"https://www.turbojet.com.hk/en/routing-sailing-schedule/hong-kong-macau/sailing-schedule-fares"}] },
-    { name:"페리 (셩완 ↔ 마카오 타이파)", status:"PLANNED",
-      rows:{ "운행":"하루 3–4편 (금–일 증편)", "소요":"약 60분", "가격":"Economy 약 HKD 194–242 (2026 요금)", "예약":"권장", "입국심사":"타이파 페리터미널", "수하물":"확인", "첫차/막차":"HK발 11:00 ~ / 타이파발 ~23:30 (금–일)", "야간":"제한적" },
-      note:"코타이와 가장 가까운 항구지만 편수가 적어 일정이 묶임.",
-      links:[{label:"Cotai Water Jet", url:"https://www.cotaiwaterjet.com/"}] },
-    { name:"SkyPier 공항 페리 (환승객 전용)", status:"PLANNED",
-      rows:{ "운행":"홍콩 입국 없이 공항 내 환승 시만 이용", "소요":"약 70분", "가격":"확인 필요", "예약":"항공 연계 필요", "입국심사":"마카오에서만", "수하물":"항공 연계 수하물", "첫차/막차":"확인", "야간":"—" },
-      note:"HK Express 별도 발권 + 홍콩 입국 일정이라 이번 여행엔 해당 가능성 낮음 → 비추천.", links:[] }
+      links:[{label:"HZMB Golden Bus 공식", url:"https://www.hzmbus.com/"}] }
   ],
 
   // 예산 (2인 합계) — currency: HKD / MOP / KRW · status: confirmed(확정 비용, KRW 결제) / confirmedFx(외화 금액 확정, 원화 환산은 예상) / estimate(예상) / unbooked(미예약 추정)
@@ -734,10 +713,11 @@ const tripData = {
     { title:"갤럭시 무료셔틀 12월 운행", detail:"공식: HZMB ↔ Galaxy 10:00–23:00(Diamond Lobby), StarWorld ↔ Galaxy 09:30–22:00(Crystal Lobby). 연휴 기간 변경 여부와 Galaxy ↔ Broadway 실내 도보 경로 재확인." },
     { title:"새벽 공항 동선 (Regal → T2 U구역 → T1)", detail:"HK Express 체크인·수하물 위탁은 T2. 00:31–05:29엔 T2 출국시설·APM 운영 중단 → T1까지 도보 약 15분 후 보안검색·출국심사. 12/26 밤 체크인 후 Regal → T2 경로 미리 걸어보기." },
     { title:"인천공항 03:45 도착 수단", detail:"새벽 공항철도·버스 운행 전 — 자차(장기주차)·택시·전날 공항 근처 숙박 중 결정." },
-    { title:"요금 재확인", detail:"공항철도 요금, TurboJET 요금표, 피크트램 공휴일 요금, 마카오 박물관 입장료." }
+    { title:"요금 재확인", detail:"공항철도 요금, 피크트램 공휴일 요금, 마카오 박물관 입장료." }
   ],
 
   history: [
+    { date:"2026-10-28", changes:["대시보드를 탭 4개로 재구성: 🗺 일정(경로 지도 + 타임라인) / 🎫 예약 / 🍜 맛집 / ℹ️ 정보 · 모바일은 하단 탭 바","일정 카드는 시간·장소만 보이고 누르면 펼침 (모두 펼치기 버튼) · 예약 버튼은 항상 표시","제거: 상단 큰 헤더 · 요약 카드 · 지역별 장소 섹션(지도로 대체) · 안 쓰는 교통수단(TurboJET·타이파 페리·SkyPier) · 하단 문구","접힘 처리: 예약 대기 입력정보, 항공 메모·수하물, 호텔 요청사항·혜택·위치, 맛집 상세, 정보 탭 전체(교통·무료 쇼·예산·동선 원칙·출처·기록)"] },
     { date:"2026-10-28", changes:["일정 Timeline을 트리플식 지도 화면으로 개편: 날짜별 지도에 번호 핀 + 이동 경로(도보·택시·버스·철도·트램·페리·항공 색 구분)","일정 카드를 누르면 지도 해당 핀으로 이동 · 핀을 누르면 해당 일정 카드로 스크롤","지역 버튼(전체/마카오 반도/코타이·타이파/콜로안/홍콩 공항/홍콩 시내/인천) · 모바일은 지도 상단 고정 + 접기","장소 좌표: Google Maps 장소 좌표 (인천공항·HZMB 마카오 口岸·피크트램 하부역은 OpenStreetMap)"] },
     { date:"2026-10-28", changes:["D3 저녁: Broadway Food Street → TACOS by miumiu 19:30–20:45 (윈 팰리스에서 택시로 타이파 빌리지 → 저녁 후 도보로 갤럭시 21:05)","D3 점심 후보에서 TACOS 제외 (3곳 택1)","Macau 2049 제거 (Timeline·공연·지도·예산·체크리스트·확인필요·출처)"] },
     { date:"2026-10-28", changes:["D3 점심 후보에 TACOS by miumiu 추가 (38 Rua das Virtudes · 12:00–24:00 안내)"] },
@@ -783,7 +763,6 @@ const tripData = {
     { label:"North / 북방관 예약 확인 메일 (로컬 비공개 자료) — 12/24 저녁 Source of Truth", url:"" },
     { label:"City of Dreams — House of Dancing Water", url:"https://www.cityofdreamsmacau.com/en/house-of-dancing-water" },
     { label:"HK Express — HKIA T2 이전 안내", url:"https://www.hkexpress.com/Plan/Travel/HKIA-T2" },
-    { label:"TurboJET 운항표·요금", url:"https://www.turbojet.com.hk/en/routing-sailing-schedule/hong-kong-macau/sailing-schedule-fares" },
     { label:"HZMB Shuttle Bus (Golden Bus)", url:"https://www.hzmbus.com/" },
     { label:"Macau HK Airport Direct — 예약 페이지", url:"https://ticket.macauhkairportbus.com/en/" },
     { label:"The Londoner — 교통·셔틀 안내", url:"https://www.londonermacao.com/getting-to-macau.html" },
@@ -830,12 +809,24 @@ const tripData = {
   // 상태 범례
   document.querySelectorAll(".status-legend").forEach(el => el.innerHTML = D.statusLegend.map(([k,v]) => `<span class="lg">${badge(k)} <span>${esc(v)}</span></span>`).join(""));
 
-  // Header & nav
-  $("heroText").textContent = D.meta.concept;
-  $("heroTags").innerHTML = D.meta.tags.map(t => `<span>${esc(t)}</span>`).join("");
-  $("asOf").textContent = "최종 수정 " + D.meta.lastUpdated;
-  const navItems = [["summary","요약"],["alerts","⚠ 확인필요"],["flights","항공"],["timeline","일정"],["map","지도"],["shows","공연"],["hotels","호텔"],["food","맛집"],["transport","교통"],["budget","예산"],["checklist","체크리스트"]];
-  $("nav").innerHTML = navItems.map(([id,l]) => `<a href="#${id}">${l}</a>`).join("");
+  // 앱바 D-day · 탭
+  const TRIP_START = new Date("2026-12-23T00:00:00+08:00"), TRIP_END = new Date("2026-12-27T23:59:59+08:00");
+  (function(){ const now = new Date(); const dd = Math.ceil((TRIP_START - now) / 864e5);
+    $("dday").textContent = now > TRIP_END ? "여행 완료" : now >= TRIP_START ? `여행 중 · DAY ${Math.floor((now - TRIP_START) / 864e5) + 1}` : `D-${dd}`; })();
+  $("asOf").textContent = "— 최종 수정 " + D.meta.lastUpdated;
+  const TABS = [["plan","🗺","일정"],["book","🎫","예약"],["food","🍜","맛집"],["info","ℹ️","정보"]];
+  let curTab = "plan";
+  try { curTab = (location.hash.slice(1) && TABS.some(t => t[0] === location.hash.slice(1))) ? location.hash.slice(1) : (localStorage.getItem("hkmo2026-tab") || "plan"); } catch(e){}
+  function showTab(t, push){
+    if (!TABS.some(x => x[0] === t)) t = "plan";
+    curTab = t;
+    $("tabs").innerHTML = TABS.map(([k,ic,l]) => `<button class="${k===t?"on":""}" data-tab="${k}"><span class="ic">${ic}</span><span>${l}</span></button>`).join("");
+    document.querySelectorAll("#tabs button").forEach(b => b.onclick = () => showTab(b.dataset.tab, true));
+    document.querySelectorAll(".panel").forEach(p => p.classList.toggle("on", p.dataset.panel === t));
+    try { localStorage.setItem("hkmo2026-tab", t); } catch(e){}
+    if (push) { try { history.replaceState(null, "", "#" + t); } catch(e){} window.scrollTo(0, 0); }
+    if (t === "plan" && typeof renderDay === "function") renderDay();
+  }
 
   // Budget totals
   const budgetTotals = () => {
@@ -846,42 +837,35 @@ const tripData = {
     return {krw,hkd,cats,byStatus};
   };
 
-  // ① Summary
-  function renderSummary(){
+  // 예약 탭 상단: 진행률 + 예약 완료 한눈에
+  function renderBookTop(){
     const st = load(); const total = D.checklist.length;
     const done = D.checklist.filter(c => st[c.id] ?? !!c.done).length;
     const pct = Math.round(done/total*100);
-    const hp = D.meta.hotelPlan, hh = D.meta.hkHotelPlan;
-    const show = D.shows.find(s => s.topPick);
-    const bt = budgetTotals();
-    const o = D.flights[0], r = D.flights[1];
-    const cards = [
-      ["여행기간", D.meta.period, "4박 5일"],
-      ["인원", D.meta.travelers, esc(D.meta.travelerNames)],
-      ["마카오 체류", D.meta.stay.macau, "코타이 3박 — 여행의 중심"],
-      ["홍콩 체류", D.meta.stay.hongkong, "D1 경유 · D4 오후~D5 새벽"],
-      ["항공권", `${o.flightNo} ${o.from.time} → ${r.flightNo} ${r.from.time}`, `HK Express · 왕복 <span class="rsv done">예약 완료</span> ${badge(o.status)}`],
-      ["숙소 ① 마카오 3박", hp.selected, `${hp.nights}박 · 12/23 ${hp.checkInTime} 체크인 → 12/26 ${hp.checkOutTime} 체크아웃<br>${esc(hp.roomType)} · ${esc(hp.meal.split(" (")[0])} · ₩${fmt(hp.paidKRW)}<br><span class="rsv done">${esc(hp.bookingStatus)}</span> ${badge(hp.status)}`],
-      ["숙소 ② 홍콩 1박", hh.selected, `${hh.nights}박 · 12/26 ${hh.checkInTime} 체크인 → 12/27 새벽 퇴실 (공식 체크아웃 ${hh.checkOutTime})<br>${esc(hh.roomType)} · ${esc(hh.meal.split(" (")[0])} · ₩${fmt(hh.paidKRW)}<br><span class="rsv done">${esc(hh.bookingStatus)}</span> ${badge(hh.status)}`],
-      ["예약 현황", "항공권·숙소·식사·공연 예약 완료", `항공권 왕복 <span class="rsv done">완료</span><br>Broadway 3박 + Regal Airport 1박 <span class="rsv done">완료</span><br>North 12/24 17:00 <span class="rsv done">완료</span><br>House of Dancing Water <span class="rsv done">완료</span><br>Airport Direct 무료버스 <span class="rsv req">예약 대기 · 11/22~</span>`],
-      ["공연", show.name, show.booking ? `${esc(show.booking.date)} ${esc(show.booking.time)}<br>${esc(show.booking.seat)}<br><span class="rsv done">예약 완료</span> ${badge(show.status)}` : `TOP PICK · ${badge(show.status)}`],
-    ];
-    $("summaryCards").innerHTML = cards.map(([l,v,n]) => `<div class="card stat"><div class="label">${l}</div><div class="value">${esc(v)}</div><div class="note">${n}</div></div>`).join("")
-      + `<div class="card stat big"><div class="label">예상 총비용 (2인, 항공 제외)</div><div class="value">₩${fmt(bt.krw)}</div><div class="note">≈ HKD ${fmt(bt.hkd)} <br>확정 ₩${fmt(bt.byStatus.confirmed||0)} · 확정(외화) ${D.budget.filter(b=>b.status==="confirmedFx").map(b=>esc(b.currency)+" "+fmt(b.amount)).join(", ")} · 예상 ₩${fmt(bt.byStatus.estimate||0)} · 미예약 ₩${fmt(bt.byStatus.unbooked||0)}</div></div>`
-      + `<div class="card stat"><div class="label">예약 진행률</div><div class="value">${done} / ${total} (${pct}%)</div><div class="progress"><i style="width:${pct}%"></i></div><div class="note"><a href="#checklist">체크리스트로 →</a></div></div>`;
+    const hp = D.meta.hotelPlan, hh = D.meta.hkHotelPlan, o = D.flights[0], r = D.flights[1];
+    const show = D.shows.find(s => s.booked);
+    const north = D.restaurants.find(f => f.reservation);
+    const rows = [
+      ["✈", `${o.flightNo} ${o.date.slice(5)} ${o.from.time} 인천 → 홍콩 · ${r.flightNo} ${r.date.slice(5)} ${r.from.time} 홍콩 → 인천`],
+      ["🏨", `${hp.selected} ${hp.nights}박 (12/23–12/26) · ${hh.selected} ${hh.nights}박 (12/26–12/27)`],
+      north ? ["🍽", `${north.name.split(" / ")[0]} · ${north.reservation.date} ${north.reservation.time} · ${north.reservation.guests}`] : null,
+      show && show.booking ? ["🎭", `${show.name} · ${show.booking.date} ${show.booking.time}`] : null
+    ].filter(Boolean);
+    $("bookTop").innerHTML = `<div class="card"><div class="progress-card"><div><div class="small muted">예약 진행률</div><div class="pv">${done} / ${total} (${pct}%)</div></div><div class="progress"><i style="width:${pct}%"></i></div></div>
+      <div class="done-list">${rows.map(([k,v]) => `<div><span class="k">${k}</span><span>${esc(v)} <span class="rsv done">예약 완료</span></span></div>`).join("")}</div></div>`;
   }
 
   // ⑪ Check needed
   // 강조(highlight) 항목은 상단 카드로, 나머지는 기존 목록 — 총 개수는 동일하게 표시
-  $("checkList").innerHTML = `<h3>⚠ 확인 필요 ${D.checkNeeded.length}건</h3>`
+  $("checkList").innerHTML = `<h3>⏰ 예약 대기 · 확인 필요</h3>`
     + D.checkNeeded.filter(c => c.highlight).map(c => `<div class="hl-card">
         <div class="hl-badges">${c.badges.map((b,i) => `<span class="hl-badge ${i===0?"hi":""}">${esc(b)}</span>`).join("")}</div>
         <h4>${esc(c.title)}</h4>
-        <div class="hl-route">🚌 ${esc(c.route)}</div><div class="hl-action">📅 ${esc(c.action)}</div>
+        <div class="hl-route">📍 ${esc(c.route)}</div><div class="hl-action">📅 ${esc(c.action)}</div>
         <div class="links">${bookingBtn(c.bookingRef)}</div>
-        ${c.inputs ? `<div class="inputs"><div class="inputs-title">예약 입력정보</div>${c.inputs.map(([k,v,n]) => `<div class="in-row"><span class="in-k">${esc(k)}</span><span class="in-v">${esc(v)}${n?`<small>${esc(n)}</small>`:""}</span></div>`).join("")}</div>` : ""}
-        <ul class="tight small">${c.lines.map(x => `<li>${esc(x)}</li>`).join("")}</ul></div>`).join("")
-    + `<ul class="tight">${D.checkNeeded.filter(c => !c.highlight).map(c => `<li><b>${esc(c.title)}</b> ${badge("CHECK")}<br><span class="small muted">${esc(c.detail)}</span></li>`).join("")}</ul>`;
+        <details><summary>예약 입력정보 · 메모</summary>${c.inputs ? `<div class="inputs"><div class="inputs-title">예약 입력정보</div>${c.inputs.map(([k,v,n]) => `<div class="in-row"><span class="in-k">${esc(k)}</span><span class="in-v">${esc(v)}${n?`<small>${esc(n)}</small>`:""}</span></div>`).join("")}</div>` : ""}
+        <ul class="tight small">${c.lines.map(x => `<li>${esc(x)}</li>`).join("")}</ul></details></div>`).join("")
+    + `<details><summary>그 외 확인할 것 ${D.checkNeeded.filter(c => !c.highlight).length}건</summary><ul class="tight">${D.checkNeeded.filter(c => !c.highlight).map(c => `<li><b>${esc(c.title)}</b> ${badge("CHECK")}<br><span class="small muted">${esc(c.detail)}</span></li>`).join("")}</ul></details>`;
 
   // ② Flights
   $("flightCards").innerHTML = D.flights.map(f => `
@@ -893,8 +877,8 @@ const tripData = {
         <div class="ap"><b>${esc(f.to.code)}</b><div class="t">${esc(f.to.time)}</div><div class="s">${esc(f.to.city)} ${esc(f.to.terminal)}</div></div>
       </div>
       <div class="small muted">PNR <b>${esc(f.pnr)}</b> · ${esc(f.bookingNo)}</div>
-      <ul class="tight small">${f.notes.map(n => `<li>${esc(n)}</li>`).join("")}</ul>
-    </div>`).join("") + `<div class="card"><h3>🧳 수하물 (1인, 왕복 동일)</h3><ul class="tight small">${D.baggage.map(b => `<li>${esc(b)}</li>`).join("")}</ul></div>`;
+      <details><summary>메모</summary><ul class="tight small">${f.notes.map(n => `<li>${esc(n)}</li>`).join("")}</ul></details>
+    </div>`).join("") + `<details class="card fold" style="grid-column:1/-1;margin-top:0"><summary>🧳 수하물 (1인, 왕복 동일)</summary><ul class="tight small">${D.baggage.map(b => `<li>${esc(b)}</li>`).join("")}</ul></details>`;
 
   // ③ Timeline — 트리플식: 날짜별 지도(번호 핀 + 이동 경로) + 번호 타임라인
   let curDay = 1;
@@ -926,31 +910,36 @@ const tripData = {
     const d = D.itinerary.find(x => x.day===curDay) || D.itinerary[0];
     const stops = dayStops(d);
     let folded = false; try { folded = localStorage.getItem("hkmo2026-mapfold") === "1"; } catch(e){}
-    $("dayBody").innerHTML = `<div class="dayhead"><h3>DAY ${d.day} · ${esc(d.date)} — ${esc(d.title)}</h3><div class="goals">${d.goals.map(g => `<span>🎯 ${esc(g)}</span>`).join("")}</div></div>
+    $("dayBody").innerHTML = `
       <div class="daygrid">
         <div class="daymap-wrap ${folded?"folded":""}" id="dayMapWrap">
           <div class="daymap" id="dayMap"></div>
           <div class="map-bar" id="mapBar"></div>
         </div>
+        <div><div class="dayhead"><h3>DAY ${d.day} · ${esc(d.date)} — ${esc(d.title)}</h3></div>
+        <div class="tl-tools"><button class="btn" id="tlAll">모두 펼치기</button></div>
         <div class="tl">${stops.map((s,i) => { const it = s.it; const m = MODES[it.mode]; return `
         <div class="tl-item ${it.key?"key":""} ${s.pts.length?"has-num":""}" data-i="${i}" ${s.pts.length?'data-geo="1"':""}>
           ${s.num ? `<span class="tl-num ${esc(it.status)}" title="지도에서 보기">${s.num}</span>` : s.pts.length ? `<span class="tl-num mv" title="지도에서 보기">${m ? m.icon : "•"}</span>` : ""}
           <div class="card">
-          <div class="tl-head"><div><div class="tl-time">${esc(it.time)}</div><div class="tl-place">${esc(it.place)}</div></div><div style="text-align:right">${stBadges(it)}<br><span class="region">${esc(it.region)}</span></div></div>
+          <div class="tl-head"><div><div class="tl-time">${esc(it.time)}<span class="tl-more">▾ 자세히</span></div><div class="tl-place">${esc(it.place)}</div>${s.num ? "" : `<div class="tl-sub">${esc(it.move)} · ${esc(it.moveTime)}</div>`}</div><div style="text-align:right">${stBadges(it)}</div></div>
+          ${it.bookingRef ? `<div class="links">${bookingBtn(it.bookingRef)}</div>` : ""}
+          <div class="tl-body">
           ${it.desc && it.desc.length ? `<ul class="tight small">${it.desc.map(x => `<li>${esc(x)}</li>`).join("")}</ul>` : ""}
           ${it.why ? `<div class="why"><b>ⓘ ${esc(it.why.q)}</b><div>${esc(it.why.a)}</div></div>` : ""}
           <div class="tl-row"><span>${m ? m.icon : "🚶"} 이동 <b>${esc(it.move)}</b></span><span>⏱ <b>${esc(it.moveTime)}</b></span><span>💰 <b>${esc(it.cost)}</b></span>${rsv(it.booking)}</div>
-          ${it.bookingRef ? `<div class="links">${bookingBtn(it.bookingRef)}</div>` : ""}
           ${it.map ? linkBtns([], it.map) : ""}
-        </div></div>`; }).join("")}</div>
+          </div>
+        </div></div>`; }).join("")}</div></div>
       </div>`;
+    $("tlAll").onclick = e => { const items = document.querySelectorAll(".tl-item"); const open = [...items].some(x => !x.classList.contains("open")); items.forEach(x => x.classList.toggle("open", open)); e.currentTarget.textContent = open ? "모두 접기" : "모두 펼치기"; };
     document.querySelectorAll(".daytab").forEach(b => b.onclick = () => { curDay = +b.dataset.day; try{localStorage.setItem("hkmo2026-day",curDay);}catch(e){} renderDay(); });
     drawDayMap(d, stops);
   }
   function drawDayMap(d, stops){
     if (dayMap) { dayMap.remove(); dayMap = null; }
     const wrap = $("dayMapWrap");
-    if (!window.L) { wrap.style.display = "none"; return; }
+    if (!window.L) { wrap.style.display = "none"; document.querySelectorAll(".tl-item").forEach(el => el.querySelector(".tl-head").addEventListener("click", e => { if (!e.target.closest("a")) el.classList.toggle("open"); })); return; }
     // 경로: 하루 시작점(숙소) → 각 항목 좌표 순서대로
     const path = [];
     if (d.start && D.places[d.start]) path.push({ p: D.places[d.start], mode: null });
@@ -1001,20 +990,18 @@ const tripData = {
         el.scrollIntoView({ behavior: "smooth", block: window.innerWidth >= 900 ? "center" : "nearest" });
       }
     }
-    document.querySelectorAll(".tl-item[data-geo]").forEach(el => {
-      const go = e => { if (e.target.closest("a")) return; focusItem(+el.dataset.i, true); };
+    document.querySelectorAll(".tl-item").forEach(el => {
+      const go = e => { if (e.target.closest("a")) return; const wasOpen = el.classList.contains("open"); el.classList.toggle("open"); if (!wasOpen && el.dataset.geo) focusItem(+el.dataset.i, true); };
       el.querySelector(".tl-head").addEventListener("click", go);
       const num = el.querySelector(".tl-num"); if (num) num.addEventListener("click", go);
     });
   }
 
-  // ④ Regions
-  $("regionCards").innerHTML = D.regions.map(r => `<div class="card"><h3>${esc(r.name)}</h3><div class="meta">${esc(r.note)}</div>
-    <ul class="tight small" style="list-style:none;padding:0">${r.places.map(p => `<li style="display:flex;justify-content:space-between;gap:8px;border-top:1px solid var(--line);padding:6px 0"><span>${esc(p.name)} <span class="region">${esc(p.day)}</span></span><a class="btn map" href="${mapUrl(p.map)}" target="_blank" rel="noopener">📍 지도</a></li>`).join("")}</ul></div>`).join("")
-    + `<div class="card"><h3>동선 원칙</h3><ul class="tight small">${D.routeTips.map(t => `<li>${esc(t)}</li>`).join("")}</ul></div>`;
+  // 정보 탭: 동선 원칙
+  $("routeTips").innerHTML = D.routeTips.map(t => `<li>${esc(t)}</li>`).join("");
 
   // ⑤ Shows
-  $("showCards").innerHTML = D.shows.map(s => `<div class="card ${s.topPick?"top":""}">${s.topPick?`<span class="ribbon">${s.booked?"예약 완료":"TOP PICK"}</span>`:""}
+  $("showCards").innerHTML = D.shows.filter(s => !s.booked).map(s => `<div class="card ${s.topPick?"top":""}">${s.topPick?`<span class="ribbon">${s.booked?"예약 완료":"TOP PICK"}</span>`:""}
     <div class="tl-head"><div><h3>${esc(s.name)}</h3><div class="meta">${esc(s.venue)}</div></div><div style="text-align:right">${stBadges(s)}<br>${stars(s.rating)}</div></div>
     <dl class="kv"><dt>스타일</dt><dd>${esc(s.style)}</dd><dt>러닝타임</dt><dd>${esc(s.runtime)}</dd><dt>공연시간</dt><dd>${esc(s.times)}</dd><dt>여행일 공연</dt><dd>${esc(s.dates)}</dd><dt>가격</dt><dd>${esc(s.price)}</dd><dt>예약 상태</dt><dd>${s.booked?'<span class="rsv done">예약 완료</span>':"미예매"}</dd></dl>
     ${s.booking?`<div class="booked-box"><b>✔ 예약 완료</b> · ${esc(s.booking.date)} ${esc(s.booking.time)}<br>${esc(s.booking.seat)}<br>${esc(s.booking.ticket)} · MOP ${fmt(s.booking.totalMOP)}<ul class="tight small">${s.booking.notes.map(n=>`<li>${esc(n)}</li>`).join("")}</ul></div>`:""}
@@ -1024,14 +1011,14 @@ const tripData = {
   // ⑥ Hotels
   function renderHotels(){
     const hp = D.meta.hotelPlan;
-    const confirmedCard = (plan, title) => { const conf = D.hotels.find(h => h.name === plan.selected); return `<div class="card top" style="margin-bottom:14px"><span class="ribbon">예약 완료</span>
+    const confirmedCard = (plan, title) => { const conf = D.hotels.find(h => h.name === plan.selected); return `<div class="card top"><span class="ribbon">예약 완료</span>
       <div class="tl-head"><div><div class="small muted">${esc(title)}</div><h3 style="font-size:20px">${esc(plan.selected)}</h3><div class="meta">${esc(conf.area)} · ${"★".repeat(conf.stars)}${conf.starsNote?` <span title="${esc(conf.starsNote)}">(Agoda 분류)</span>`:""} · 예약처 ${esc(plan.channel)}</div>${plan.purpose?`<div class="small" style="margin-top:4px">✈ ${esc(plan.purpose)}</div>`:""}</div>${badge(plan.status)}</div>
       <div class="price-row"><div><span class="lbl">${plan.nights}박 결제 금액</span><span class="price-big">₩${fmt(plan.paidKRW)}</span></div>${plan.nights>1?`<div><span class="lbl">1박 평균</span><b>₩${fmt(plan.nightlyAvgKRW)}</b></div>`:""}<div><span class="lbl">예약 상태</span><span class="rsv done">${esc(plan.bookingStatus)}</span></div></div>
-      <dl class="kv"><dt>체크인</dt><dd>${esc(plan.checkIn)} (${esc(plan.checkInDow)}) ${esc(plan.checkInTime)}</dd><dt>체크아웃</dt><dd>${esc(plan.checkOut)} (${esc(plan.checkOutDow)}) ${esc(plan.checkOutTime)} <span class="small muted">(호텔 공식)</span></dd>${plan.actualDeparture?`<dt>실제 퇴실</dt><dd>${esc(plan.actualDeparture)}</dd>`:""}<dt>숙박</dt><dd>${plan.nights}박 · ${esc(plan.roomType)} · 객실 ${plan.rooms}개 · ${esc(plan.guests)}</dd><dt>식사</dt><dd>${esc(plan.meal)}</dd><dt>도착 계획</dt><dd>${esc(plan.arrivalPlan)}</dd><dt>예약번호</dt><dd>${esc(plan.booking.bookingNo)} <span class="small muted">(체크인 시 제시)</span></dd><dt>주소</dt><dd>${esc(plan.address)}</dd></dl>
+      <dl class="kv"><dt>체크인</dt><dd>${esc(plan.checkIn)} (${esc(plan.checkInDow)}) ${esc(plan.checkInTime)}</dd><dt>체크아웃</dt><dd>${esc(plan.checkOut)} (${esc(plan.checkOutDow)}) ${esc(plan.checkOutTime)} <span class="small muted">(호텔 공식)</span></dd>${plan.actualDeparture?`<dt>실제 퇴실</dt><dd>${esc(plan.actualDeparture)}</dd>`:""}<dt>숙박</dt><dd>${plan.nights}박 · ${esc(plan.roomType)} · 객실 ${plan.rooms}개 · ${esc(plan.guests)}</dd><dt>식사</dt><dd>${esc(plan.meal)}</dd><dt>예약번호</dt><dd>${esc(plan.booking.bookingNo)} <span class="small muted">(체크인 시 제시)</span></dd><dt>주소</dt><dd>${esc(plan.address)}</dd></dl>
+      <details><summary>요청사항 · 혜택 · 위치</summary>
       <div class="nature"><b>요청사항</b> <span class="small muted">— ${esc(plan.requestNote)}</span><div class="chips">${plan.requests.map(x => `<span class="chip">${esc(x)}</span>`).join("")}</div></div>
       ${plan.benefits?`<div class="small" style="margin-top:8px">${plan.benefits.map(x => `🎁 ${esc(x.text)} <span class="muted">· ${esc(x.note)}</span>`).join("<br>")}</div>`:""}
-      ${plan.taxNote?`<div class="small muted" style="margin-top:8px">ⓘ ${esc(plan.taxNote)}</div>`:""}
-      <details><summary>위치·접근성</summary><dl class="kv"><dt>공연 접근</dt><dd>${esc(conf.showAccess)}</dd><dt>관광 접근</dt><dd>${esc(conf.sightAccess)}</dd><dt>이동</dt><dd>${esc(conf.shuttle)}</dd></dl><ul class="tight small">${conf.pros.map(x=>`<li>${esc(x)}</li>`).join("")}</ul></details>
+      ${plan.taxNote?`<div class="small muted" style="margin-top:8px">ⓘ ${esc(plan.taxNote)}</div>`:""}<div class="small" style="margin-top:8px"><b>도착 계획</b> ${esc(plan.arrivalPlan)}</div><dl class="kv"><dt>공연 접근</dt><dd>${esc(conf.showAccess)}</dd><dt>관광 접근</dt><dd>${esc(conf.sightAccess)}</dd><dt>이동</dt><dd>${esc(conf.shuttle)}</dd></dl><ul class="tight small">${conf.pros.map(x=>`<li>${esc(x)}</li>`).join("")}</ul></details>
       ${linkBtns(conf.links, conf.map)}</div>`; };
     $("hotelConfirmed").innerHTML = confirmedCard(hp, "숙소 ① 마카오 · 12/23 → 12/26") + confirmedCard(D.meta.hkHotelPlan, "숙소 ② 홍콩 공항 · 12/26 → 12/27");
   }
@@ -1049,12 +1036,14 @@ const tripData = {
       const list = shown.filter(x => x.region === r); if (!list.length) return "";
       return `<h3 style="color:var(--navy);margin:16px 0 10px;font-size:17px">${esc(r)}</h3><div class="grid g3">${list.map(f => `<div class="card">
         <div class="tl-head"><div><h3>${esc(f.name)}</h3><div class="meta">📍 ${esc(f.location)}</div><div class="meta">📅 ${f.day ? esc(f.day) : (f.status === "SAVED" ? "가보고 싶은 곳으로 저장 · 일정 미정" : "방문일 미정")}</div>${f.category ? `<div class="meta">🍵 ${esc(f.category)}</div>` : ""}</div>${stBadges(f)}</div>
-        ${f.desc ? `<div class="small" style="margin:6px 0">${esc(f.desc)}</div>` : ""}
-        <dl class="kv"><dt>대표메뉴</dt><dd>${esc(f.menu)}${f.menuNote ? ` <span class="small muted">(${esc(f.menuNote)})</span>` : ""}</dd><dt>가격</dt><dd>${esc(f.price)}</dd><dt>예약</dt><dd>${rsv(f.booking)}</dd></dl>
+        <div class="small" style="margin-top:6px">🍴 <b>${esc(f.menu)}</b></div>
         ${f.reservation ? `<div class="booked-box"><b>✔ 예약 완료</b> · ${esc(f.reservation.date)} ${esc(f.reservation.time)} · ${esc(f.reservation.guests)}<br>${esc(f.reservation.request)} <span class="small muted">(요청사항 — 보장되지 않음)</span><br><span class="small muted">예약번호 ${esc(f.reservation.bookingNo)}</span></div>` : ""}
         ${f.menuMemo ? `<div class="menu-memo"><b>먹어볼 메뉴</b><ul class="tight small">${f.menuMemo.map(([k,e]) => `<li>${esc(k)} <span class="muted">(${esc(e)})</span></li>`).join("")}</ul></div>` : ""}
-        ${(f.hours || f.wait) ? `<details><summary>영업시간 · 웨이팅</summary><div class="small">${esc(f.hours||"—")} · ${esc(f.wait||"—")}</div></details>` : ""}
-        ${f.locNote ? `<div class="small muted" style="margin-top:6px">📌 ${esc(f.locNote)}</div>` : ""}
+        <details><summary>자세히 (가격 · 영업시간 · 메모)</summary>
+          ${f.desc ? `<div class="small" style="margin:4px 0 6px">${esc(f.desc)}</div>` : ""}
+          <dl class="kv" style="margin-top:4px">${f.menuNote ? `<dt>메뉴</dt><dd>${esc(f.menuNote)}</dd>` : ""}<dt>가격</dt><dd>${esc(f.price)}</dd><dt>예약</dt><dd>${rsv(f.booking)}</dd>${f.hours ? `<dt>영업시간</dt><dd>${esc(f.hours)}</dd>` : ""}${f.wait ? `<dt>웨이팅</dt><dd>${esc(f.wait)}</dd>` : ""}</dl>
+          ${f.locNote ? `<div class="small muted" style="margin-top:6px">📌 ${esc(f.locNote)}</div>` : ""}
+        </details>
         ${f.bookingRef ? `<div class="links">${bookingBtn(f.bookingRef)}</div>` : ""}${linkBtns(f.links, f.map)}</div>`).join("")}</div>`;
     }).join("") || `<div class="card muted">${foodFilter === "SAVED" ? "저장한 맛집이 아직 없습니다." : "해당 상태의 맛집이 없습니다."}</div>`;
   }
@@ -1083,19 +1072,20 @@ const tripData = {
   // ⑩ Checklist
   function renderChecklist(){
     const st = load();
-    $("checkBody").innerHTML = `<h3 style="margin-bottom:6px">예약 현황</h3>` + D.checklist.map(c => { const on = st[c.id] ?? !!c.done;
+    $("checkBody").innerHTML = `` + D.checklist.map(c => { const on = st[c.id] ?? !!c.done;
       return `<div class="check-item ${on?"done":""}"><input type="checkbox" id="ck-${esc(c.id)}" data-id="${esc(c.id)}" ${on?"checked":""}><label for="ck-${esc(c.id)}"><span class="t">${esc(c.label)}</span> ${stBadges(c)}${c.ref?`<div class="ref">${esc(c.ref)}</div>`:""}${c.bookingRef?`<div class="links" style="margin-top:6px">${bookingBtn(c.bookingRef)}</div>`:""}</label></div>`; }).join("")
       + `<div class="links"><button class="btn" id="ckReset">체크 상태 초기화</button></div>`;
-    document.querySelectorAll("#checkBody input").forEach(i => i.onchange = () => { const s = load(); s[i.dataset.id] = i.checked; save(s); renderChecklist(); renderSummary(); });
-    $("ckReset").onclick = () => { try{localStorage.removeItem(storeKey);}catch(e){} renderChecklist(); renderSummary(); };
+    document.querySelectorAll("#checkBody input").forEach(i => i.onchange = () => { const s = load(); s[i.dataset.id] = i.checked; save(s); renderChecklist(); renderBookTop(); });
+    $("ckReset").onclick = () => { try{localStorage.removeItem(storeKey);}catch(e){} renderChecklist(); renderBookTop(); };
   }
-  $("prioBody").innerHTML = `<h3 style="margin-bottom:6px">예약 우선순위</h3>` + D.priority.map(p => `<div style="margin-top:12px"><h4>${esc(p.when)}</h4><ul class="tight small">${p.items.map(x => typeof x === "string" ? `<li>${esc(x)}</li>` : `<li>${esc(x.text)}<div class="links" style="margin-top:6px">${bookingBtn(x.bookingRef)}</div></li>`).join("")}</ul></div>`).join("");
+  $("prioBody").innerHTML = D.priority.map(p => `<div style="margin-top:12px"><h4>${esc(p.when)}</h4><ul class="tight small">${p.items.map(x => typeof x === "string" ? `<li>${esc(x)}</li>` : `<li>${esc(x.text)}<div class="links" style="margin-top:6px">${bookingBtn(x.bookingRef)}</div></li>`).join("")}</ul></div>`).join("");
 
   // 하단: Sources · Update History (접힘)
   $("historyBody").innerHTML = D.history.map(h => `<div class="ver"><b>${esc(h.date)}</b><ul class="tight small">${h.changes.map(c=>`<li>${esc(c)}</li>`).join("")}</ul></div>`).join("");
   $("sourceList").innerHTML = D.sources.map(s => `<li>${s.url?`<a href="${esc(s.url)}" target="_blank" rel="noopener">${esc(s.label)}</a>`:esc(s.label)}</li>`).join("");
 
-  renderSummary(); renderDay(); renderHotels(); renderFood(); renderChecklist();
+  renderBookTop(); renderHotels(); renderFood(); renderChecklist();
+  showTab(curTab, false);
 })();
 </script>
 </body>

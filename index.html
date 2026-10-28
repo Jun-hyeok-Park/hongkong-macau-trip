@@ -344,8 +344,10 @@ const tripData = {
         { time:"20:05–20:15", place:"도보 → 파리지앵", region:"이동", map:"The Parisian Macao", desc:["런더너 → 파리지앵 약 530m (직선 360m)"], move:"도보", moveTime:"약 8분", cost:"—", booking:"none", status:"LOCKED" },
         { time:"20:15–20:45", place:"파리지앵 에펠탑 조명", region:"코타이", map:"The Parisian Macao Eiffel Tower", desc:["18:15–24:00 15분 간격 그랜드 일루미네이션 — 시간 맞출 필요 없음","전망대는 선택(유료)"], move:"—", moveTime:"—", cost:"무료", booking:"none", status:"LOCKED" },
         { time:"20:45–20:55", place:"실내 연결 → 베네시안", region:"이동", map:"The Venetian Macao Grand Canal Shoppes", desc:["파리지앵 → 베네시안 실내 연결 약 700m (직선 490m)"], move:"도보 (실내 연결)", moveTime:"약 10분", cost:"—", booking:"none", status:"LOCKED" },
-        { time:"20:55–21:35", place:"베네시안 그랜드 캐널 쇼핑몰", region:"코타이", map:"The Venetian Macao Grand Canal Shoppes", desc:["그랜드 캐널 · 크리스마스 장식 (곤돌라는 선택)","피곤하면 줄이고 바로 복귀"], move:"—", moveTime:"—", cost:"—", booking:"none", status:"LOCKED" },
-        { time:"21:35–21:55", place:"도보 → 갤럭시 → Broadway Hotel 복귀 · 취침", region:"코타이", map:"Broadway Hotel Macau", desc:["베네시안 → 갤럭시 → Broadway 약 1.2km (직선 820m)","다음 날 반도 일정"], move:"도보", moveTime:"약 17분", cost:"무료", booking:"none", status:"LOCKED" },
+        { time:"20:55–21:15", place:"베네시안 그랜드 캐널 쇼핑몰", region:"코타이", map:"The Venetian Macao Grand Canal Shoppes", desc:["그랜드 캐널 · 크리스마스 장식 (곤돌라는 선택)","Lemoncello 22:00 마감 → 21:15에는 출발"], move:"—", moveTime:"—", cost:"—", booking:"none", status:"LOCKED" },
+        { time:"21:15–21:30", place:"도보 → Lemoncello Gelato (타이파 빌리지)", region:"이동", map:"Lemoncello Gelato Taipa Macau", desc:["베네시안 → 북서쪽 타이파 빌리지 약 1.1km (직선 770m)"], move:"도보", moveTime:"약 15분", cost:"—", booking:"none", status:"LOCKED" },
+        { time:"21:30–21:45", place:"Lemoncello Gelato 檸檬車露", region:"타이파", map:"Lemoncello Gelato Taipa Macau", desc:["Shop J, Chun Fok Village, 115 R. do Regedor","22:00 마감 (구글 지도 기준) · 연휴 영업시간 확인","리뷰 추천: 블랙망고·구아바·레몬 · 두 가지 맛 약 MOP 45"], move:"—", moveTime:"—", cost:"약 MOP 45 (2가지 맛)", booking:"none", needsCheck:true, status:"LOCKED" },
+        { time:"21:45–22:00", place:"도보 → Broadway Hotel 복귀 · 취침", region:"코타이", map:"Broadway Hotel Macau", desc:["타이파 빌리지 → Broadway 약 1km (직선 690m)","다음 날 반도 일정"], move:"도보", moveTime:"약 15분", cost:"무료", booking:"none", status:"LOCKED" },
       ]},
     { day:2, date:"12/24 (목)", title:"마카오 반도 반나절 역사 동선 → North 1주년 저녁 → 크리스마스 이브 House of Dancing Water", goals:["쏸라펀 → 세나도 → 육포거리 망고모찌 → 성 바울 → 몬테 요새","★ North 17:00 (1주년 기념 식사)","★ House of Dancing Water 19:30"],
       items:[
@@ -528,6 +530,10 @@ const tripData = {
   restaurants: [
     { region:"마카오 반도", name:"Margaret's Café e Nata", menu:"에그타르트, 샌드위치", price:"MOP 12 내외/개", location:"Rua do Comandante Mata e Oliveira (세나도 도보 8분)", hours:"평일 08:30–16:30 · 주말 10:00–18:00 · 수요일 휴무 (확인)", booking:"none", wait:"줄 있음, 회전 빠름", day:"", status:"PLANNED", map:"Margaret's Cafe e Nata Macau" },
     { region:"마카오 반도", name:"Riquexó (매캐니즈 가정식)", menu:"아프리칸 치킨, 민치, 매캐니즈 커리", price:"MOP 100–200/인 (확인)", location:"Av. de Sidónio Pais 69", hours:"확인 필요", booking:"none", wait:"보통", day:"", status:"PLANNED", map:"Riquexo Macau" },
+    { region:"타이파", name:"Lemoncello Gelato 檸檬車露", category:"디저트 · 이탈리안 젤라또", menu:"젤라또 (블랙망고·구아바·레몬 추천)", price:"약 MOP 45 (2가지 맛)", location:"타이파 빌리지 · Shop J, Chun Fok Village, 115 R. do Regedor", hours:"~22:00 (구글 지도 기준) · 연휴 영업시간 확인", booking:"none", wait:"", day:"D1 밤 (12/23 21:30–21:45)", status:"PLANNED", needsCheck:true, map:"Lemoncello Gelato Taipa Macau",
+      desc:"구글 평점 4.3 (리뷰 633개) 젤라또 가게. D1 베네시안 구경 후 숙소 가는 길에 들름.",
+      locNote:"☎ +853 2858 3396 · 22:00 마감이라 베네시안에서 21:15 출발",
+      links:[{label:"Google Maps (저장한 장소)", url:"https://maps.app.goo.gl/DZgRA83u7wUhsYi98"}] },
     { region:"코타이", name:"Casa Maquista 土生公館", category:"매캐니즈 가정식 · Taipa Houses-Museum", menu:"Capela(미트로프), 생강 닭찜(Galinha Chau Chau Parida), 바칼라우 양배추 롤", price:"현장 결제 (식비 예산 참조)", location:"Avenida da Praia, Taipa (Taipa Houses-Museum 안)", hours:"10:00–22:00 · 메인 12시부터 · 라스트 오더 21:15", booking:"required", wait:"예약 대기 (inline · 약 1개월 전 오픈)", day:"D1 저녁 (12/23 17:00–19:00)", status:"PLANNED", needsCheck:true, map:"Casa Maquista Taipa Houses Macau", bookingRef:"casaMaquista",
       desc:"Taipa Houses 안 100년 된 저택에서 매캐니즈 가정식. 일정은 12/23 17:00로 확정, 예약은 오픈 후 진행.",
       locNote:"☎ / WhatsApp +853 6217 6332 · 예약창 오픈(12/23은 11/21경 예상) 후 inline에서 성인 2명 17:00 예약 · 이름·연락처는 직접 입력",
@@ -667,6 +673,7 @@ const tripData = {
   ],
 
   history: [
+    { date:"2026-10-28", changes:["D1 복귀 길에 Lemoncello Gelato 추가 (타이파 빌리지 · 21:30–21:45 · 22:00 마감) · 베네시안 20:55–21:15로 단축 · Broadway 22:00 도착 (LOCKED)"] },
     { date:"2026-10-28", changes:["D1 저녁 후 동선 확정 (전부 도보 · LOCKED): Casa Maquista → 런더너 → 파리지앵 에펠탑 → 실내로 베네시안 → 갤럭시 → Broadway 21:55 도착","택시 이동 제거 · 루트는 구글 지도 좌표 기준 직선거리 합계가 가장 짧은 순서"] },
     { date:"2026-10-28", changes:["D2 공연 후 CHAGEE / 霸王茶姬 추가: City of Dreams → 베네시안 L3 CHAGEE 21:20–21:40 → 걸어서 Broadway 22:05 도착 (LOCKED · 22:00 마감 CHECK)","CHAGEE 맛집 카드 SAVED → PLANNED"] },
     { date:"2026-10-28", changes:["D2 North 저녁 17:00–19:00 (2시간) → 19:00–19:15 극장 도보 → 19:15 House of Dancing Water 도착","D2 전체 일정 LOCKED (내가 확정한 계획) — 예약 완료 항목은 CONFIRMED 유지"] },

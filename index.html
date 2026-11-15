@@ -606,6 +606,7 @@ const tripData = {
     COTAIW:[22.1450892,113.5578614],
     COTAIE:[22.1483833,113.5691226],
     MRGUNG:[22.1971184,113.5367845],
+    NAPE:[22.1945528,113.552713],
     TAPSEAC:[22.1981161,113.547134],
     DIMSUM:[22.284886,114.1513815],
     MANMO:[22.2839963,114.1502256],
@@ -697,9 +698,10 @@ const tripData = {
         { time:"14:40–15:30", geo:"BROADWAY", mode:"walk", place:"숙소에서 휴식 · 짐 정리", region:"코타이", map:"Broadway Hotel Macau", desc:["내일 체크아웃이라 짐 미리 정리"], move:"—", moveTime:"—", cost:"—", booking:"none", status:"LOCKED" },
         { time:"15:30–16:05", geo:"STARWORLD", mode:"bus", place:"갤럭시 무료셔틀 → 스타월드", region:"이동", map:"StarWorld Hotel Macau", desc:["2일차에 낮에 본 세나도 광장·성 바울 성당은 다시 가지 않고, 밤에만 볼 수 있는 마켓·빛 축제 위주","갤럭시 'Crystal Lobby'에서 스타월드행 무료셔틀 (약 35분)"], move:"무료셔틀", moveTime:"약 35분", cost:"무료", booking:"none", needsCheck:true, status:"LOCKED" },
         { time:"16:05–16:25", geo:"TAPSEAC", mode:"walk", place:"걸어서 → 타슥 광장", region:"이동", map:"Tap Seac Square Macau", desc:["스타월드에서 북쪽으로 약 1km (오르막)","세나도 광장 쪽이 아닌 동쪽 큰길로 — 구글맵 도보 경로 확인"], move:"걷기", moveTime:"약 20분", cost:"—", booking:"none", status:"LOCKED" },
-        { photo:["tapseac-xmas-market"], time:"16:25–18:30", geo:"TAPSEAC", mode:"walk", food:true, place:"타슥 광장 크리스마스 마켓", region:"마카오 반도", map:"Tap Seac Square Macau", desc:["마카오 시정서 주최 · 2026-12-18 ~ 2027-01-02","선물·간식 가판 24곳 · 회전목마 · 미니 기차 · 미로","저녁은 마켓 간식으로 (점심을 Casa Maquista에서 든든히)","해 질 무렵(17:40쯤)부터 조명이 켜져 사진 찍기 좋음","운영 시간 확인 (2025년: 14:00–23:00, 12/24·25는 자정까지)"], move:"—", moveTime:"—", cost:"간식 현장 결제", booking:"none", needsCheck:true, status:"LOCKED", key:true },
-        { photo:["light-up-macao"], time:"18:30–20:30", mode:"walk", place:"Light Up Macao — 마카오 빛 축제 야경", region:"마카오 반도", desc:["2026-12-05 ~ 2027-01-10 예정 (발표 확인)","전시 구역은 아직 발표 전 — 2025년: 신구안 · 남반 호수 · 콕사이(筷子基)","구역 발표 후 동선 확정 — 끝나면 스타월드 쪽으로 걸어서 마무리"], move:"걷기", moveTime:"—", cost:"무료", booking:"none", needsCheck:true, status:"LOCKED" },
-        { time:"20:30–21:20", geo:["STARWORLD","GALAXY"], mode:"bus", place:"스타월드 → 갤럭시 무료셔틀", region:"이동", map:"StarWorld Hotel Macau", desc:["셔틀 막차 확인 (예전 기록상 22:00)"], move:"무료셔틀", moveTime:"약 35–50분", cost:"무료", booking:"none", needsCheck:true, status:"LOCKED" },
+        { photo:["tapseac-xmas-market"], time:"16:25–18:30", geo:"TAPSEAC", mode:"walk", food:true, place:"타슥 광장 크리스마스 마켓", region:"마카오 반도", map:"Tap Seac Square Macau", desc:["마카오 시정서 주최 · 2026-12-18 ~ 2027-01-02 · 입장 무료","선물·간식 가판 24곳 (크레페 · 에그와플 · 꼬치 · 애플파이 · 수공예품) · 회전목마 · 미니 기차 · 미로","🎠 놀이기구는 무료 · 15:00–22:00 — 당일 오전 10시부터 온라인 예약(1시간 단위, 15:00–21:00 시작), 현장 줄도 가능 · 슬라이드는 빨리 마감, 회전목마는 오후에도 잡히는 편 (2025년 기준)","🎭 공연 15:00 · 17:30 · 20:00 (2025년 기준) → 17:30 공연 보기","저녁은 마켓 간식으로 (점심을 Casa Maquista에서 든든히)","해 질 무렵(17:40쯤)부터 조명이 켜져 사진 찍기 좋음","운영 시간: 2025년 14:00–23:00, 12/24·25·31은 자정까지 — 2026년 발표 확인"], move:"—", moveTime:"—", cost:"간식 현장 결제", booking:"none", needsCheck:true, status:"LOCKED", key:true },
+        { time:"18:30–18:50", geo:"NAPE", mode:"walk", place:"걸어서 → 신구안(新口岸) 빛 축제 구역", region:"이동", map:"Macau Grand Prix Museum", desc:["타슥 광장에서 남동쪽 내리막으로 약 1km","그랑프리 박물관 주변이 2025년 신구안 전시 구역"], move:"걷기", moveTime:"약 15–20분", cost:"—", booking:"none", status:"LOCKED" },
+        { photo:["light-up-macao"], time:"18:50–20:30", geo:"NAPE", mode:"walk", food:true, place:"Light Up Macao 빛 축제 신구안 구역 + 야시장 먹거리 거리", region:"마카오 반도", map:"Macau Grand Prix Museum", desc:["빛 축제: 매일 18:00–22:00 무료 (2025년 12/6–1/11 기준 · 2026년 발표 확인)","신구안 구역: 그랑프리 박물관 일대 · 크리스마스 특별 행사(2025년 12/20–28)는 광저우 거리·베이징 거리 일대","야시장 먹거리 거리: 고메스 거리·하문 거리·나가사키 거리 — 금·토·일·공휴일 운영 → 12/25는 금요일·공휴일","2026년 전시 구역이 바뀌면 동선 다시 확인","끝나면 스타월드까지 걸어서 약 10분"], move:"걷기", moveTime:"—", cost:"무료 (먹거리 현장 결제)", booking:"none", needsCheck:true, status:"LOCKED", key:true },
+        { time:"20:30–21:20", geo:["STARWORLD","GALAXY"], mode:"bus", place:"스타월드 → 갤럭시 무료셔틀", region:"이동", map:"StarWorld Hotel Macau", desc:["신구안에서 스타월드까지 걸어서 약 10분","셔틀 막차 확인 (예전 기록상 22:00)"], move:"걷기 + 무료셔틀", moveTime:"약 45–60분", cost:"무료", booking:"none", needsCheck:true, status:"LOCKED" },
         { time:"21:20–23:00", geo:["GALAXY","BROADWAY"], mode:"walk", place:"갤럭시 크리스마스 밤 — 다이아몬드 쇼 · 카지노", region:"코타이", map:"Galaxy Macau", desc:["다이아몬드 쇼: 로비에서 하는 무료 쇼 (거대한 다이아몬드가 올라옴) · 공휴일 자정까지","카지노는 만 21세 이상 · 여권 챙기기 · 안에서 사진 금지","끝나면 건물 안으로 숙소까지 걸어서"], move:"걷기 (건물 안)", moveTime:"5–10분", cost:"—", booking:"none", status:"LOCKED" }
       ]},
     { day:4, start:"BROADWAY", date:"12/26 (토)", tab:"홍콩 하루", title:"마카오 체크아웃 → 홍콩으로 → 딤섬 · 센트럴 골목 · 스타페리 · 북경오리 → 공항 호텔", goals:["짐은 공항 호텔(Regal)에 맡기고 시내로","딤섬 스퀘어 → 만모 사원 → 에스컬레이터 · 소호 → 타이쿤 → PMQ","노을 스타페리 · Peking Garden 북경오리 · 심포니 오브 라이트"],
@@ -923,7 +925,7 @@ const tripData = {
     { when:"⏰ 2026-11-22(일) ~ 11-23(월) — 높은 우선순위", items:[{ text:"★ Macau HK Airport Direct 무료버스 (12/23 HKG → Macao, 성인 2명) — 예약 대기: 11/22부터 예약창 확인, 늦어도 11/23 예약 시도", bookingRef:"macauAirportDirect" }] },
     { when:"⏰ 2026-11-22(일) ~ 11-23(월) — 높은 우선순위", items:[{ text:"★ Casa Maquista 土生公館 (12/25 12:00 크리스마스 점심, 성인 2명) — 예약 대기: 11/22부터 inline 예약창 확인 (약 1개월 전 오픈 · 11/23경 예상)", bookingRef:"casaMaquista" }] },
     { when:"지금 예약 (10월)", items:["① 12/23 새벽 인천공항 도착 수단 결정","② 12/23 17:00 영도죽 전화 예약"] },
-    { when:"1~2개월 전 (10월 말~11월)", items:["D1 경전철 확인: 바하행 환승 여부 · 요금·결제 수단 · 막차","12/24 耿記點心 여는 시간 확인","타슥 광장 크리스마스 마켓 · Light Up Macao 2026 구역·시간 발표 확인","12/26 저녁 Peking Garden 전화 예약 (☎ +852 2735 8211)","여행자 보험 · eSIM 구매","크리스마스 행사(리조트·Light Up Macau) 발표 확인"] },
+    { when:"1~2개월 전 (10월 말~11월)", items:["D1 경전철 확인: 바하행 환승 여부 · 요금·결제 수단 · 막차","12/24 耿記點心 여는 시간 확인","타슥 광장 크리스마스 마켓 · Light Up Macao 2026 구역·시간 발표 확인","12/25 오전 10시: 타슥 광장 회전목마 온라인 예약 (원하면)","12/26 저녁 Peking Garden 전화 예약 (☎ +852 2735 8211)","여행자 보험 · eSIM 구매","크리스마스 행사(리조트·Light Up Macau) 발표 확인"] },
     { when:"1~2주 전 (12월 초)", items:["갤럭시 무료셔틀 시간표(HZMB 口岸·StarWorld ↔ Galaxy) 12월 운행 확인","Symphony of Lights 운영 여부 확인","날씨·HZMB 운행 공지 확인"] },
     { when:"여행 직전", items:["HK Express 온라인 체크인 · 항공 시간 변경 확인","위탁 20kg / 개인물품 7kg 무게 확인","환전·옥토퍼스 충전","여권 유효기간(6개월 이상) 확인","예약 확인서 오프라인 저장"] }
   ],
@@ -949,6 +951,7 @@ const tripData = {
   ],
 
   history: [
+    { date:"2026-11-15", changes:["D3 저녁: 타슥 광장 마켓 정보 보강 (놀이기구 당일 10시 온라인 예약 · 공연 15:00/17:30/20:00 · 12/25 자정까지) → 내리막으로 신구안 빛 축제 구역 + 야시장 먹거리 거리 18:50–20:30 → 스타월드 셔틀"] },
     { date:"2026-11-15", changes:["D1 저녁: Casa Maquista → 영도죽 贏到粥 조개 훠궈 17:00–18:30 (경전철 코타이 서 ↔ 바하 왕복 · 택시는 옵션) → 런더너·파리지앵·베네시안 산책은 그대로","D2: 몬테 요새 후 耿記點心(Mr. Gung) 딤섬 늦은 점심 13:40–14:30 추가 (쏸라펀 유지) · 숙소 휴식 40분으로","D3: Casa Maquista 크리스마스 점심 12:00 → 타이파 빌리지 · 젤라또 → 휴식 · 반도 남쪽 산책·영도죽·윈 팰리스 제외","D3 오후 확정: 반도 크리스마스 밤 — 갤럭시 셔틀 → 타슥 광장 크리스마스 마켓 16:25–18:30 → Light Up Macao 빛 축제 → 셔틀로 갤럭시 (2일차의 세나도 광장·성 바울 성당은 다시 안 감)","맛집: 耿記點心 추가 · D3 점심 후보 3곳은 저장한 맛집으로 · Casa Maquista 예약 12/25 12:00으로 변경"] },
     { date:"2026-11-15", changes:["D3(12/25) 콜로안 일정 취소 → 경전철 타이파선으로 마카오 반도 남쪽(마조묘 · 릴라우 광장 · 만다린 하우스 · 성 로렌스 성당) 산책","D3 크리스마스 저녁: TACOS by miumiu → 영도죽 贏到粥 조개 훠궈 17:00–18:30 (예약 필요)","D3 택시 3번 → 0번: 바하 ↔ 코타이 경전철 · 윈 팰리스는 코타이 동역 무료 스카이캡","D1 Casa Maquista까지 걷기로 확정 (택시 없음)","맛집: 영도죽 추가 · TACOS · Lord Stow’s 원조점은 저장한 맛집으로"] },
     { date:"2026-10-29", changes:["D4 확정 (LOCKED): 점심 딤섬 스퀘어 13:30 → 만모 사원 → 미드레벨 에스컬레이터·소호 → 타이쿤 → PMQ → 스타페리 17:15 → 시계탑 노을 → 저녁 Peking Garden 18:00–20:00 (2시간) → 20:00 심포니 오브 라이트","피크트램·빅토리아 피크 제외 (연휴 줄)","맛집: Tim Ho Wan 후보 → 딤섬 스퀘어 · 북경오리 미정 → Peking Garden"] },

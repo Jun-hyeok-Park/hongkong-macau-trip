@@ -5,6 +5,11 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Hong Kong &amp; Macau Trip 2026</title>
+<meta name="theme-color" content="#D8566A">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="apple-touch-icon" href="icon-192.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="홍콩마카오">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Gowun+Dodum&family=Jua&display=swap" rel="stylesheet">
@@ -434,6 +439,48 @@ table.simple th{color:var(--muted);font-weight:400;font-family:var(--display);fo
   .card .meta{line-height:1.5;margin-top:2px}
 }
 .nw{white-space:nowrap}
+/* 지금/다음 일정 바 (여행 중에만) — 데스크톱: 상단 메뉴 아래 · 모바일: 하단 메뉴 위 */
+.nowbar{display:flex;align-items:center;gap:8px;background:var(--card);border-radius:20px;padding:6px 6px 6px 10px;box-shadow:0 6px 18px rgba(44,72,65,.18);margin:0 auto 8px;max-width:520px;pointer-events:auto}
+.nowbar[hidden]{display:none}
+.nb-main{flex:1;min-width:0;border:0;background:none;text-align:left;cursor:pointer;padding:2px 0;display:flex;flex-direction:column;gap:1px}
+.nb-t{font-size:14.5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.nb-t .nowtag{margin-right:6px}
+.nb-next{font-size:12.5px;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.nowbar .leg-go{flex:0 0 auto}
+@media (min-width:900px){.nowbar{margin:8px 0 0;max-width:640px}}
+@media (max-width:899px){body.has-now{padding-bottom:150px}}
+/* 하단 메뉴 환율 버튼 */
+nav.tabs button.fx{background:var(--butter)}
+/* 시트 (택시 카드 · 환율 계산기) */
+.sheet{position:fixed;inset:0;z-index:200;background:rgba(44,72,65,.45);display:flex;align-items:flex-end;justify-content:center;padding:12px}
+.sheet[hidden]{display:none}
+.sheet-box{background:var(--card);border-radius:26px;width:100%;max-width:520px;max-height:calc(100dvh - 24px);overflow:auto;padding:20px 18px calc(18px + env(safe-area-inset-bottom));position:relative}
+@media (min-width:900px){.sheet{align-items:center}}
+.sheet-x{position:absolute;right:12px;top:12px;border:0;background:var(--bg);border-radius:999px;width:38px;height:38px;font-size:18px;cursor:pointer}
+.sheet-box h3{font-size:20px;margin:0 44px 12px 0}
+.tx{text-align:center;padding-top:10px}
+.tx-say{font-size:22px;color:var(--muted);margin:4px 0}
+.tx-zh{font-size:clamp(44px,13vw,72px);line-height:1.15;font-weight:700;color:#111;margin:10px 0 8px;word-break:keep-all;overflow-wrap:anywhere;font-family:"PingFang HK","Microsoft JhengHei","Noto Sans TC",sans-serif}
+.tx-sub{font-size:17px;color:var(--ink)}
+.tx-addr{font-size:19px;background:var(--butter);border-radius:16px;padding:10px 12px;margin:12px 0 4px;color:#111;font-family:"PingFang HK","Microsoft JhengHei","Noto Sans TC",sans-serif}
+.tx-ko{font-size:13px;color:var(--muted);margin-top:8px}
+.tx .links{justify-content:center;margin-top:14px}
+.btn.taxi{background:var(--butter)}
+.taxi-list{display:flex;flex-wrap:wrap;gap:8px}
+.taxi-list .btn{background:var(--bg)}
+.fx-in{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.fx-in input{flex:1 1 140px;min-width:0;font:inherit;font-size:26px;font-family:var(--display);padding:8px 14px;border-radius:16px;border:2.5px solid var(--line);background:var(--bg);color:var(--ink)}
+.fx-in input:focus{outline:none;border-color:var(--berry)}
+.seg{display:flex;background:var(--bg);border-radius:999px;padding:4px;gap:2px}
+.seg button{border:0;background:none;border-radius:999px;padding:7px 13px;font-family:var(--display);cursor:pointer;color:var(--muted)}
+.seg button.on{background:var(--card);color:var(--berry);box-shadow:0 2px 0 var(--line)}
+.fx-out{display:grid;gap:8px;margin:14px 0}
+.fx-out div{display:flex;justify-content:space-between;align-items:baseline;background:var(--bg);border-radius:16px;padding:10px 14px}
+.fx-out b{font-family:var(--display);font-weight:400;font-size:24px;color:var(--berry)}
+.fx-quick{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:10px}
+.fx-quick .btn{background:var(--mint)}
+.toast{position:fixed;left:50%;bottom:calc(96px + env(safe-area-inset-bottom));transform:translateX(-50%);background:var(--ink);color:#fff;padding:9px 16px;border-radius:999px;font-size:14px;z-index:210;box-shadow:0 6px 18px rgba(44,72,65,.25);max-width:calc(100% - 32px);text-align:center}
+@media (min-width:900px){.toast{bottom:24px}}
 @media (prefers-reduced-motion:reduce){.nowtag{animation:none}}
 @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}.tw{animation:none}.daytab,.btn,.pin{transition:none}}
 @media print{.topbar{display:none}.daytabs,.glance{display:none}.panel{display:block!important}}
@@ -452,9 +499,11 @@ table.simple th{color:var(--muted);font-weight:400;font-family:var(--display);fo
 </header>
 <div class="topbar">
   <div class="wrap">
+    <div class="nowbar" id="nowBar" hidden></div>
     <nav class="tabs" id="tabs" aria-label="메뉴"></nav>
   </div>
 </div>
+<div class="sheet" id="sheet" hidden role="dialog" aria-modal="true"><div class="sheet-box"><button class="sheet-x" id="sheetX" aria-label="닫기">✕</button><div id="sheetBody"></div></div></div>
 
 <main class="wrap">
   <div class="panel" data-panel="plan">
@@ -478,6 +527,7 @@ table.simple th{color:var(--muted);font-weight:400;font-family:var(--display);fo
 
   <div class="panel" data-panel="info">
     <details class="card fold" open><summary>🍯 주연이 꿀팁 — 마카오 돈 쓰는 법</summary><div class="tips" id="tipsBody"></div></details>
+    <details class="card fold" open><summary>🀄 택시 · 길 물을 때 보여주는 카드</summary><p class="small muted" style="margin:6px 0 10px">누르면 한자 이름이 크게 떠요. 화면을 기사님께 보여주세요. (마카오 택시는 영어가 잘 안 통함)</p><div class="taxi-list" id="taxiList"></div></details>
     <details class="card fold"><summary>🚌 홍콩 ↔ 마카오 교통 (이번 여행에서 타는 것)</summary><div class="grid g2" id="transportCards"></div></details>
     <details class="card fold"><summary>🎆 무료 쇼 · 크리스마스 이벤트</summary><div class="grid g2" id="showCards"></div></details>
     <details class="card fold"><summary>💰 예산 (2인)</summary><div class="small muted" id="fxNote"></div><div id="budgetBody" style="margin-top:10px"></div></details>
@@ -564,6 +614,33 @@ const tripData = {
   bookingLinks: {
     macauAirportDirect: { label:"Macau HK Airport Direct 예매하기", url:"https://ticket.macauhkairportbus.com/en/" },
     casaMaquista: { label:"Casa Maquista 예약하기", url:"https://inline.app/booking/-OPn7-p3_QvmCAbt5IT1%3Ainline-live-3/-OPn7-wz38lwZeWBqqK-?hl=ko-KR" }
+  },
+
+  // 택시 · 길 묻기 카드 — places 키와 같은 이름. zh=크게 보여줄 한자 이름, sub=영문/포르투갈어, addr=주소(확인된 것만)
+  taxiCards: {
+    BROADWAY:{ ko:"숙소 Broadway Hotel", zh:"澳門百老匯酒店", sub:"Broadway Hotel · 路氹 銀河旁", addr:"Sul da Marina Taipa-Sul, junto a Rotunda do Dique Oeste, Taipa" },
+    GALAXY:{ ko:"갤럭시", zh:"澳門銀河", sub:"Galaxy Macau · 路氹" },
+    YINGDOU:{ ko:"영도죽 (조개 훠궈)", zh:"贏到粥", sub:"火鍋 · 媽閣 內港" },
+    BARRA:{ ko:"경전철 바하역", zh:"輕軌 媽閣站", sub:"Estação da Barra (LRT)" },
+    LONDONER:{ ko:"런더너", zh:"澳門倫敦人", sub:"The Londoner Macao" },
+    PARISIAN:{ ko:"파리지앵", zh:"澳門巴黎人", sub:"The Parisian Macao" },
+    VENETIAN:{ ko:"베네시안", zh:"澳門威尼斯人", sub:"The Venetian Macao" },
+    STARWORLD:{ ko:"스타월드 호텔", zh:"星際酒店", sub:"StarWorld Hotel" },
+    SLF:{ ko:"쏸라펀 가게", zh:"酸辣粉", sub:"新口岸 北京街", addr:"澳門新口岸北京街183F號地下K號舖" },
+    SENADO:{ ko:"세나도 광장", zh:"議事亭前地", sub:"Largo do Senado" },
+    STPAUL:{ ko:"성 바울 성당 유적", zh:"大三巴牌坊", sub:"Ruínas de São Paulo" },
+    MRGUNG:{ ko:"耿記點心 딤섬", zh:"耿記點心", sub:"Mr. Gung Dim Sum · 大三巴附近" },
+    LISBOA:{ ko:"그랜드 리스보아", zh:"新葡京", sub:"Grand Lisboa" },
+    HODW:{ ko:"공연장 City of Dreams", zh:"新濠天地 · 水舞間", sub:"City of Dreams · The House of Dancing Water" },
+    CASA:{ ko:"Casa Maquista", zh:"土生公館", sub:"Casa Maquista · 龍環葡韻 (Taipa Houses)" },
+    CUNHA:{ ko:"타이파 빌리지", zh:"官也街", sub:"Rua do Cunha, Taipa" },
+    TAPSEAC:{ ko:"타슥 광장 크리스마켓", zh:"塔石廣場", sub:"Praça do Tap Seac" },
+    NAPE:{ ko:"신구안 빛 축제", zh:"新口岸", sub:"NAPE · Light Up Macao" },
+    HZMB_MO:{ ko:"마카오 출국장 (다리)", zh:"港珠澳大橋 澳門口岸", sub:"HZMB Macau Port" },
+    REGAL:{ ko:"홍콩 공항 호텔 Regal", zh:"富豪機場酒店", sub:"Regal Airport Hotel · 香港國際機場", addr:"No. 9 Cheong Tat Road, Chek Lap Kok" },
+    TAIKWUN:{ ko:"타이쿤", zh:"大館", sub:"Tai Kwun · 中環" },
+    PMQ:{ ko:"PMQ", zh:"元創方", sub:"PMQ · 中環" },
+    CLOCK:{ ko:"침사추이 시계탑", zh:"尖沙咀鐘樓", sub:"Clock Tower, Tsim Sha Tsui" }
   },
 
   // 일정 (추천안 C) — 시간순
@@ -1082,8 +1159,10 @@ const tripData = {
   function showTab(t, push){
     if (!TABS.some(x => x[0] === t)) t = "plan";
     curTab = t;
-    $("tabs").innerHTML = TABS.map(([k,ic,l]) => `<button class="${k===t?"on":""}" data-tab="${k}"><span class="ic">${ic}</span><span>${l}</span></button>`).join("");
-    document.querySelectorAll("#tabs button").forEach(b => b.onclick = () => showTab(b.dataset.tab, true));
+    $("tabs").innerHTML = TABS.map(([k,ic,l]) => `<button class="${k===t?"on":""}" data-tab="${k}"><span class="ic">${ic}</span><span>${l}</span></button>`).join("")
+      + `<button class="fx" data-fx="1" aria-label="환율 계산기"><span class="ic">💱</span><span>환율</span></button>`;
+    document.querySelectorAll("#tabs button[data-tab]").forEach(b => b.onclick = () => showTab(b.dataset.tab, true));
+    $("tabs").querySelector("[data-fx]").onclick = () => openFx();
     document.querySelectorAll(".panel").forEach(p => p.classList.toggle("on", p.dataset.panel === t));
     try { localStorage.setItem("hkmo2026-tab", t); } catch(e){}
     if (push) { try { history.replaceState(null, "", "#" + t); } catch(e){} window.scrollTo(0, 0); }
@@ -1186,7 +1265,9 @@ const tripData = {
   const TRAVEL = { walk:"walking", bus:"transit", rail:"transit", tram:"transit", ferry:"transit", taxi:"driving" };
   const goBtn = (it, small) => `<a class="${small ? "leg-go" : "btn go"}" href="https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(it.map)}&travelmode=${TRAVEL[it.mode] || "walking"}" target="_blank" rel="noopener">🧭 길찾기</a>`;
   // 여행 중: 마카오/홍콩 시간(UTC+8) 기준 오늘 · 지금 일정
-  const localNow = () => { const n = new Date(); return new Date(n.getTime() + (n.getTimezoneOffset() + 480) * 60000); };
+  // 테스트용: 주소 뒤에 ?now=2026-12-23T16:40 을 붙이면 그 시각(마카오 시간)으로 동작
+  const NOW_OVERRIDE = (() => { const m = /[?&]now=([\d\-T:]+)/.exec(location.search); const t = m && new Date(m[1] + "+08:00"); return t && !isNaN(t) ? t : null; })();
+  const localNow = () => { const n = NOW_OVERRIDE || new Date(); return new Date(n.getTime() + (n.getTimezoneOffset() + 480) * 60000); };
   const tripDayToday = () => { const m = localNow(); const diff = Math.round((new Date(m.getFullYear(), m.getMonth(), m.getDate()) - new Date(2026, 11, 23)) / 864e5) + 1; return D.itinerary.some(d => d.day === diff) ? diff : null; };
   const toMin = t => { const m = /(\d{1,2}):(\d{2})/.exec(t || ""); return m ? +m[1] * 60 + +m[2] : null; };
   function nowIndex(d){
@@ -1218,6 +1299,10 @@ const tripData = {
     return `<figure class="photo"><img src="${esc(ph.src)}" alt="${esc(it.place)}" loading="lazy" decoding="async" onerror="this.closest('figure').remove()"><figcaption>사진: <a href="${esc(ph.page)}" target="_blank" rel="noopener">${esc(ph.credit || "Wikimedia Commons")}</a> · ${esc(ph.license)} · Wikimedia Commons</figcaption></figure>`;
   };
   let photoShown = new Set();
+  // 택시 카드 — 항목 좌표 중 카드가 있는 마지막 장소(도착지)
+  const TAXI = D.taxiCards || {};
+  const taxiKey = it => (Array.isArray(it.geo) ? it.geo : it.geo ? [it.geo] : []).slice().reverse().find(k => TAXI[k]);
+  const taxiBtn = it => { const k = taxiKey(it); return k ? `<button class="btn taxi" data-taxi="${k}" type="button">🀄 기사님께</button>` : ""; };
   function stopHtml(s, i){
     const it = s.it, m = MODES[it.mode], [ac, em] = artOf(it);
     const row = costChip(it) + rsvChip(it);
@@ -1226,7 +1311,7 @@ const tripData = {
         <div class="art ${ac}" title="${s.pts.length?"지도에서 보기":""}"><span aria-hidden="true">${em}</span>${s.num ? `<span class="tl-num ${esc(it.status)} ${it.food?"food":""}">${s.num}</span>` : ""}</div>
         <div style="min-width:0">
           <div class="tl-head"><div><div class="tl-time">${esc(it.time)}<span class="tl-more">▾<span class="mhide"> 자세히</span></span></div><div class="tl-place">${esc(it.place)}</div></div><div class="st" style="text-align:right;flex:0 0 auto">${stBadges(it)}</div></div>
-          ${row || it.map || it.needsCheck ? `<div class="tl-row">${it.map ? goBtn(it) : ""}${row}${it.needsCheck ? `<span class="mchk">확인 필요</span>` : ""}</div>` : ""}
+          ${row || it.map || it.needsCheck ? `<div class="tl-row">${it.map ? goBtn(it) : ""}${taxiBtn(it)}${row}${it.needsCheck ? `<span class="mchk">확인 필요</span>` : ""}</div>` : ""}
           ${it.warn ? `<div class="warn">⚠️ ${esc(it.warn)}</div>` : ""}
           ${it.bookingRef ? `<div class="links">${bookingBtn(it.bookingRef)}</div>` : ""}
           <div class="tl-body">
@@ -1248,7 +1333,7 @@ const tripData = {
         <div class="tl-body">
           <div style="margin-top:10px">${stBadges(it)}</div>
           ${descHtml(it)}
-          ${row ? `<div class="tl-row">${row}</div>` : ""}
+          ${row || taxiKey(it) ? `<div class="tl-row">${taxiBtn(it)}${row}</div>` : ""}
           ${it.map ? linkBtns([], it.map) : ""}
         </div>
       </div></div>`;
@@ -1297,7 +1382,7 @@ const tripData = {
     };
     document.querySelectorAll(".tl-item").forEach(el => {
       const i = +el.dataset.i;
-      const go = e => { if (e.target.closest("a")) return; const was = el.classList.contains("open"); el.classList.toggle("open"); if (!was && el.dataset.geo) focus(i, true, false); };
+      const go = e => { if (e.target.closest("a, button.taxi")) return; const was = el.classList.contains("open"); el.classList.toggle("open"); if (!was && el.dataset.geo) focus(i, true, false); };
       el.querySelectorAll(".tl-head, .art").forEach(x => x.addEventListener("click", go));
     });
     document.querySelectorAll(".glance button").forEach(b => b.onclick = () => focus(+b.dataset.go, true, true));
@@ -1305,7 +1390,7 @@ const tripData = {
     // 지금 / 다음 일정 표시 (오늘 날짜만) — 1분마다 갱신
     const markNow = () => {
       document.querySelectorAll(".tl-item.now, .tl-item.next").forEach(x => x.classList.remove("now", "next"));
-      document.querySelectorAll(".nowtag").forEach(x => x.remove());
+      document.querySelectorAll(".tl .nowtag").forEach(x => x.remove());
       if (d.day !== tripDayToday()) return null;
       const n = nowIndex(d); if (!n) return null;
       const el = document.querySelector(`.tl-item[data-i="${n.i}"]`); if (!el) return null;
@@ -1336,7 +1421,7 @@ const tripData = {
     pins.forEach(g => macros[macroOf(g.p)].n += g.nums.length);
     const mainPts = (Object.values(macros).sort((a,b) => b.n - a.n)[0] || { pts: path.map(x => x.p) }).pts;
     dayMap = L.map("dayMap", { zoomControl: true, scrollWheelZoom: false });
-    L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", { maxZoom: 19, attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>' }).addTo(dayMap);
+    L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", { maxZoom: 19, crossOrigin: true, attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>' }).addTo(dayMap);
     for (let i = 1; i < path.length; i++) { const m = MODES[path[i].mode] || MODES.walk; L.polyline([path[i-1].p, path[i].p], { color: m.color, weight: m.weight, opacity: .9, dashArray: m.dash || null, lineCap: "round", lineJoin: "round" }).addTo(dayMap); }
     const markers = {};
     if (d.start && D.places[d.start]) L.circleMarker(D.places[d.start], { radius: 7, color: "#fff", weight: 3, fillColor: "#F6CF57", fillOpacity: 1 }).bindTooltip("출발 · 숙소").addTo(dayMap);
@@ -1485,6 +1570,89 @@ const tripData = {
   $("sourceList").innerHTML = D.sources.map(s => `<li>${s.url?`<a href="${esc(s.url)}" target="_blank" rel="noopener">${esc(s.label)}</a>`:esc(s.label)}</li>`).join("");
 
   renderBookTop(); renderHotels(); renderFood(); renderChecklist();
+
+  // ── 시트 (택시 카드 · 환율 계산기) ──
+  let sheetBack = null;
+  function openSheet(html){ sheetBack = document.activeElement; $("sheetBody").innerHTML = html; $("sheet").hidden = false; document.body.style.overflow = "hidden"; $("sheetX").focus(); }
+  function closeSheet(){ $("sheet").hidden = true; document.body.style.overflow = ""; if (sheetBack && sheetBack.focus) sheetBack.focus(); }
+  $("sheetX").onclick = closeSheet;
+  $("sheet").addEventListener("click", e => { if (e.target === $("sheet") || e.target.closest("[data-close]")) closeSheet(); });
+  document.addEventListener("keydown", e => { if (e.key === "Escape" && !$("sheet").hidden) closeSheet(); });
+  const toast = msg => { const t = document.createElement("div"); t.className = "toast"; t.textContent = msg; document.body.appendChild(t); setTimeout(() => t.remove(), 3500); };
+
+  // 택시 · 길 묻기 카드 (광둥어 문장 + 큰 한자)
+  function openTaxi(k){
+    const c = TAXI[k]; if (!c) return;
+    const q = D.places[k] ? D.places[k].join(",") : c.zh;
+    openSheet(`<div class="tx">
+      <div class="tx-say">唔該，我想去</div>
+      <div class="tx-zh">${esc(c.zh)}</div>
+      <div class="tx-sub">${esc(c.sub || "")}</div>
+      ${c.addr ? `<div class="tx-addr">${esc(c.addr)}</div>` : ""}
+      <div class="tx-say">唔該晒！</div>
+      <div class="tx-ko">「${esc(c.ko)}」— "실례합니다, 여기로 가고 싶어요. 감사합니다!" (광둥어)</div>
+      <div class="links"><a class="btn map" href="${mapUrl(q)}" target="_blank" rel="noopener">📍 지도 보여주기</a><button class="btn" data-close="1" type="button">닫기</button></div>
+    </div>`);
+  }
+  document.addEventListener("click", e => { const b = e.target.closest("[data-taxi]"); if (b) { e.preventDefault(); e.stopPropagation(); openTaxi(b.dataset.taxi); } }, true);
+  $("taxiList").innerHTML = Object.entries(TAXI).map(([k,c]) => `<button class="btn" data-taxi="${k}" type="button">${esc(c.ko)}</button>`).join("");
+
+  // 환율 계산기
+  let fxCur = "MOP"; try { fxCur = localStorage.getItem("hkmo2026-fxcur") || "MOP"; } catch(e){}
+  function openFx(){
+    openSheet(`<h3>💱 환율 계산기</h3>
+      <div class="fx-in"><input id="fxAmt" type="number" inputmode="decimal" min="0" step="any" placeholder="금액 입력" aria-label="금액"><div class="seg" id="fxSeg">${["MOP","HKD","KRW"].map(c => `<button type="button" data-c="${c}">${c === "KRW" ? "원" : c}</button>`).join("")}</div></div>
+      <div class="fx-quick" id="fxQuick"></div>
+      <div class="fx-out" id="fxOut"></div>
+      <p class="small muted" style="margin:0">기준: 1 MOP ≈ ₩${D.fx.MOP} · 1 HKD ≈ ₩${D.fx.HKD} (${String(D.fx.asOf).replace(/[<>&"]/g, "")}). 마카오 가게는 HKD를 MOP와 1:1로 받는 곳이 많아요 — HKD로 내면 약 3% 손해, 거스름돈은 MOP로 받음.</p>`);
+    const inp = $("fxAmt");
+    const draw = () => {
+      document.querySelectorAll("#fxSeg button").forEach(b => b.classList.toggle("on", b.dataset.c === fxCur));
+      $("fxQuick").innerHTML = (fxCur === "KRW" ? [10000, 30000, 50000, 100000] : [10, 50, 100, 300, 500]).map(v => `<button class="btn" type="button" data-v="${v}">${v.toLocaleString("ko-KR")}</button>`).join("");
+      $("fxQuick").querySelectorAll("button").forEach(b => b.onclick = () => { inp.value = b.dataset.v; draw(); });
+      const v = parseFloat(inp.value) || 0, krw = v * D.fx[fxCur];
+      const rows = ["KRW","MOP","HKD"].filter(c => c !== fxCur).map(c => c === "KRW"
+        ? [`원화`, "₩" + Math.round(krw).toLocaleString("ko-KR")]
+        : [c, (krw / D.fx[c]).toLocaleString("ko-KR", { maximumFractionDigits: 1 })]);
+      $("fxOut").innerHTML = rows.map(([k, x]) => `<div><span>${k}</span><b>${x}</b></div>`).join("");
+    };
+    document.querySelectorAll("#fxSeg button").forEach(b => b.onclick = () => { fxCur = b.dataset.c; try { localStorage.setItem("hkmo2026-fxcur", fxCur); } catch(e){} draw(); inp.focus(); });
+    inp.oninput = draw; draw();
+    if (matchMedia("(pointer:fine)").matches) inp.focus();
+  }
+
+  // 지금 / 다음 일정 바 — 여행 중(마카오 시간)에만 보임
+  const isMoveItem = it => it.region === "이동" || it.region === "항공" || /복귀/.test(it.place);
+  function renderNowBar(){
+    const bar = $("nowBar"), day = tripDayToday(), d = day && D.itinerary.find(x => x.day === day), n = d && nowIndex(d);
+    if (!n) { bar.hidden = true; document.body.classList.remove("has-now"); return; }
+    const it = d.items[n.i], st = t => esc(t.split(/[–~]/)[0]);
+    const nx = n.kind === "now" ? d.items.slice(n.i + 1).find(x => toMin(x.time) != null) : null;
+    const dest = n.kind === "next" || isMoveItem(it) || !nx ? it : nx; // 길찾기 = 지금 가는 곳 / 다음 장소
+    bar.innerHTML = `<button class="nb-main" type="button" data-i="${n.i}"><span class="nb-t"><span class="nowtag">${n.kind === "now" ? "지금" : "다음"}</span>${st(it.time)} <b>${esc(it.place)}</b></span>${nx ? `<span class="nb-next">다음 ${st(nx.time)} · ${esc(nx.place)}</span>` : ""}</button>${dest.map ? goBtn(dest, true) : ""}`;
+    bar.hidden = false; document.body.classList.add("has-now");
+    bar.querySelector(".nb-main").onclick = () => {
+      curDay = day; showTab("plan", true);
+      const el = document.querySelector(`.tl-item[data-i="${n.i}"]`);
+      if (el) { el.classList.add("open"); setTimeout(() => el.scrollIntoView({ behavior: "smooth", block: "center" }), 50); }
+    };
+  }
+  renderNowBar(); setInterval(renderNowBar, 60000);
+
+  // 오프라인 — 한 번 열면 일정·사진·본 지도를 폰에 저장 (공개 페이지에서만)
+  if ("serviceWorker" in navigator && /^https?:$/.test(location.protocol) && !/\/travel\//.test(location.pathname)) {
+    navigator.serviceWorker.register("sw.js").then(() => navigator.serviceWorker.ready).then(reg => {
+      const urls = new Set();
+      D.itinerary.forEach(d => d.items.forEach(it => (it.photo || []).forEach(p => urls.add(new URL(IMG_BASE + p + ".webp", location.href).href))));
+      Object.values(D.photos || {}).forEach(p => p.src && urls.add(p.src));
+      document.querySelectorAll('link[rel="stylesheet"], script[src]').forEach(x => urls.add(x.href || x.src));
+      navigator.serviceWorker.addEventListener("message", e => {
+        if (e.data && e.data.type === "warmed") { let seen = null; try { seen = localStorage.getItem("hkmo2026-offline"); localStorage.setItem("hkmo2026-offline", "1"); } catch(err){} if (!seen) toast("📶 오프라인에서도 볼 수 있게 저장했어요"); }
+      });
+      if (reg.active) reg.active.postMessage({ type: "warm", urls: [...urls] });
+    }).catch(() => {});
+  }
+
   showTab(!location.hash && tripDayToday() ? "plan" : curTab, false); // 여행 중엔 일정 탭부터
 })();
 </script>

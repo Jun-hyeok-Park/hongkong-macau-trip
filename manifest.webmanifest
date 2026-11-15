@@ -1,0 +1,14 @@
+{
+  "name": "홍콩 & 마카오 크리스마스 2026",
+  "short_name": "홍콩마카오",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#EDF4F0",
+  "theme_color": "#D8566A",
+  "lang": "ko",
+  "icons": [
+    { "src": "icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any maskable" },
+    { "src": "icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any maskable" }
+  ]
+}

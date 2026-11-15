@@ -29,7 +29,7 @@
 }
 *{box-sizing:border-box}
 html{scroll-behavior:smooth;scroll-padding-top:76px}
-body{margin:0;overflow-wrap:anywhere;background:var(--bg);color:var(--ink);font-family:var(--body);font-size:15.5px;line-height:1.6;-webkit-text-size-adjust:100%;
+body{margin:0;word-break:keep-all;overflow-wrap:anywhere;line-break:strict;background:var(--bg);color:var(--ink);font-family:var(--body);font-size:15.5px;line-height:1.6;-webkit-text-size-adjust:100%;
   background-image:radial-gradient(circle at 12% 40px,#fff 0 3px,transparent 4px),radial-gradient(circle at 82% 22px,#fff 0 2px,transparent 3px),radial-gradient(circle at 64% 70px,#fff 0 3px,transparent 4px),radial-gradient(circle at 30% 95px,#fff 0 2px,transparent 3px),radial-gradient(circle at 93% 110px,#fff 0 3px,transparent 4px),radial-gradient(circle at 47% 18px,#fff 0 2px,transparent 3px);
   background-repeat:no-repeat;background-size:100% 260px}
 a{color:var(--ink);text-decoration-color:var(--berry);text-underline-offset:3px}
@@ -100,7 +100,7 @@ ul.tight li{margin:3px 0}
 @keyframes tw{0%,100%{opacity:.25}50%{opacity:1}}
 
 /* 메인 탭 (데스크톱: 상단 고정 알약 바 / 모바일: 하단 고정) */
-.top{position:sticky;top:0;z-index:60;padding:8px 0;background:linear-gradient(var(--bg) 70%,rgba(237,244,240,0))}
+.topbar{position:sticky;top:0;z-index:60;padding:8px 0;background:linear-gradient(var(--bg) 70%,rgba(237,244,240,0))}
 nav.tabs{display:flex;gap:6px;background:var(--card);border-radius:999px;padding:5px;box-shadow:0 3px 0 var(--line);width:max-content;max-width:100%}
 nav.tabs button{background:none;border:0;color:var(--muted);font-family:var(--display);font-size:16px;padding:7px 20px;border-radius:999px;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:6px;transition:background .15s}
 nav.tabs button:hover{background:var(--bg);color:var(--ink)}
@@ -124,7 +124,7 @@ details.fold[open]>summary{margin-bottom:12px}
 .done-list div{display:flex;gap:8px;align-items:baseline;background:var(--bg);border-radius:14px;padding:6px 12px}
 .done-list .k{flex:0 0 auto}
 @media (max-width:899px){
-  .top{position:fixed;left:0;right:0;bottom:0;top:auto;padding:0 10px calc(8px + env(safe-area-inset-bottom));background:none;pointer-events:none}
+  .topbar{position:fixed;left:0;right:0;bottom:0;top:auto;padding:0 10px calc(8px + env(safe-area-inset-bottom));background:none;pointer-events:none}
   nav.tabs{pointer-events:auto;width:100%;margin:0 auto;max-width:520px;gap:2px;box-shadow:0 6px 18px rgba(44,72,65,.18)}
   nav.tabs button{flex:1 1 0;flex-direction:column;gap:0;font-size:13px;padding:5px 2px}
   nav.tabs button .ic{font-size:19px;line-height:1.25}
@@ -425,10 +425,18 @@ table.simple th{color:var(--muted);font-weight:400;font-family:var(--display);fo
   .btn{min-height:38px}
   .links .btn{padding:7px 14px}
   .card{border-radius:20px}
+  /* 맛집·숙소·항공 카드: 오른쪽 배지 때문에 이름이 좁아지지 않게 배지를 위로 */
+  .card > .tl-head{flex-wrap:wrap;justify-content:flex-start;align-items:center;gap:6px}
+  .card > .tl-head > div:first-child{order:2;flex:1 0 100%}
+  .card > .tl-head > *:not(:first-child){text-align:left!important}
+  .card > .tl-head .stars{margin-left:6px}
+  .card > .tl-head br{display:none}
+  .card .meta{line-height:1.5;margin-top:2px}
 }
+.nw{white-space:nowrap}
 @media (prefers-reduced-motion:reduce){.nowtag{animation:none}}
 @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}.tw{animation:none}.daytab,.btn,.pin{transition:none}}
-@media print{.top{display:none}.daytabs,.glance{display:none}.panel{display:block!important}}
+@media print{.topbar{display:none}.daytabs,.glance{display:none}.panel{display:block!important}}
 </style>
 </head>
 <body>
@@ -442,7 +450,7 @@ table.simple th{color:var(--muted);font-weight:400;font-family:var(--display);fo
   <div class="sum" id="heroSum"><span class="dday" id="dday"></span></div>
   <svg class="deco" viewBox="0 0 120 46" aria-hidden="true"><g fill="#F6CF57"><path class="tw" d="M18 8l2 5 5 2-5 2-2 5-2-5-5-2 5-2z"/><path class="tw d2" d="M100 4l1.5 3.5 3.5 1.5-3.5 1.5-1.5 3.5-1.5-3.5-3.5-1.5 3.5-1.5z"/></g><g fill="#D8566A"><circle class="tw d1" cx="58" cy="14" r="3"/><circle class="tw d3" cx="84" cy="34" r="2.5"/></g><circle class="tw d2" cx="38" cy="36" r="2.5" fill="#7FC3A6"/></svg>
 </header>
-<div class="top">
+<div class="topbar">
   <div class="wrap">
     <nav class="tabs" id="tabs" aria-label="메뉴"></nav>
   </div>
@@ -665,7 +673,7 @@ const tripData = {
         { time:"20:55–21:35", geo:"VENETIAN", mode:"walk", place:"베네시안 쇼핑몰 구경", region:"코타이", map:"The Venetian Macao Grand Canal Shoppes", desc:["베네치아 운하를 본뜬 실내 쇼핑몰 · 크리스마스 장식 (곤돌라는 유료라 선택)","🥧 에그타르트집 있음: Lord Stow’s Bakery & Café (Venetian) — Shop 870 & 308","피곤하면 줄이고 바로 숙소로"], move:"—", moveTime:"—", cost:"—", booking:"none", status:"LOCKED" },
         { time:"21:35–21:55", geo:["GALAXY","BROADWAY"], mode:"walk", place:"걸어서 숙소 복귀", region:"코타이", map:"Broadway Hotel Macau", desc:["베네시안 → 갤럭시 → 숙소 약 1.2km","다음 날은 마카오 구시가지(반도) 일정"], move:"걷기", moveTime:"약 17분", cost:"무료", booking:"none", status:"LOCKED" }
       ]},
-    { day:2, start:"BROADWAY", date:"12/24 (목)", tab:"구시가지·공연", title:"마카오 구시가지(반도) 걷기 → 1주년 저녁 North → 크리스마스 이브 공연", goals:["쏸라펀 → 세나도 광장 → 육포거리 망고모찌 → 성 바울 성당 → 몬테 요새 → 耿記點心 딤섬","★ 17:00 North 1주년 저녁","★ 19:30 House of Dancing Water 공연"],
+    { day:2, start:"BROADWAY", date:"12/24 (목)", tab:"구시가지", title:"마카오 구시가지(반도) 걷기 → 1주년 저녁 North → 크리스마스 이브 공연", goals:["쏸라펀 → 세나도 광장 → 육포거리 망고모찌 → 성 바울 성당 → 몬테 요새 → 耿記點心 딤섬","★ 17:00 North 1주년 저녁","★ 19:30 House of Dancing Water 공연"],
       items:[
         { time:"09:45–10:45", geo:"STARWORLD", mode:"bus", place:"갤럭시 무료셔틀 → 스타월드 호텔 (구시가지 쪽)", region:"이동", map:"StarWorld Hotel Macau", desc:["아침은 안 먹고 출발 — 첫 끼는 쏸라펀","갤럭시 'Crystal Lobby'에서 스타월드행 무료셔틀 (09:30–22:00, 10–20분마다, 약 35분)"], move:"무료셔틀", moveTime:"약 35분 + 기다리는 시간", cost:"무료", booking:"none", status:"LOCKED" },
         { time:"10:45–10:50", geo:"SLF", mode:"walk", place:"걸어서 → 쏸라펀 가게", region:"이동", map:"酸辣粉 澳門新口岸北京街183F +85328700077", desc:["스타월드에서 북쪽 길(北京街)로 400m"], move:"걷기", moveTime:"5분", cost:"—", booking:"none", status:"LOCKED" },
@@ -1124,7 +1132,7 @@ const tripData = {
   // ② Flights
   $("flightCards").innerHTML = D.flights.map(f => `
     <div class="card">
-      <div class="tl-head"><div><h3>${esc(f.label)} · ${esc(f.flightNo)}</h3><div class="meta">${esc(f.airline)} · ${esc(f.date)}</div></div>${stBadges(f)}</div>
+      <div class="tl-head"><div><h3>${esc(f.label)} · ${esc(f.flightNo)}</h3><div class="meta">${esc(f.airline)} · <span class="nw">${esc(f.date)}</span></div></div>${stBadges(f)}</div>
       <div class="flight">
         <div class="ap"><b>${esc(f.from.code)}</b><div class="t">${esc(f.from.time)}</div><div class="s">${esc(f.from.city)} ${esc(f.from.terminal)}</div></div>
         <div class="mid">${esc(f.duration)}<div class="line"></div>✈</div>

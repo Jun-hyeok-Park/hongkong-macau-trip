@@ -469,7 +469,7 @@ const tripData = {
   },
 
   // 환율: 2026-09 기준 약 1 HKD ≈ 173 KRW. 계산 편의상 아래 값 사용. 2026년 12월 실제 환율은 달라질 수 있음.
-  fx: { HKD: 175, MOP: 170, KRW: 1, asOf: "2026-10-05 (추정치)" },
+  fx: { HKD: 175, MOP: 170, KRW: 1, asOf: "2026-11-15 (추정치 · MOP 100 ≈ ₩17,000 기준)" },
 
   flights: [
     { id:"out", label:"출국", status:"CONFIRMED", flightNo:"UO617", airline:"HK Express (홍콩익스프레스)", date:"2026-12-23 (수)",
@@ -544,6 +544,8 @@ const tripData = {
     BARRA:[22.183668,113.5294449],
     COTAIW:[22.1450892,113.5578614],
     COTAIE:[22.1483833,113.5691226],
+    MRGUNG:[22.1971184,113.5367845],
+    TAPSEAC:[22.1981161,113.547134],
     DIMSUM:[22.284886,114.1513815],
     MANMO:[22.2839963,114.1502256],
     ESCALATOR:[22.2838464,114.1549689],
@@ -554,7 +556,7 @@ const tripData = {
   },
 
   itinerary: [
-    { day:1, date:"12/23 (수)", tab:"마카오로", title:"인천 출발 → 홍콩공항에서 바로 마카오로 → 첫날 저녁 + 코타이 리조트 산책", goals:["홍콩 입국 없이 공항에서 마카오행 무료버스","저녁 Casa Maquista (포르투갈 음식)","런더너 · 파리지앵 에펠탑 · 베네시안 걸어서 구경"],
+    { day:1, date:"12/23 (수)", tab:"마카오로", title:"인천 출발 → 홍콩공항에서 바로 마카오로 → 영도죽 조개 훠궈 + 코타이 리조트 산책", goals:["홍콩 입국 없이 공항에서 마카오행 무료버스","저녁 영도죽 조개 훠궈 (경전철 왕복)","런더너 · 파리지앵 에펠탑 · 베네시안 걸어서 구경"],
       items:[
         { time:"03:45", geo:"ICN", place:"인천공항 제1터미널 도착", region:"인천", desc:["비행기 출발 3시간 전에 도착","짐은 1인당 20kg까지 부칠 수 있음","새벽이라 공항철도·리무진 첫차로는 못 감 → 자차·택시 또는 전날 공항 근처에서 자기 (정해야 함)"], move:"자차·택시 또는 전날 공항 근처 숙박", moveTime:"—", cost:"—", booking:"recommended", needsCheck:true, status:"PLANNED" },
         { time:"06:45–09:50", geo:"HKG_T1", mode:"flight", place:"비행기 UO617 인천 → 홍콩", region:"항공", desc:["HK Express · 홍콩공항 제1터미널 도착"], move:"비행기", moveTime:"4시간 5분", cost:"결제 완료", booking:"none", status:"CONFIRMED", key:true },
@@ -564,10 +566,14 @@ const tripData = {
         { time:"12:45–13:30", geo:"GALAXY", mode:"bus", place:"갤럭시 무료셔틀 → 갤럭시 호텔", region:"코타이", map:"Galaxy Macau Diamond Lobby", desc:["입국장 앞 버스 터미널에서 갤럭시 리조트 무료셔틀 탑승 (10:00–23:00, 10–25분마다, 약 25분)","갤럭시 'Diamond Lobby'에서 내린 뒤 건물 안으로 걸어서 숙소(Broadway)까지 5–10분","셔틀 줄이 너무 길면 택시 (약 20–25분 · MOP 120–150)"], move:"무료셔틀 + 걷기", moveTime:"기다리는 시간 포함 30–45분", cost:"무료 (택시면 MOP 120–150)", booking:"none", status:"LOCKED", key:true },
         { time:"13:30–13:45", geo:"BROADWAY", mode:"walk", place:"숙소 Broadway Hotel 도착 · 짐 맡기기", region:"코타이", map:"Broadway Hotel Macau", desc:["체크인은 15:00부터 — 먼저 프런트에 짐만 맡기기","일찍 체크인 요청은 해뒀지만 확정은 아님"], move:"걷기 (갤럭시 건물 안)", moveTime:"5–10분", cost:"—", booking:"none", status:"LOCKED" },
         { time:"13:45–15:00", geo:"BROADWAY", mode:"walk", food:true, place:"점심 — Broadway 푸드스트리트", region:"코타이", map:"Broadway Food Street Macau", desc:["호텔 바로 앞 길거리 식당가 — 완탕면, 돼지갈비 번 같은 마카오 서민 음식","예약 필요 없음"], move:"걷기 (호텔 바로 앞)", moveTime:"1–3분", cost:"2인 MOP 250 정도", booking:"none", status:"PLANNED" },
-        { time:"15:00–17:00", geo:"BROADWAY", mode:"walk", place:"체크인 · 낮잠", region:"코타이", map:"Broadway Hotel Macau", desc:["Broadway King 객실 · 3박 (12/23–12/26) · 조식 없음","새벽에 출발했으니 저녁 전에 푹 쉬기","요청사항(조용한 고층 객실 등)은 호텔 재량이라 보장 안 됨"], move:"—", moveTime:"—", cost:"결제 완료 (3박 ₩726,939)", booking:"done", status:"CONFIRMED" },
-        { time:"16:45–17:00", geo:"CASA", mode:"walk", place:"숙소 → Casa Maquista", region:"이동", map:"Casa Maquista Taipa Houses Macau", desc:["16:45에 출발","걸어서 약 15분 (식당은 '타이파 주택 박물관' 안에 있음)"], move:"걷기", moveTime:"약 15분", cost:"—", booking:"none", status:"LOCKED" },
-        { time:"17:00–19:00", geo:"CASA", mode:"walk", food:true, place:"★ 저녁 — Casa Maquista 土生公館 (포르투갈 음식점)", region:"코타이", map:"Casa Maquista Taipa Houses Macau", desc:["마카오식 포르투갈 가정식 식당 — 포르투갈 요리에 중국·동남아 양념이 섞인 마카오 전통 음식(이걸 '매캐니즈'라고 부름)","100년 된 포르투갈풍 저택 안에 있음 · 2시간 여유 있게","★ 꼭 먹을 메뉴: 해산물 빠에야","다른 대표 메뉴: 미트로프(Capela) · 생강 닭찜 · 대구 양배추 롤","아직 예약 전 — 예약창이 약 1개월 전에 열림 (12/23은 11/21쯤 예상) → 11/20부터 '예약하기' 버튼으로 확인"], move:"—", moveTime:"—", cost:"현장 결제", booking:"required", needsCheck:true, status:"LOCKED", key:true, bookingRef:"casaMaquista" },
-        { time:"19:00–19:25", geo:"LONDONER", mode:"walk", place:"걸어서 → 런더너", region:"이동", map:"The Londoner Macao", desc:["베네시안 옆을 지나 큰길 건너 런더너까지 약 1.5km"], move:"걷기", moveTime:"약 22분", cost:"—", booking:"none", status:"LOCKED" },
+        { time:"15:00–16:15", geo:"BROADWAY", mode:"walk", place:"체크인 · 낮잠", region:"코타이", map:"Broadway Hotel Macau", desc:["Broadway King 객실 · 3박 (12/23–12/26) · 조식 없음","새벽에 출발했으니 저녁 전에 푹 쉬기","요청사항(조용한 고층 객실 등)은 호텔 재량이라 보장 안 됨"], move:"—", moveTime:"—", cost:"결제 완료 (3박 ₩726,939)", booking:"done", status:"CONFIRMED" },
+        { time:"16:15–16:30", geo:"COTAIW", mode:"walk", place:"걸어서 → 경전철 코타이 서(Cotai West)역", region:"이동", map:"Cotai West Station Macau", desc:["갤럭시를 지나 동쪽 — 갤럭시와 베네시안·파리지앵 사이 큰길(Avenida Cidade Nova)에 있는 역","숙소에서 직선 약 650m · 실제 걷는 길과 시간은 확인","🚕 택시 옵션: 피곤하면 숙소 → 영도죽 택시 약 20–25분 · MOP 100–130 예상"], move:"걷기", moveTime:"약 10–15분", cost:"—", booking:"none", needsCheck:true, status:"LOCKED" },
+        { time:"16:30–16:50", geo:"BARRA", mode:"rail", place:"경전철 타이파선 코타이 서 → 바하(Barra 媽閣)", region:"이동", map:"Barra Station Macau LRT", desc:["코타이 서 → 파이콕 → 스타디움 → 자키클럽 → 오션 → 바하 (5정거장)","바하역은 2023년 12월 개통 — 바로 가는지, 오션역에서 갈아타는지 현장 안내 확인","요금 MOP 10 안팎 예상 · 결제 수단(현금·마카오패스 등) 확인"], move:"경전철 (택시 옵션)", moveTime:"약 15–20분", cost:"MOP 10 안팎 (확인)", booking:"none", needsCheck:true, status:"LOCKED" },
+        { time:"16:50–17:00", geo:"YINGDOU", mode:"walk", place:"걸어서 → 영도죽", region:"이동", map:"贏到粥 Macau", desc:["바하역에서 북쪽으로 약 500m","(선택) 마조묘(媽閣廟)가 바로 앞 — 18:00에 닫으니 일찍 도착하면 잠깐 들르기"], move:"걷기", moveTime:"약 10분", cost:"—", booking:"none", status:"LOCKED" },
+        { time:"17:00–18:30", geo:"YINGDOU", mode:"walk", food:true, place:"★ 저녁 — 영도죽 贏到粥 (조개 훠궈)", region:"마카오 반도", map:"贏到粥 Macau", desc:["순더(順德)식 훠궈 · 대표 메뉴 卜卜蜆 — 끓으면 조개가 '톡톡' 열리는 조개 훠궈 · 동아(冬瓜) 죽 육수","먹는 순서: 해산물 → 고기 → 채소 → 마지막에 육수가 밴 죽","16:00–01:00 영업 안내 (2025년 글 기준) · 12/23 영업 확인","인기가 많아 예약 필수 — 전화번호는 구글맵 장소 페이지에서 확인"], move:"걷기", moveTime:"—", cost:"현장 결제", booking:"required", needsCheck:true, status:"LOCKED", key:true },
+        { time:"18:30–18:40", geo:"BARRA", mode:"walk", place:"걸어서 → 바하역", region:"이동", map:"Barra Station Macau LRT", desc:["식당에서 남쪽으로 약 500m"], move:"걷기", moveTime:"약 10분", cost:"—", booking:"none", status:"LOCKED" },
+        { time:"18:40–19:00", geo:"COTAIW", mode:"rail", place:"경전철 바하 → 코타이 서", region:"이동", map:"Cotai West Station Macau", desc:["5정거장 · 막차·환승 여부 확인","🚕 택시 옵션: 영도죽 → 런더너 약 20–25분 · MOP 100–130 예상"], move:"경전철 (택시 옵션)", moveTime:"약 15–20분", cost:"MOP 10 안팎 (확인)", booking:"none", needsCheck:true, status:"LOCKED" },
+        { time:"19:00–19:25", geo:"LONDONER", mode:"walk", place:"걸어서 → 런더너", region:"이동", map:"The Londoner Macao", desc:["코타이 서역에서 파리지앵 앞을 지나 런더너까지 약 800m"], move:"걷기", moveTime:"약 12–15분", cost:"—", booking:"none", status:"LOCKED" },
         { time:"19:25–20:05", geo:"LONDONER", mode:"walk", place:"런더너 구경", region:"코타이", map:"The Londoner Macao", desc:["런던을 본뜬 리조트 — 빅벤 시계탑 외관, 크리스마스 트리·장식 사진","🥧 에그타르트집 있음: Lord Stow’s Bakery & Café (Londoner) — 2층 Shop 2113"], move:"—", moveTime:"—", cost:"간식 MOP 60 정도", booking:"none", status:"LOCKED" },
         { time:"20:05–20:15", geo:"PARISIAN", mode:"walk", place:"걸어서 → 파리지앵", region:"이동", map:"The Parisian Macao", desc:["런더너에서 약 530m"], move:"걷기", moveTime:"약 8분", cost:"—", booking:"none", status:"LOCKED" },
         { time:"20:15–20:45", geo:"PARISIAN", mode:"walk", place:"파리지앵 에펠탑 조명쇼", region:"코타이", map:"The Parisian Macao Eiffel Tower", desc:["에펠탑 모형 조명쇼 — 18:15–24:00 사이 15분마다 하니까 시간 맞출 필요 없음","🥧 에그타르트집 있음: Élysée Bakery (Parisian) — 프랑스식 베이커리, 3층 Shop K302","에펠탑 전망대는 유료라 선택"], move:"—", moveTime:"—", cost:"무료", booking:"none", status:"LOCKED" },
@@ -575,7 +581,7 @@ const tripData = {
         { time:"20:55–21:35", geo:"VENETIAN", mode:"walk", place:"베네시안 쇼핑몰 구경", region:"코타이", map:"The Venetian Macao Grand Canal Shoppes", desc:["베네치아 운하를 본뜬 실내 쇼핑몰 · 크리스마스 장식 (곤돌라는 유료라 선택)","🥧 에그타르트집 있음: Lord Stow’s Bakery & Café (Venetian) — Shop 870 & 308","피곤하면 줄이고 바로 숙소로"], move:"—", moveTime:"—", cost:"—", booking:"none", status:"LOCKED" },
         { time:"21:35–21:55", geo:["GALAXY","BROADWAY"], mode:"walk", place:"걸어서 숙소 복귀", region:"코타이", map:"Broadway Hotel Macau", desc:["베네시안 → 갤럭시 → 숙소 약 1.2km","다음 날은 마카오 구시가지(반도) 일정"], move:"걷기", moveTime:"약 17분", cost:"무료", booking:"none", status:"LOCKED" }
       ]},
-    { day:2, start:"BROADWAY", date:"12/24 (목)", tab:"구시가지·공연", title:"마카오 구시가지(반도) 걷기 → 1주년 저녁 North → 크리스마스 이브 공연", goals:["쏸라펀 → 세나도 광장 → 육포거리 망고모찌 → 성 바울 성당 → 몬테 요새","★ 17:00 North 1주년 저녁","★ 19:30 House of Dancing Water 공연"],
+    { day:2, start:"BROADWAY", date:"12/24 (목)", tab:"구시가지·공연", title:"마카오 구시가지(반도) 걷기 → 1주년 저녁 North → 크리스마스 이브 공연", goals:["쏸라펀 → 세나도 광장 → 육포거리 망고모찌 → 성 바울 성당 → 몬테 요새 → 耿記點心 딤섬","★ 17:00 North 1주년 저녁","★ 19:30 House of Dancing Water 공연"],
       items:[
         { time:"09:45–10:45", geo:"STARWORLD", mode:"bus", place:"갤럭시 무료셔틀 → 스타월드 호텔 (구시가지 쪽)", region:"이동", map:"StarWorld Hotel Macau", desc:["아침은 안 먹고 출발 — 첫 끼는 쏸라펀","갤럭시 'Crystal Lobby'에서 스타월드행 무료셔틀 (09:30–22:00, 10–20분마다, 약 35분)"], move:"무료셔틀", moveTime:"약 35분 + 기다리는 시간", cost:"무료", booking:"none", status:"LOCKED" },
         { time:"10:45–10:50", geo:"SLF", mode:"walk", place:"걸어서 → 쏸라펀 가게", region:"이동", map:"酸辣粉 澳門新口岸北京街183F +85328700077", desc:["스타월드에서 북쪽 길(北京街)로 400m"], move:"걷기", moveTime:"5분", cost:"—", booking:"none", status:"LOCKED" },
@@ -585,9 +591,11 @@ const tripData = {
         { time:"12:30–12:40", geo:"DOMINIC", mode:"walk", place:"걸어서 → 육포거리 (성 도미니크 성당 지나서)", region:"이동", map:"St. Dominic's Church Macau", desc:["노란 성 도미니크 성당은 지나가면서 외관만 보기","육포거리까지 약 570m"], move:"걷기", moveTime:"10분", cost:"—", booking:"none", status:"LOCKED" },
         { time:"12:40–13:00", geo:"MOCHI", mode:"walk", food:true, place:"육포거리 — 육포 시식 · 망고모찌", region:"마카오 반도", map:"林記長洲糯米糍 38 Rua de São Paulo Macau", desc:["성 바울 성당 올라가는 길 — 가게마다 육포를 잘라서 맛보게 해줌","망고모찌: 林記長洲糯米糍 (38번지) — 얇은 찹쌀떡 안에 생망고가 크게 들어감","망고모찌 가게 영업시간은 확인 필요"], move:"—", moveTime:"—", cost:"간식 (현장)", booking:"none", needsCheck:true, status:"LOCKED" },
         { time:"13:00–13:30", geo:["STPAUL","MONTE"], mode:"walk", place:"성 바울 성당 유적 → 몬테 요새", region:"마카오 반도", map:"Ruins of St. Paul's Macau", desc:["성 바울 성당: 앞면 벽만 남은 마카오 상징 — 계단 위에서 사진","몬테 요새: 성당 옆 언덕 위 옛 요새 — 구시가지가 내려다보임 (오르막 약 240m)","요새 안 박물관은 시간상 생략"], move:"걷기", moveTime:"5–10분 (구간 합계)", cost:"무료", booking:"none", status:"LOCKED" },
-        { time:"13:30–14:00", geo:["LISBOA","STARWORLD"], mode:"walk", place:"걸어서 → 그랜드 리스보아 → 스타월드", region:"이동", map:"Grand Lisboa Macau", desc:["연꽃 모양 금색 건물(그랜드 리스보아) 보면서 내리막으로 약 1.7km","다리 아프면 요새 아래에서 숙소까지 택시 (약 20분 · MOP 110–140)"], move:"걷기", moveTime:"25분", cost:"—", booking:"none", status:"LOCKED" },
-        { time:"14:00–14:40", geo:["GALAXY","BROADWAY"], mode:"bus", place:"무료셔틀로 숙소 복귀", region:"이동", map:"StarWorld Hotel Macau", desc:["스타월드 → 갤럭시 무료셔틀 (약 35분) → 건물 안으로 숙소"], move:"무료셔틀", moveTime:"약 40분", cost:"무료", booking:"none", status:"LOCKED" },
-        { time:"14:40–16:20", geo:"BROADWAY", mode:"walk", place:"숙소에서 휴식 · 옷 갈아입기", region:"코타이", desc:["저녁 식사와 공연 전에 쉬기 (약 1시간 40분)"], move:"—", moveTime:"—", cost:"—", booking:"none", status:"LOCKED" },
+        { time:"13:30–13:40", geo:"MRGUNG", mode:"walk", place:"걸어서 → 耿記點心", region:"이동", map:"Mr. Gung 耿記點心 Macau", desc:["성 바울 성당 아래에서 서쪽(사리두 방향)으로 약 450m"], move:"걷기", moveTime:"약 6–8분", cost:"—", booking:"none", status:"LOCKED" },
+        { time:"13:40–14:30", geo:"MRGUNG", mode:"walk", food:true, place:"늦은 점심 — 耿記點心 Mr. Gung (딤섬)", region:"마카오 반도", map:"Mr. Gung 耿記點心 Macau", desc:["구글 평점 4.7 (리뷰 281개) · 1인 MOP 100–200 · 한국어 메뉴판 있음 (리뷰)","추천: 홍미창펀 · 하가우 · 샤오롱바오 · 무케이크(蘿蔔糕) · 커리 소내장","저녁이 17:00 North라 3–4가지만 나눠 먹기","22:00까지 영업 · 여는 시간과 12/24 영업 확인 · ☎ +853 2892 0980"], move:"걷기", moveTime:"—", cost:"1인 MOP 100–200", booking:"none", needsCheck:true, status:"LOCKED" },
+        { time:"14:30–15:00", geo:["LISBOA","STARWORLD"], mode:"walk", place:"걸어서 → 그랜드 리스보아 → 스타월드", region:"이동", map:"Grand Lisboa Macau", desc:["연꽃 모양 금색 건물(그랜드 리스보아) 보면서 내리막으로 약 2km","다리 아프면 택시로 숙소까지 (약 20분 · MOP 110–140)"], move:"걷기", moveTime:"약 25–30분", cost:"—", booking:"none", status:"LOCKED" },
+        { time:"15:00–15:40", geo:["GALAXY","BROADWAY"], mode:"bus", place:"무료셔틀로 숙소 복귀", region:"이동", map:"StarWorld Hotel Macau", desc:["스타월드 → 갤럭시 무료셔틀 (약 35분) → 건물 안으로 숙소"], move:"무료셔틀", moveTime:"약 40분", cost:"무료", booking:"none", status:"LOCKED" },
+        { time:"15:40–16:20", geo:"BROADWAY", mode:"walk", place:"숙소에서 휴식 · 옷 갈아입기", region:"코타이", desc:["저녁 식사와 공연 전에 쉬기 (약 40분)"], move:"—", moveTime:"—", cost:"—", booking:"none", status:"LOCKED" },
         { time:"16:20–16:50", geo:"VENETIAN", mode:"walk", place:"숙소 → 베네시안 (North 식당)", region:"이동", map:"The Venetian Macao", desc:["걸어서 16–20분 또는 택시 5분","16:50까지 식당 도착"], move:"걷기 또는 택시", moveTime:"5–20분", cost:"택시면 MOP 40–60", booking:"none", status:"LOCKED" },
         { time:"17:00–19:00", geo:"VENETIAN", mode:"walk", food:true, place:"★ 1주년 저녁 — North 北方館 (중국 북방 요리)", region:"코타이", map:"North Restaurant The Venetian Macao", desc:["예약 완료 · 베네시안 1층 · 성인 2명","면·만두 같은 중국 북쪽 지방 요리","먹어볼 메뉴: 뱡뱡면(넓적한 수타면) · 가지튀김","좋은 자리 요청해 둠 (보장은 안 됨)"], move:"—", moveTime:"—", cost:"현장 결제", booking:"done", status:"CONFIRMED", key:true },
         { time:"19:00–19:15", geo:"HODW", mode:"walk", place:"걸어서 → 공연장 (City of Dreams)", region:"이동", map:"Dancing Water Theater City of Dreams Macau", desc:["베네시안 길 건너편 · 걸어서 10–15분","19:00 정각에 출발해야 공연 15분 전 도착 — 여유 없음"], move:"걷기", moveTime:"10–15분", cost:"—", booking:"none", status:"LOCKED" },
@@ -596,27 +604,20 @@ const tripData = {
         { time:"21:20–21:40", geo:"VENETIAN", mode:"walk", food:true, place:"CHAGEE 霸王茶姬 — 밀크티", region:"코타이", map:"CHAGEE The Venetian Macao", desc:["중국 인기 밀크티 브랜드 · 베네시안 3층 Shop 875","대표 메뉴: 伯牙絕弦 (자스민 녹차 밀크티)","크리스마스 이브 마감 시간 확인 필요"], move:"—", moveTime:"—", cost:"현장 결제", booking:"none", needsCheck:true, status:"LOCKED" },
         { time:"21:40–22:05", geo:["GALAXY","BROADWAY"], mode:"walk", place:"걸어서 숙소 복귀", region:"코타이", map:"Broadway Hotel Macau", desc:["베네시안 조명 보면서 갤럭시 지나 숙소로","공연 끝난 직후엔 택시 줄이 길어서 걷는 게 나음 (피곤하면 베네시안 택시 승강장)"], move:"걷기", moveTime:"20–25분", cost:"무료", booking:"none", status:"LOCKED" }
       ]},
-    { day:3, start:"BROADWAY", date:"12/25 (금·크리스마스)", tab:"크리스마스", title:"타이파 빌리지 → 경전철로 마카오 반도 남쪽 골목 → 조개 훠궈 → 윈 팰리스 밤 분수쇼 → 갤럭시 밤", goals:["타이파 빌리지 점심 · 젤라또","경전철로 반도 남쪽: 마조묘 · 릴라우 광장 · 만다린 하우스 · 성 로렌스 성당","크리스마스 저녁 영도죽 조개 훠궈 → 윈 팰리스 밤 분수쇼 (택시 없이)"],
+    { day:3, start:"BROADWAY", date:"12/25 (금·크리스마스)", tab:"크리스마스", title:"Casa Maquista 크리스마스 점심 → 타이파 빌리지 → 반도 크리스마스 밤 (타슥 광장 마켓 · 빛 축제) → 갤럭시 밤", goals:["★ 12:00 Casa Maquista 크리스마스 점심 (해산물 빠에야)","타이파 빌리지 산책 · 젤라또","반도 크리스마스 밤: 타슥 광장 마켓 → Light Up Macao 빛 축제 (2일차 코스는 다시 안 감)"],
       items:[
-        { time:"11:00–11:20", geo:"CUNHA", mode:"walk", place:"걸어서 → 타이파 빌리지", region:"이동", map:"Rua do Cunha Taipa", desc:["숙소에서 북쪽으로 약 1.3km — 택시 필요 없음"], move:"걷기", moveTime:"20분", cost:"—", booking:"none", status:"LOCKED" },
-        { time:"11:20–12:20", geo:"CUNHA", mode:"walk", food:true, place:"점심 — 아래 3곳 중 하나", region:"타이파", map:"Rua do Cunha Taipa", desc:["① La Cucina Italiana — 이탈리아 가정식 · 크리스마스 당일이라 전화 예약 필수 (+853 2882 7818)","② 세이 키 카페 世記咖啡 — 쭈빠빠오(바삭한 빵에 돼지갈비를 끼운 마카오 버거) · 주로 포장","③ 라오데이 Lao Day — 카레 + 마라 양념 소곱창 · 리뷰 추천 '에브리띵, 중간 매운맛' · 줄 설 수 있음","저녁이 조개 훠궈라 가볍게 먹는 걸 추천 — ② 쭈빠빠오가 무난","세 곳 모두 타이파 빌리지 안이라 걸어서 이동 · ②③ 영업시간 확인 필요"], move:"걷기", moveTime:"3–5분", cost:"현장 결제", booking:"none", needsCheck:true, status:"LOCKED" },
-        { time:"12:20–13:00", geo:"CUNHA", mode:"walk", place:"타이파 빌리지 산책", region:"타이파", map:"Rua do Cunha Taipa", desc:["파스텔색 포르투갈풍 골목과 쿤하 거리(먹자골목) 구경 · 사진"], move:"—", moveTime:"—", cost:"무료", booking:"none", status:"LOCKED" },
-        { time:"13:00–13:30", geo:"LEMON", mode:"walk", food:true, place:"Lemoncello Gelato 檸檬車露 — 젤라또", region:"타이파", map:"Lemoncello Gelato Taipa Macau", desc:["구글 평점 4.3 젤라또 가게 (115 R. do Regedor)","추천 맛: 블랙망고 · 구아바 · 레몬 — 두 가지 맛 약 MOP 45","크리스마스 영업 확인 필요"], move:"걷기", moveTime:"3–5분", cost:"약 MOP 45", booking:"none", needsCheck:true, status:"LOCKED" },
-        { time:"13:30–13:50", geo:"BROADWAY", mode:"walk", place:"걸어서 숙소 복귀", region:"이동", map:"Broadway Hotel Macau", desc:["타이파 빌리지 → 숙소 약 1.3km"], move:"걷기", moveTime:"20분", cost:"—", booking:"none", status:"LOCKED" },
-        { time:"13:50–14:50", geo:"BROADWAY", mode:"walk", place:"숙소에서 휴식 · 짐 정리", region:"코타이", map:"Broadway Hotel Macau", desc:["내일 체크아웃이라 짐 미리 정리","오후엔 반도의 언덕길을 걸으니 편한 신발로"], move:"—", moveTime:"—", cost:"—", booking:"none", status:"LOCKED" },
-        { time:"14:50–15:05", geo:"COTAIW", mode:"walk", place:"걸어서 → 경전철 코타이 서(Cotai West)역", region:"이동", map:"Cotai West Station Macau", desc:["갤럭시를 지나 동쪽 — 갤럭시와 베네시안·파리지앵 사이 큰길(Avenida Cidade Nova)에 있는 역","숙소에서 직선 약 650m · 실제 걷는 길과 시간은 확인"], move:"걷기", moveTime:"약 10–15분", cost:"—", booking:"none", needsCheck:true, status:"LOCKED" },
-        { time:"15:05–15:25", geo:"BARRA", mode:"rail", place:"경전철 타이파선 코타이 서 → 바하(Barra 媽閣)", region:"이동", map:"Barra Station Macau LRT", desc:["코타이 서 → 파이콕 → 스타디움 → 자키클럽 → 오션 → 바하 (5정거장)","바하역은 2023년 12월 개통 — 바로 가는지, 오션역에서 갈아타는지 현장 안내 확인","요금 MOP 10 안팎 예상 · 결제 수단(현금·마카오패스 등) 확인"], move:"경전철", moveTime:"약 15–20분", cost:"MOP 10 안팎 (확인)", booking:"none", needsCheck:true, status:"LOCKED" },
-        { time:"15:25–15:55", geo:"AMA", mode:"walk", place:"마조묘(媽閣廟) + 바하 광장", region:"마카오 반도", map:"A-Ma Temple Macau", desc:["바하역에서 걸어서 약 5분","바다의 여신 마조를 모신 사원 — '마카오'라는 이름의 유래 · 세계유산","18:00에 닫으니 가장 먼저 보기 · 무료"], move:"걷기", moveTime:"약 5분", cost:"무료", booking:"none", status:"LOCKED" },
-        { time:"15:55–16:05", geo:"LILAU", mode:"walk", place:"릴라우 광장(亞婆井前地)", region:"마카오 반도", map:"Largo do Lilau Macau", desc:["마조묘에서 언덕길로 약 400m","포르투갈풍 집들로 둘러싸인 작은 광장 · 사진"], move:"걷기 (언덕길)", moveTime:"약 8–10분", cost:"무료", booking:"none", status:"LOCKED" },
-        { time:"16:05–16:35", geo:"MANDARIN", mode:"walk", place:"만다린 하우스(鄭家大屋)", region:"마카오 반도", map:"Mandarin's House Macau", desc:["릴라우 광장 바로 옆","청나라 사상가 정관응의 옛 대저택 · 세계유산 · 무료","10:00–18:00 · 수요일 휴관 (12/25 금요일은 영업 예상 — 크리스마스 운영 확인)"], move:"걷기", moveTime:"1–2분", cost:"무료", booking:"none", needsCheck:true, status:"LOCKED" },
-        { time:"16:35–16:50", geo:"STLAW", mode:"walk", place:"성 로렌스 성당(聖老楞佐堂)", region:"마카오 반도", map:"St. Lawrence's Church Macau", desc:["만다린 하우스에서 북동쪽으로 약 300m","선원 가족들이 무사 귀환을 빌던 성당 · 세계유산 · 무료","크리스마스 미사 중에는 관람이 제한될 수 있음"], move:"걷기", moveTime:"약 5분", cost:"무료", booking:"none", status:"LOCKED" },
-        { time:"16:50–17:00", geo:"YINGDOU", mode:"walk", place:"걸어서 → 영도죽", region:"이동", map:"贏到粥 Macau", desc:["성당에서 언덕을 내려가 이너하버 쪽으로 약 600m"], move:"걷기", moveTime:"약 10분", cost:"—", booking:"none", status:"LOCKED" },
-        { time:"17:00–18:30", geo:"YINGDOU", mode:"walk", food:true, place:"크리스마스 저녁 — 영도죽 贏到粥 (조개 훠궈)", region:"마카오 반도", map:"贏到粥 Macau", desc:["순더(順德)식 훠궈 · 대표 메뉴 卜卜蜆 — 끓으면 조개가 '톡톡' 열리는 조개 훠궈 · 동아(冬瓜) 죽 육수","먹는 순서: 해산물 → 고기 → 채소 → 마지막에 육수가 밴 죽","16:00–01:00 영업 안내 (2025년 글 기준) · 크리스마스 영업 여부 확인","인기가 많아 예약 필수 — 전화번호는 구글맵 장소 페이지에서 확인"], move:"걷기", moveTime:"—", cost:"현장 결제", booking:"required", needsCheck:true, status:"LOCKED", key:true },
-        { time:"18:30–18:40", geo:"BARRA", mode:"walk", place:"걸어서 → 바하역", region:"이동", map:"Barra Station Macau LRT", desc:["식당에서 남쪽으로 약 500m"], move:"걷기", moveTime:"약 10분", cost:"—", booking:"none", status:"LOCKED" },
-        { time:"18:40–19:10", geo:"COTAIE", mode:"rail", place:"경전철 바하 → 코타이 동(Cotai East)", region:"이동", map:"Cotai East Station Macau", desc:["바하 → 오션 → 자키클럽 → 스타디움 → 파이콕 → 코타이 서 → 연화 → 협화병원 → 동아운 → 코타이 동 (9정거장)","크리스마스 밤에도 택시를 기다릴 필요 없음 · 막차 시간 확인"], move:"경전철", moveTime:"약 25–30분", cost:"MOP 10 안팎 (확인)", booking:"none", needsCheck:true, status:"LOCKED" },
-        { time:"19:10–20:10", geo:["COTAIE","WYNN"], mode:"walk", place:"윈 팰리스 스카이캡 · 분수쇼 · 크리스마스 꽃장식", region:"코타이", map:"Wynn Palace Performance Lake", desc:["코타이 동역 앞 아래쪽 스카이캡 탑승장에서 무료 케이블카 → 호수 위를 지나 윈 팰리스로 (호텔 안 위쪽 탑승장은 투숙객용일 수 있음)","분수쇼: 정오~자정, 20–30분마다 · 밤이라 조명이 더 예쁨 (무료)","로비의 크리스마스 꽃 장식","스카이캡 밤 운영 시간 확인"], move:"걷기 + 스카이캡", moveTime:"—", cost:"무료", booking:"none", needsCheck:true, status:"LOCKED", key:true },
-        { time:"20:10–20:30", geo:"COTAIW", mode:"rail", place:"경전철 코타이 동 → 코타이 서", region:"이동", map:"Cotai West Station Macau", desc:["4정거장 · 내려서 갤럭시까지 걷기","걷고 싶으면 윈 팰리스 → 갤럭시 걸어서 25–30분"], move:"경전철 + 걷기", moveTime:"약 15–20분", cost:"MOP 10 안팎 (확인)", booking:"none", status:"LOCKED" },
-        { time:"20:30–23:00", geo:["GALAXY","BROADWAY"], mode:"walk", place:"갤럭시 크리스마스 밤 — 다이아몬드 쇼 · 카지노", region:"코타이", map:"Galaxy Macau", desc:["다이아몬드 쇼: 로비에서 하는 무료 쇼 (거대한 다이아몬드가 올라옴) · 공휴일 자정까지","카지노는 만 21세 이상 · 여권 챙기기 · 안에서 사진 금지","끝나면 건물 안으로 숙소까지 걸어서"], move:"걷기 (건물 안)", moveTime:"5–10분", cost:"—", booking:"none", status:"LOCKED" }
+        { time:"11:40–12:00", geo:"CASA", mode:"walk", place:"걸어서 → Casa Maquista", region:"이동", map:"Casa Maquista Taipa Houses Macau", desc:["숙소에서 북쪽으로 걸어서 약 15분 (식당은 '타이파 주택 박물관' 안에 있음)"], move:"걷기", moveTime:"약 15분", cost:"—", booking:"none", status:"LOCKED" },
+        { time:"12:00–13:30", geo:"CASA", mode:"walk", food:true, place:"★ 크리스마스 점심 — Casa Maquista 土生公館 (포르투갈 음식점)", region:"코타이", map:"Casa Maquista Taipa Houses Macau", desc:["마카오식 포르투갈 가정식 식당 — 포르투갈 요리에 중국·동남아 양념이 섞인 마카오 전통 음식(이걸 '매캐니즈'라고 부름)","100년 된 포르투갈풍 저택 안에 있음 · 1시간 30분","★ 꼭 먹을 메뉴: 해산물 빠에야","다른 대표 메뉴: 미트로프(Capela) · 생강 닭찜 · 대구 양배추 롤","아직 예약 전 — 예약창이 약 1개월 전에 열림 (12/25 점심은 11/23쯤 예상) → 11/22부터 '예약하기' 버튼으로 확인 · 메인 메뉴는 12:00부터"], move:"—", moveTime:"—", cost:"현장 결제", booking:"required", needsCheck:true, status:"LOCKED", key:true, bookingRef:"casaMaquista" },
+        { time:"13:30–14:00", geo:"CUNHA", mode:"walk", place:"타이파 빌리지 크리스마스 골목 산책", region:"타이파", map:"Rua do Cunha Taipa", desc:["Casa Maquista에서 걸어서 약 5분","파스텔색 포르투갈풍 골목과 쿤하 거리(먹자골목) 구경 · 사진"], move:"걷기", moveTime:"약 5분", cost:"무료", booking:"none", status:"LOCKED" },
+        { time:"14:00–14:20", geo:"LEMON", mode:"walk", food:true, place:"Lemoncello Gelato 檸檬車露 — 젤라또", region:"타이파", map:"Lemoncello Gelato Taipa Macau", desc:["구글 평점 4.3 젤라또 가게 (115 R. do Regedor)","추천 맛: 블랙망고 · 구아바 · 레몬 — 두 가지 맛 약 MOP 45","크리스마스 영업 확인 필요"], move:"걷기", moveTime:"3–5분", cost:"약 MOP 45", booking:"none", needsCheck:true, status:"LOCKED" },
+        { time:"14:20–14:40", geo:"BROADWAY", mode:"walk", place:"걸어서 숙소 복귀", region:"이동", map:"Broadway Hotel Macau", desc:["타이파 빌리지 → 숙소 약 1.3km"], move:"걷기", moveTime:"20분", cost:"—", booking:"none", status:"LOCKED" },
+        { time:"14:40–15:30", geo:"BROADWAY", mode:"walk", place:"숙소에서 휴식 · 짐 정리", region:"코타이", map:"Broadway Hotel Macau", desc:["내일 체크아웃이라 짐 미리 정리"], move:"—", moveTime:"—", cost:"—", booking:"none", status:"LOCKED" },
+        { time:"15:30–16:05", geo:"STARWORLD", mode:"bus", place:"갤럭시 무료셔틀 → 스타월드", region:"이동", map:"StarWorld Hotel Macau", desc:["2일차에 낮에 본 세나도 광장·성 바울 성당은 다시 가지 않고, 밤에만 볼 수 있는 마켓·빛 축제 위주","갤럭시 'Crystal Lobby'에서 스타월드행 무료셔틀 (약 35분)"], move:"무료셔틀", moveTime:"약 35분", cost:"무료", booking:"none", needsCheck:true, status:"LOCKED" },
+        { time:"16:05–16:25", geo:"TAPSEAC", mode:"walk", place:"걸어서 → 타슥 광장", region:"이동", map:"Tap Seac Square Macau", desc:["스타월드에서 북쪽으로 약 1km (오르막)","세나도 광장 쪽이 아닌 동쪽 큰길로 — 구글맵 도보 경로 확인"], move:"걷기", moveTime:"약 20분", cost:"—", booking:"none", status:"LOCKED" },
+        { time:"16:25–18:30", geo:"TAPSEAC", mode:"walk", food:true, place:"타슥 광장 크리스마스 마켓", region:"마카오 반도", map:"Tap Seac Square Macau", desc:["마카오 시정서 주최 · 2026-12-18 ~ 2027-01-02","선물·간식 가판 24곳 · 회전목마 · 미니 기차 · 미로","저녁은 마켓 간식으로 (점심을 Casa Maquista에서 든든히)","해 질 무렵(17:40쯤)부터 조명이 켜져 사진 찍기 좋음","운영 시간 확인 (2025년: 14:00–23:00, 12/24·25는 자정까지)"], move:"—", moveTime:"—", cost:"간식 현장 결제", booking:"none", needsCheck:true, status:"LOCKED", key:true },
+        { time:"18:30–20:30", mode:"walk", place:"Light Up Macao — 마카오 빛 축제 야경", region:"마카오 반도", desc:["2026-12-05 ~ 2027-01-10 예정 (발표 확인)","전시 구역은 아직 발표 전 — 2025년: 신구안 · 남반 호수 · 콕사이(筷子基)","구역 발표 후 동선 확정 — 끝나면 스타월드 쪽으로 걸어서 마무리"], move:"걷기", moveTime:"—", cost:"무료", booking:"none", needsCheck:true, status:"LOCKED" },
+        { time:"20:30–21:20", geo:["STARWORLD","GALAXY"], mode:"bus", place:"스타월드 → 갤럭시 무료셔틀", region:"이동", map:"StarWorld Hotel Macau", desc:["셔틀 막차 확인 (예전 기록상 22:00)"], move:"무료셔틀", moveTime:"약 35–50분", cost:"무료", booking:"none", needsCheck:true, status:"LOCKED" },
+        { time:"21:20–23:00", geo:["GALAXY","BROADWAY"], mode:"walk", place:"갤럭시 크리스마스 밤 — 다이아몬드 쇼 · 카지노", region:"코타이", map:"Galaxy Macau", desc:["다이아몬드 쇼: 로비에서 하는 무료 쇼 (거대한 다이아몬드가 올라옴) · 공휴일 자정까지","카지노는 만 21세 이상 · 여권 챙기기 · 안에서 사진 금지","끝나면 건물 안으로 숙소까지 걸어서"], move:"걷기 (건물 안)", moveTime:"5–10분", cost:"—", booking:"none", status:"LOCKED" }
       ]},
     { day:4, start:"BROADWAY", date:"12/26 (토)", tab:"홍콩 하루", title:"마카오 체크아웃 → 홍콩으로 → 딤섬 · 센트럴 골목 · 스타페리 · 북경오리 → 공항 호텔", goals:["짐은 공항 호텔(Regal)에 맡기고 시내로","딤섬 스퀘어 → 만모 사원 → 에스컬레이터 · 소호 → 타이쿤 → PMQ","노을 스타페리 · Peking Garden 북경오리 · 심포니 오브 라이트"],
       items:[
@@ -722,25 +723,25 @@ const tripData = {
 
   // 맛집 — status: CONFIRMED(예약 완료) / PLANNED(현재 계획, day:"" 면 방문일 미정 · Timeline 포함 여부는 별개) / SAVED(사용자가 "저장해두자"고 한 곳만 · Timeline 에 넣지 않음)
   restaurants: [
-    { region:"타이파", name:"Lemoncello Gelato 檸檬車露", category:"디저트 · 이탈리안 젤라또", menu:"젤라또 (블랙망고·구아바·레몬 추천)", price:"약 MOP 45 (2가지 맛)", location:"타이파 빌리지 · Shop J, Chun Fok Village, 115 R. do Regedor", hours:"~22:00 마감 (구글 지도 기준) · 오픈 시간·크리스마스 영업 확인", booking:"none", wait:"", day:"D3 (12/25 13:00–13:30) · 확정", status:"PLANNED", needsCheck:true, map:"Lemoncello Gelato Taipa Macau",
+    { region:"타이파", name:"Lemoncello Gelato 檸檬車露", category:"디저트 · 이탈리안 젤라또", menu:"젤라또 (블랙망고·구아바·레몬 추천)", price:"약 MOP 45 (2가지 맛)", location:"타이파 빌리지 · Shop J, Chun Fok Village, 115 R. do Regedor", hours:"~22:00 마감 (구글 지도 기준) · 오픈 시간·크리스마스 영업 확인", booking:"none", wait:"", day:"D3 (12/25 14:00–14:20) · 확정", status:"PLANNED", needsCheck:true, map:"Lemoncello Gelato Taipa Macau",
       desc:"구글 평점 4.3 (리뷰 633개) 젤라또 가게. D3 타이파 점심 후 디저트로 확정.",
       locNote:"☎ +853 2858 3396 · 크리스마스 영업 확인",
       links:[{label:"Google Maps (저장한 장소)", url:"https://maps.app.goo.gl/DZgRA83u7wUhsYi98"}] },
-    { region:"코타이", name:"Casa Maquista 土生公館", category:"포르투갈 음식점 · 마카오식 포르투갈 가정식(매캐니즈)", menu:"Capela(미트로프), 생강 닭찜(Galinha Chau Chau Parida), 바칼라우 양배추 롤", price:"현장 결제 (식비 예산 참조)", location:"Avenida da Praia, Taipa (Taipa Houses-Museum 안)", hours:"10:00–22:00 · 메인 12시부터 · 라스트 오더 21:15", booking:"required", wait:"예약 대기 (inline · 약 1개월 전 오픈)", day:"D1 저녁 (12/23 17:00–19:00)", status:"PLANNED", needsCheck:true, map:"Casa Maquista Taipa Houses Macau", bookingRef:"casaMaquista",
-      desc:"포르투갈 음식점 — 포르투갈 요리에 중국·동남아 양념이 섞인 마카오 전통 음식(매캐니즈). 100년 된 포르투갈풍 저택 안. 12/23 17:00로 확정, 예약은 예약창이 열리면 진행.",
-      locNote:"☎ / WhatsApp +853 6217 6332 · 예약창 오픈(12/23은 11/21경 예상) 후 inline에서 성인 2명 17:00 예약 · 이름·연락처는 직접 입력",
+    { region:"코타이", name:"Casa Maquista 土生公館", category:"포르투갈 음식점 · 마카오식 포르투갈 가정식(매캐니즈)", menu:"Capela(미트로프), 생강 닭찜(Galinha Chau Chau Parida), 바칼라우 양배추 롤", price:"현장 결제 (식비 예산 참조)", location:"Avenida da Praia, Taipa (Taipa Houses-Museum 안)", hours:"10:00–22:00 · 메인 12시부터 · 라스트 오더 21:15", booking:"required", wait:"예약 대기 (inline · 약 1개월 전 오픈)", day:"D3 크리스마스 점심 (12/25 12:00–13:30)", status:"PLANNED", needsCheck:true, map:"Casa Maquista Taipa Houses Macau", bookingRef:"casaMaquista",
+      desc:"포르투갈 음식점 — 포르투갈 요리에 중국·동남아 양념이 섞인 마카오 전통 음식(매캐니즈). 100년 된 포르투갈풍 저택 안. 12/25 12:00 크리스마스 점심으로 확정, 예약은 예약창이 열리면 진행.",
+      locNote:"☎ / WhatsApp +853 6217 6332 · 예약창 오픈(12/25는 11/23경 예상) 후 inline에서 성인 2명 12:00 예약 · 이름·연락처는 직접 입력",
       menuMemo:[ ["★ 해산물 빠에야 (꼭 먹기)","Seafood Paella"] ],
       links:[{label:"Instagram", url:"https://www.instagram.com/casamaquista"}] },
     { region:"코타이", name:"North / 北方館 / 북방관", menu:"북방 중국요리 (면·만두·요리)", price:"현장 결제 (식비 예산 참조)", location:"The Venetian Macao · Level 1", hours:"예약 17:00", booking:"done", wait:"예약 완료", day:"D2 저녁 (12/24 17:00)", status:"CONFIRMED", map:"North Restaurant The Venetian Macao",
       reservation:{ date:"2026-12-24 (목)", time:"17:00", guests:"성인 2명", request:"1주년 기념 식사 · 좋은 테이블 요청", bookingNo:"비공개" },
       menuMemo:[ ["뱡뱡면","Traditional Shanxi biáng biáng noodles with chicken"], ["가지튀김","Deep-fried eggplant with caramel and spices"] ] },
-    { region:"타이파", name:"La Cucina Italiana", category:"이탈리안 가정식 · D3 점심 후보 ①", menu:"현장 확인", price:"현장 확인", location:"6–12 Rua do Pai Kok, Chun Fok Village (Wai Heng Kok G/F), Taipa", hours:"12:00–22:00 안내 (오래된 정보 · 확인)", booking:"required", wait:"크리스마스 당일 예약 필수", day:"D3 점심 후보 (12/25 11:20 · 3곳 중 택1)", status:"PLANNED", needsCheck:true, map:"La Cucina Italiana Taipa Macau",
+    { region:"타이파", name:"La Cucina Italiana", category:"이탈리안 가정식 · 저장 (D3 점심은 Casa Maquista)", menu:"현장 확인", price:"현장 확인", location:"6–12 Rua do Pai Kok, Chun Fok Village (Wai Heng Kok G/F), Taipa", hours:"12:00–22:00 안내 (오래된 정보 · 확인)", booking:"required", wait:"크리스마스 당일 예약 필수", day:"", status:"SAVED", needsCheck:true, map:"La Cucina Italiana Taipa Macau",
       locNote:"☎ +853 2882 7818 전화 예약 · 온라인 예약처 확인 안 됨 (uniiti.com 'La Cucina'는 파리 식당 — 사용 금지)",
       links:[{label:"Google Maps", url:"https://maps.app.goo.gl/LFTdZwTdpzMS9UhcA"}] },
-    { region:"타이파", name:"세이 키 카페 世記咖啡 (타이파)", category:"쭈빠빠오 · D3 점심 후보 ②", menu:"쭈빠빠오 (돼지갈비 번)", price:"현장 확인", location:"타이파 빌리지 消防局前地1號 (또 다른 지점: 柯打蘇沙街37號)", hours:"약 10:30/11:00~18:30/19:00 (출처별 상이 · 확인)", booking:"none", wait:"주로 테이크아웃", day:"D3 점심 후보 (12/25 11:20 · 3곳 중 택1)", status:"PLANNED", needsCheck:true, map:"Sei Kee Cafe Taipa Macau" },
-    { region:"타이파", name:"Lao Day Beef Offal", category:"카레·마라 소곱창 · D3 점심 후보 ③", menu:"소곱창 에브리띵 · 미디엄 스파이시 (리뷰 추천)", price:"현장 확인", location:"2 Rua do Cunha, Taipa (쿤하 거리 입구)", hours:"영업시간 정보 없음 · 확인", booking:"none", wait:"줄 설 수 있음", day:"D3 점심 후보 (12/25 11:20 · 3곳 중 택1)", status:"PLANNED", needsCheck:true, map:"Lao Day Beef Offal 2 Rua do Cunha Taipa",
+    { region:"타이파", name:"세이 키 카페 世記咖啡 (타이파)", category:"쭈빠빠오 · 저장 (D3 점심은 Casa Maquista)", menu:"쭈빠빠오 (돼지갈비 번)", price:"현장 확인", location:"타이파 빌리지 消防局前地1號 (또 다른 지점: 柯打蘇沙街37號)", hours:"약 10:30/11:00~18:30/19:00 (출처별 상이 · 확인)", booking:"none", wait:"주로 테이크아웃", day:"", status:"SAVED", needsCheck:true, map:"Sei Kee Cafe Taipa Macau" },
+    { region:"타이파", name:"Lao Day Beef Offal", category:"카레·마라 소곱창 · 저장 (D3 점심은 Casa Maquista)", menu:"소곱창 에브리띵 · 미디엄 스파이시 (리뷰 추천)", price:"현장 확인", location:"2 Rua do Cunha, Taipa (쿤하 거리 입구)", hours:"영업시간 정보 없음 · 확인", booking:"none", wait:"줄 설 수 있음", day:"", status:"SAVED", needsCheck:true, map:"Lao Day Beef Offal 2 Rua do Cunha Taipa",
       desc:"구글 평점 4.5 (리뷰 31개). 마살라 카레 + 마라 기름 소곱창 — 흰밥과 같이." },
-    { region:"마카오 반도", name:"영도죽 贏到粥", category:"순더식 훠궈 · 조개 훠궈(卜卜蜆) · D3 크리스마스 저녁", menu:"卜卜蜆 조개 훠궈 · 동아(冬瓜) 죽 육수", price:"현장 확인", location:"마카오 반도 이너하버 골목 (마조묘에서 걸어서 3–4분)", hours:"16:00–01:00 안내 (2025년 글 기준 · 확인)", booking:"required", wait:"인기 많아 예약 필수", day:"D3 크리스마스 저녁 (12/25 17:00–18:30)", status:"PLANNED", needsCheck:true, map:"贏到粥 Macau",
+    { region:"마카오 반도", name:"영도죽 贏到粥", category:"순더식 훠궈 · 조개 훠궈(卜卜蜆) · D1 첫날 저녁", menu:"卜卜蜆 조개 훠궈 · 동아(冬瓜) 죽 육수", price:"현장 확인", location:"마카오 반도 이너하버 골목 (마조묘에서 걸어서 3–4분)", hours:"16:00–01:00 안내 (2025년 글 기준 · 확인)", booking:"required", wait:"인기 많아 예약 필수", day:"D1 저녁 (12/23 17:00–18:30)", status:"PLANNED", needsCheck:true, map:"贏到粥 Macau",
       desc:"순더(順德)식 훠궈집. 끓으면 조개가 '톡톡' 열리는 卜卜蜆과 쌀을 오래 끓인 죽 육수가 유명. 해산물 → 고기 → 채소 → 마지막에 죽 순서로 먹음.",
       locNote:"바하(Barra) 경전철역에서 걸어서 약 10분 · 예약 전화번호는 구글맵 장소 페이지에서 확인", links:[{label:"구글맵 (공유 링크)", url:"https://maps.app.goo.gl/pMiCqJfkPcG6wLu58"}] },
     { region:"타이파", name:"TACOS by miumiu", category:"멕시칸 타코 · 저장 (D3 저녁은 영도죽으로 변경)", menu:"타코", price:"가격대 높은 편 (후기) · 현장 확인", location:"38 Rua das Virtudes, Hei Loi Tang Plaza G/F Shop H, Taipa", hours:"매일 12:00–24:00 안내 (확인)", booking:"none", wait:"", day:"", status:"SAVED", map:"TACOS by miumiu Taipa Macau",
@@ -759,6 +760,9 @@ const tripData = {
       desc:"프랑스식 베이커리 Élysée Bakery의 파리지앵 지점. Lord Stow’s와 다른 스타일의 에그타르트와 페이스트리를 비교해보기 위해 저장한 곳.",
       locNote:"D1 저녁 산책 동선(런더너·파리지앵·베네시안)에 있음 · Parisian 내부 · Londoner/Venetian과 도보 연결 가능" },
     { region:"코타이", name:"Broadway Food Street (숙소 앞)", menu:"마카오·홍콩 로컬 노점형 식당가", price:"MOP 80–200/인", location:"Broadway Hotel 1층 (갤럭시 연결)", hours:"확인 필요", booking:"none", wait:"저녁 혼잡", day:"D1 점심", status:"PLANNED", map:"Broadway Food Street Macau" },
+    { region:"마카오 반도", name:"耿記點心 Mr. Gung", category:"딤섬 전문점 · D2 늦은 점심", menu:"홍미창펀 · 하가우 · 샤오롱바오 · 무케이크(蘿蔔糕) · 커리 소내장", price:"1인 MOP 100–200", location:"R. de Miguel Aires, 마카오 반도 (성 바울 성당 서쪽 약 450m)", hours:"~22:00 · 여는 시간 확인", booking:"none", wait:"", day:"D2 늦은 점심 (12/24 13:40–14:30)", status:"PLANNED", needsCheck:true, map:"Mr. Gung 耿記點心 Macau",
+      desc:"구글 평점 4.7 (리뷰 281개). 한국인 리뷰가 많고 한국어 메뉴판을 준다는 후기. 4일차 홍콩 딤섬과 겹치지 않게 창펀·소내장 위주로.",
+      locNote:"☎ +853 2892 0980", links:[{label:"구글맵 (공유 링크)", url:"https://maps.app.goo.gl/8Yig2QSEiSfWTSNE6"}] },
     { region:"마카오 반도", name:"쏸라펀 酸辣粉 / Suan La Fen", category:"새콤매콤한 사천식 당면국수 · 로컬 맛집", menu:"酸辣粉 · 소고기 쏸라펀", menuNote:"肥牛 소고기 · 田雞 개구리 · 金菇牛丸 팽이버섯·소고기완자 · 毛肚 천엽 · 排骨 갈비", price:"약 MOP 60~70+ · 토핑별 상이 / 현장 확인", location:"마카오 반도 · 신커우안 / 베이징거리 · 澳門新口岸北京街183F號地下K號舖", hours:"영업시간 · 방문 전 재확인 (현재 출처별 영업시간 정보가 달라 여행 직전 확인 필요)", booking:"none", wait:"", day:"D2 첫 끼 (12/24 10:50–11:50)", status:"PLANNED", needsCheck:true, map:"酸辣粉 澳門新口岸北京街183F +85328700077",
       desc:"새콤하고 얼큰한 사천식 당면국수. 새콤하고 얼큰한 국물에 쫄깃한 당면과 다양한 토핑을 넣어 먹는 사천식 면요리.",
       locNote:"☎ +853 2870 0077 · 매운 쏸라펀과 함께 炸饅頭(튀긴 만터우)도 많이 주문하는 편 (그 외 涼拌皮蛋·豆漿·甘蔗汁) · 현금 준비 권장 · 결제수단 현장 확인 · CHECK: 2026년 12월 기준 영업시간·가격 재확인 · StarWorld에서 도보 400m(5분)" },
@@ -815,15 +819,15 @@ const tripData = {
     { id:"flight-out", label:"항공권: 인천 → 홍콩 UO617 (12/23 06:45) — 예약 완료", ref:"PNR 비공개 · 비공개", status:"CONFIRMED", done:true },
     { id:"flight-ret", label:"항공권: 홍콩 → 인천 UO618 (12/27 07:15) — 예약 완료", ref:"PNR 비공개 · 비공개", status:"CONFIRMED", done:true },
     { id:"airport-direct", label:"[예약 대기] Macau HK Airport Direct 무료버스 — 12/23 HKG → Macao · 성인 2명", ref:"11/22 확인 · 11/23 예약 시도", needsCheck:true, status:"LOCKED", bookingRef:"macauAirportDirect" },
-    { id:"casa-maquista", label:"[예약 대기] Casa Maquista 土生公館 — 12/23 17:00 · 성인 2명", ref:"inline 예약창 약 1개월 전 오픈 · 11/20부터 확인 (11/21경 예상)", needsCheck:true, status:"LOCKED", bookingRef:"casaMaquista" },
+    { id:"casa-maquista", label:"[예약 대기] Casa Maquista 土生公館 — 12/25 12:00 크리스마스 점심 · 성인 2명", ref:"inline 예약창 약 1개월 전 오픈 · 11/22부터 확인 (11/23경 예상)", needsCheck:true, status:"LOCKED", bookingRef:"casaMaquista" },
     { id:"d4-restaurants", label:"Peking Garden 전화 예약 — 12/26 18:00 · 성인 2명", ref:"☎ +852 2735 8211 · 반 마리 가격 확인 · 창가 자리 요청", needsCheck:true, status:"PLANNED" },
     { id:"icn-transport", label:"12/23 03:45 인천공항 T1 도착 수단 (자차·택시·전날 숙박)", ref:"", needsCheck:true, status:"PLANNED" },
     { id:"show-hodw-confirmed", label:"공연: House of Dancing Water 12/24 19:30 — 예약 완료 (Grand · Section 500 · Row C · Seats 512–513 · Early Bird × 2)", ref:"예약번호: 비공개 · MOP 1,756 · 전자티켓 2장", status:"CONFIRMED", done:true },
     { id:"hotel-macau-confirmed", label:"마카오 호텔: Broadway Hotel 12/23–12/26 (3박) — 예약 완료", ref:"예약번호: 비공개 · NOL · Broadway King · 조식 불포함 · ₩726,939", status:"CONFIRMED", done:true },
     { id:"hotel-hkg-confirmed", label:"홍콩 호텔: Regal Airport Hotel 12/26–12/27 (1박) — 예약 완료", ref:"예약번호: 비공개 · NOL · Superior Room · 조식 불포함 · ₩188,829", status:"CONFIRMED", done:true },
-    { id:"rest-d3-lunch", label:"D3 12/25 점심 결정 — La Cucina Italiana(전화 예약) / 세이 키 카페 / 라오데이", ref:"La Cucina ☎ +853 2882 7818 · 나머지는 예약 없음", needsCheck:true, status:"PLANNED" },
+    { id:"rest-d3-lunch", label:"D2 12/24 耿記點心 여는 시간 · 영업 여부 확인", ref:"☎ +853 2892 0980 · 예약 없이 방문", needsCheck:true, status:"PLANNED" },
     { id:"rest-north-confirmed", label:"식당: North / 북방관 12/24 17:00 — 예약 완료 (The Venetian Macao · 성인 2명)", ref:"예약번호: 비공개 · 1주년 기념 식사 · 좋은 테이블 요청", status:"CONFIRMED", done:true },
-    { id:"rest-xmas-dinner", label:"식당: 영도죽 贏到粥 12/25 17:00 전화 예약 · 성인 2명 (조개 훠궈)", ref:"전화번호는 구글맵 장소 페이지 · 크리스마스 영업 여부 함께 확인", needsCheck:true, status:"PLANNED" },
+    { id:"rest-xmas-dinner", label:"식당: 영도죽 贏到粥 12/23 17:00 전화 예약 · 성인 2명 (조개 훠궈)", ref:"전화번호는 구글맵 장소 페이지 · 영업 여부 함께 확인", needsCheck:true, status:"PLANNED" },
     { id:"insurance", label:"여행자 보험", ref:"", status:"PLANNED" },
     { id:"esim", label:"eSIM / 로밍 (홍콩+마카오 겸용)", ref:"", status:"PLANNED" },
     { id:"octopus", label:"옥토퍼스 카드 (모바일/실물)", ref:"", status:"PLANNED" },
@@ -834,23 +838,23 @@ const tripData = {
   priority: [
     { when:"✔ 예약 완료", items:["항공권 왕복 UO617 / UO618","마카오 Broadway Hotel 3박 (12/23–12/26)","North / 북방관 12/24 17:00 (성인 2명)","House of Dancing Water 12/24 19:30 (Grand · 500/C/512–513)","홍콩 Regal Airport Hotel 1박 (12/26–12/27)"] },
     { when:"⏰ 2026-11-22(일) ~ 11-23(월) — 높은 우선순위", items:[{ text:"★ Macau HK Airport Direct 무료버스 (12/23 HKG → Macao, 성인 2명) — 예약 대기: 11/22부터 예약창 확인, 늦어도 11/23 예약 시도", bookingRef:"macauAirportDirect" }] },
-    { when:"⏰ 2026-11-20(금) ~ 11-21(토) — 높은 우선순위", items:[{ text:"★ Casa Maquista 土生公館 (12/23 17:00, 성인 2명) — 예약 대기: 11/20부터 inline 예약창 확인 (약 1개월 전 오픈 · 11/21경 예상)", bookingRef:"casaMaquista" }] },
-    { when:"지금 예약 (10월)", items:["① D3 점심 결정 — La Cucina Italiana로 가면 전화 예약 (+853 2882 7818)","② 12/23 새벽 인천공항 도착 수단 결정"] },
-    { when:"1~2개월 전 (10월 말~11월)", items:["12/25 17:00 영도죽 贏到粥 전화 예약 (크리스마스 영업 확인)","D3 경전철 확인: 바하행 환승 여부 · 요금·결제 수단 · 크리스마스 막차 · 스카이캡 밤 운영","12/26 저녁 Peking Garden 전화 예약 (☎ +852 2735 8211)","여행자 보험 · eSIM 구매","크리스마스 행사(리조트·Light Up Macau) 발표 확인"] },
+    { when:"⏰ 2026-11-22(일) ~ 11-23(월) — 높은 우선순위", items:[{ text:"★ Casa Maquista 土生公館 (12/25 12:00 크리스마스 점심, 성인 2명) — 예약 대기: 11/22부터 inline 예약창 확인 (약 1개월 전 오픈 · 11/23경 예상)", bookingRef:"casaMaquista" }] },
+    { when:"지금 예약 (10월)", items:["① 12/23 새벽 인천공항 도착 수단 결정","② 12/23 17:00 영도죽 전화 예약"] },
+    { when:"1~2개월 전 (10월 말~11월)", items:["D1 경전철 확인: 바하행 환승 여부 · 요금·결제 수단 · 막차","12/24 耿記點心 여는 시간 확인","타슥 광장 크리스마스 마켓 · Light Up Macao 2026 구역·시간 발표 확인","12/26 저녁 Peking Garden 전화 예약 (☎ +852 2735 8211)","여행자 보험 · eSIM 구매","크리스마스 행사(리조트·Light Up Macau) 발표 확인"] },
     { when:"1~2주 전 (12월 초)", items:["갤럭시 무료셔틀 시간표(HZMB 口岸·StarWorld ↔ Galaxy) 12월 운행 확인","Symphony of Lights 운영 여부 확인","날씨·HZMB 운행 공지 확인"] },
     { when:"여행 직전", items:["HK Express 온라인 체크인 · 항공 시간 변경 확인","위탁 20kg / 개인물품 7kg 무게 확인","환전·옥토퍼스 충전","여권 유효기간(6개월 이상) 확인","예약 확인서 오프라인 저장"] }
   ],
 
   checkNeeded: [
-    { title:"Casa Maquista 土生公館 — 예약 대기", highlight:true, badges:["우선 확인","예약 대기 · 11/20부터 확인"], route:"12/23 17:00 저녁 · 성인 2명", action:"11/20부터 inline 예약창 확인 → 열리면 바로 17:00 예약", bookingRef:"casaMaquista",
-      inputs:[ ["Party size","2 Adults · 0 Kids"], ["Dining date","2026-12-23 (Wed)"], ["Time","17:00","EVENING 시간대"] ],
-      lines:["2026-10-28 확인 시 예약 가능 날짜가 오늘+약 32일(11/29)까지 — 12/23은 11/21경 열릴 것으로 예상 (추정).","17:00이 안 되면 17:30/18:00 → 그래도 안 되면 전화·WhatsApp +853 6217 6332 문의 또는 D3 저녁 대안."],
-      detail:"12/23 저녁 Casa Maquista — 11/20부터 예약창 확인, 열리면 17:00 예약." },
+    { title:"Casa Maquista 土生公館 — 예약 대기", highlight:true, badges:["우선 확인","예약 대기 · 11/22부터 확인"], route:"12/25 12:00 크리스마스 점심 · 성인 2명", action:"11/22부터 inline 예약창 확인 → 열리면 바로 12:00 예약", bookingRef:"casaMaquista",
+      inputs:[ ["Party size","2 Adults · 0 Kids"], ["Dining date","2026-12-25 (Fri)"], ["Time","12:00","LUNCH 시간대"] ],
+      lines:["2026-10-28 확인 시 예약 가능 날짜가 오늘+약 32일(11/29)까지 — 12/25는 11/23경 열릴 것으로 예상 (추정).","12:00이 안 되면 12:30/13:00 → 그래도 안 되면 전화·WhatsApp +853 6217 6332 문의."],
+      detail:"12/25 점심 Casa Maquista — 11/22부터 예약창 확인, 열리면 12:00 예약." },
     { title:"Macau HK Airport Direct 무료버스 — 예약 대기", highlight:true, badges:["우선 확인","예약 대기 · 11/22부터 확인"], route:"12/23 HKG → Macao · 성인 2명", action:"11/22 예약창 확인 → 늦어도 11/23 예약 시도", bookingRef:"macauAirportDirect",
       inputs:[ ["Direction","Hong Kong Airport → Macao","예약 화면 표기: HK Int'l Airport → HZMB Macau Port"], ["Date","2026-12-23"], ["Flight","UO617"], ["Arrival","09:50"], ["Passengers","2"] ],
       lines:["현재 예약 페이지 기준 약 1개월 전부터 날짜 선택이 가능한 것으로 보임 — 예약 가능 기간은 운영사 정책에 따라 변경될 수 있으므로 11/22 실제 예약 페이지에서 다시 확인.","위탁수하물이 있는 경우 홍콩공항에서 직접 수하물을 찾지 않고 E2 환승 카운터로 이동해 baggage tag receipt를 제시하여 수하물 이송 절차를 진행한다. 실제 예약 시 운영 안내를 다시 확인."],
       detail:"12/23 HKG → Macao 무료 직통버스 — 11/22부터 예약창 확인, 늦어도 11/23 예약 시도." },
-    { title:"아직 예약하지 않은 항목", detail:"Macau HK Airport Direct 무료버스(11/22~) · D3 점심 결정 (La Cucina면 전화 예약) · 12/25 영도죽 전화 예약 · 12/26 Peking Garden 전화 예약 · 12/23 새벽 인천공항 이동 수단 (항공권·숙소 4박·North·House of Dancing Water는 예약 완료)." },
+    { title:"아직 예약하지 않은 항목", detail:"Macau HK Airport Direct 무료버스(11/22~) · 12/23 영도죽 전화 예약 · 12/25 Casa Maquista 점심 예약 · 12/26 Peking Garden 전화 예약 · 12/23 새벽 인천공항 이동 수단 (항공권·숙소 4박·North·House of Dancing Water는 예약 완료)." },
     { title:"크리스마스 이벤트 2026 미공개", detail:"리조트별 크리스마스 장식·Light Up Macau 2026 일정 발표 대기 (11월 예상)." },
     { title:"Symphony of Lights 종료 예정", detail:"홍콩 정부가 2026년 하반기 종료 방침 발표. 12/26 운영 여부 불확실 → 하버 야경 자체는 그대로 감상 가능." },
     { title:"Regal Airport Hotel 숙박세 안내", detail:"바우처에 홍콩 호텔숙박세(HAT) 3%가 총 숙박비에 영향을 줄 수 있다는 안내 — 결제금액 ₩188,829에 포함 여부를 체크인 시 확인 (예산엔 추가 반영 안 함)." },
@@ -862,6 +866,7 @@ const tripData = {
   ],
 
   history: [
+    { date:"2026-11-15", changes:["D1 저녁: Casa Maquista → 영도죽 贏到粥 조개 훠궈 17:00–18:30 (경전철 코타이 서 ↔ 바하 왕복 · 택시는 옵션) → 런더너·파리지앵·베네시안 산책은 그대로","D2: 몬테 요새 후 耿記點心(Mr. Gung) 딤섬 늦은 점심 13:40–14:30 추가 (쏸라펀 유지) · 숙소 휴식 40분으로","D3: Casa Maquista 크리스마스 점심 12:00 → 타이파 빌리지 · 젤라또 → 휴식 · 반도 남쪽 산책·영도죽·윈 팰리스 제외","D3 오후 확정: 반도 크리스마스 밤 — 갤럭시 셔틀 → 타슥 광장 크리스마스 마켓 16:25–18:30 → Light Up Macao 빛 축제 → 셔틀로 갤럭시 (2일차의 세나도 광장·성 바울 성당은 다시 안 감)","맛집: 耿記點心 추가 · D3 점심 후보 3곳은 저장한 맛집으로 · Casa Maquista 예약 12/25 12:00으로 변경"] },
     { date:"2026-11-15", changes:["D3(12/25) 콜로안 일정 취소 → 경전철 타이파선으로 마카오 반도 남쪽(마조묘 · 릴라우 광장 · 만다린 하우스 · 성 로렌스 성당) 산책","D3 크리스마스 저녁: TACOS by miumiu → 영도죽 贏到粥 조개 훠궈 17:00–18:30 (예약 필요)","D3 택시 3번 → 0번: 바하 ↔ 코타이 경전철 · 윈 팰리스는 코타이 동역 무료 스카이캡","D1 Casa Maquista까지 걷기로 확정 (택시 없음)","맛집: 영도죽 추가 · TACOS · Lord Stow’s 원조점은 저장한 맛집으로"] },
     { date:"2026-10-29", changes:["D4 확정 (LOCKED): 점심 딤섬 스퀘어 13:30 → 만모 사원 → 미드레벨 에스컬레이터·소호 → 타이쿤 → PMQ → 스타페리 17:15 → 시계탑 노을 → 저녁 Peking Garden 18:00–20:00 (2시간) → 20:00 심포니 오브 라이트","피크트램·빅토리아 피크 제외 (연휴 줄)","맛집: Tim Ho Wan 후보 → 딤섬 스퀘어 · 북경오리 미정 → Peking Garden"] },
     { date:"2026-10-28", changes:["정보 탭 맨 위에 '주연이 꿀팁 — 마카오 돈 쓰는 법' 추가 (카지노 HKD 현금 · 상점 카카오페이/MOP · 트래블월렛 HSBC ATM 무료 출금 · 버스카드 반값/현금 구매)"] },
@@ -933,7 +938,15 @@ const tripData = {
 (function(){
   const D = tripData;
   const $ = id => document.getElementById(id);
-  const esc = s => String(s ?? "").replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+  // MOP·HKD 금액 옆에 대략적인 원화 자동 표시 (예: MOP 100 → MOP 100 (≈₩16,000)) — 환율은 tripData.fx
+  const roundKRW = v => v >= 10000 ? Math.round(v / 1000) * 1000 : Math.round(v / 100) * 100;
+  const krwTxt = v => "₩" + roundKRW(v).toLocaleString("ko-KR");
+  const withKRW = t => t.replace(/(MOP|HKD)\s?(\d[\d,]*(?:\.\d+)?)(?:\s?[–~-]\s?(\d[\d,]*))?(?![\d,.]*\d)(?!\s*\(≈₩)/g, (m, cur, a, b) => {
+    const rate = (typeof tripData !== "undefined" && tripData.fx[cur]) || 0; if (!rate) return m;
+    const n = x => parseFloat(x.replace(/,/g, "")) * rate;
+    return `${m} (≈${krwTxt(n(a))}${b ? "–" + krwTxt(n(b)).slice(1) : ""})`;
+  });
+  const esc = s => withKRW(String(s ?? "")).replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
   const mapUrl = q => "https://www.google.com/maps/search/?api=1&query=" + encodeURIComponent(q);
   const badge = s => s ? `<span class="badge b-${esc(s)}">${esc(s)}</span>` : "";
   // 상태 배지 + 보조 CHECK 배지 (needsCheck)

@@ -85,7 +85,7 @@ ul.tight li{margin:3px 0}
 .btn.book:hover{background:var(--berry-d)}
 
 /* Hero (헤더) */
-.hero{padding:26px 0 14px;display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:14px;position:relative}
+.hero{padding-top:26px;padding-bottom:14px;display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:14px;position:relative}
 .date-pill{display:inline-block;background:var(--berry);color:#fff;font-family:var(--display);padding:4px 16px;border-radius:999px;font-size:15px;letter-spacing:.02em}
 .hero h1{font-size:clamp(32px,6.4vw,50px);line-height:1.1;margin-top:10px}
 .hero h1 em{font-style:normal;color:var(--berry)}
@@ -366,6 +366,64 @@ table.simple th{color:var(--muted);font-weight:400;font-family:var(--display);fo
   .tl-place{font-size:18px}
   .tl-time{font-size:17px}
 }
+/* 장소 대표사진 */
+.tl-item .photo{grid-column:1/-1;margin:2px 0 0}
+.tl-item .photo img{display:block;width:100%;aspect-ratio:16/8.5;object-fit:cover;border-radius:16px;background:var(--bg)}
+.tl-item .photo figcaption{font-size:11.5px;color:var(--muted);margin-top:4px;padding:0 4px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.tl-item .photo figcaption a{color:var(--muted)}
+
+/* 여행 중 기능: 길찾기 · 지금/다음 · 오늘 */
+.btn.go{background:var(--sky);min-height:30px;padding:3px 12px;font-size:13px}
+.btn.go:hover{background:#C3D9F0}
+.leg-go{display:inline-block;margin-left:4px;font-family:var(--display);font-size:12.5px;color:#2F5C88;background:var(--sky);border-radius:999px;padding:2px 10px;text-decoration:none;white-space:nowrap}
+.mchk{display:none}
+.nowtag{display:inline-block;background:var(--berry);color:#fff;font-family:var(--display);font-size:12.5px;border-radius:999px;padding:1px 9px;margin-right:6px;vertical-align:2px;animation:pulse 2s ease-in-out infinite}
+.tl-item.next .nowtag{background:var(--butter);color:#7A5A12;animation:none}
+.tl-item.now:not(.leg) .card{border-color:var(--berry);box-shadow:0 4px 0 #F2C3CA}
+.tl-item.next:not(.leg) .card{border-color:#F2D58A}
+@keyframes pulse{0%,100%{box-shadow:0 0 0 0 rgba(216,86,106,.45)}50%{box-shadow:0 0 0 5px rgba(216,86,106,0)}}
+.daytab.today .w{color:var(--berry-d);font-family:var(--display)}
+.daytab.today:not(.on) .n{background:var(--berry);color:#fff}
+
+/* 휴대폰 최적화 */
+@media (max-width:640px){
+  body{font-size:16px}
+  .hero{padding-top:14px;padding-bottom:6px;gap:8px}
+  .hero h1{font-size:28px;margin-top:6px}
+  .hero p{display:none}
+  .date-pill{font-size:13px;padding:3px 12px}
+  .sum{flex-wrap:nowrap;overflow-x:auto;scrollbar-width:none;width:calc(100% + 16px);margin-right:-16px;padding:2px 16px 4px 0}
+  .sum span{flex:0 0 auto;padding:5px 11px;font-size:13px}
+  .daytabs{margin-bottom:10px}
+  .dayhead{margin-bottom:8px}
+  .dayhead .dlabel{font-size:14px}
+  .dayhead h3{font-size:18px}
+  .dayhead .goals{flex-wrap:nowrap;overflow-x:auto;scrollbar-width:none;margin-right:-16px;padding:2px 16px 4px 0}
+  .dayhead .goals span{flex:0 0 auto;white-space:nowrap}
+  .glance{margin-right:-16px;padding-right:16px}
+  /* 카드: 상태 배지는 숨기고(여행 중엔 불필요) '확인 필요'만 칩으로 */
+  .tl-item .st{display:none}
+  .mchk{display:inline-block;background:var(--peach);color:#A3520F;border-radius:14px;padding:3px 11px}
+  .mhide{display:none}
+  .tl-item .card{padding:12px;gap:12px}
+  .tl-place{font-size:18.5px}
+  .tl-body ul.tight{font-size:15px;line-height:1.6}
+  .tl-body ul.tight li{margin:5px 0}
+  .tl-row{font-size:13.5px}
+  .leg-txt{font-size:14.5px}
+  .tl-item.leg .tl-body{margin-left:0}
+  .tl-item.leg .links{margin-left:24px}
+  .tl-tools{margin-bottom:6px}
+  /* 지도: 화면을 덜 차지하게 */
+  .daymap{height:165px}
+  .mapnow .now{font-size:15px}
+  .rbtn{height:34px;min-width:34px}
+  .map-bar .btn{min-height:30px}
+  .btn{min-height:38px}
+  .links .btn{padding:7px 14px}
+  .card{border-radius:20px}
+}
+@media (prefers-reduced-motion:reduce){.nowtag{animation:none}}
 @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}.tw{animation:none}.daytab,.btn,.pin{transition:none}}
 @media print{.top{display:none}.daytabs,.glance{display:none}.panel{display:block!important}}
 </style>
@@ -553,6 +611,29 @@ const tripData = {
     PMQ:[22.283328,114.1515669],
     PEKING:[22.2946924,114.1690422],
     CLOCK:[22.2935624,114.1695528]
+  },
+
+  // 장소 대표사진 — Wikimedia Commons 자유 라이선스 (출처 표기 필수 · 화면에 자동 표시)
+  photos: {
+    GALAXY:{ src:"https://thumb.wikimedia.org/wikipedia/commons/thumb/9/96/Galaxy%2CMacau_18-03-2023.jpg/960px-Galaxy%2CMacau_18-03-2023.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail", page:"https://commons.wikimedia.org/wiki/File:Galaxy,Macau_18-03-2023.jpg", credit:"LN9267", license:"CC BY-SA 4.0" },
+    LONDONER:{ src:"https://thumb.wikimedia.org/wikipedia/commons/thumb/6/61/THE_LONDONER_MACAU_1.jpg/960px-THE_LONDONER_MACAU_1.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail", page:"https://commons.wikimedia.org/wiki/File:THE_LONDONER_MACAU_1.jpg", credit:"Hugo F.H.C", license:"CC BY-SA 4.0" },
+    PARISIAN:{ src:"https://thumb.wikimedia.org/wikipedia/commons/thumb/8/8f/The_Parisian_Macao_tower_and_hotel.jpg/960px-The_Parisian_Macao_tower_and_hotel.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail", page:"https://commons.wikimedia.org/wiki/File:The_Parisian_Macao_tower_and_hotel.jpg", credit:"Shantham11", license:"CC BY-SA 4.0" },
+    VENETIAN:{ src:"https://thumb.wikimedia.org/wikipedia/commons/thumb/e/e1/MC_%E6%BE%B3%E9%96%80_Macau_%E8%B7%AF%E6%B0%B9_Taipa_%E9%87%91%E5%85%89%E5%A4%A7%E9%81%93_Cotai_hotel_shuttle_view_November_2019_SS2_07_The_Venetian_Macao_bridge.jpg/960px-MC_%E6%BE%B3%E9%96%80_Macau_%E8%B7%AF%E6%B0%B9_Taipa_%E9%87%91%E5%85%89%E5%A4%A7%E9%81%93_Cotai_hotel_shuttle_view_November_2019_SS2_07_The_Venetian_Macao_bridge.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail", page:"https://commons.wikimedia.org/wiki/File:MC_%E6%BE%B3%E9%96%80_Macau_%E8%B7%AF%E6%B0%B9_Taipa_%E9%87%91%E5%85%89%E5%A4%A7%E9%81%93_Cotai_hotel_shuttle_view_November_2019_SS2_07_The_Venetian_Macao_bridge.jpg", credit:"Fitsimz Gucoartem", license:"CC BY-SA 4.0" },
+    SENADO:{ src:"https://upload.wikimedia.org/wikipedia/commons/f/f7/Centre_of_Makau.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled", page:"https://commons.wikimedia.org/wiki/File:Centre_of_Makau.jpg", credit:"Andrey Surikov", license:"CC BY 2.5" },
+    STPAUL:{ src:"https://thumb.wikimedia.org/wikipedia/commons/thumb/f/fc/%E5%A4%A7%E4%B8%89%E5%B7%B4%E7%89%8C%E5%9D%8A.jpg/960px-%E5%A4%A7%E4%B8%89%E5%B7%B4%E7%89%8C%E5%9D%8A.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail", page:"https://commons.wikimedia.org/wiki/File:%E5%A4%A7%E4%B8%89%E5%B7%B4%E7%89%8C%E5%9D%8A.jpg", credit:"GG001213", license:"CC0" },
+    MONTE:{ src:"https://thumb.wikimedia.org/wikipedia/commons/thumb/a/af/FortalegoDoMonte.jpg/960px-FortalegoDoMonte.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail", page:"https://commons.wikimedia.org/wiki/File:FortalegoDoMonte.jpg", credit:"Holly Cheng", license:"CC BY-SA 3.0" },
+    CASA:{ src:"https://thumb.wikimedia.org/wikipedia/commons/thumb/9/9f/Taipa_Houses_Museum_01.JPG/960px-Taipa_Houses_Museum_01.JPG?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail", page:"https://commons.wikimedia.org/wiki/File:Taipa_Houses_Museum_01.JPG", credit:"Abasaa", license:"Public domain" },
+    TAPSEAC:{ src:"https://upload.wikimedia.org/wikipedia/commons/a/a5/Pra%C3%A7a_do_Tap_Seac.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled", page:"https://commons.wikimedia.org/wiki/File:Pra%C3%A7a_do_Tap_Seac.jpg", credit:"Iidxplus", license:"CC BY-SA 3.0" },
+    HKSTN:{ src:"https://thumb.wikimedia.org/wikipedia/commons/thumb/7/7e/Concourse_of_Hong_Kong_station_2019-02-01_%282%29.jpg/960px-Concourse_of_Hong_Kong_station_2019-02-01_%282%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail", page:"https://commons.wikimedia.org/wiki/File:Concourse_of_Hong_Kong_station_2019-02-01_(2).jpg", credit:"Jc86035", license:"CC BY-SA 4.0" },
+    ESCALATOR:{ src:"https://thumb.wikimedia.org/wikipedia/commons/thumb/f/f8/Central-Mid-Levels_Escalator_and_Walkway_System_2017.jpg/960px-Central-Mid-Levels_Escalator_and_Walkway_System_2017.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail", page:"https://commons.wikimedia.org/wiki/File:Central-Mid-Levels_Escalator_and_Walkway_System_2017.jpg", credit:"Wpcpey", license:"CC BY-SA 4.0" },
+    PMQ:{ src:"https://thumb.wikimedia.org/wikipedia/commons/thumb/f/f8/PMQ_Overview_201510.jpg/960px-PMQ_Overview_201510.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail", page:"https://commons.wikimedia.org/wiki/File:PMQ_Overview_201510.jpg", credit:"Wpcpey", license:"CC BY 4.0" },
+    TSTPIER:{ src:"https://thumb.wikimedia.org/wikipedia/commons/thumb/5/59/Tsim_Sha_Tsui_Ferry_Pier.jpg/960px-Tsim_Sha_Tsui_Ferry_Pier.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail", page:"https://commons.wikimedia.org/wiki/File:Tsim_Sha_Tsui_Ferry_Pier.jpg", credit:"Baycrest", license:"CC BY-SA 2.5" },
+    AOS:{ src:"https://thumb.wikimedia.org/wikipedia/commons/thumb/d/d9/Hong_Kong%2C_A_Symphony_of_Lights_%282%29.jpg/960px-Hong_Kong%2C_A_Symphony_of_Lights_%282%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail", page:"https://commons.wikimedia.org/wiki/File:Hong_Kong,_A_Symphony_of_Lights_(2).jpg", credit:"Krimuk2.0", license:"CC BY-SA 4.0" },
+    KOWLOON:{ src:"https://thumb.wikimedia.org/wikipedia/commons/thumb/8/84/Kowloon_Station_Podium_2025_07_part1.jpg/960px-Kowloon_Station_Podium_2025_07_part1.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail", page:"https://commons.wikimedia.org/wiki/File:Kowloon_Station_Podium_2025_07_part1.jpg", credit:"Qwer132477", license:"CC BY 4.0" },
+    ICN:{ src:"https://thumb.wikimedia.org/wikipedia/commons/thumb/b/bc/%EC%9D%B8%EC%B2%9C%EA%B5%AD%EC%A0%9C%EA%B3%B5%ED%95%AD_%281472%29.jpeg/960px-%EC%9D%B8%EC%B2%9C%EA%B5%AD%EC%A0%9C%EA%B3%B5%ED%95%AD_%281472%29.jpeg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail", page:"https://commons.wikimedia.org/wiki/File:%EC%9D%B8%EC%B2%9C%EA%B5%AD%EC%A0%9C%EA%B3%B5%ED%95%AD_(1472).jpeg", credit:"Korea Aerospace Research Institute", license:"KOGL Type 1" },
+    CUNHA:{ src:"https://thumb.wikimedia.org/wikipedia/commons/thumb/4/47/Taipa_tourism_%2895080%29.jpg/960px-Taipa_tourism_%2895080%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail", page:"https://commons.wikimedia.org/wiki/File:Taipa_tourism_(95080).jpg", credit:"Syced", license:"CC0" },
+    MANMO:{ src:"https://thumb.wikimedia.org/wikipedia/commons/thumb/5/5b/Man_Mo_Temple_Compound.jpg/960px-Man_Mo_Temple_Compound.jpg", page:"https://commons.wikimedia.org/wiki/File:Man_Mo_Temple_Compound.jpg", credit:"Baycrest", license:"CC BY-SA 2.5" },
+    CLOCK:{ src:"https://thumb.wikimedia.org/wikipedia/commons/thumb/7/7e/HK_TST_Clock_Tower_interior_Salisbury_Road_night_Mar-2013.JPG/960px-HK_TST_Clock_Tower_interior_Salisbury_Road_night_Mar-2013.JPG?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail", page:"https://commons.wikimedia.org/wiki/File:HK_TST_Clock_Tower_interior_Salisbury_Road_night_Mar-2013.JPG", credit:"Tomanyanimlae", license:"CC BY-SA 3.0" },
   },
 
   itinerary: [
@@ -1088,10 +1169,35 @@ const tripData = {
     return ["a-sight", "📍"];
   }
   const filled = v => v && v !== "—";
+  // 길찾기 — 현재 위치에서 구글맵 경로 (이동수단에 맞춰 도보/대중교통/차)
+  const TRAVEL = { walk:"walking", bus:"transit", rail:"transit", tram:"transit", ferry:"transit", taxi:"driving" };
+  const goBtn = (it, small) => `<a class="${small ? "leg-go" : "btn go"}" href="https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(it.map)}&travelmode=${TRAVEL[it.mode] || "walking"}" target="_blank" rel="noopener">🧭 길찾기</a>`;
+  // 여행 중: 마카오/홍콩 시간(UTC+8) 기준 오늘 · 지금 일정
+  const localNow = () => { const n = new Date(); return new Date(n.getTime() + (n.getTimezoneOffset() + 480) * 60000); };
+  const tripDayToday = () => { const m = localNow(); const diff = Math.round((new Date(m.getFullYear(), m.getMonth(), m.getDate()) - new Date(2026, 11, 23)) / 864e5) + 1; return D.itinerary.some(d => d.day === diff) ? diff : null; };
+  const toMin = t => { const m = /(\d{1,2}):(\d{2})/.exec(t || ""); return m ? +m[1] * 60 + +m[2] : null; };
+  function nowIndex(d){
+    const m = localNow(), cur = m.getHours() * 60 + m.getMinutes(); let next = null;
+    for (let i = 0; i < d.items.length; i++) {
+      const [a, b] = d.items[i].time.split(/[–~]/); const s = toMin(a); if (s == null) continue;
+      let e = toMin(b); if (e == null || e <= s) e = s + 30;
+      if (cur >= s && cur < e) return { i, kind: "now" };
+      if (s > cur && next == null) next = i;
+    }
+    return next != null ? { i: next, kind: "next" } : null;
+  }
+  let autoScrolled = false;
   const costChip = it => filled(it.cost) ? `<span>💰 <b>${esc(it.cost)}</b></span>` : "";
   const rsvChip = it => it.booking && it.booking !== "none" ? rsv(it.booking) : "";
   const descHtml = it => (it.desc && it.desc.length ? `<ul class="tight small">${it.desc.map(x => `<li>${esc(x)}</li>`).join("")}</ul>` : "")
     + (it.why ? `<div class="why"><b>ⓘ ${esc(it.why.q)}</b><div>${esc(it.why.a)}</div></div>` : "");
+  // 대표사진: 하루에 같은 장소는 처음 한 번만
+  const geoKey = it => { const g = Array.isArray(it.geo) ? it.geo : it.geo ? [it.geo] : []; return g[it.pin || 0] || g[0]; };
+  const photoHtml = (it, shown) => {
+    const k = geoKey(it), ph = k && D.photos && D.photos[k]; if (!ph || shown.has(k)) return ""; shown.add(k);
+    return `<figure class="photo"><img src="${esc(ph.src)}" alt="${esc(it.place)}" loading="lazy" decoding="async" onerror="this.closest('figure').remove()"><figcaption>사진: <a href="${esc(ph.page)}" target="_blank" rel="noopener">${esc(ph.credit || "Wikimedia Commons")}</a> · ${esc(ph.license)} · Wikimedia Commons</figcaption></figure>`;
+  };
+  let photoShown = new Set();
   function stopHtml(s, i){
     const it = s.it, m = MODES[it.mode], [ac, em] = artOf(it);
     const row = costChip(it) + rsvChip(it);
@@ -1099,8 +1205,8 @@ const tripData = {
       <div class="card">
         <div class="art ${ac}" title="${s.pts.length?"지도에서 보기":""}"><span aria-hidden="true">${em}</span>${s.num ? `<span class="tl-num ${esc(it.status)} ${it.food?"food":""}">${s.num}</span>` : ""}</div>
         <div style="min-width:0">
-          <div class="tl-head"><div><div class="tl-time">${esc(it.time)}<span class="tl-more">▾ 자세히</span></div><div class="tl-place">${esc(it.place)}</div></div><div style="text-align:right;flex:0 0 auto">${stBadges(it)}</div></div>
-          ${row ? `<div class="tl-row">${row}</div>` : ""}
+          <div class="tl-head"><div><div class="tl-time">${esc(it.time)}<span class="tl-more">▾<span class="mhide"> 자세히</span></span></div><div class="tl-place">${esc(it.place)}</div></div><div class="st" style="text-align:right;flex:0 0 auto">${stBadges(it)}</div></div>
+          ${row || it.map || it.needsCheck ? `<div class="tl-row">${it.map ? goBtn(it) : ""}${row}${it.needsCheck ? `<span class="mchk">확인 필요</span>` : ""}</div>` : ""}
           ${it.bookingRef ? `<div class="links">${bookingBtn(it.bookingRef)}</div>` : ""}
           <div class="tl-body">
             ${descHtml(it)}
@@ -1108,6 +1214,7 @@ const tripData = {
             ${it.map ? linkBtns([], it.map) : ""}
           </div>
         </div>
+        ${photoHtml(it, photoShown)}
       </div></div>`;
   }
   function legHtml(s, i){
@@ -1115,7 +1222,7 @@ const tripData = {
     const row = (filled(it.move) ? `<span>${m ? m.icon : "🚶"} <b>${esc(it.move)}</b></span>` : "") + costChip(it) + rsvChip(it);
     return `<div class="tl-item leg ${it.key?"key":""}" data-i="${i}" ${s.pts.length?'data-geo="1"':""}>
       <div class="card">
-        <div class="leg-line tl-head"><span class="leg-ic" aria-hidden="true">${m ? m.icon : "🚶"}</span><div class="leg-txt" style="flex:1"><span class="lt">${esc(it.time)}</span><b>${esc(it.place)}</b>${filled(it.moveTime) ? ` · ${esc(it.moveTime)}` : ""}${it.needsCheck ? " " + badge("CHECK") : ""}<span class="tl-more">▾</span></div></div>
+        <div class="leg-line tl-head"><span class="leg-ic" aria-hidden="true">${m ? m.icon : "🚶"}</span><div class="leg-txt" style="flex:1"><span class="lt">${esc(it.time)}</span><b>${esc(it.place)}</b>${filled(it.moveTime) ? ` · ${esc(it.moveTime)}` : ""}${it.needsCheck ? " " + badge("CHECK") : ""}<span class="tl-more">▾</span>${it.map ? ` ${goBtn(it, true)}` : ""}</div></div>
         ${it.bookingRef ? `<div class="links">${bookingBtn(it.bookingRef)}</div>` : ""}
         <div class="tl-body">
           <div style="margin-top:10px">${stBadges(it)}</div>
@@ -1125,15 +1232,19 @@ const tripData = {
         </div>
       </div></div>`;
   }
+  let todayApplied = false;
   function renderDay(){
+    const today = tripDayToday();
+    if (!todayApplied) { todayApplied = true; if (today) curDay = today; } // 여행 중엔 처음 열 때 오늘 날짜로
     $("dayTabs").style.setProperty("--days", D.itinerary.length);
     $("dayTabs").innerHTML = D.itinerary.map(d => { const md = d.date.split(" ")[0]; const dow = (d.date.match(/\(([^)]*)\)/) || [])[1] || "";
-      return `<button class="daytab ${d.day===curDay?"on":""}" data-day="${d.day}" aria-current="${d.day===curDay}"><span class="n">${d.day}</span><b>${esc(md)}</b><span class="w">${esc(d.tab || dow)}</span></button>`; }).join("");
+      return `<button class="daytab ${d.day===curDay?"on":""} ${d.day===today?"today":""}" data-day="${d.day}" aria-current="${d.day===curDay}"><span class="n">${d.day}</span><b>${esc(md)}</b><span class="w">${d.day===today ? "오늘" : esc(d.tab || dow)}</span></button>`; }).join("");
     const d = D.itinerary.find(x => x.day===curDay) || D.itinerary[0];
     const stops = dayStops(d);
+    photoShown = new Set();
     let folded = false; try { folded = localStorage.getItem("hkmo2026-mapfold") === "1"; } catch(e){}
     $("dayBody").innerHTML = `
-      <div class="dayhead"><span class="dlabel">DAY ${d.day} · ${esc(d.date)}</span><h3>${esc(d.title)}</h3>${d.goals && d.goals.length ? `<div class="goals">${d.goals.map(g => `<span>${esc(g)}</span>`).join("")}</div>` : ""}</div>
+      <div class="dayhead"><span class="dlabel">DAY ${d.day} · ${esc(d.date)}</span>${d.goals && d.goals.length ? `<div class="goals">${d.goals.map(g => `<span>${esc(g)}</span>`).join("")}</div>` : ""}</div>
       <nav class="glance" aria-label="이날 장소 한눈에">${stops.map((s,i) => s.num ? `<button data-go="${i}" class="${s.it.food?"food":""}"><span class="n">${s.num}</span><span class="gt"><b>${esc(s.it.time.split("–")[0])}</b><span>${esc(s.it.place)}</span></span></button>` : "").join("")}</nav>
       <div class="daygrid">
         <div class="daymap-wrap ${folded?"folded":""}" id="dayMapWrap"><div class="mapcard">
@@ -1170,6 +1281,21 @@ const tripData = {
     });
     document.querySelectorAll(".glance button").forEach(b => b.onclick = () => focus(+b.dataset.go, true, true));
     drawDayMap(d, stops, focus, clearFocus);
+    // 지금 / 다음 일정 표시 (오늘 날짜만) — 1분마다 갱신
+    const markNow = () => {
+      document.querySelectorAll(".tl-item.now, .tl-item.next").forEach(x => x.classList.remove("now", "next"));
+      document.querySelectorAll(".nowtag").forEach(x => x.remove());
+      if (d.day !== tripDayToday()) return null;
+      const n = nowIndex(d); if (!n) return null;
+      const el = document.querySelector(`.tl-item[data-i="${n.i}"]`); if (!el) return null;
+      el.classList.add(n.kind);
+      const tag = document.createElement("span"); tag.className = "nowtag"; tag.textContent = n.kind === "now" ? "지금" : "다음";
+      (el.querySelector(".tl-time") || el.querySelector(".leg-txt")).prepend(tag);
+      return el;
+    };
+    const nowEl = markNow();
+    clearInterval(renderDay.timer); renderDay.timer = setInterval(markNow, 60000);
+    if (nowEl && !autoScrolled) { autoScrolled = true; setTimeout(() => nowEl.scrollIntoView({ behavior: "smooth", block: "center" }), 300); }
   }
   function drawDayMap(d, stops, focus, clearFocus){
     if (dayMap) { dayMap.remove(); dayMap = null; }
@@ -1338,7 +1464,7 @@ const tripData = {
   $("sourceList").innerHTML = D.sources.map(s => `<li>${s.url?`<a href="${esc(s.url)}" target="_blank" rel="noopener">${esc(s.label)}</a>`:esc(s.label)}</li>`).join("");
 
   renderBookTop(); renderHotels(); renderFood(); renderChecklist();
-  showTab(curTab, false);
+  showTab(!location.hash && tripDayToday() ? "plan" : curTab, false); // 여행 중엔 일정 탭부터
 })();
 </script>
 </body>

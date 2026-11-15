@@ -5,286 +5,385 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Hong Kong &amp; Macau Trip 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Gowun+Dodum&family=Jua&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
 <style>
 /* =========================================================
    DESIGN (스타일) — 여행 데이터는 아래 <script> tripData 에 있음
+   파스텔 연말 테마: 민트 배경 · 베리 포인트 · 둥근 카드(아래 단색 선 그림자)
    ========================================================= */
 :root{
-  --navy:#0f1d3d; --navy-2:#1b2c55; --gold:#c9a24a; --gold-soft:#f6edd6;
-  --bg:#f3f5f9; --card:#ffffff; --text:#1c2333; --muted:#5f6b80; --line:#e3e7ef;
-  --c-confirmed:#1e8e5a; --c-planned:#2f6fd6; --c-candidate:#7b5cc4; --c-check:#d9822b;
-  --radius:14px; --shadow:0 1px 3px rgba(15,29,61,.08),0 4px 14px rgba(15,29,61,.05);
+  color-scheme: light;
+  --bg:#EDF4F0; --card:#FFFFFF; --ink:#2C4841; --muted:#6B827B; --line:#DCE8E2;
+  --berry:#D8566A; --berry-d:#B8414F; --blush:#FBDFE2; --mint:#CDE7DB; --mint-d:#B9DCCC; --butter:#FBEEC2; --sky:#D8E7F6; --lilac:#E9E4F5; --peach:#FDE3D2;
+  --display:"Jua","Apple SD Gothic Neo","Malgun Gothic",sans-serif;
+  --body:"Gowun Dodum","Apple SD Gothic Neo","Malgun Gothic",sans-serif;
+  /* 상태 색 (의미 유지 · 톤만 부드럽게) */
+  --c-confirmed:#3E9B76; --c-locked:#4F7FB0; --c-planned:#93A39D; --c-saved:#A07D3B; --c-check:#D9822B; --c-food:#D8566A;
+  /* 예전 변수 이름 호환 (인라인 style 에서 사용) */
+  --navy:var(--ink); --navy-2:#3F6158; --gold:var(--berry); --gold-soft:var(--butter); --text:var(--ink);
+  --radius:24px; --r-sm:16px; --shadow:0 4px 0 var(--line);
 }
 *{box-sizing:border-box}
-html{scroll-behavior:smooth;scroll-padding-top:64px}
-body{margin:0;overflow-wrap:anywhere;background:var(--bg);color:var(--text);font:15px/1.6 -apple-system,BlinkMacSystemFont,"Segoe UI","Malgun Gothic","Apple SD Gothic Neo",sans-serif;-webkit-text-size-adjust:100%}
-a{color:var(--planned,#2f6fd6)}
-h1,h2,h3,h4{line-height:1.3;margin:0}
+html{scroll-behavior:smooth;scroll-padding-top:76px}
+body{margin:0;overflow-wrap:anywhere;background:var(--bg);color:var(--ink);font-family:var(--body);font-size:15.5px;line-height:1.6;-webkit-text-size-adjust:100%;
+  background-image:radial-gradient(circle at 12% 40px,#fff 0 3px,transparent 4px),radial-gradient(circle at 82% 22px,#fff 0 2px,transparent 3px),radial-gradient(circle at 64% 70px,#fff 0 3px,transparent 4px),radial-gradient(circle at 30% 95px,#fff 0 2px,transparent 3px),radial-gradient(circle at 93% 110px,#fff 0 3px,transparent 4px),radial-gradient(circle at 47% 18px,#fff 0 2px,transparent 3px);
+  background-repeat:no-repeat;background-size:100% 260px}
+a{color:var(--ink);text-decoration-color:var(--berry);text-underline-offset:3px}
+h1,h2,h3,h4{line-height:1.3;margin:0;font-family:var(--display);font-weight:400;text-wrap:balance}
+b,strong{font-weight:700}
+button{font:inherit;color:inherit}
+:focus-visible{outline:3px solid var(--berry);outline-offset:3px}
 .wrap{max-width:1180px;margin:0 auto;padding:0 16px}
 
 .sec-title{display:flex;align-items:baseline;gap:10px;margin-bottom:14px;flex-wrap:wrap}
-.sec-title h2{font-size:22px;color:var(--navy)}
-.sec-title .num{color:var(--gold);font-weight:700;font-size:22px}
+.sec-title h2{font-size:22px}
+.sec-title .num{color:var(--berry);font-family:var(--display);font-size:22px}
 .sec-title .sub{color:var(--muted);font-size:13.5px}
 
 .grid{display:grid;gap:14px}
 .g2{grid-template-columns:repeat(auto-fill,minmax(min(320px,100%),1fr))}
 .g3{grid-template-columns:repeat(auto-fill,minmax(min(270px,100%),1fr))}
 .g4{grid-template-columns:repeat(auto-fill,minmax(min(160px,100%),1fr))}
-.card{background:var(--card);border-radius:var(--radius);box-shadow:var(--shadow);padding:16px 18px;border:1px solid var(--line);position:relative;min-width:0}
-.card h3{font-size:17px;color:var(--navy)}
-.card .meta{color:var(--muted);font-size:13px}
+.card{background:var(--card);border-radius:var(--radius);box-shadow:var(--shadow);padding:16px 18px;border:2.5px solid transparent;position:relative;min-width:0}
+.card h3{font-size:19px}
+.card .meta{color:var(--muted);font-size:13.5px}
 .muted{color:var(--muted)}
-.small{font-size:13px}
-.kv{display:grid;grid-template-columns:92px 1fr;gap:4px 10px;font-size:13.5px;margin-top:10px}
+.small{font-size:13.5px}
+.kv{display:grid;grid-template-columns:92px 1fr;gap:4px 10px;font-size:14px;margin-top:10px}
 .kv dt{color:var(--muted)}
 .kv dd{margin:0}
 ul.tight{margin:6px 0 0;padding-left:18px}
-ul.tight li{margin:2px 0}
+ul.tight li{margin:3px 0}
 
-/* Badges */
-.badge{display:inline-block;font-size:11px;font-weight:700;letter-spacing:.4px;padding:2px 8px;border-radius:6px;color:#fff;vertical-align:middle;white-space:nowrap}
-.b-CONFIRMED{background:var(--c-confirmed)}
-.b-LOCKED{background:var(--navy);box-shadow:inset 0 0 0 1px var(--gold)}
-.b-PLANNED{background:#6d86b8}
-.b-SAVED{background:#a07d3b}
-.b-CHECK{background:var(--c-check)}
-.ribbon{position:absolute;top:-10px;right:14px;background:var(--gold);color:var(--navy);font-weight:800;font-size:11.5px;padding:3px 10px;border-radius:6px;letter-spacing:.6px;box-shadow:0 2px 6px rgba(0,0,0,.15)}
-.card.top{border:2px solid var(--gold);background:linear-gradient(180deg,#fffdf6,#fff)}
-.stars{color:var(--gold);letter-spacing:1px;white-space:nowrap}
-.rsv{display:inline-block;font-size:11.5px;padding:1px 7px;border-radius:6px;border:1px solid var(--line);color:var(--muted);white-space:nowrap}
-.rsv.req{border-color:#e6b3b3;color:#b23b3b;background:#fdf1f1}
-.rsv.done{border-color:#a8d9bf;color:#1e7a4d;background:#e7f5ee}
-.rsv.rec{border-color:#ecd39a;color:#946b12;background:#fff8e6}
+/* Badges — 둥근 파스텔 알약 */
+.badge{display:inline-block;font-size:12px;font-family:var(--display);letter-spacing:.3px;padding:1px 10px;border-radius:999px;vertical-align:middle;white-space:nowrap;background:var(--mint);color:var(--ink)}
+.b-CONFIRMED{background:var(--mint);color:#24684C}
+.b-LOCKED{background:var(--sky);color:#2F5C88}
+.b-PLANNED{background:#EEF2F0;color:#5E716B}
+.b-SAVED{background:var(--butter);color:#7A5A12}
+.b-CHECK{background:var(--peach);color:#A3520F}
+.ribbon{position:absolute;top:-12px;right:16px;background:var(--berry);color:#fff;font-family:var(--display);font-size:13px;padding:3px 13px;border-radius:999px;letter-spacing:.3px;box-shadow:0 3px 0 #E7A9B2}
+.card.top{padding-top:24px;border-color:var(--berry);background:linear-gradient(180deg,#FFF6F7,#fff 120px)}
+.stars{color:var(--berry);letter-spacing:1px;white-space:nowrap}
+.rsv{display:inline-block;font-size:12px;padding:1px 9px;border-radius:999px;background:#EEF2F0;color:var(--muted);white-space:nowrap}
+.rsv.req{background:var(--blush);color:var(--berry-d)}
+.rsv.done{background:var(--mint);color:#24684C}
+.rsv.rec{background:var(--butter);color:#7A5A12}
 
 /* Buttons / links */
 .links{display:flex;flex-wrap:wrap;gap:6px;margin-top:12px}
-.btn{display:inline-flex;align-items:center;gap:4px;font-size:12.5px;text-decoration:none;padding:5px 10px;border-radius:8px;border:1px solid var(--line);color:var(--navy);background:#fff;cursor:pointer;font-family:inherit}
-.btn:hover{border-color:var(--gold);background:var(--gold-soft)}
-.btn.map{color:#1a6b3c}
-.btn.on{background:var(--navy);color:#fff;border-color:var(--navy)}
+.btn{display:inline-flex;align-items:center;gap:4px;font-size:13.5px;text-decoration:none;padding:6px 13px;min-height:34px;border-radius:999px;border:0;color:var(--ink);background:var(--mint);cursor:pointer;font-family:var(--display);transition:background .15s,transform .15s}
+.btn:hover{background:var(--mint-d)}
+.btn.map{background:var(--butter)}
+.btn.map:hover{background:#F6E2A0}
+.btn.on{background:var(--berry);color:#fff}
+.btn.book{background:var(--berry);color:#fff;padding:8px 16px;font-size:14.5px;box-shadow:0 3px 0 #E7A9B2}
+.btn.book:hover{background:var(--berry-d)}
 
-/* App bar + 탭 */
-.top{position:sticky;top:0;z-index:60;background:var(--navy);color:#fff;border-bottom:2px solid var(--gold)}
-.appbar{display:flex;align-items:center;justify-content:space-between;gap:8px;height:46px}
-.appbar b{font-size:16px;letter-spacing:.3px}
-.appbar .dates{color:var(--gold);font-size:13px;margin-left:8px}
-.dday{font-size:12px;background:var(--gold);color:var(--navy);font-weight:800;padding:2px 10px;border-radius:99px;white-space:nowrap}
-nav.tabs{display:flex;gap:4px;padding-bottom:6px}
-nav.tabs button{flex:0 1 150px;background:none;border:0;color:#c9d2e6;font:inherit;font-size:14px;padding:7px 10px;border-radius:8px;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:6px}
-nav.tabs button:hover{background:rgba(255,255,255,.08);color:#fff}
-nav.tabs button.on{background:rgba(255,255,255,.13);color:#fff;font-weight:700;box-shadow:inset 0 -3px 0 var(--gold)}
-.panel{display:none;padding:12px 0 30px}
+/* Hero (헤더) */
+.hero{padding:26px 0 14px;display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:14px;position:relative}
+.date-pill{display:inline-block;background:var(--berry);color:#fff;font-family:var(--display);padding:4px 16px;border-radius:999px;font-size:15px;letter-spacing:.02em}
+.hero h1{font-size:clamp(32px,6.4vw,50px);line-height:1.1;margin-top:10px}
+.hero h1 em{font-style:normal;color:var(--berry)}
+.hero p{color:var(--muted);margin:6px 0 0}
+.sum{display:flex;gap:8px;flex-wrap:wrap}
+.sum span{background:var(--card);border-radius:999px;padding:7px 14px;font-size:14px;box-shadow:0 2px 0 var(--line);white-space:nowrap}
+.sum b{font-family:var(--display);font-weight:400;color:var(--berry);margin-right:4px}
+.sum .dday{background:var(--berry);color:#fff;font-family:var(--display);box-shadow:0 2px 0 #E7A9B2}
+.deco{position:absolute;right:4px;top:6px;width:120px;height:46px;pointer-events:none}
+.tw{animation:tw 1.9s ease-in-out infinite}
+.tw.d1{animation-delay:.4s}.tw.d2{animation-delay:.8s}.tw.d3{animation-delay:1.2s}
+@keyframes tw{0%,100%{opacity:.25}50%{opacity:1}}
+
+/* 메인 탭 (데스크톱: 상단 고정 알약 바 / 모바일: 하단 고정) */
+.top{position:sticky;top:0;z-index:60;padding:8px 0;background:linear-gradient(var(--bg) 70%,rgba(237,244,240,0))}
+nav.tabs{display:flex;gap:6px;background:var(--card);border-radius:999px;padding:5px;box-shadow:0 3px 0 var(--line);width:max-content;max-width:100%}
+nav.tabs button{background:none;border:0;color:var(--muted);font-family:var(--display);font-size:16px;padding:7px 20px;border-radius:999px;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:6px;transition:background .15s}
+nav.tabs button:hover{background:var(--bg);color:var(--ink)}
+nav.tabs button.on{background:var(--blush);color:var(--berry-d)}
+.panel{display:none;padding:6px 0 34px}
 .panel.on{display:block}
-.ptitle{font-size:18px;color:var(--navy);margin:22px 0 10px}
-.ptitle .sub{font-size:12.5px;color:var(--muted);font-weight:400;margin-left:6px}
+.ptitle{font-size:22px;margin:26px 0 12px}
+.ptitle .sub{font-size:13px;color:var(--muted);font-family:var(--body);margin-left:6px}
 details.fold{margin-top:12px}
-.tips{display:grid;gap:10px}
-.tip{display:flex;gap:10px;align-items:flex-start;padding:10px 12px;border-radius:10px;background:var(--gold-soft)}
-.tip .ti{font-size:20px;line-height:1.2}
-.tip b{color:var(--navy)}
-details.fold>summary{font-size:15px;padding:2px 0}
+details.fold>summary{font-family:var(--display);font-weight:400;font-size:18px;color:var(--ink);padding:2px 0}
 details.fold[open]>summary{margin-bottom:12px}
+.tips{display:grid;gap:12px;grid-template-columns:repeat(auto-fill,minmax(min(260px,100%),1fr))}
+.tip{display:flex;gap:10px;align-items:flex-start;padding:14px 16px;border-radius:20px;background:var(--blush)}
+.tip:nth-child(4n+2){background:var(--butter)}.tip:nth-child(4n+3){background:var(--sky)}.tip:nth-child(4n+4){background:var(--mint)}
+.tip .ti{font-size:22px;line-height:1.2}
+.tip b{font-family:var(--display);font-weight:400;font-size:16.5px;display:block}
 .progress-card{display:flex;flex-wrap:wrap;gap:10px 20px;align-items:center}
-.progress-card .pv{font-size:20px;font-weight:800;color:var(--navy)}
+.progress-card .pv{font-size:22px;font-family:var(--display);color:var(--berry)}
 .progress-card .progress{flex:1 1 180px;margin:0}
-.done-list{display:grid;gap:6px;margin-top:12px;font-size:13.5px}
-.done-list div{display:flex;gap:8px;align-items:baseline}
+.done-list{display:grid;gap:8px;margin-top:12px;font-size:14px}
+.done-list div{display:flex;gap:8px;align-items:baseline;background:var(--bg);border-radius:14px;padding:6px 12px}
 .done-list .k{flex:0 0 auto}
 @media (max-width:899px){
-  nav.tabs{position:fixed;left:0;right:0;bottom:0;z-index:70;background:var(--navy);border-top:2px solid var(--gold);padding:4px 6px calc(4px + env(safe-area-inset-bottom));gap:2px}
-  nav.tabs button{flex:1 1 0;flex-direction:column;gap:0;font-size:11.5px;padding:5px 2px}
-  nav.tabs button .ic{font-size:19px;line-height:1.2}
-  nav.tabs button.on{box-shadow:inset 0 3px 0 var(--gold)}
-  body{padding-bottom:70px}
-  .appbar .nights{display:none}
-  .appbar b{font-size:15px}
-  .dayhead h3{font-size:14px}
+  .top{position:fixed;left:0;right:0;bottom:0;top:auto;padding:0 10px calc(8px + env(safe-area-inset-bottom));background:none;pointer-events:none}
+  nav.tabs{pointer-events:auto;width:100%;margin:0 auto;max-width:520px;gap:2px;box-shadow:0 6px 18px rgba(44,72,65,.18)}
+  nav.tabs button{flex:1 1 0;flex-direction:column;gap:0;font-size:13px;padding:5px 2px}
+  nav.tabs button .ic{font-size:19px;line-height:1.25}
+  body{padding-bottom:84px}
+  html{scroll-padding-top:12px}
+  .hero{padding-top:20px}
+  .deco{display:none}
 }
 
 /* Summary */
-.stat .label{font-size:12.5px;color:var(--muted)}
-.stat .value{font-size:18px;font-weight:700;color:var(--navy);margin-top:2px}
-.stat .note{font-size:12.5px;color:var(--muted);margin-top:2px}
-.progress{height:8px;background:#e8ebf2;border-radius:99px;overflow:hidden;margin-top:8px}
-.progress>i{display:block;height:100%;background:linear-gradient(90deg,var(--gold),#e2c47a);border-radius:99px;transition:width .3s}
-.stat.big{background:var(--navy);color:#fff;border:none}
-.stat.big .label,.stat.big .note{color:#c4cde2}
-.stat.big .value{color:var(--gold);font-size:22px}
+.stat .label{font-size:13px;color:var(--muted)}
+.stat .value{font-size:19px;font-family:var(--display);margin-top:2px}
+.stat .note{font-size:13px;color:var(--muted);margin-top:2px}
+.progress{height:10px;background:var(--bg);border-radius:99px;overflow:hidden;margin-top:8px}
+.progress>i{display:block;height:100%;background:linear-gradient(90deg,var(--berry),#EE8E9C);border-radius:99px;transition:width .3s}
+.stat.big{background:var(--blush)}
+.stat.big .value{color:var(--berry);font-size:23px}
 
 /* Flights */
-.flight{display:flex;align-items:center;justify-content:space-between;gap:10px;margin:14px 0 6px}
+.flight{display:flex;align-items:center;justify-content:space-between;gap:10px;margin:14px 0 8px;background:var(--sky);border-radius:20px;padding:12px 10px}
 .flight .ap{text-align:center;min-width:80px}
-.flight .ap b{display:block;font-size:28px;color:var(--navy);letter-spacing:1px}
-.flight .ap .t{font-size:22px;font-weight:700}
-.flight .ap .s{font-size:12px;color:var(--muted)}
-.flight .mid{flex:1;text-align:center;color:var(--muted);font-size:12px}
-.flight .mid .line{height:2px;background:repeating-linear-gradient(90deg,var(--gold) 0 6px,transparent 6px 10px);margin:6px 0}
+.flight .ap b{display:block;font-family:var(--display);font-weight:400;font-size:30px;letter-spacing:1px}
+.flight .ap .t{font-family:var(--display);font-size:21px;color:var(--berry)}
+.flight .ap .s{font-size:12.5px;color:var(--muted)}
+.flight .mid{flex:1;text-align:center;color:var(--muted);font-size:12.5px}
+.flight .mid .line{height:0;border-top:3px dotted #9DB6CC;margin:6px 0}
 
-/* Timeline */
-.daytabs{display:flex;gap:8px;overflow-x:auto;padding-bottom:6px;scrollbar-width:thin}
-.daytab{flex:0 0 auto;border:1px solid var(--line);background:#fff;border-radius:12px;padding:8px 14px;cursor:pointer;text-align:left;font-family:inherit;color:var(--text)}
-.daytab b{display:block;color:var(--navy);font-size:15px}
-.daytab span{font-size:12px;color:var(--muted)}
-.daytab.on{background:var(--navy);border-color:var(--navy)}
-.daytab.on b{color:var(--gold)}
-.daytab.on span{color:#c4cde2}
-.dayhead h3{color:var(--navy)}
-.dayhead .goals{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}
-.dayhead .goals span{background:var(--gold-soft);color:#7a5a12;font-size:12.5px;padding:3px 10px;border-radius:99px}
-.tl{position:relative;margin-left:8px;padding-left:22px;border-left:2px solid #d5dbe7}
-.tl-item{position:relative;margin:0 0 12px}
-.tl-item::before{content:"";position:absolute;left:-30px;top:18px;width:12px;height:12px;border-radius:50%;background:#fff;border:3px solid var(--navy)}
-.tl-item.key::before{border-color:var(--gold);background:var(--gold)}
-.tl-item .card{padding:12px 14px}
-.tl-item.key .card{border-color:var(--gold)}
-.tl-time{font-weight:800;color:var(--navy);font-size:14px}
-.tl-place{font-weight:700;font-size:16px;margin-top:2px}
-.tl-row{display:flex;flex-wrap:wrap;gap:6px 14px;margin-top:8px;font-size:12.8px;color:var(--muted)}
-.tl-row b{color:var(--text);font-weight:600}
+/* DAY 탭 */
+.daytabs{display:grid;grid-template-columns:repeat(var(--days,5),minmax(0,1fr));gap:10px;margin:2px 0 14px}
+.daytab{border:0;background:var(--card);border-radius:22px;padding:11px 6px 10px;cursor:pointer;text-align:center;display:flex;flex-direction:column;align-items:center;gap:2px;box-shadow:0 3px 0 var(--line);transition:transform .15s,background .15s;color:var(--ink)}
+.daytab:hover{transform:translateY(-2px)}
+.daytab .n{width:28px;height:28px;border-radius:50%;background:var(--mint);font-family:var(--display);display:grid;place-items:center;font-size:14px}
+.daytab b{font-family:var(--display);font-weight:400;font-size:17px;font-variant-numeric:tabular-nums}
+.daytab span.w{font-size:12.5px;color:var(--muted);line-height:1.3;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:100%}
+.daytab.on{background:var(--blush)}
+.daytab.on .n{background:var(--berry);color:#fff}
+.dayhead{margin:2px 0 12px}
+.dayhead h3{font-size:22px;line-height:1.3}
+.dayhead .dlabel{display:inline-block;font-family:var(--display);color:var(--berry);font-size:15px;margin-bottom:2px}
+.dayhead .goals{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px}
+.dayhead .goals span{background:var(--card);box-shadow:0 2px 0 var(--line);font-size:13px;padding:4px 12px;border-radius:999px}
+
+/* 한눈에 보기 (장소 번호 띠) */
+.glance{position:relative;display:flex;gap:8px;overflow-x:auto;padding:2px 2px 8px;margin-bottom:6px;scrollbar-width:thin;scroll-snap-type:x proximity}
+.glance button{flex:0 0 auto;scroll-snap-align:start;border:0;background:var(--card);border-radius:18px;padding:7px 12px 7px 8px;display:flex;align-items:center;gap:7px;box-shadow:0 3px 0 var(--line);cursor:pointer;max-width:200px;transition:background .15s}
+.glance .n{flex:0 0 auto;min-width:24px;height:24px;border-radius:12px;background:var(--mint);font-family:var(--display);display:grid;place-items:center;font-size:13px;padding:0 5px}
+.glance .gt{display:flex;flex-direction:column;align-items:flex-start;min-width:0;line-height:1.25;text-align:left}
+.glance .gt b{font-family:var(--display);font-weight:400;font-size:14px;color:var(--berry);font-variant-numeric:tabular-nums}
+.glance .gt span{font-size:12.5px;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:150px}
+.glance button.food .n{background:var(--blush);color:var(--berry-d)}
+.glance button[aria-current="true"]{background:var(--blush)}
+.glance button[aria-current="true"] .n{background:var(--berry);color:#fff}
+
+/* 일정 카드 + 이동 연결줄 */
+.tl{display:flex;flex-direction:column;gap:10px}
+.tl-item{position:relative}
+.tl-item .card{padding:14px;display:grid;grid-template-columns:64px minmax(0,1fr);gap:14px;transition:border-color .2s}
+.tl-item.key .card{background:linear-gradient(180deg,#FFFBEF,#fff 90px)}
+.tl-item .card.focus{border-color:var(--berry)}
+.art{position:relative;width:64px;height:64px;border-radius:20px;display:grid;place-items:center;font-size:32px;line-height:1;background:var(--mint);cursor:pointer}
+.art.a-food{background:var(--butter)}.art.a-show{background:var(--blush)}.art.a-stay{background:var(--sky)}.art.a-sight{background:var(--mint)}.art.a-shop{background:var(--lilac)}.art.a-air{background:var(--sky)}
+.tl-num{position:absolute;left:-6px;top:-6px;min-width:24px;height:24px;padding:0 5px;border-radius:12px;background:#fff;color:var(--ink);font-family:var(--display);font-size:13px;display:flex;align-items:center;justify-content:center;box-shadow:0 0 0 2.5px var(--c-planned);cursor:pointer;z-index:1}
+.tl-num.CONFIRMED{box-shadow:0 0 0 2.5px var(--c-confirmed);color:#24684C}
+.tl-num.LOCKED{box-shadow:0 0 0 2.5px var(--c-locked);color:#2F5C88}
+.tl-num.food{box-shadow:0 0 0 2.5px var(--c-food);color:var(--berry-d)}
+.tl-time{font-family:var(--display);color:var(--berry);font-size:19px;font-variant-numeric:tabular-nums;line-height:1.3}
+.tl-place{font-family:var(--display);font-size:20px;line-height:1.3;margin-top:2px}
+.tl-row{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px;font-size:13px;list-style:none;padding:0}
+.tl-row>span{background:var(--bg);border-radius:14px;padding:3px 11px}
+.tl-row>span.rsv{border-radius:14px;padding:3px 11px}
+.tl-row b{font-weight:700}
 .tl-head{display:flex;justify-content:space-between;gap:8px;align-items:flex-start}
-.region{font-size:11px;padding:1px 7px;border-radius:6px;background:#eef1f7;color:var(--muted);white-space:nowrap}
-
-/* Day map (지도 + 타임라인) */
-.daygrid{display:grid;gap:16px;align-items:start}
-.daymap-wrap{position:sticky;top:48px;z-index:5;background:var(--bg);padding:6px 0 4px}
-.daymap{height:240px;border-radius:var(--radius);border:1px solid var(--line);box-shadow:var(--shadow);overflow:hidden;background:#e9edf3}
-.daymap-wrap.folded .daymap{display:none}
-.map-bar{display:flex;flex-wrap:wrap;gap:6px;align-items:center;margin-top:6px}
-.map-bar .btn{padding:3px 9px;font-size:12px}
-.map-legend{display:flex;flex-wrap:wrap;gap:4px 10px;font-size:11.5px;color:var(--muted);margin-left:auto}
-.map-legend i{display:inline-block;width:18px;height:0;border-top:3px solid;vertical-align:middle;margin-right:3px}
-@media (min-width:900px){
-  .daygrid{grid-template-columns:minmax(0,1fr) minmax(0,1.05fr)}
-  .daymap-wrap{order:2;top:104px;padding:0}
-  .daymap{height:calc(100vh - 160px);min-height:420px}
-  .map-fold{display:none}
-}
-.pin{display:flex;align-items:center;justify-content:center;min-width:26px;height:26px;padding:0 6px;border-radius:13px;color:#fff;font-weight:800;font-size:12.5px;border:2px solid #fff;box-shadow:0 1px 4px rgba(0,0,0,.35);white-space:nowrap;transform:translate(-50%,-50%)}
-.pin.CONFIRMED{background:var(--c-confirmed)}
-.pin.LOCKED{background:var(--navy)}
-.pin.PLANNED{background:#6d86b8}
-.pin.on{outline:3px solid var(--gold);transform:translate(-50%,-50%) scale(1.15)}
-.leaflet-div-icon.pin-icon{background:none;border:none}
-.leaflet-popup-content{margin:10px 12px;font:13px/1.5 inherit}
-.leaflet-popup-content b{color:var(--navy)}
-.tl-num{position:absolute;left:-36px;top:12px;min-width:22px;height:22px;padding:0 4px;border-radius:11px;color:#fff;font-weight:800;font-size:11.5px;display:flex;align-items:center;justify-content:center;border:2px solid #fff;box-shadow:0 0 0 1px #d5dbe7;cursor:pointer;z-index:1}
-.tl-num.CONFIRMED{background:var(--c-confirmed)} .tl-num.LOCKED{background:var(--navy)} .tl-num.PLANNED{background:#6d86b8}
-.tl-num.mv{background:#fff;color:var(--muted);font-size:12px;box-shadow:0 0 0 1px #d5dbe7}
-.tl-item.has-num::before{display:none}
-/* 먹는 일정 강조 */
-.tl-item.food .card{border-left:5px solid #e0703a;background:#fff7f0}
-.tl-item.food .tl-place::before{content:"🍴 ";}
-.tl-num.food,.pin.food{background:#e0703a}
-.map-legend .lg-food{color:#c45a1f;font-weight:700}
-.tl-item .card.focus{box-shadow:0 0 0 3px var(--gold),var(--shadow)}
 .tl-item .tl-head{cursor:pointer}
 .tl-item .tl-body{display:none}
 .tl-item.open .tl-body{display:block}
-.tl-item .card{padding:10px 12px}
-.tl-sub{font-size:12.5px;color:var(--muted);margin-top:2px}
-.tl-more{font-size:11.5px;color:var(--muted);margin-left:6px}
+.tl-body ul.tight{margin-top:10px}
+.tl-sub{font-size:13px;color:var(--muted);margin-top:2px}
+.tl-more{font-family:var(--body);font-size:12.5px;color:var(--muted);margin-left:8px}
 .tl-item.open .tl-more{display:none}
-.tl-item .links{margin-top:8px}
-.tl-tools{display:flex;justify-content:flex-end;margin:4px 0 6px}
-.tl-tools .btn{padding:3px 9px;font-size:12px}
-.dayhead{margin:2px 0 10px}
-.dayhead h3{font-size:15.5px}
+.tl-item .links{margin-top:10px}
+.tl-tools{display:flex;justify-content:flex-end;margin:0 0 8px}
+.tl-tools .btn{background:var(--butter)}
+.region{font-size:12px;padding:1px 9px;border-radius:999px;background:var(--bg);color:var(--muted);white-space:nowrap}
+/* 이동 항목 = 카드 사이 점선 연결줄 */
+.tl-item.leg .card{background:none;box-shadow:none;border:0;padding:2px 0 2px 30px;display:block;position:relative}
+.tl-item.leg .card::before{content:"";position:absolute;left:30px;top:-8px;bottom:-8px;border-left:3px dotted #B9CEC5}
+.tl-item.leg .card.focus{border:0}
+.tl-item.leg .card.focus .leg-line{background:var(--blush)}
+.leg-line{display:flex;align-items:center;gap:10px;margin-left:-14px;padding:4px 12px 4px 0;border-radius:16px;cursor:pointer;position:relative}
+.leg-ic{flex:0 0 auto;width:30px;height:30px;border-radius:50%;background:var(--card);box-shadow:0 2px 0 var(--line);display:grid;place-items:center;font-size:15px;position:relative;z-index:1}
+.leg-txt{min-width:0;color:var(--muted);font-size:14px;line-height:1.4}
+.leg-txt b{color:var(--ink);font-weight:700}
+.leg-txt .lt{font-family:var(--display);color:var(--berry);margin-right:6px;font-variant-numeric:tabular-nums}
+.tl-item.leg.key .leg-txt{color:var(--ink)}
+.tl-item.leg.key .leg-ic{background:var(--butter)}
+.tl-item.leg .tl-body,.tl-item.leg .links{margin-left:32px}
+.tl-item.leg .tl-body{background:var(--card);border-radius:20px;padding:4px 14px 12px;box-shadow:var(--shadow);margin-top:6px}
+.tl-item.leg .badge{margin-left:4px}
+/* 먹는 일정 강조 */
+.tl-item.food .tl-place::before{content:"🍴 ";font-size:.85em}
+.map-legend .lg-food{color:var(--berry-d)}
+
+/* 지도 카드 */
+.daygrid{display:grid;grid-template-columns:minmax(0,1fr);gap:16px;align-items:start}
+.daymap-wrap{position:sticky;top:8px;z-index:5}
+.mapcard{background:var(--card);border-radius:var(--radius);padding:10px;box-shadow:0 6px 18px rgba(44,72,65,.14);display:flex;flex-direction:column;gap:8px}
+.daymap{height:230px;border-radius:18px;overflow:hidden;background:#F2F0E8}
+.daymap .leaflet-tile-pane{filter:saturate(.7) brightness(1.04) sepia(.08)}
+.daymap-wrap.folded .daymap{display:none}
+.mapnow{display:flex;align-items:center;gap:6px}
+.mapnow .now{flex:1;min-width:0;font-family:var(--display);font-size:16px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;padding-left:4px}
+.mapnow .now small{font-family:var(--body);color:var(--muted);font-size:12.5px;margin-left:6px}
+.rbtn{border:0;background:var(--mint);border-radius:999px;height:36px;min-width:36px;padding:0 12px;font-family:var(--display);font-size:15px;cursor:pointer;color:var(--ink)}
+.rbtn:hover{background:var(--mint-d)}
+.rbtn.ghost{background:var(--butter)}
+.map-bar{display:flex;flex-wrap:wrap;gap:6px;align-items:center}
+.map-bar .btn{padding:3px 11px;min-height:28px;font-size:13px;background:var(--bg)}
+.map-bar .btn:hover{background:var(--mint)}
+.map-bar .btn.on{background:var(--berry);color:#fff}
+.map-legend{display:flex;flex-wrap:wrap;gap:4px 10px;font-size:12px;color:var(--muted);margin-left:auto;padding-right:4px}
+.map-legend i{display:inline-block;width:18px;height:0;border-top:3px solid;vertical-align:middle;margin-right:3px}
+@media (min-width:900px){
+  .daygrid{grid-template-columns:minmax(0,1fr) minmax(0,1.05fr);gap:22px}
+  .daymap-wrap{order:2;top:76px}
+  .daymap{height:calc(100vh - 190px);min-height:400px}
+  .map-fold{display:none}
+}
+@media (max-width:899px){
+  .mapcard{padding:8px;gap:6px}
+  .daymap{height:200px}
+  .map-bar{flex-wrap:nowrap;overflow-x:auto;scrollbar-width:none}
+  .map-bar .btn{flex:0 0 auto;white-space:nowrap}
+  .map-legend{display:none}
+}
+.pin{display:flex;align-items:center;justify-content:center;min-width:28px;height:28px;padding:0 7px;border-radius:14px;background:#fff;color:var(--ink);font-family:var(--display);font-size:13.5px;box-shadow:0 0 0 2.5px var(--c-planned),0 2px 5px rgba(44,72,65,.3);white-space:nowrap;transform:translate(-50%,-50%);transition:transform .2s}
+.pin.CONFIRMED{box-shadow:0 0 0 2.5px var(--c-confirmed),0 2px 5px rgba(44,72,65,.3);color:#24684C}
+.pin.LOCKED{box-shadow:0 0 0 2.5px var(--c-locked),0 2px 5px rgba(44,72,65,.3);color:#2F5C88}
+.pin.food{box-shadow:0 0 0 2.5px var(--c-food),0 2px 5px rgba(44,72,65,.3);color:var(--berry-d)}
+.pin.on{background:var(--berry);color:#fff;transform:translate(-50%,-50%) scale(1.2);box-shadow:0 0 0 3px #fff,0 3px 8px rgba(44,72,65,.35)}
+.leaflet-div-icon.pin-icon{background:none;border:none}
+.leaflet-container{font-family:var(--body)}
+.leaflet-popup-content-wrapper{border-radius:16px}
+.leaflet-popup-content{margin:10px 12px;font:13.5px/1.5 var(--body)}
+.leaflet-popup-content b{font-family:var(--display);font-weight:400;font-size:15px}
 
 /* Verdict box (교통 카드) */
-.verdict{margin-top:10px;font-size:13.5px;padding:8px 10px;border-radius:8px;background:#f4f6fb}
+.verdict{margin-top:10px;font-size:14px;padding:9px 13px;border-radius:16px;background:var(--butter)}
 
 /* Filters */
 .filters{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:12px}
+.filters .btn{background:var(--card);box-shadow:0 2px 0 var(--line)}
+.filters .btn.on{background:var(--berry);color:#fff}
+.filters .btn.on .muted{color:#FBDFE2}
 
 /* Budget */
-.bar-row{display:grid;grid-template-columns:110px 1fr 150px;gap:10px;align-items:center;margin:8px 0;font-size:13.5px}
-.bar{height:14px;background:#e8ebf2;border-radius:99px;overflow:hidden}
-.bar>i{display:block;height:100%;background:var(--navy-2);border-radius:99px}
+.bar-row{display:grid;grid-template-columns:110px 1fr 150px;gap:10px;align-items:center;margin:8px 0;font-size:14px}
+.bar{height:14px;background:var(--bg);border-radius:99px;overflow:hidden}
+.bar>i{display:block;height:100%;background:linear-gradient(90deg,#7FC3A6,#A8D5BF);border-radius:99px}
 .bar-row .amt{text-align:right;font-variant-numeric:tabular-nums}
-.bar-row .amt small{display:block;color:var(--muted);font-size:11.5px}
+.bar-row .amt small{display:block;color:var(--muted);font-size:12px}
 .total-box{display:flex;flex-wrap:wrap;gap:18px;align-items:baseline}
-.total-box .krw{font-size:32px;font-weight:800;color:var(--navy)}
+.total-box .krw{font-size:34px;font-family:var(--display);color:var(--berry)}
 
 /* Checklist */
-.check-item{display:flex;gap:10px;align-items:flex-start;padding:9px 4px;border-top:1px solid var(--line)}
+.check-item{display:flex;gap:10px;align-items:flex-start;padding:10px 4px;border-top:2px dotted var(--line)}
 .check-item:first-child{border-top:none}
-.check-item input{width:19px;height:19px;margin-top:2px;accent-color:var(--navy);flex:0 0 auto}
+.check-item input{width:20px;height:20px;margin-top:2px;accent-color:var(--berry);flex:0 0 auto}
 .check-item label{flex:1;cursor:pointer}
 .check-item.done label .t{text-decoration:line-through;color:var(--muted)}
-.check-item .ref{font-size:12px;color:var(--muted)}
-.prio h4{font-size:15px;color:var(--navy);margin-bottom:6px}
+.check-item .ref{font-size:12.5px;color:var(--muted)}
+.prio h4{font-size:16px;margin-bottom:6px}
 
 /* Alert / check-needed */
-.alert{background:#fff7ec;border:2px solid var(--c-check);border-radius:var(--radius);padding:16px 18px}
-.alert h3{color:#a35a10}
+.alert{background:#FFF7E3;border:2.5px solid #F2D58A;border-radius:var(--radius);padding:16px 18px;box-shadow:0 4px 0 #F3E3B6;margin-top:14px}
+.alert h3{color:#8A5A0E;font-size:20px}
 .alert li{margin:6px 0}
 
 /* Details */
 details{margin-top:10px}
-details summary{cursor:pointer;color:var(--navy);font-weight:600;font-size:13.5px}
+details summary{cursor:pointer;font-family:var(--display);font-weight:400;font-size:14.5px;color:var(--ink)}
+details summary::marker{color:var(--berry)}
 details[open] summary{margin-bottom:6px}
 
-table.simple{width:100%;border-collapse:collapse;font-size:13.5px}
-table.simple th,table.simple td{border-bottom:1px solid var(--line);padding:7px 6px;text-align:left;vertical-align:top}
-table.simple th{color:var(--muted);font-weight:600;font-size:12.5px}
+table.simple{width:100%;border-collapse:collapse;font-size:14px}
+table.simple th,table.simple td{border-bottom:2px dotted var(--line);padding:7px 6px;text-align:left;vertical-align:top}
+table.simple th{color:var(--muted);font-weight:400;font-family:var(--display);font-size:13px}
 .scroll-x{overflow-x:auto}
 
-.history .ver{border-left:3px solid var(--gold);padding:4px 0 4px 12px;margin:10px 0}
-.history .ver b{color:var(--navy)}
+.history .ver{border-left:3px dotted var(--berry);padding:4px 0 4px 12px;margin:10px 0}
+.history .ver b{font-family:var(--display);font-weight:400}
 
 /* 공용: 가격 행 · 칩 */
-.price-big{font-size:22px;font-weight:800;color:var(--navy)}
+.price-big{font-size:24px;font-family:var(--display);color:var(--berry)}
 .price-row{display:flex;gap:18px;flex-wrap:wrap;margin-top:10px;align-items:baseline}
-.price-row .lbl{font-size:12px;color:var(--muted);display:block}
-.chips{display:flex;flex-wrap:wrap;gap:5px;margin-top:10px}
-.chip{font-size:11.5px;padding:2px 8px;border-radius:99px;background:#eef1f7;color:var(--muted)}
-.chip.ok{background:#e7f5ee;color:#1e7a4d}
-.chip.no{background:#fbeeee;color:#a23a3a}
-.hl-card{background:#fff;border:2px solid var(--gold);border-left:6px solid var(--navy);border-radius:12px;padding:12px 14px;margin:8px 0 12px;box-shadow:var(--shadow)}
-.hl-card h4{font-size:16px;color:var(--navy);margin:6px 0 4px}
+.price-row .lbl{font-size:12.5px;color:var(--muted);display:block}
+.chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px}
+.chip{font-size:12.5px;padding:3px 11px;border-radius:999px;background:var(--bg);color:var(--muted)}
+.chip.ok{background:var(--mint);color:#24684C}
+.chip.no{background:var(--blush);color:var(--berry-d)}
+.hl-card{background:#fff;border:2.5px solid var(--berry);border-radius:20px;padding:14px 16px;margin:10px 0 12px;box-shadow:0 4px 0 #F2C3CA}
+.hl-card h4{font-size:18px;margin:8px 0 4px}
 .hl-badges{display:flex;flex-wrap:wrap;gap:6px}
-.hl-badge{font-size:11.5px;font-weight:700;padding:2px 9px;border-radius:99px;background:var(--gold-soft);color:#7a5a12;border:1px solid #e6cf95}
-.hl-badge.hi{background:var(--navy);color:var(--gold);border-color:var(--navy)}
-.hl-route,.hl-action{font-size:13.5px;font-weight:600;color:var(--text)}
-.inputs{margin:10px 0 6px;border:1px solid var(--line);border-radius:10px;background:#f7f8fb;padding:8px 12px}
-.inputs-title{font-size:12.5px;font-weight:700;color:var(--navy);margin-bottom:4px}
-.in-row{display:grid;grid-template-columns:96px 1fr;gap:8px;padding:4px 0;border-top:1px dashed var(--line);font-size:13.5px}
+.hl-badge{font-size:12.5px;font-family:var(--display);padding:2px 11px;border-radius:999px;background:var(--butter);color:#7A5A12}
+.hl-badge.hi{background:var(--berry);color:#fff}
+.hl-route,.hl-action{font-size:14px;font-weight:700}
+.inputs{margin:10px 0 6px;border-radius:16px;background:var(--bg);padding:8px 14px}
+.inputs-title{font-size:13.5px;font-family:var(--display);margin-bottom:4px}
+.in-row{display:grid;grid-template-columns:96px 1fr;gap:8px;padding:5px 0;border-top:2px dotted var(--line);font-size:14px}
 .in-row:first-of-type{border-top:none}
-.in-k{color:var(--muted);font-weight:600}
-.in-v{font-weight:700;color:var(--text);font-variant-numeric:tabular-nums}
-.in-v small{display:block;font-weight:400;color:var(--muted);font-size:11.5px}
+.in-k{color:var(--muted)}
+.in-v{font-weight:700;font-variant-numeric:tabular-nums}
+.in-v small{display:block;font-weight:400;color:var(--muted);font-size:12px}
 @media (max-width:420px){.in-row{grid-template-columns:1fr;gap:0}}
-.booked-box{margin-top:10px;padding:10px 12px;border-radius:10px;background:#e7f5ee;border:1px solid #a8d9bf;font-size:13.5px}
-.booked-box b{color:#1e7a4d}
-.btn.book{background:var(--navy);color:#fff;border-color:var(--navy);font-weight:700;padding:8px 14px;font-size:13.5px}
-.btn.book:hover{background:var(--navy-2);color:var(--gold)}
-.status-legend{display:flex;flex-wrap:wrap;gap:6px 12px;margin:-6px 0 12px;font-size:12px;color:var(--muted)}
+.booked-box{margin-top:10px;padding:10px 14px;border-radius:16px;background:var(--mint);font-size:14px}
+.booked-box b{color:#24684C}
+.status-legend{display:flex;flex-wrap:wrap;gap:6px 12px;margin:-6px 0 12px;font-size:12.5px;color:var(--muted)}
 .status-legend .lg{display:inline-flex;align-items:center;gap:4px;white-space:nowrap}
-.menu-memo{margin-top:8px;font-size:13px}
-.why{margin-top:8px;padding:8px 10px;border-radius:8px;background:#eef4ff;border:1px solid #c9dafb;font-size:12.8px;line-height:1.55}
-.why b{color:var(--navy)}
-.nature{margin-top:10px;padding:8px 10px;border-radius:8px;background:#f7f8fb;border:1px solid var(--line);font-size:12.8px}
+.menu-memo{margin-top:8px;font-size:14px}
+.why{margin-top:10px;padding:9px 13px;border-radius:16px;background:var(--sky);font-size:13.5px;line-height:1.55}
+.why b{font-family:var(--display);font-weight:400}
+.nature{margin-top:10px;padding:9px 13px;border-radius:16px;background:var(--bg);font-size:13.5px}
+.foot{font-size:12.5px;color:var(--muted);text-align:center;padding:4px 0 24px}
 
 @media (max-width:640px){
   .kv{grid-template-columns:80px 1fr}
-  .bar-row{grid-template-columns:72px 1fr 104px;font-size:12.5px}
-  .flight .ap b{font-size:22px}.flight .ap .t{font-size:18px}
+  .bar-row{grid-template-columns:72px 1fr 104px;font-size:13px}
+  .flight .ap b{font-size:24px}.flight .ap .t{font-size:18px}
   .card{padding:14px}
-  .total-box .krw{font-size:26px}
+  .total-box .krw{font-size:28px}
   .g2,.g3{grid-template-columns:1fr}
+  .daytabs{gap:6px}
+  .daytab{padding:9px 2px;border-radius:18px}
+  .daytab b{font-size:14px}.daytab span.w{font-size:11.5px}
+  .dayhead h3{font-size:19px}
 }
-@media print{.top{display:none}.daytabs{display:none}.panel{display:block!important}}
+@media (max-width:420px){
+  .tl-item .card{grid-template-columns:52px minmax(0,1fr);gap:12px;padding:12px}
+  .art{width:52px;height:52px;border-radius:17px;font-size:26px}
+  .tl-place{font-size:18px}
+  .tl-time{font-size:17px}
+}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}.tw{animation:none}.daytab,.btn,.pin{transition:none}}
+@media print{.top{display:none}.daytabs,.glance{display:none}.panel{display:block!important}}
 </style>
 </head>
 <body>
 
+<header class="wrap hero">
+  <div>
+    <span class="date-pill">2026. 12. 23 (수) – 12. 27 (일)</span>
+    <h1>홍콩 &amp; 마카오 <em>크리스마스</em></h1>
+    <p>코타이 리조트 3박, 하우스 오브 댄싱 워터, 그리고 홍콩에서 마지막 하루.</p>
+  </div>
+  <div class="sum" id="heroSum"><span class="dday" id="dday"></span></div>
+  <svg class="deco" viewBox="0 0 120 46" aria-hidden="true"><g fill="#F6CF57"><path class="tw" d="M18 8l2 5 5 2-5 2-2 5-2-5-5-2 5-2z"/><path class="tw d2" d="M100 4l1.5 3.5 3.5 1.5-3.5 1.5-1.5 3.5-1.5-3.5-3.5-1.5 3.5-1.5z"/></g><g fill="#D8566A"><circle class="tw d1" cx="58" cy="14" r="3"/><circle class="tw d3" cx="84" cy="34" r="2.5"/></g><circle class="tw d2" cx="38" cy="36" r="2.5" fill="#7FC3A6"/></svg>
+</header>
 <div class="top">
   <div class="wrap">
-    <div class="appbar"><div><b>Hong Kong &amp; Macau</b><span class="dates">12.23 – 12.27<span class="nights"> · 4박 5일</span></span></div><span class="dday" id="dday"></span></div>
-    <nav class="tabs" id="tabs"></nav>
+    <nav class="tabs" id="tabs" aria-label="메뉴"></nav>
   </div>
 </div>
 
@@ -447,7 +546,7 @@ const tripData = {
   },
 
   itinerary: [
-    { day:1, date:"12/23 (수)", title:"인천 출발 → 홍콩공항에서 바로 마카오로 → 첫날 저녁 + 코타이 리조트 산책", goals:["홍콩 입국 없이 공항에서 마카오행 무료버스","저녁 Casa Maquista (포르투갈 음식)","런더너 · 파리지앵 에펠탑 · 베네시안 걸어서 구경"],
+    { day:1, date:"12/23 (수)", tab:"마카오로", title:"인천 출발 → 홍콩공항에서 바로 마카오로 → 첫날 저녁 + 코타이 리조트 산책", goals:["홍콩 입국 없이 공항에서 마카오행 무료버스","저녁 Casa Maquista (포르투갈 음식)","런더너 · 파리지앵 에펠탑 · 베네시안 걸어서 구경"],
       items:[
         { time:"03:45", geo:"ICN", place:"인천공항 제1터미널 도착", region:"인천", desc:["비행기 출발 3시간 전에 도착","짐은 1인당 20kg까지 부칠 수 있음","새벽이라 공항철도·리무진 첫차로는 못 감 → 자차·택시 또는 전날 공항 근처에서 자기 (정해야 함)"], move:"자차·택시 또는 전날 공항 근처 숙박", moveTime:"—", cost:"—", booking:"recommended", needsCheck:true, status:"PLANNED" },
         { time:"06:45–09:50", geo:"HKG_T1", mode:"flight", place:"비행기 UO617 인천 → 홍콩", region:"항공", desc:["HK Express · 홍콩공항 제1터미널 도착"], move:"비행기", moveTime:"4시간 5분", cost:"결제 완료", booking:"none", status:"CONFIRMED", key:true },
@@ -468,7 +567,7 @@ const tripData = {
         { time:"20:55–21:35", geo:"VENETIAN", mode:"walk", place:"베네시안 쇼핑몰 구경", region:"코타이", map:"The Venetian Macao Grand Canal Shoppes", desc:["베네치아 운하를 본뜬 실내 쇼핑몰 · 크리스마스 장식 (곤돌라는 유료라 선택)","🥧 에그타르트집 있음: Lord Stow’s Bakery & Café (Venetian) — Shop 870 & 308","피곤하면 줄이고 바로 숙소로"], move:"—", moveTime:"—", cost:"—", booking:"none", status:"LOCKED" },
         { time:"21:35–21:55", geo:["GALAXY","BROADWAY"], mode:"walk", place:"걸어서 숙소 복귀", region:"코타이", map:"Broadway Hotel Macau", desc:["베네시안 → 갤럭시 → 숙소 약 1.2km","다음 날은 마카오 구시가지(반도) 일정"], move:"걷기", moveTime:"약 17분", cost:"무료", booking:"none", status:"LOCKED" }
       ]},
-    { day:2, start:"BROADWAY", date:"12/24 (목)", title:"마카오 구시가지(반도) 걷기 → 1주년 저녁 North → 크리스마스 이브 공연", goals:["쏸라펀 → 세나도 광장 → 육포거리 망고모찌 → 성 바울 성당 → 몬테 요새","★ 17:00 North 1주년 저녁","★ 19:30 House of Dancing Water 공연"],
+    { day:2, start:"BROADWAY", date:"12/24 (목)", tab:"구시가지·공연", title:"마카오 구시가지(반도) 걷기 → 1주년 저녁 North → 크리스마스 이브 공연", goals:["쏸라펀 → 세나도 광장 → 육포거리 망고모찌 → 성 바울 성당 → 몬테 요새","★ 17:00 North 1주년 저녁","★ 19:30 House of Dancing Water 공연"],
       items:[
         { time:"09:45–10:45", geo:"STARWORLD", mode:"bus", place:"갤럭시 무료셔틀 → 스타월드 호텔 (구시가지 쪽)", region:"이동", map:"StarWorld Hotel Macau", desc:["아침은 안 먹고 출발 — 첫 끼는 쏸라펀","갤럭시 'Crystal Lobby'에서 스타월드행 무료셔틀 (09:30–22:00, 10–20분마다, 약 35분)"], move:"무료셔틀", moveTime:"약 35분 + 기다리는 시간", cost:"무료", booking:"none", status:"LOCKED" },
         { time:"10:45–10:50", geo:"SLF", mode:"walk", place:"걸어서 → 쏸라펀 가게", region:"이동", map:"酸辣粉 澳門新口岸北京街183F +85328700077", desc:["스타월드에서 북쪽 길(北京街)로 400m"], move:"걷기", moveTime:"5분", cost:"—", booking:"none", status:"LOCKED" },
@@ -489,7 +588,7 @@ const tripData = {
         { time:"21:20–21:40", geo:"VENETIAN", mode:"walk", food:true, place:"CHAGEE 霸王茶姬 — 밀크티", region:"코타이", map:"CHAGEE The Venetian Macao", desc:["중국 인기 밀크티 브랜드 · 베네시안 3층 Shop 875","대표 메뉴: 伯牙絕弦 (자스민 녹차 밀크티)","크리스마스 이브 마감 시간 확인 필요"], move:"—", moveTime:"—", cost:"현장 결제", booking:"none", needsCheck:true, status:"LOCKED" },
         { time:"21:40–22:05", geo:["GALAXY","BROADWAY"], mode:"walk", place:"걸어서 숙소 복귀", region:"코타이", map:"Broadway Hotel Macau", desc:["베네시안 조명 보면서 갤럭시 지나 숙소로","공연 끝난 직후엔 택시 줄이 길어서 걷는 게 나음 (피곤하면 베네시안 택시 승강장)"], move:"걷기", moveTime:"20–25분", cost:"무료", booking:"none", status:"LOCKED" }
       ]},
-    { day:3, start:"BROADWAY", date:"12/25 (금·크리스마스)", title:"타이파 빌리지 → 콜로안 마을 → 윈 팰리스 분수쇼 → 크리스마스 저녁 → 갤럭시 밤", goals:["타이파 빌리지 점심 · 젤라또","콜로안 원조 에그타르트 · 바닷가 마을 산책","윈 팰리스 분수쇼 · 크리스마스 저녁 타코"],
+    { day:3, start:"BROADWAY", date:"12/25 (금·크리스마스)", tab:"크리스마스", title:"타이파 빌리지 → 콜로안 마을 → 윈 팰리스 분수쇼 → 크리스마스 저녁 → 갤럭시 밤", goals:["타이파 빌리지 점심 · 젤라또","콜로안 원조 에그타르트 · 바닷가 마을 산책","윈 팰리스 분수쇼 · 크리스마스 저녁 타코"],
       items:[
         { time:"11:00–11:20", geo:"CUNHA", mode:"walk", place:"걸어서 → 타이파 빌리지", region:"이동", map:"Rua do Cunha Taipa", desc:["숙소에서 북쪽으로 약 1.3km — 택시 필요 없음"], move:"걷기", moveTime:"20분", cost:"—", booking:"none", status:"LOCKED" },
         { time:"11:20–12:20", geo:"CUNHA", mode:"walk", food:true, place:"점심 — 아래 3곳 중 하나", region:"타이파", map:"Rua do Cunha Taipa", desc:["① La Cucina Italiana — 이탈리아 가정식 · 크리스마스 당일이라 전화 예약 필수 (+853 2882 7818)","② 세이 키 카페 世記咖啡 — 쭈빠빠오(바삭한 빵에 돼지갈비를 끼운 마카오 버거) · 주로 포장","③ 라오데이 Lao Day — 카레 + 마라 양념 소곱창 · 리뷰 추천 '에브리띵, 중간 매운맛' · 줄 설 수 있음","세 곳 모두 타이파 빌리지 안이라 걸어서 이동 · ②③ 영업시간 확인 필요"], move:"걷기", moveTime:"3–5분", cost:"현장 결제", booking:"none", needsCheck:true, status:"LOCKED" },
@@ -509,7 +608,7 @@ const tripData = {
         { time:"20:40–21:00", geo:"GALAXY", mode:"walk", place:"걸어서 → 갤럭시", region:"이동", map:"Galaxy Macau", desc:["타이파 빌리지에서 숙소 방향으로 약 1km"], move:"걷기", moveTime:"20분", cost:"—", booking:"none", status:"LOCKED" },
         { time:"21:00–23:00", geo:["GALAXY","BROADWAY"], mode:"walk", place:"갤럭시 크리스마스 밤 — 다이아몬드 쇼 · 카지노", region:"코타이", map:"Galaxy Macau", desc:["다이아몬드 쇼: 로비에서 하는 무료 쇼 (거대한 다이아몬드가 올라옴) · 공휴일 자정까지","카지노는 만 21세 이상 · 여권 챙기기 · 안에서 사진 금지","끝나면 건물 안으로 숙소까지 걸어서"], move:"걷기 (건물 안)", moveTime:"5–10분", cost:"—", booking:"none", status:"LOCKED" }
       ]},
-    { day:4, start:"BROADWAY", date:"12/26 (토)", title:"마카오 체크아웃 → 홍콩으로 → 딤섬 · 센트럴 골목 · 스타페리 · 북경오리 → 공항 호텔", goals:["짐은 공항 호텔(Regal)에 맡기고 시내로","딤섬 스퀘어 → 만모 사원 → 에스컬레이터 · 소호 → 타이쿤 → PMQ","노을 스타페리 · Peking Garden 북경오리 · 심포니 오브 라이트"],
+    { day:4, start:"BROADWAY", date:"12/26 (토)", tab:"홍콩 하루", title:"마카오 체크아웃 → 홍콩으로 → 딤섬 · 센트럴 골목 · 스타페리 · 북경오리 → 공항 호텔", goals:["짐은 공항 호텔(Regal)에 맡기고 시내로","딤섬 스퀘어 → 만모 사원 → 에스컬레이터 · 소호 → 타이쿤 → PMQ","노을 스타페리 · Peking Garden 북경오리 · 심포니 오브 라이트"],
       items:[
         { time:"08:30–09:30", geo:"BROADWAY", mode:"walk", place:"아침 · 짐 싸기", region:"코타이", desc:["부칠 짐 20kg 넘는지 확인","남은 마카오 돈(MOP)은 여기서 쓰기"], move:"—", moveTime:"—", cost:"2인 MOP 200 정도", booking:"none", status:"PLANNED" },
         { time:"09:30–10:40", geo:["GALAXY","HZMB_MO"], mode:"bus", place:"체크아웃 → 무료셔틀로 마카오 출국장", region:"이동", map:"HZMB Macau Port", desc:["09:30 체크아웃 (마감 11:00)","갤럭시 'Diamond Lobby'에서 출국장행 무료셔틀 — 첫차 10:00이라 09:50까지 로비 도착","셔틀 줄이 길면 택시 (20–25분 · MOP 120–160)","연휴 직후 토요일이라 출국장이 붐빌 수 있음"], move:"무료셔틀 (또는 택시)", moveTime:"약 25분 + 기다리는 시간", cost:"무료", booking:"none", status:"LOCKED" },
@@ -529,7 +628,7 @@ const tripData = {
         { time:"20:00–20:30", geo:"AOS", mode:"walk", place:"심포니 오브 라이트 · 바닷가 산책", region:"홍콩", map:"Avenue of Stars Hong Kong", desc:["20:00 홍콩섬 빌딩들이 음악에 맞춰 조명을 쏘는 쇼 (약 10분) — 식당 앞 바닷가에서 보기","2026년 하반기 종료 예정이라 12월에 하는지 확인 필요","끝나고 스타의 거리 따라 짧게 산책"], move:"걷기", moveTime:"—", cost:"무료", booking:"none", needsCheck:true, status:"LOCKED" },
         { time:"20:45–21:30", geo:["KOWLOON","REGAL"], pin:1, mode:"rail", place:"공항철도 → 공항 호텔 Regal 체크인", region:"홍콩", map:"Regal Airport Hotel Hong Kong", desc:["구룡역까지 택시 10분 → 공항철도 → 호텔","Superior 객실 · 조식 없음 · 예약 완료","다음 날 03:30 기상이라 22:00 전에 자기"], move:"택시 + 공항철도", moveTime:"약 40분", cost:"2인 HKD 250 정도 · 숙박 결제 완료 (₩188,829)", booking:"done", status:"CONFIRMED" }
       ]},
-    { day:5, date:"12/27 (일)", title:"새벽 퇴실 → 제2터미널 체크인 → 제1터미널 출국 → 귀국", goals:["03:50 호텔 퇴실","04:15 제2터미널에서 짐 부치기","07:15 비행기"],
+    { day:5, date:"12/27 (일)", tab:"귀국", title:"새벽 퇴실 → 제2터미널 체크인 → 제1터미널 출국 → 귀국", goals:["03:50 호텔 퇴실","04:15 제2터미널에서 짐 부치기","07:15 비행기"],
       items:[
         { time:"03:30", geo:"REGAL", place:"기상", region:"홍콩", desc:["짐은 전날 밤에 다 싸두기"], move:"—", moveTime:"—", cost:"—", booking:"none", status:"LOCKED" },
         { time:"03:50–04:00", geo:"REGAL", mode:"walk", place:"호텔 퇴실 (키 반납)", region:"홍콩", map:"Regal Airport Hotel Hong Kong", desc:["정식 체크아웃은 12:00지만 비행기 때문에 새벽에 나감"], move:"—", moveTime:"—", cost:"—", booking:"none", status:"LOCKED",
@@ -848,6 +947,13 @@ const tripData = {
   const TRIP_START = new Date("2026-12-23T00:00:00+08:00"), TRIP_END = new Date("2026-12-27T23:59:59+08:00");
   (function(){ const now = new Date(); const dd = Math.ceil((TRIP_START - now) / 864e5);
     $("dday").textContent = now > TRIP_END ? "여행 완료" : now >= TRIP_START ? `여행 중 · DAY ${Math.floor((now - TRIP_START) / 864e5) + 1}` : `D-${dd}`; })();
+  // 헤더 요약 알약
+  function renderHeroSum(){
+    const st = load(); const done = D.checklist.filter(c => st[c.id] ?? !!c.done).length;
+    const keep = $("dday").outerHTML;
+    $("heroSum").innerHTML = keep + `<span><b>4박</b>5일</span><span><b>${D.itinerary.length}일</b>일정</span><span><b>${done}/${D.checklist.length}</b>예약 완료</span>`;
+  }
+  renderHeroSum();
   $("asOf").textContent = "— 최종 수정 " + D.meta.lastUpdated;
   const TABS = [["plan","🗺","일정"],["book","🎫","예약"],["food","🍜","맛집"],["info","ℹ️","정보"]];
   let curTab = "plan";
@@ -919,62 +1025,130 @@ const tripData = {
   let curDay = 1;
   try { curDay = +(localStorage.getItem("hkmo2026-day")) || 1; } catch(e){}
   let dayMap = null;
+  let mapApi = null; // drawDayMap 이 채움: { focus(i, fromList), reset() }
   const MODES = {
-    walk:{label:"도보", icon:"🚶", color:"#c9a24a", dash:"2 7", weight:4},
-    taxi:{label:"택시", icon:"🚕", color:"#e0703a", weight:4},
-    bus:{label:"버스·셔틀", icon:"🚌", color:"#2f6fd6", weight:4},
-    rail:{label:"철도", icon:"🚆", color:"#7b5cc4", weight:4},
-    tram:{label:"트램", icon:"🚋", color:"#7b5cc4", dash:"8 6", weight:4},
-    ferry:{label:"페리", icon:"⛴", color:"#1fa2b8", dash:"10 6", weight:4},
-    flight:{label:"항공", icon:"✈", color:"#8a94a6", dash:"4 8", weight:2}
+    walk:{label:"도보", icon:"🚶", color:"#D8566A", dash:"1 9", weight:5},
+    taxi:{label:"택시", icon:"🚕", color:"#E99A4C", weight:4},
+    bus:{label:"버스·셔틀", icon:"🚌", color:"#5F8FB5", weight:4},
+    rail:{label:"철도", icon:"🚆", color:"#8C74C9", weight:4},
+    tram:{label:"트램", icon:"🚋", color:"#8C74C9", dash:"8 6", weight:4},
+    ferry:{label:"페리", icon:"⛴", color:"#3FA7B5", dash:"10 6", weight:4},
+    flight:{label:"항공", icon:"✈", color:"#93A39D", dash:"4 8", weight:2}
   };
   const geoPts = g => (Array.isArray(g) ? g : g ? [g] : []).map(k => D.places[k]).filter(Boolean);
   const areaOf = ([lat,lng]) => lng > 120 ? "인천" : lng >= 114.0 ? "홍콩 시내" : lng >= 113.8 ? "홍콩 공항" : lat > 22.195 && lng > 113.565 ? "HZMB 마카오 口岸" : lat > 22.17 ? "마카오 반도" : lat < 22.13 ? "콜로안" : "코타이·타이파";
   const macroOf = p => { const a = areaOf(p); return a === "마카오 반도" || a === "콜로안" || a === "코타이·타이파" ? "마카오" : a; };
-  // 번호 = 머무는 장소 (이동·항공 항목 제외, 좌표 있는 것)
+  // 번호 = 머무는 장소 (이동·항공 항목 제외, 좌표 있는 것) · move = 카드 사이 연결줄로 표시
   function dayStops(d){
     let n = 0;
     return d.items.map(it => {
       const pts = geoPts(it.geo);
       const isMove = it.region === "이동" || it.region === "항공" || /복귀/.test(it.place);
-      return { it, pts, pin: pts[it.pin || 0] || pts[0], num: (!isMove && pts.length) ? ++n : null };
+      return { it, pts, move: isMove, pin: pts[it.pin || 0] || pts[0], num: (!isMove && pts.length) ? ++n : null };
     });
   }
+  // 카드 왼쪽 그림 타일 (종류별 색 + 아이콘)
+  function artOf(it){
+    const p = it.place + " " + (it.map || "");
+    if (it.food) return ["a-food", /카페|디저트|에그타르트|타르트|빵|cafe|bakery/i.test(p) ? "🥮" : "🍜"];
+    if (it.mode === "flight" || /공항|출국|체크인 줄|비행기/.test(p)) return ["a-air", "✈️"];
+    if (/공연|Dancing Water|쇼|show/i.test(p)) return ["a-show", "🎭"];
+    if (/숙소|호텔|Hotel|체크인|체크아웃|낮잠|휴식|짐 /i.test(p)) return ["a-stay", "🛏️"];
+    if (/쇼핑|몰|마켓|Mall|기념품|면세/i.test(p)) return ["a-shop", "🛍️"];
+    if (/크리스마스|트리|조명|야경|불꽃|분수/.test(p)) return ["a-show", "🎄"];
+    if (/성당|성 바울|교회|사원|Temple|Church|Ruins/i.test(p)) return ["a-sight", "⛪"];
+    if (/피크|Peak|전망|스타페리|페리|하버/i.test(p)) return ["a-sight", "🌉"];
+    return ["a-sight", "📍"];
+  }
+  const filled = v => v && v !== "—";
+  const costChip = it => filled(it.cost) ? `<span>💰 <b>${esc(it.cost)}</b></span>` : "";
+  const rsvChip = it => it.booking && it.booking !== "none" ? rsv(it.booking) : "";
+  const descHtml = it => (it.desc && it.desc.length ? `<ul class="tight small">${it.desc.map(x => `<li>${esc(x)}</li>`).join("")}</ul>` : "")
+    + (it.why ? `<div class="why"><b>ⓘ ${esc(it.why.q)}</b><div>${esc(it.why.a)}</div></div>` : "");
+  function stopHtml(s, i){
+    const it = s.it, m = MODES[it.mode], [ac, em] = artOf(it);
+    const row = costChip(it) + rsvChip(it);
+    return `<div class="tl-item ${it.key?"key":""} ${it.food?"food":""}" data-i="${i}" ${s.pts.length?'data-geo="1"':""}>
+      <div class="card">
+        <div class="art ${ac}" title="${s.pts.length?"지도에서 보기":""}"><span aria-hidden="true">${em}</span>${s.num ? `<span class="tl-num ${esc(it.status)} ${it.food?"food":""}">${s.num}</span>` : ""}</div>
+        <div style="min-width:0">
+          <div class="tl-head"><div><div class="tl-time">${esc(it.time)}<span class="tl-more">▾ 자세히</span></div><div class="tl-place">${esc(it.place)}</div></div><div style="text-align:right;flex:0 0 auto">${stBadges(it)}</div></div>
+          ${row ? `<div class="tl-row">${row}</div>` : ""}
+          ${it.bookingRef ? `<div class="links">${bookingBtn(it.bookingRef)}</div>` : ""}
+          <div class="tl-body">
+            ${descHtml(it)}
+            ${filled(it.move) ? `<div class="tl-row"><span>${m ? m.icon : "🚶"} 오는 길 <b>${esc(it.move)}</b></span>${filled(it.moveTime) ? `<span>⏱ <b>${esc(it.moveTime)}</b></span>` : ""}</div>` : ""}
+            ${it.map ? linkBtns([], it.map) : ""}
+          </div>
+        </div>
+      </div></div>`;
+  }
+  function legHtml(s, i){
+    const it = s.it, m = MODES[it.mode];
+    const row = (filled(it.move) ? `<span>${m ? m.icon : "🚶"} <b>${esc(it.move)}</b></span>` : "") + costChip(it) + rsvChip(it);
+    return `<div class="tl-item leg ${it.key?"key":""}" data-i="${i}" ${s.pts.length?'data-geo="1"':""}>
+      <div class="card">
+        <div class="leg-line tl-head"><span class="leg-ic" aria-hidden="true">${m ? m.icon : "🚶"}</span><div class="leg-txt" style="flex:1"><span class="lt">${esc(it.time)}</span><b>${esc(it.place)}</b>${filled(it.moveTime) ? ` · ${esc(it.moveTime)}` : ""}${it.needsCheck ? " " + badge("CHECK") : ""}<span class="tl-more">▾</span></div></div>
+        ${it.bookingRef ? `<div class="links">${bookingBtn(it.bookingRef)}</div>` : ""}
+        <div class="tl-body">
+          <div style="margin-top:10px">${stBadges(it)}</div>
+          ${descHtml(it)}
+          ${row ? `<div class="tl-row">${row}</div>` : ""}
+          ${it.map ? linkBtns([], it.map) : ""}
+        </div>
+      </div></div>`;
+  }
   function renderDay(){
-    $("dayTabs").innerHTML = D.itinerary.map(d => `<button class="daytab ${d.day===curDay?"on":""}" data-day="${d.day}"><b>DAY ${d.day}</b><span>${esc(d.date)}</span></button>`).join("");
+    $("dayTabs").style.setProperty("--days", D.itinerary.length);
+    $("dayTabs").innerHTML = D.itinerary.map(d => { const md = d.date.split(" ")[0]; const dow = (d.date.match(/\(([^)]*)\)/) || [])[1] || "";
+      return `<button class="daytab ${d.day===curDay?"on":""}" data-day="${d.day}" aria-current="${d.day===curDay}"><span class="n">${d.day}</span><b>${esc(md)}</b><span class="w">${esc(d.tab || dow)}</span></button>`; }).join("");
     const d = D.itinerary.find(x => x.day===curDay) || D.itinerary[0];
     const stops = dayStops(d);
     let folded = false; try { folded = localStorage.getItem("hkmo2026-mapfold") === "1"; } catch(e){}
     $("dayBody").innerHTML = `
+      <div class="dayhead"><span class="dlabel">DAY ${d.day} · ${esc(d.date)}</span><h3>${esc(d.title)}</h3>${d.goals && d.goals.length ? `<div class="goals">${d.goals.map(g => `<span>${esc(g)}</span>`).join("")}</div>` : ""}</div>
+      <nav class="glance" aria-label="이날 장소 한눈에">${stops.map((s,i) => s.num ? `<button data-go="${i}" class="${s.it.food?"food":""}"><span class="n">${s.num}</span><span class="gt"><b>${esc(s.it.time.split("–")[0])}</b><span>${esc(s.it.place)}</span></span></button>` : "").join("")}</nav>
       <div class="daygrid">
-        <div class="daymap-wrap ${folded?"folded":""}" id="dayMapWrap">
+        <div class="daymap-wrap ${folded?"folded":""}" id="dayMapWrap"><div class="mapcard">
           <div class="daymap" id="dayMap"></div>
+          <div class="mapnow" id="mapNow"></div>
           <div class="map-bar" id="mapBar"></div>
+        </div></div>
+        <div>
+          <div class="tl-tools"><button class="btn" id="tlAll">모두 펼치기</button></div>
+          <div class="tl">${stops.map((s,i) => s.move ? legHtml(s,i) : stopHtml(s,i)).join("")}</div>
         </div>
-        <div><div class="dayhead"><h3>DAY ${d.day} · ${esc(d.date)} — ${esc(d.title)}</h3></div>
-        <div class="tl-tools"><button class="btn" id="tlAll">모두 펼치기</button></div>
-        <div class="tl">${stops.map((s,i) => { const it = s.it; const m = MODES[it.mode]; return `
-        <div class="tl-item ${it.key?"key":""} ${it.food?"food":""} ${s.pts.length?"has-num":""}" data-i="${i}" ${s.pts.length?'data-geo="1"':""}>
-          ${s.num ? `<span class="tl-num ${esc(it.status)} ${it.food?"food":""}" title="지도에서 보기">${s.num}</span>` : s.pts.length ? `<span class="tl-num mv" title="지도에서 보기">${m ? m.icon : "•"}</span>` : ""}
-          <div class="card">
-          <div class="tl-head"><div><div class="tl-time">${esc(it.time)}<span class="tl-more">▾ 자세히</span></div><div class="tl-place">${esc(it.place)}</div>${s.num ? "" : `<div class="tl-sub">${esc(it.move)} · ${esc(it.moveTime)}</div>`}</div><div style="text-align:right">${stBadges(it)}</div></div>
-          ${it.bookingRef ? `<div class="links">${bookingBtn(it.bookingRef)}</div>` : ""}
-          <div class="tl-body">
-          ${it.desc && it.desc.length ? `<ul class="tight small">${it.desc.map(x => `<li>${esc(x)}</li>`).join("")}</ul>` : ""}
-          ${it.why ? `<div class="why"><b>ⓘ ${esc(it.why.q)}</b><div>${esc(it.why.a)}</div></div>` : ""}
-          <div class="tl-row"><span>${m ? m.icon : "🚶"} 이동 <b>${esc(it.move)}</b></span><span>⏱ <b>${esc(it.moveTime)}</b></span><span>💰 <b>${esc(it.cost)}</b></span>${rsv(it.booking)}</div>
-          ${it.map ? linkBtns([], it.map) : ""}
-          </div>
-        </div></div>`; }).join("")}</div></div>
       </div>`;
     $("tlAll").onclick = e => { const items = document.querySelectorAll(".tl-item"); const open = [...items].some(x => !x.classList.contains("open")); items.forEach(x => x.classList.toggle("open", open)); e.currentTarget.textContent = open ? "모두 접기" : "모두 펼치기"; };
     document.querySelectorAll(".daytab").forEach(b => b.onclick = () => { curDay = +b.dataset.day; try{localStorage.setItem("hkmo2026-day",curDay);}catch(e){} renderDay(); });
-    drawDayMap(d, stops);
+    // 카드 강조 · 한눈에 띠 · 지도 핀 연동
+    const focus = (i, fromList, scroll) => {
+      document.querySelectorAll(".tl-item .card.focus").forEach(c => c.classList.remove("focus"));
+      const el = document.querySelector(`.tl-item[data-i="${i}"]`);
+      if (el) el.querySelector(".card").classList.add("focus");
+      const g = document.querySelector(".glance"), gb = g && g.querySelector(`button[data-go="${i}"]`);
+      document.querySelectorAll(".glance button").forEach(b => b.setAttribute("aria-current", String(b === gb)));
+      if (gb) g.scrollTo({ left: gb.offsetLeft - g.clientWidth/2 + gb.offsetWidth/2, behavior: "smooth" });
+      if (mapApi) mapApi.focus(i, fromList);
+      if (scroll && el) el.scrollIntoView({ behavior: "smooth", block: "center" });
+    };
+    const clearFocus = () => {
+      document.querySelectorAll(".tl-item .card.focus").forEach(c => c.classList.remove("focus"));
+      document.querySelectorAll(".glance button").forEach(b => b.setAttribute("aria-current", "false"));
+    };
+    document.querySelectorAll(".tl-item").forEach(el => {
+      const i = +el.dataset.i;
+      const go = e => { if (e.target.closest("a")) return; const was = el.classList.contains("open"); el.classList.toggle("open"); if (!was && el.dataset.geo) focus(i, true, false); };
+      el.querySelectorAll(".tl-head, .art").forEach(x => x.addEventListener("click", go));
+    });
+    document.querySelectorAll(".glance button").forEach(b => b.onclick = () => focus(+b.dataset.go, true, true));
+    drawDayMap(d, stops, focus, clearFocus);
   }
-  function drawDayMap(d, stops){
+  function drawDayMap(d, stops, focus, clearFocus){
     if (dayMap) { dayMap.remove(); dayMap = null; }
+    mapApi = null;
     const wrap = $("dayMapWrap");
-    if (!window.L) { wrap.style.display = "none"; document.querySelectorAll(".tl-item").forEach(el => el.querySelector(".tl-head").addEventListener("click", e => { if (!e.target.closest("a")) el.classList.toggle("open"); })); return; }
+    if (!window.L) { wrap.style.display = "none"; return; }
     // 경로: 하루 시작점(숙소) → 각 항목 좌표 순서대로
     const path = [];
     if (d.start && D.places[d.start]) path.push({ p: D.places[d.start], mode: null });
@@ -989,47 +1163,63 @@ const tripData = {
     const mainPts = (Object.values(macros).sort((a,b) => b.n - a.n)[0] || { pts: path.map(x => x.p) }).pts;
     dayMap = L.map("dayMap", { zoomControl: true, scrollWheelZoom: false });
     L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", { maxZoom: 19, attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>' }).addTo(dayMap);
-    for (let i = 1; i < path.length; i++) { const m = MODES[path[i].mode] || MODES.walk; L.polyline([path[i-1].p, path[i].p], { color: m.color, weight: m.weight, opacity: .9, dashArray: m.dash || null, lineCap: "round" }).addTo(dayMap); }
+    for (let i = 1; i < path.length; i++) { const m = MODES[path[i].mode] || MODES.walk; L.polyline([path[i-1].p, path[i].p], { color: m.color, weight: m.weight, opacity: .9, dashArray: m.dash || null, lineCap: "round", lineJoin: "round" }).addTo(dayMap); }
     const markers = {};
-    if (d.start && D.places[d.start]) L.circleMarker(D.places[d.start], { radius: 6, color: "#fff", weight: 2, fillColor: "#c9a24a", fillOpacity: 1 }).bindTooltip("출발 · 숙소").addTo(dayMap);
+    if (d.start && D.places[d.start]) L.circleMarker(D.places[d.start], { radius: 7, color: "#fff", weight: 3, fillColor: "#F6CF57", fillOpacity: 1 }).bindTooltip("출발 · 숙소").addTo(dayMap);
     pins.forEach(g => {
       const items = g.idx.map(i => stops[i].it);
       const icon = L.divIcon({ className: "pin-icon", html: `<div class="pin ${esc(g.status)} ${g.food?"food":""}">${g.nums.join("·")}</div>`, iconSize: [0,0] });
       const mk = L.marker(g.p, { icon, riseOnHover: true }).addTo(dayMap)
         .bindPopup(items.map((it,j) => `<div${j?' style="margin-top:6px"':""}><b>${g.nums[j]}. ${esc(it.place)}</b><br><span class="muted">${esc(it.time)}</span></div>`).join("") + (items[0].map ? `<div style="margin-top:6px"><a href="${mapUrl(items[0].map)}" target="_blank" rel="noopener">📍 Google Maps</a></div>` : ""));
-      mk.on("click", () => focusItem(g.idx[0], false));
+      mk.on("click", () => focus(g.idx[0], false, true));
       g.idx.forEach(i => markers[i] = mk);
     });
     const fit = pts => pts.length === 1 ? dayMap.setView(pts[0], 16) : dayMap.fitBounds(L.latLngBounds(pts), { padding: [28,28], maxZoom: 16 });
     fit(mainPts);
+    // 지금 보는 장소 + ‹ 전체 › 넘기기
+    const order = stops.map((s,i) => s.num ? i : -1).filter(i => i >= 0);
+    let cur = -1;
+    $("mapNow").innerHTML = (order.length ? `<button class="rbtn" data-step="-1" aria-label="이전 장소">‹</button>` : "")
+      + `<div class="now" id="mNow"></div><button class="rbtn ghost" data-step="0">전체</button>`
+      + (order.length ? `<button class="rbtn" data-step="1" aria-label="다음 장소">›</button>` : "");
+    const setNow = () => {
+      const s = stops[cur];
+      $("mNow").innerHTML = s ? `${s.num ? s.num + ". " : (MODES[s.it.mode] ? MODES[s.it.mode].icon + " " : "")}${esc(s.it.place)}<small>${esc(s.it.time)}</small>` : `이날 동선 한눈에<small>${order.length}곳</small>`;
+    };
+    setNow();
+    const reset = () => {
+      cur = -1; setNow(); clearFocus();
+      document.querySelectorAll(".pin.on").forEach(p => p.classList.remove("on"));
+      document.querySelectorAll("#mapBar [data-area]").forEach(b => b.classList.remove("on"));
+      dayMap.closePopup(); fit(mainPts);
+    };
+    document.querySelectorAll("#mapNow [data-step]").forEach(b => b.onclick = () => {
+      const dir = +b.dataset.step; if (!dir) { reset(); return; }
+      const pos = order.indexOf(cur);
+      const next = pos < 0 ? (dir > 0 ? 0 : order.length - 1) : (pos + dir + order.length) % order.length;
+      focus(order[next], true, true);
+    });
     const usedModes = [...new Set(path.slice(1).map(x => x.mode))].filter(m => MODES[m]);
     const foldLabel = () => wrap.classList.contains("folded") ? "🗺 지도 펼치기" : "지도 접기";
-    $("mapBar").innerHTML = (areas.length > 1 ? `<button class="btn" data-area="all">전체</button>` + areas.map((a,i) => `<button class="btn" data-area="${i}">${esc(a.name)}</button>`).join("") : "")
+    $("mapBar").innerHTML = (areas.length > 1 ? areas.map((a,i) => `<button class="btn" data-area="${i}">${esc(a.name)}</button>`).join("") : "")
       + `<button class="btn map-fold">${foldLabel()}</button>`
-      + `<span class="map-legend">${stops.some(s => s.it.food) ? `<span class="lg-food">🍴 주황 = 먹는 일정</span>` : ""}${usedModes.map(m => `<span><i style="border-color:${MODES[m].color};${MODES[m].dash?"border-top-style:dashed":""}"></i>${MODES[m].label}</span>`).join("")}</span>`;
-    document.querySelectorAll("#mapBar [data-area]").forEach(b => b.onclick = () => { document.querySelectorAll("#mapBar [data-area]").forEach(x => x.classList.remove("on")); b.classList.add("on"); fit(b.dataset.area === "all" ? path.map(x => x.p) : areas[+b.dataset.area].pts); });
+      + `<span class="map-legend">${stops.some(s => s.it.food) ? `<span class="lg-food">🍴 베리 = 먹는 일정</span>` : ""}${usedModes.map(m => `<span><i style="border-color:${MODES[m].color};${MODES[m].dash?"border-top-style:dotted":""}"></i>${MODES[m].label}</span>`).join("")}</span>`;
+    document.querySelectorAll("#mapBar [data-area]").forEach(b => b.onclick = () => { document.querySelectorAll("#mapBar [data-area]").forEach(x => x.classList.remove("on")); b.classList.add("on"); fit(areas[+b.dataset.area].pts); });
     document.querySelector("#mapBar .map-fold").onclick = e => { wrap.classList.toggle("folded"); const f = wrap.classList.contains("folded"); try { localStorage.setItem("hkmo2026-mapfold", f ? "1" : "0"); } catch(err){} e.currentTarget.textContent = foldLabel(); if (!f) dayMap.invalidateSize(); };
-    function focusItem(i, fromList){
-      document.querySelectorAll(".tl-item .card.focus").forEach(c => c.classList.remove("focus"));
-      document.querySelectorAll(".pin.on").forEach(p => p.classList.remove("on"));
-      const el = document.querySelector(`.tl-item[data-i="${i}"]`); if (el) el.querySelector(".card").classList.add("focus");
-      const s = stops[i]; const mk = markers[i];
-      if (mk && mk.getElement()) mk.getElement().querySelector(".pin").classList.add("on");
-      if (fromList) {
-        if (!s.pts.length) return;
+    mapApi = {
+      focus(i, fromList){
+        cur = i; setNow();
+        document.querySelectorAll(".pin.on").forEach(p => p.classList.remove("on"));
+        const s = stops[i], mk = markers[i];
+        if (mk && mk.getElement()) mk.getElement().querySelector(".pin").classList.add("on");
+        if (!fromList || !s.pts.length) return;
         const a = areas.find(z => z.name === areaOf(s.pin));
         document.querySelectorAll("#mapBar [data-area]").forEach(b => b.classList.toggle("on", areas[+b.dataset.area] === a));
         dayMap.flyTo(s.pin, Math.max(dayMap.getZoom(), 15), { duration: .6 });
         if (mk) setTimeout(() => mk.openPopup(), 650);
-      } else if (el) {
-        el.scrollIntoView({ behavior: "smooth", block: window.innerWidth >= 900 ? "center" : "nearest" });
-      }
-    }
-    document.querySelectorAll(".tl-item").forEach(el => {
-      const go = e => { if (e.target.closest("a")) return; const wasOpen = el.classList.contains("open"); el.classList.toggle("open"); if (!wasOpen && el.dataset.geo) focusItem(+el.dataset.i, true); };
-      el.querySelector(".tl-head").addEventListener("click", go);
-      const num = el.querySelector(".tl-num"); if (num) num.addEventListener("click", go);
-    });
+      },
+      reset
+    };
   }
 
   // 정보 탭: 동선 원칙
@@ -1111,8 +1301,8 @@ const tripData = {
     $("checkBody").innerHTML = `` + D.checklist.map(c => { const on = st[c.id] ?? !!c.done;
       return `<div class="check-item ${on?"done":""}"><input type="checkbox" id="ck-${esc(c.id)}" data-id="${esc(c.id)}" ${on?"checked":""}><label for="ck-${esc(c.id)}"><span class="t">${esc(c.label)}</span> ${stBadges(c)}${c.ref?`<div class="ref">${esc(c.ref)}</div>`:""}${c.bookingRef?`<div class="links" style="margin-top:6px">${bookingBtn(c.bookingRef)}</div>`:""}</label></div>`; }).join("")
       + `<div class="links"><button class="btn" id="ckReset">체크 상태 초기화</button></div>`;
-    document.querySelectorAll("#checkBody input").forEach(i => i.onchange = () => { const s = load(); s[i.dataset.id] = i.checked; save(s); renderChecklist(); renderBookTop(); });
-    $("ckReset").onclick = () => { try{localStorage.removeItem(storeKey);}catch(e){} renderChecklist(); renderBookTop(); };
+    document.querySelectorAll("#checkBody input").forEach(i => i.onchange = () => { const s = load(); s[i.dataset.id] = i.checked; save(s); renderChecklist(); renderBookTop(); renderHeroSum(); });
+    $("ckReset").onclick = () => { try{localStorage.removeItem(storeKey);}catch(e){} renderChecklist(); renderBookTop(); renderHeroSum(); };
   }
   $("prioBody").innerHTML = D.priority.map(p => `<div style="margin-top:12px"><h4>${esc(p.when)}</h4><ul class="tight small">${p.items.map(x => typeof x === "string" ? `<li>${esc(x)}</li>` : `<li>${esc(x.text)}<div class="links" style="margin-top:6px">${bookingBtn(x.bookingRef)}</div></li>`).join("")}</ul></div>`).join("");
 
